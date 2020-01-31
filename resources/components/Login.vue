@@ -35,7 +35,7 @@
 					<v-btn
 						color="green darken-1"
 						text
-						@click="dialog = false"
+						@click="login"
 					>
 						Agree
 					</v-btn>
@@ -46,11 +46,25 @@
 </template>
 
 <script>
+	const Cookie = process.client ? require('js-cookie') : undefined
 	export default {
 		data () {
 			return {
 				dialog: false,
 			}
 		},
+		methods: {
+		    login () {
+		    	this.dialog=false;
+			    setTimeout(() => { // we simulate the async request with timeout.
+			        const auth = {
+			          accessToken: 'someStringGotFromApiServiceWithAjax'
+			        }
+			        this.$store.commit('setAuth', auth) // mutating to store for client rendering
+			        Cookie.set('auth', auth) // saving token in cookie for server rendering
+			        this.$router.push('/')
+			    }, 1000)
+		    }
+		}
 	}
 </script>

@@ -61,6 +61,7 @@
 	import Footer from '~/components/Footer.vue'
 	import Login from '~/components/Login.vue'
 	import Register from '~/components/Register.vue'
+	const Cookie = process.client ? require('js-cookie') : undefined;
 	export default {
 		data() {
 			return {
@@ -90,6 +91,12 @@
 			Register,
 			Navbar,
 			Footer
+		},
+		methods: {
+		    logout () {
+		      Cookie.remove('auth')
+		      this.$store.commit('setAuth', null)
+		    }
 		}
 	}
 </script>
