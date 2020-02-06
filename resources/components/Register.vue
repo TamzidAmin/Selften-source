@@ -8,92 +8,129 @@
 		>
 			Register
 		</v-btn>
-
+		
 		<v-dialog
 			v-model="dialog"
 			max-width="600"
 		>
-			<v-card>
-				<form class="p-5" style="padding: 20px;">
-				    <v-text-field
-				      v-model="name"
-				      label="Name"
+			<v-card style="padding: 20px;">
+				<h2 class="text-center" style="padding: 20px">Register</h2>
+				  <v-form
+				    ref="form"
+				    v-model="valid"
+				    lazy-validation
+				  >
+					<v-text-field
+				      v-model="username"
+				      :rules="required"
+				      label="User name"
 				      required
 				    ></v-text-field>
+
+				     <v-text-field
+				      v-model="phone"
+				      :rules="required"
+				      label="Phone"
+				      required
+				    ></v-text-field>
+
 				    <v-text-field
 				      v-model="email"
+				      :rules="emailRules"
 				      label="E-mail"
 				      required
 				    ></v-text-field>
-				    <v-select
-				      v-model="select"
-				      :items="items"
-				      label="Select"
-				      data-vv-name="select"
-				      required
-				    ></v-select>
-				    <v-checkbox
-				      v-model="checkbox"
-				      value="1"
-				      label="Option"
-				      data-vv-name="checkbox"
-				      type="checkbox"
-				      required
-				    ></v-checkbox>
 
-    <v-btn class="mr-4" @click="submit">submit</v-btn>
-    <v-btn @click="clear">clear</v-btn>
-  </form>
+				    <v-text-field
+				      v-model="password"
+				      :rules="nameRules"
+				      label="Password"
+				      required
+				    ></v-text-field>
+
+				    <v-btn
+				      :disabled="!valid"
+				      color="success"
+				      class="mr-4"
+				      @click="validate"
+				    >
+				      Register
+				    </v-btn>
+
+				    <v-btn
+				      color="error"
+				      class="mr-4"
+				      @click.stop="dialog = false"
+				    >
+				      Cancel
+				    </v-btn>
+				  </v-form>
 			</v-card>
 		</v-dialog>
 	</v-row>
 </template>
 
+
 <script>
+import axios from '~/plugins/axios'
+const Cookie = process.client ? require('js-cookie') : undefined
   export default {
     data: () => ({
-    	dialog: false,
-      name: '',
-      email: '',
-      select: null,
-
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
-      ],
-      checkbox: null,
-      dictionary: {
-        attributes: {
-          email: 'E-mail Address',
-          // custom attributes
-        },
-        custom: {
-          name: {
-            required: () => 'Name can not be empty',
-            max: 'The name field may not be greater than 10 characters',
-            // custom messages
-          },
-          select: {
-            required: 'Select field is required',
-          },
-        },
-      },
+      	valid: true,
+		dialog: false,
+		phone:'',
+      	username: '',
+      	required:[
+      		v => !!v || v+'is required',
+      	],
+      	nameRules: [
+       		v => !!v || 'Name is required',
+        	v => (v && v.length <= 6) || 'Name must be less than 6 characters',
+      	],
+      	email: '',
+      	password:'',
+      	emailRules: [
+        	v => !!v || 'E-mail is required',
+        	v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      	],
     }),
 
-
     methods: {
-      submit () {
-        this.$validator.validateAll()
+      validate () {
+        if (this.$refs.form.validate()) {
+          	this.snackbar = true
+          	var self = this;
+         	axios.post('/api/register', {
+			    username: this.username,
+			    phone: this.phone,
+			    email: this.email,
+			    password: this.password
+			})
+			.then(function (response) {
+			    console.log(response.data);
+			    setTimeout(() => { // we simulate the async request with timeout.
+		        const auth = {
+		          accessToken: response.data.token
+		        }
+		        self.$store.commit('setAuth', auth) // mutating to store for client rendering
+		        self.$store.commit('setUser', response.data) // mutating to store for client rendering
+		        Cookie.set('auth', auth) // saving token in cookie for server rendering
+		         Cookie.set('user', response.data) // saving token in cookie for server rendering
+		        self.$router.push('/')
+		      }, 1000)
+			})
+			.catch(function (error) {
+			    console.log(error);
+			});
+        }
       },
-      clear () {
-        this.name = ''
-        this.email = ''
-        this.select = null
-        this.checkbox = null
-        this.$validator.reset()
+      reset () {
+        this.$refs.form.reset()
+      },
+      resetValidation () {
+        this.$refs.form.resetValidation()
       },
     },
   }
 </script>
+

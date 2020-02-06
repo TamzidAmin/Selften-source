@@ -1,7 +1,6 @@
 <template>
 <v-layout column justify-center align-center>
 	<Carousels/>
-	<Navmanu/>
 	<p>Top Up</p>
 	<div>
 	  <v-simple-table dark>

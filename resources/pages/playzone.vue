@@ -1,68 +1,100 @@
 <template>
 <v-layout column justify-center align-center>
-	<Carousels/>
-	<Navmanu/>
+	<div> 
+		<h2 class="text-center" style="color: #D0254B;">Daily Matches</h2>
+		<div class="playzone">
+			<div class="single-playzone" v-for="m in match">
+				 <v-hover>
+			      <template v-slot="{ hover }">
+			        <v-card
+			          :elevation="hover ? 24 : 6"
+			          class="mx-auto pa-2"
+			        >
+			          	<div class="d-flex" style="margin-top: 7px;">
+			          		<div>
+								<img :src="'http://127.0.0.1:3333/uploads/product/'+m.logo" alt="!opps" height="100px" width="100px" style="object-fit: contain;">
+			          		</div>
+			          		<div style="padding: 10px">
+					          <div>
+					          	<h3>{{ m.name }}</h3>
+					          </div>
+					          <span>No Match Found</span>
+				          	</div>
+			          	</div>
+			        </v-card>
+			      </template>
+			    </v-hover>
+			</div>
+		</div>
+	</div>
 	<div>
+		<h2 class="text-center" style="color: #D0254B;">Tournaments</h2>
 		<div class="playzone">
 			<div class="single-playzone">
-				<div style="width: 30%;">
-					<img src="~/assets/poster.jpg" alt="!opps">
-				</div>
-				<div class="card_2nd_right">
-					<div class="card_right_top">
-						<h4>PUBG Mobile Solo Premium</h4>
-					</div>
-					<div class="card_right_bottom">
-						<ul class="card_right_bottom_left">
-							<li><i class="fas fa-calendar-week"></i> <p>jan 20, 12:00PM</p></li>
-							<li><i class="fas fa-trophy"></i><p>BDT 1000</p></li>
-						</ul >
-						<ul class="card_right_bottom_right">
-							<li><i class="fas fa-user-friends"></i> <p>12/100</p></li>
-							<li><i class="fas fa-info-circle"></i> <p>SOLO</p></li>
-						</ul>
-					</div>
-				</div>
+				 <v-hover>
+			      <template v-slot="{ hover }">
+			        <v-card
+			          :elevation="hover ? 24 : 6"
+			          class="mx-auto pa-2"
+			        >
+			          	<div class="d-flex" style="margin-top: 7px;">
+			          		<div>
+								<img src="~/assets/poster.jpg" alt="!opps" height="100px" width="100px" style="object-fit: contain;">
+			          		</div>
+			          		<div style="padding: 10px">
+					          <div>
+					          	<h3>Free Fire</h3>
+					          </div>
+					          <span>Upcoming</span>
+				          	</div>
+			          	</div>
+			        </v-card>
+			      </template>
+			    </v-hover>
 			</div>
 			<div class="single-playzone">
-				<div style="width: 30%;">
-					<img src="~/assets/poster.jpg" alt="!opps">
-				</div>
-				<div class="card_2nd_right">
-					<div class="card_right_top">
-						<h4>PUBG Mobile Solo Premium</h4>
-					</div>
-					<div class="card_right_bottom">
-						<ul class="card_right_bottom_left">
-							<li><i class="fas fa-calendar-week"></i> <p>jan 20, 12:00PM</p></li>
-							<li><i class="fas fa-trophy"></i><p>BDT 1000</p></li>
-						</ul >
-						<ul class="card_right_bottom_right">
-							<li><i class="fas fa-user-friends"></i> <p>12/100</p></li>
-							<li><i class="fas fa-info-circle"></i> <p>SOLO</p></li>
-						</ul>
-					</div>
-				</div>
+				 <v-hover>
+			      <template v-slot="{ hover }">
+			        <v-card
+			          :elevation="hover ? 24 : 6"
+			          class="mx-auto pa-2"
+			        >
+			          	<div class="d-flex" style="margin-top: 7px;">
+			          		<div>
+								<img src="~/assets/poster.jpg" alt="!opps" height="100px" width="100px" style="object-fit: contain;">
+			          		</div>
+			          		<div style="padding: 10px">
+					          <div>
+					          	<h3>PUBG Mobile</h3>
+					          </div>
+					          <span>Upcoming</span>
+				          	</div>
+			          	</div>
+			        </v-card>
+			      </template>
+			    </v-hover>
 			</div>
 			<div class="single-playzone">
-				<div style="width: 30%;">
-					<img src="~/assets/poster.jpg" alt="!opps">
-				</div>
-				<div class="card_2nd_right">
-					<div class="card_right_top">
-						<h4>PUBG Mobile Solo Premium</h4>
-					</div>
-					<div class="card_right_bottom">
-						<ul class="card_right_bottom_left">
-							<li><i class="fas fa-calendar-week"></i> <p>jan 20, 12:00PM</p></li>
-							<li><i class="fas fa-trophy"></i><p>BDT 1000</p></li>
-						</ul >
-						<ul class="card_right_bottom_right">
-							<li><i class="fas fa-user-friends"></i> <p>12/100</p></li>
-							<li><i class="fas fa-info-circle"></i> <p>SOLO</p></li>
-						</ul>
-					</div>
-				</div>
+				 <v-hover>
+			      <template v-slot="{ hover }">
+			        <v-card
+			          :elevation="hover ? 24 : 6"
+			          class="mx-auto pa-2"
+			        >
+			          	<div class="d-flex" style="margin-top: 7px;">
+			          		<div>
+								<img src="~/assets/poster.jpg" alt="!opps" height="100px" width="100px" style="object-fit: contain;">
+			          		</div>
+			          		<div style="padding: 10px">
+					          <div>
+					          	<h3>Call Of Duty Mobile</h3>
+					          </div>
+					          <span>Upcoming</span>
+				          	</div>
+			          	</div>
+			        </v-card>
+			      </template>
+			    </v-hover>
 			</div>
 		</div>
 	</div>
@@ -73,56 +105,32 @@
 import Carousels from '~/components/Carousels'
 import Navmanu from '~/components/Navmanu'
 import Card from '~/components/Card'
+import axios from '~/plugins/axios'
 export default {
 	components:{
 		Carousels,
 		Card,
 		Navmanu
-	}
+	},
+	data: () => ({
+     	match:[]
+    }),
+    asyncData ({ params }) {
+	    return axios.get(`/api/matchproduct`)
+	      .then((res) => {
+	        return { match: res.data }
+	      })
+  	}
 }
 </script>
 <style scoped>
-.card_2nd_right{
-	    padding: 0px 10px;
-    font-size: 15px;
-}
 .playzone{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    color: #000000;
-}
-.playzone img{
-    object-fit:cover;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 .single-playzone{
-	display: flex;
-}
-.playzone > div {
-	padding: 10px;
-    min-width: 320px;
-    max-width: 320px;
-    margin: 10px;
-    background: #F1F1F1;
-    -webkit-box-shadow: 3px 3px 5px 6px #ccc;
-    -moz-box-shadow: 3px 3px 5px 6px #ccc;
-    box-shadow: -2px 2px 8px 6px #ccc;
-}
-ul{
-	list-style: none;
-	padding: 0px!important;
-	margin: 0px;
-	
-}
-ul li{
-	padding: 0px!important;
-	margin: 0px!important;
-
-}
-ul p{
-	margin-bottom: 0px!important;
-}
-img{
-	width: 100%;
+	min-width: 285px;
+	margin: 10px;
 }
 </style>
