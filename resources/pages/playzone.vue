@@ -3,24 +3,27 @@
 	<div> 
 		<h2 class="text-center" style="color: #D0254B;">Daily Matches</h2>
 		<div class="playzone">
-			<div class="single-playzone" v-for="m in match">
-				 <v-hover>
+			<div class="single-playzone" v-for="m in match"> 
+				 <v-hover> 
 			      <template v-slot="{ hover }">
 			        <v-card
 			          :elevation="hover ? 24 : 6"
 			          class="mx-auto pa-2"
 			        >
-			          	<div class="d-flex" style="margin-top: 7px;">
-			          		<div>
-								<img :src="'http://127.0.0.1:3333/uploads/product/'+m.logo" alt="!opps" height="100px" width="100px" style="object-fit: contain;">
-			          		</div>
-			          		<div style="padding: 10px">
-					          <div>
-					          	<h3>{{ m.name }}</h3>
-					          </div>
-					          <span>No Match Found</span>
+			          	<nuxt-link :to="'gamematch/'+m.id">
+			          		<div class="d-flex" style="margin-top: 7px;">
+				          		<div>
+									<img :src="'http://127.0.0.1:3333/uploads/product/'+m.logo" alt="!opps" height="100px" width="100px" style="object-fit: contain;">
+				          		</div>
+				          		<div style="padding: 10px">
+						          <div>
+						          	<h3>{{ m.name }} </h3>
+						          </div>
+						          <span v-if="m.matches.length==0">No Match Found</span>
+						          <span v-else>{{ m.matches.length }} Match Found</span>
+					          	</div>
 				          	</div>
-			          	</div>
+			          	</nuxt-link>
 			        </v-card>
 			      </template>
 			    </v-hover>
@@ -124,6 +127,10 @@ export default {
 }
 </script>
 <style scoped>
+a{
+	text-decoration: none;
+	color: black;
+}
 .playzone{
 	display: flex;
 	flex-wrap: wrap;

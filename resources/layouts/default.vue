@@ -28,7 +28,9 @@
 		<v-app-bar :clipped-left="clipped" fixed app>
 			<v-app-bar-nav-icon @click.stop="drawer = !drawer" />
 			<div class="logo">
-				<img src="~/assets/selften.png" alt="" width="100%"/>
+				<nuxt-link to="/">
+					<img src="~/assets/selften.png" alt="" width="100%"/>
+				</nuxt-link>
 			</div>
 			<v-spacer></v-spacer>
 			<div class="d-flex" style="min-width: 170px;" v-if="authuser==null"> 
@@ -36,17 +38,7 @@
 				<Register/>
 			</div>
 			<div class="text-right" style="min-width: 170px;" v-else> 
-				
-				<v-btn
-					color="primary"
-					dark
-					@click="logout"
-					outlined
-					small
-				>
-					Logout
-				</v-btn>
-
+				<Dropdown :user="authuser"/>
 			</div>
 		</v-app-bar>
 		<v-content>
@@ -73,6 +65,7 @@
 <script>
 	import { mapMutations, mapGetters } from 'vuex'
 	import Navbar from '~/components/Navbar.vue'
+	import Dropdown from '~/components/Dropdown.vue'
 	import Footer from '~/components/Footer.vue'
 	import Login from '~/components/Login.vue'
 	import Register from '~/components/Register.vue'
@@ -120,7 +113,8 @@
 			Login,
 			Register,
 			Navbar,
-			Footer
+			Footer,
+			Dropdown
 		},
 		computed: mapGetters({
 		   authuser: 'authuser'
