@@ -23,58 +23,71 @@
 				   v-if="i.status==item"
 				  > 
 				    <v-list-item three-line style="padding: 10px;margin: 10px;">
-				    	<v-card style="padding: 10px;">
-					    	<div class="d-flex">
-					    		<div>
-					    			<img :src="'http://127.0.0.1:3333/uploads/product/'+i.product.logo" alt="!opps" style="object-fit: contain;width: 75px;height: 75px;">
+				    	<v-card style="padding: 10px;" class="bg-light">
+				    		<nuxt-link :to="/singlegame/+i.id">
+						    	<div class="d-flex">
+						    		<div>
+						    			<img :src="'http://127.0.0.1:3333/uploads/product/'+i.product.logo" alt="!opps" style="object-fit: contain;width: 75px;height: 75px;">
+						    		</div>
+						    		<div class="content">
+						    			<h2 class="text-left">{{ i.match_name }}</h2>
+						    			<div class="d-flex">
+						    				<div style="margin-right: 10px;">
+						    					<span>Time : {{ formatDate(i.start_at) }} at {{ i.start_time }}</span>
+						    				</div>
+						    			</div>
+						    		</div>
+						    	</div>
+					    		<div class="d-flex single-box">
+									<div style="margin-right: 10px;">
+				    					<h5>TOTAL PRIZE</h5>
+				    					<span>৳ {{ i.total_prize }}</span>
+				    				</div>
+									<div style="margin-right: 10px;">
+				    					<h5>PER KILL</h5>
+				    					<span>৳ {{ i.perkill }}</span>
+				    				</div>
+					    			<div style="margin-right: 10px;">
+				    					<h5>ENTRY FEE</h5>
+				    					<span>৳ {{ i.entryfee }}</span>
+				    				</div>
 					    		</div>
-					    		<div class="content">
-					    			<h2 class="text-left">{{ i.match_name }}</h2>
-					    			<div class="d-flex">
-					    				<div style="margin-right: 10px;">
-					    					<img src="~/assets/clendar.svg" alt="!opps" style="object-fit: contain;width: 17px;height: 17px;">
-					    					<span>{{ formatDate(i.start_at) }} | {{ i.start_time }}</span>
-					    				</div>
-					    				<div>
-					    					<img src="~/assets/userp.svg" alt="!opps" style="object-fit: contain;width: 17px;height: 17px;">
-					    					<span>{{ i.users.length }} / {{ i.max_join }}</span>
-					    				</div>
-					    			</div>
-					    			<div class="d-flex">
-					    				<div style="margin-right: 10px;">
-					    					<img src="~/assets/trophy.svg" alt="!opps" style="object-fit: contain;width: 17px;height: 17px;">
-					    					<span>{{ i.total_prize }}</span>
-					    				</div>
-					    				<div>
-					    					<img src="~/assets/money.svg" alt="!opps" style="object-fit: contain;width: 17px;height: 17px;">
-					    					<span>{{ i.entryfee }} </span>
-					    				</div>
-					    			</div>
-					    			<div class="d-flex">
-					    				<div style="margin-right: 10px;">
-					    					<img src="~/assets/map.svg" alt="!opps" style="object-fit: contain;width: 17px;height: 17px;">
-					    					<span>{{ i.map.name }}</span>
-					    				</div>
-					    				<div>
-					    					<div v-if="i.type=='solo'">
-						    					<img src="~/assets/solo.svg" alt="!opps" style="object-fit: contain;width: 17px;height: 17px;">
-						    					<span>{{ i.type }} </span>
-					    					</div>
-					    					<div v-if="i.type=='duo'">
-						    					<img src="~/assets/duo.svg" alt="!opps" style="object-fit: contain;width: 17px;height: 17px;">
-						    					<span>{{ i.type }} </span>
-					    					</div>
-					    					<div v-if="i.type=='squad'">
-						    					<img src="~/assets/userp.svg" alt="!opps" style="object-fit: contain;width: 17px;height: 17px;">
-						    					<span>{{ i.type }} </span>
-					    					</div>
-					    				</div>
-					    			</div>
+					    		<div class="d-flex single-box">
+									<div style="margin-right: 10px;">
+				    					<h5>TYPE</h5>
+				    					<span style="text-transform: capitalize">{{ i.type }}</span>
+				    				</div>
+									<div style="margin-right: 10px;">
+				    					<h5>PLATFORM</h5>
+				    					<span>{{ i.platform }}</span>
+				    				</div>
+					    			<div style="margin-right: 10px;">
+				    					<h5>MAP</h5>
+				    					<span>{{ i.map.name }}</span>
+				    				</div>
 					    		</div>
-					    	</div>
+								<div class="" style="display: flex;">
+			    					<div style="width: 75%;margin-top: 12px">
+			    						<v-progress-linear
+									      v-model="knowledge"
+									      height="5"
+									      reactive
+									      style="width: 96%;margin-left: auto;"
+									    >
+									    </v-progress-linear>
+										<span style="font-size: 12px;">
+										Only {{ i.max_join-i.users.length }} spots left</span> {{ i.users.length }}/{{ i.max_join }}
+										 <span style="visibility: hidden"> {{ knowledge=(i.users.length/i.max_join)*100 }}</span>
+			    					</div>
+			    					<div style="width: 25%">
+			    						<button class="v-btn v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">join</button>
+			    					</div>
+			    				</div>
+						    </nuxt-link>
 				    	</v-card>
 				    </v-list-item>
 				 </div>
+				 
 	        </div>
 	      </v-tab-item>
 	    </v-tabs-items>
@@ -98,6 +111,7 @@ export default {
       return {
       	match:[],
         tab: null,
+        knowledge: 0,
         items: [
           'upcoming','ongoing','result',
         ],
@@ -126,6 +140,27 @@ export default {
 }
 </script>
 <style>
+.bg-light{
+	background: #F5F5F5!important;
+}
+.single-box{
+	justify-content: center;
+	text-align: center;
+}
+.single-box div{
+	width: 33.33%;
+}
+.single-box div h5{
+	color: black;
+	padding: 5px 0px;
+}
+.single-box div span{
+	color: #D0254B;
+	
+}
+a{
+	text-decoration: none;
+}
 span{
 	font-size: 15px;
 }

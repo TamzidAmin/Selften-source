@@ -34,7 +34,7 @@
 			</div>
 			<v-spacer></v-spacer>
 			<div class="d-flex" style="min-width: 170px;" v-if="authuser==null"> 
-				<Login/>
+				<Login class="abc"/>
 				<Register/>
 			</div>
 			<div class="text-right" style="min-width: 170px;" v-else> 
@@ -131,11 +131,22 @@
 </script>
 
 <style>
+	.v-list-item__action{
+		width: 30px;
+	    height: 30px;
+	    margin: 10px;
+	}
+	.v-list-item__action svg{
+		color: #C81F4E;
+	}
 	body{
 		overflow-x: hidden!important;
 	}
 	.drow-root{
 		display: flex;
+	}
+	.abc .primary--text{
+		    margin-right: 38px!important;
 	}
 	.logo{
 		width: 130px;
