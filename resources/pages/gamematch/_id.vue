@@ -69,24 +69,12 @@
 						    </nuxt-link>
 							<div class="" style="display: flex;">
 		    					<div style="width: 75%;margin-top: 12px">
-		    						<v-progress-linear
-								      v-model="knowledge"
-								      height="5"
-								      reactive
-								      style="width: 96%;margin-left: auto;"
-								    >
-								    </v-progress-linear>
+		    						<Prograsvar :abcd="(i.users.length/i.max_join)*100"/>
 									<span style="font-size: 12px;">
 									Only {{ i.max_join-i.users.length }} spots left</span> {{ i.users.length }}/{{ i.max_join }}
-									 <span style="visibility: hidden"> {{ knowledge=(i.users.length/i.max_join)*100 }}</span>
 		    					</div>
 		    					<div style="width: 25%">
-		    						<nuxt-link :to="/join/+i.id" v-if="authuser">
-		    							<button class="v-btn v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">join</button>
-		    						</nuxt-link>
-		    						<div v-else>
-		    							<button onclick="return alert('Please Login to Join');" class="v-btn disabled v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">join</button>
-		    						</div>
+		    						<Joinbutton :match="i" :authuser='authuser'/>
 		    					</div>
 		    				</div>
 				    	</v-card>
@@ -104,14 +92,18 @@
 import { mapMutations, mapGetters } from 'vuex'
 import Carousels from '~/components/Carousels'
 import Navmanu from '~/components/Navmanu'
+import Joinbutton from '~/components/Joinbutton'
 import Card from '~/components/Card'
+import Prograsvar from '~/components/Prograsvar'
 import axios from '~/plugins/axios'
 export default {
 	props:['matches'],
 	components:{
 		Carousels,
 		Card,
-		Navmanu
+		Navmanu,
+		Joinbutton,
+		Prograsvar
 	},
     data () {
       return {
@@ -123,24 +115,32 @@ export default {
         ],
       }
     },
-	computed:{
-	
+	computed: {
+		...mapGetters({
+		   authuser: 'authuser'
+		})
 	},
-	computed: mapGetters({
-	   authuser: 'authuser'
-	}),
 	methods: {
 	  	formatDate(date) {
-	  		console.log(date);
 	  		var d = new Date(date);
 	  		var day = d.getDate();
 		  	var monthIndex = d.getMonth();
 		  	var year = d.getFullYear();
 		  	return day + '/' + ++monthIndex + '/' + year;
+		},
+		check(){
+			let exists=0;
+			for (var i = this.i.users.length - 1; i >= 0; i--) {
+				let exists = Object.values(this.i.users[i]).includes(this.authuser.id);
+				if(exists==true){
+					this.isjoined=1;
+					console.log(this.isjoined);
+					break;
+				}
+			}
 		}
 	},
 	asyncData ({ params }) {
-		console.log(params);
 	    return axios.get(`/api/match/${params.id}`)
 	      .then((res) => {
 	        return { match: res.data }

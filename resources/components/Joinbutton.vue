@@ -1,0 +1,41 @@
+<template>
+	<div> {{ check() }} 
+		<nuxt-link :to="/join/+match.id" v-if="authuser && isjoined==0">
+			<button class="v-btn v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">join</button>
+		</nuxt-link>
+		<div v-else-if="isjoined">
+			<nuxt-link :to="/join/+match.id">
+				<button class="v-btn v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small success--text" style="margin-top: 10px;">joined</button>
+			</nuxt-link>
+			<span>Room id: {{ match.room_id }}</span>
+			<span>Password: {{ match.password }}</span>
+		</div>
+		<div v-else>
+			<button onclick="return alert('Please Login to Join');" class="v-btn disabled v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">join</button>
+		</div>
+	</div>
+</template>
+
+<script>
+	export default {
+		props:['match','authuser'],
+		data () {
+	      return {
+	      	isjoined:0
+	      }
+	    },
+		methods:{
+			check(){
+				let exists=0;
+				for (var i = this.match.users.length - 1; i >= 0; i--) {
+					let exists = Object.values(this.match.users[i]).includes(this.authuser.id);
+					if(exists==true){
+						this.isjoined=1;
+						console.log(this.isjoined);
+						break;
+					}
+				}
+			}
+		}
+	}
+</script>
