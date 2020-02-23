@@ -3,7 +3,7 @@
 		<h2 class="text-center">Prize   {{ check() }}  {{ isjoined }}</h2>
 		<v-simple-table dark>
 		    <template v-slot:default>
-		      <thead>
+		      <thead> 
 		        <tr>
 		          <th class="text-left">S.NO</th>
 		          <th class="text-left">Lavel</th>
