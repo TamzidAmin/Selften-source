@@ -7,7 +7,7 @@
 			outlined
 			small
 		>
-			Login l ssd
+			Login l ss
 		</v-btn>
 		
 		<v-dialog
