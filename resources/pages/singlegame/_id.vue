@@ -1,7 +1,7 @@
 <template>
 	<div style="width: 80%;margin: auto;">
 		<h2 class="text-center">Prize   {{ check() }}  {{ isjoined }}</h2>
-		<v-simple-table dark>
+		<v-simple-table dark> 
 		    <template v-slot:default>
 		      <thead> 
 		        <tr>
