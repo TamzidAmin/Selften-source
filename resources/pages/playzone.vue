@@ -13,7 +13,7 @@
 			          	<nuxt-link :to="'gamematch/'+m.id">
 			          		<div class="d-flex" style="margin-top: 7px;">
 				          		<div>
-									<img :src="'http://127.0.0.1:3333/uploads/product/'+m.logo" alt="!opps" height="100px" width="100px" style="object-fit: contain;">
+									<img :src="'https://admin.selften.com/uploads/product/'+m.logo" alt="!opps" height="100px" width="100px" style="object-fit: contain;">
 				          		</div>
 				          		<div style="padding: 10px">
 						          <div>
