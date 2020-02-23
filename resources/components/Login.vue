@@ -7,7 +7,7 @@
 			outlined
 			small
 		>
-			Login l ss
+			Login
 		</v-btn>
 		
 		<v-dialog
