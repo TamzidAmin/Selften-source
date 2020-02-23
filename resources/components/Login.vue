@@ -7,7 +7,7 @@
 			outlined
 			small
 		>
-			Login l1
+			Login l
 		</v-btn>
 		
 		<v-dialog
