@@ -27,12 +27,16 @@
 		        <tr>
 		          <th class="text-left">S.NO</th>
 		          <th class="text-left">Game Name</th>
+		          <th class="text-left">Total Kill</th>
+		          <th class="text-left">Total Win</th>
 		        </tr>
 		      </thead>
 		      <tbody>
 		        <tr v-for="(item,index) in match.users" :key="item.name">
 		          <td>{{ index+1 }}</td>
 		          <td>{{ item.pivot.gamename }}</td>
+		          <td>{{ item.pivot.total_kill }}</td>
+		          <td>{{ item.pivot.total_earn }}</td>
 		        </tr>
 		      </tbody>
 		    </template>

@@ -1,6 +1,9 @@
 <template>
-	<div> {{ check() }} 
-		<nuxt-link :to="/join/+match.id" v-if="authuser && isjoined==0">
+	<div> {{ check() }}
+		<div v-if="match.status=='ongoing'">
+			<button class="v-btn disabled v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">Closed</button>
+		</div>
+		<nuxt-link :to="/join/+match.id" v-else-if="authuser && isjoined==0">
 			<button class="v-btn v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">join</button>
 		</nuxt-link>
 		<div v-else-if="isjoined">
