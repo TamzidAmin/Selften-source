@@ -45,6 +45,9 @@
 				      v-model="password"
 				      :rules="nameRules"
 				      label="Password"
+				      :type="show1 ? 'text' : 'password'"
+				      :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+				      @click:append="show1 = !show1"
 				      required
 				    ></v-text-field>
 
@@ -52,6 +55,7 @@
 				      :disabled="!valid"
 				      color="success"
 				      class="mr-4"
+				      :loading="loading"
 				      @click="validate"
 				    >
 				      Register
@@ -78,6 +82,8 @@ const Cookie = process.client ? require('js-cookie') : undefined
     data: () => ({
       	valid: true,
 		dialog: false,
+		show1: false,
+		loading:false,
 		phone:'',
       	username: '',
       	required:[
@@ -85,7 +91,7 @@ const Cookie = process.client ? require('js-cookie') : undefined
       	],
       	nameRules: [
        		v => !!v || 'Name is required',
-        	v => (v && v.length <= 6) || 'Name must be less than 6 characters',
+        	v => (v && v.length >= 6) || 'Name must be less than 6 characters',
       	],
       	email: '',
       	password:'',
@@ -98,6 +104,7 @@ const Cookie = process.client ? require('js-cookie') : undefined
     methods: {
       validate () {
         if (this.$refs.form.validate()) {
+        	this.loading=true
           	this.snackbar = true
           	var self = this;
          	axios.post('/api/register', {
@@ -107,6 +114,7 @@ const Cookie = process.client ? require('js-cookie') : undefined
 			    password: this.password
 			})
 			.then(function (response) {
+				self.loading=false
 			    console.log(response.data);
 			    setTimeout(() => { // we simulate the async request with timeout.
 		        const auth = {
@@ -122,6 +130,8 @@ const Cookie = process.client ? require('js-cookie') : undefined
 			.catch(function (error) {
 			    console.log(error);
 			});
+        }else{
+        	this.loading=false
         }
       },
       reset () {

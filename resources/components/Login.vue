@@ -32,6 +32,9 @@
 					  v-model="password"
 					  :rules="nameRules"
 					  label="Password"
+					  :type="show1 ? 'text' : 'password'"
+					  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+					  @click:append="show1 = !show1"
 					  required
 					></v-text-field>
 					<p style="color: red;" v-if="error!=null">{{ error }}</p>
@@ -39,7 +42,9 @@
 					  :disabled="!valid"
 					  color="success"
 					  class="mr-4"
+					  :loading="loading"
 					  @click="validate"
+
 					>
 					  Login
 					</v-btn>
@@ -63,13 +68,15 @@ import axios from '~/plugins/axios'
 const Cookie = process.client ? require('js-cookie') : undefined
   export default {
 	data: () => ({
+		loading: false,
+		show1: false,
 		error:null,
-	  valid: true,
+	  	valid: true,
 		dialog: false,
 	  name: '',
 	  nameRules: [
 		v => !!v || 'Name is required',
-		v => (v && v.length <= 6) || 'Name must be less than 6 characters',
+		v => (v && v.length >= 6) || 'Name must be less than 6 characters',
 	  ],
 	  email: '',
 	  password:'',
@@ -81,6 +88,7 @@ const Cookie = process.client ? require('js-cookie') : undefined
 
 	methods: {
 	  validate () {
+	  	this.loading=true;
 		if (this.$refs.form.validate()) {
 		  this.snackbar = true
 		  var self = this;
@@ -91,8 +99,10 @@ const Cookie = process.client ? require('js-cookie') : undefined
 			.then(function (response) {
 				console.log(response.data);
 				if(response.data.message){
+					self.loading=false
 					self.error=response.data.message
 				}else{
+					self.loading=false
 					setTimeout(() => { // we simulate the async request with timeout.
 					const auth = {
 					  accessToken: response.data.token
@@ -109,6 +119,8 @@ const Cookie = process.client ? require('js-cookie') : undefined
 				console.log(error);
 			});
 
+		}else{
+			this.loading=false
 		}
 	  },
 	  reset () {

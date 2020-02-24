@@ -95,6 +95,7 @@ export default {
 	asyncData ({ params }) {
 	    return axios.get(`/api/singlematch/${params.id}`)
 	      	.then((res) => {
+	      		console.log(res.data);
 	        	return { match: res.data[0] }
 	    })
   	}

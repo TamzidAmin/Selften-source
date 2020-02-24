@@ -3,132 +3,130 @@
 <div>
 	<v-card style="padding: 10px;" width="320px" class="bg-light">
 		<v-simple-table>{{ check() }}
-				<template v-slot:default>
-					<tbody style="text-align: center;">
-						<tr>
-							<td style="background: black;color: white;text-align: center;">{{ i.match_name }}</td>
-						</tr>
-						<tr><td>Available Balance: ৳{{ authuser.wallet }}</td></tr>
-						<tr><td>Match Entry Fee Per Person: ৳{{ i.entryfee }}</td></tr>
-						<tr v-if="row=='solo'" style="visibility: hidden;"><td>Team Entry Fee : ৳{{ totalfee=i.entryfee }}</td></tr>
-						<tr v-if="row=='duo'"><td>Team Entry Fee : ৳{{ totalfee=i.entryfee*2 }}</td></tr>
-						<tr v-if="row=='squad'"><td>Team Entry Fee : ৳{{ totalfee=i.entryfee*4 }}</td></tr>
-						<tr><td><v-btn small color="primary">{{ i.max_join-i.users.length }} Spots Left</v-btn></td></tr>
-					</tbody>
-				</template>
+			<template v-slot:default>
+				<tbody style="text-align: center;">
+					<tr>
+						<td style="background: black;color: white;text-align: center;">{{ i.match_name }}</td>
+					</tr>
+					<tr><td>Available Balance: ৳{{ authuser.wallet }}</td></tr>
+					<tr><td>Match Entry Fee Per Person: ৳{{ i.entryfee }}</td></tr>
+					<tr v-if="row=='solo'" style="visibility: hidden;"><td>Team Entry Fee : ৳{{ totalfee=i.entryfee }}</td></tr>
+					<tr v-if="row=='duo'"><td>Team Entry Fee : ৳{{ totalfee=i.entryfee*2 }}</td></tr>
+					<tr v-if="row=='squad'"><td>Team Entry Fee : ৳{{ totalfee=i.entryfee*4 }}</td></tr>
+					<tr><td><v-btn small color="primary">{{ i.max_join-i.users.length }} Spots Left</v-btn></td></tr>
+				</tbody>
+			</template>
 		</v-simple-table>
 	</v-card>
 	<br>
-			 <v-form
-					ref="form"
-					v-model="valid"
-					lazy-validation
-				  >
-	 <v-card style="padding: 10px;" width="320px" class="bg-light">
-				<v-simple-table>
-						<template v-slot:default>
-					
-							<tbody>
-							<tr>
-									<td style="background: black;color: white;text-align: center;text-transform: capitalize;">{{ i.type }} Registration</td>
-								</tr>
-								<tr>
-										<td style="padding: 5px;text-align: center;">
-												<span v-if="i.type=='duo'">This is Duo match.You can join as Solo or Duo.</span>
-												<span v-if="i.type=='solo'">This is Solo match.You can join as Solo.</span>
-												<span v-if="i.type=='squad'">This is Squad match.You can join as Solo,Duo or Squad</span>
-										</td>
-								</tr>
-								<tr style="text-align: center;">
-									 <td>
-										 <v-radio-group v-model="row" row style="justify-content: center;">
-											<div v-if="i.type=='duo'" class="d-flex" style="justify-content: center">
-												<v-radio label="Solo" value="solo"></v-radio>
-												<v-radio label="Duo" value="duo"></v-radio>
-											</div>
-											{{  }}
-											<div v-if="i.type=='solo'" style="text-align: center">
-												<v-radio  label="solo" value="solo"></v-radio>
-											</div>
-											<div v-if="i.type=='squad'" class="d-flex" style="justify-content: center">
-												<v-radio label="solo" value="solo"></v-radio>
-												<v-radio label="duo" value="duo"></v-radio>
-												<v-radio label="squad" value="squad"></v-radio>
-											</div>
-										</v-radio-group>
-									 </td>
-								</tr>
-								<tr>
-									<td>
-										Enter Your Exact {{ i.product.name }} Name
-									</td>
-								</tr>
-								<tr style="text-align: center;">
-									<td>
-										<div v-if="row=='solo'" style="padding: 10px">
-												<v-text-field
-													v-model="player1"
-													:rules="nameRules"
-													:label="'Player 1 '+i.product.name+' Name'"
-													required
-												></v-text-field>
-										</div>
-										<div v-if="row=='duo'" style="padding: 10px">
-												<v-text-field
-													v-model="player1"
-													:rules="nameRules"
-													 :label="'Player 1 '+i.product.name+' Name'"
-													required
-												></v-text-field>
-												<v-text-field
-													v-model="player2"
-													:rules="nameRules"
-													:label="'Player 2 '+i.product.name+' Name'"
-													required
-												></v-text-field>
-										</div>
-										<div v-if="row=='squad'" style="padding: 10px">
-												<v-text-field
-													v-model="player1"
-													:rules="nameRules"
-													 :label="'Player 1 '+i.product.name+' Name'"
-													required
-												></v-text-field>
-												<v-text-field
-													v-model="player2"
-													:rules="nameRules"
-													 :label="'Player 2 '+i.product.name+' Name'"
-													required
-												></v-text-field>
-												<v-text-field
-													v-model="player3"
-													:rules="nameRules"
-													 :label="'Player 3 '+i.product.name+' Name'"
-													required
-												></v-text-field>
-												<v-text-field
-													v-model="player4"
-													:rules="nameRules"
-													:label="'Player 4 '+i.product.name+' Name'"
-													required
-												></v-text-field>
-										</div>
-										<div>
-											<v-btn v-if="authuser.wallet>=totalfee && isjoined==0" @click="join" depressed small color="primary">Join</v-btn>
-											<v-btn v-else-if="isjoined==1" depressed small color="success">Joined</v-btn>
-											<nuxt-link to="/addwallet" v-else>
-												<v-btn depressed small color="primary">Add Money</v-btn>
-											</nuxt-link>
-										</div>
-										</td>
-									</tr>
-							</tbody>
-							 
-						</template>
-				</v-simple-table>
+	<v-form
+		ref="form"
+		v-model="valid"
+		lazy-validation
+	>
+	 	<v-card style="padding: 10px;" width="320px" class="bg-light">
+			<v-simple-table>
+				<template v-slot:default>
+					<tbody>
+						<tr>
+							<td style="background: black;color: white;text-align: center;text-transform: capitalize;">{{ i.type }} Registration</td>
+						</tr>
+						<tr>
+							<td style="padding: 5px;text-align: center;">
+								<span v-if="i.type=='duo'">This is Duo match.You can join as Solo or Duo.</span>
+								<span v-if="i.type=='solo'">This is Solo match.You can join as Solo.</span>
+								<span v-if="i.type=='squad'">This is Squad match.You can join as Solo,Duo or Squad</span>
+							</td>
+						</tr>
+						<tr style="text-align: center;">
+							 <td>
+								 <v-radio-group v-model="row" row style="justify-content: center;">
+									<div v-if="i.type=='duo'" class="d-flex" style="justify-content: center">
+										<v-radio label="Solo" value="solo"></v-radio>
+										<v-radio label="Duo" value="duo"></v-radio>
+									</div>
+									{{  }}
+									<div v-if="i.type=='solo'" style="text-align: center">
+										<v-radio  label="solo" value="solo"></v-radio>
+									</div>
+									<div v-if="i.type=='squad'" class="d-flex" style="justify-content: center">
+										<v-radio label="solo" value="solo"></v-radio>
+										<v-radio label="duo" value="duo"></v-radio>
+										<v-radio label="squad" value="squad"></v-radio>
+									</div>
+								</v-radio-group>
+							 </td>
+						</tr>
+						<tr>
+							<td>
+								Enter Your Exact {{ i.product.name }} Name
+							</td>
+						</tr>
+						<tr style="text-align: center;">
+							<td>
+								<div v-if="row=='solo'" style="padding: 10px">
+										<v-text-field
+											v-model="player1"
+											:rules="nameRules"
+											:label="'Player 1 '+i.product.name+' Name'"
+											required
+										></v-text-field>
+								</div>
+								<div v-if="row=='duo'" style="padding: 10px">
+										<v-text-field
+											v-model="player1"
+											:rules="nameRules"
+											 :label="'Player 1 '+i.product.name+' Name'"
+											required
+										></v-text-field>
+										<v-text-field
+											v-model="player2"
+											:rules="nameRules"
+											:label="'Player 2 '+i.product.name+' Name'"
+											required
+										></v-text-field>
+								</div>
+								<div v-if="row=='squad'" style="padding: 10px">
+										<v-text-field
+											v-model="player1"
+											:rules="nameRules"
+											 :label="'Player 1 '+i.product.name+' Name'"
+											required
+										></v-text-field>
+										<v-text-field
+											v-model="player2"
+											:rules="nameRules"
+											 :label="'Player 2 '+i.product.name+' Name'"
+											required
+										></v-text-field>
+										<v-text-field
+											v-model="player3"
+											:rules="nameRules"
+											 :label="'Player 3 '+i.product.name+' Name'"
+											required
+										></v-text-field>
+										<v-text-field
+											v-model="player4"
+											:rules="nameRules"
+											:label="'Player 4 '+i.product.name+' Name'"
+											required
+										></v-text-field>
+								</div>
+								<div> 
+									<v-btn v-if="(authuser.wallet+authuser.earn_wallet)>=totalfee && isjoined==0" @click="join" depressed small color="primary">Join</v-btn>
+									<v-btn v-else-if="isjoined==1" depressed small color="success">Joined</v-btn>
+									<nuxt-link to="/addwallet" v-else>
+										<v-btn depressed small color="primary">Add Money</v-btn>
+									</nuxt-link>
+								</div>
+								</td>
+							</tr>
+					</tbody>
+				</template>
+			</v-simple-table>
 		</v-card>
 	</v-form>		
-</div>
+	</div>
 </v-layout>
 </template>
 
