@@ -27,7 +27,7 @@
 				    		<nuxt-link :to="/singlegame/+i.id">
 						    	<div class="d-flex">
 						    		<div>
-						    			<img :src="'http://127.0.0.1:3333/uploads/product/'+i.product.logo" alt="!opps" style="object-fit: contain;width: 75px;height: 75px;">
+						    			<img :src="base_url+'/uploads/product/'+i.product.logo" alt="!opps" style="object-fit: contain;width: 75px;height: 75px;">
 						    		</div>
 						    		<div class="content">
 						    			<h2 class="text-left">{{ i.match_name }}</h2>
@@ -117,7 +117,8 @@ export default {
     },
 	computed: {
 		...mapGetters({
-		   authuser: 'authuser'
+		   authuser: 'authuser',
+		   base_url:'base_url'
 		})
 	},
 	methods: {
@@ -144,92 +145,93 @@ export default {
 	    return axios.get(`/api/match/${params.id}`)
 	      .then((res) => {
 	        return { match: res.data }
-	      })
+	    })
   	}
 }
 </script>
-<style>
-.bg-light{
-	background: #F5F5F5!important;
-}
-.single-box{
-	justify-content: center;
-	text-align: center;
-}
-.single-box div{
-	width: 33.33%;
-}
-.single-box div h5{
-	color: black;
-	padding: 5px 0px;
-}
-.single-box div span{
-	color: #D0254B;
-	
-}
-a{
-	text-decoration: none;
-}
-span{
-	font-size: 15px;
-}
-.v-list-item{
-	padding: 0px!important;
-}
-.content{
-	margin-left: 10px;
-}
-.v-slide-group__content{
-	justify-content: center!important;
-}
-.root{
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center!important;
-}
-</style>
-<style scoped>
-.card_2nd_right{
-	    padding: 0px 10px;
-    font-size: 15px;
-}
-.playzone{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    color: #000000;
-}
-.playzone img{
-    object-fit:cover;
-}
-.single-playzone{
-	display: flex;
-}
-.playzone > div {
-	padding: 10px;
-    min-width: 320px;
-    max-width: 320px;
-    margin: 10px;
-    background: #F1F1F1;
-    -webkit-box-shadow: 3px 3px 5px 6px #ccc;
-    -moz-box-shadow: 3px 3px 5px 6px #ccc;
-    box-shadow: -2px 2px 8px 6px #ccc;
-}
-ul{
-	list-style: none;
-	padding: 0px!important;
-	margin: 0px;
-	
-}
-ul li{
-	padding: 0px!important;
-	margin: 0px!important;
 
-}
-ul p{
-	margin-bottom: 0px!important;
-}
-img{
-	width: 100%;
-}
+<style>
+	.bg-light{
+		background: #F5F5F5!important;
+	}
+	.single-box{
+		justify-content: center;
+		text-align: center;
+	}
+	.single-box div{
+		width: 33.33%;
+	}
+	.single-box div h5{
+		color: black;
+		padding: 5px 0px;
+	}
+	.single-box div span{
+		color: #D0254B;
+		
+	}
+	a{
+		text-decoration: none;
+	}
+	span{
+		font-size: 15px;
+	}
+	.v-list-item{
+		padding: 0px!important;
+	}
+	.content{
+		margin-left: 10px;
+	}
+	.v-slide-group__content{
+		justify-content: center!important;
+	}
+	.root{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center!important;
+	}
+	</style>
+	<style scoped>
+	.card_2nd_right{
+		    padding: 0px 10px;
+	    font-size: 15px;
+	}
+	.playzone{
+	    display: flex;
+	    flex-wrap: wrap;
+	    justify-content: center;
+	    color: #000000;
+	}
+	.playzone img{
+	    object-fit:cover;
+	}
+	.single-playzone{
+		display: flex;
+	}
+	.playzone > div {
+		padding: 10px;
+	    min-width: 320px;
+	    max-width: 320px;
+	    margin: 10px;
+	    background: #F1F1F1;
+	    -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+	    -moz-box-shadow: 3px 3px 5px 6px #ccc;
+	    box-shadow: -2px 2px 8px 6px #ccc;
+	}
+	ul{
+		list-style: none;
+		padding: 0px!important;
+		margin: 0px;
+		
+	}
+	ul li{
+		padding: 0px!important;
+		margin: 0px!important;
+
+	}
+	ul p{
+		margin-bottom: 0px!important;
+	}
+	img{
+		width: 100%;
+	}
 </style>

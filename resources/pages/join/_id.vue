@@ -145,31 +145,32 @@ export default {
 		Card,
 		Navmanu
 	},
-		data () {
-			return {
-				error:null,
-	  			valid: true,
-				dialog: false,
-				totalfee:0,
-				i:[],
-				player1:'',
-				player2:'',
-				player3:'',
-				player4:'',
-				row:'solo',
-				tab: null,
-				isjoined:0,
-				knowledge: 0,
-				nameRules: [
-					v => !!v || 'Player Name is required',
+	data () {
+		return {
+			error:null,
+  			valid: true,
+			dialog: false,
+			totalfee:0,
+			i:[],
+			player1:'',
+			player2:'',
+			player3:'',
+			player4:'',
+			row:'solo',
+			tab: null,
+			isjoined:0,
+			knowledge: 0,
+			nameRules: [
+				v => !!v || 'Player Name is required',
+		],
+			items: [
+				'upcoming','ongoing','result',
 			],
-				items: [
-					'upcoming','ongoing','result',
-				],
-			}
-		},
+		}
+	},
 	computed: mapGetters({
-		authuser: 'authuser'
+		authuser: 'authuser',
+		base_url:'base_url'
 	}),
 	methods: {
 		join(){

@@ -3,13 +3,17 @@ const cookieparser = process.server ? require('cookieparser') : undefined
 export const state = () => {
 	return {
 		auth: null,
-		authuser:[]
+		authuser:[],
+		base_url:"https://admin.selften.com/"
 	}
 }
 
 export const getters = {
   authuser (state) {
     return state.authuser
+  },
+  base_url (state) {
+    return state.base_url
   }
 }
 
