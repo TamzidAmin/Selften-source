@@ -35,7 +35,7 @@
 			<v-spacer></v-spacer>
 			<div class="d-flex" style="min-width: 170px;" v-if="authuser==null"> 
 				<Login class="abc"/>
-				<Register/>
+				<Register class="abc"/>
 			</div>
 			<div class="text-right" style="min-width: 170px;" v-else> 
 				<Dropdown :user="authuser"/>
@@ -131,6 +131,7 @@
 </script>
 
 <style>
+
 	.v-list-item__action{
 		width: 30px;
 	    height: 30px;
@@ -146,7 +147,7 @@
 		display: flex;
 	}
 	.abc .primary--text{
-		    margin-right: 38px!important;
+		margin-right: 38px!important;
 	}
 	.logo{
 		width: 130px;
@@ -165,5 +166,16 @@
 	}
 	.v-application .primary--text{
 		color: #C91F4E!important;
+	}
+	@media only screen and (max-width: 425px) {
+		.abc .primary--text{
+			margin-right: -14px!important;
+		}
+		.abc .v-btn__content{
+			font-size: 11px;
+		}
+		.abc button{
+			padding: 0 9.444444px;
+		}
 	}
 </style>

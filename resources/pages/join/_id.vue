@@ -162,7 +162,7 @@ export default {
 			knowledge: 0,
 			nameRules: [
 				v => !!v || 'Player Name is required',
-		],
+			],
 			items: [
 				'upcoming','ongoing','result',
 			],

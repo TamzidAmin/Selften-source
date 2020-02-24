@@ -1,6 +1,6 @@
 <template>
 <v-layout column justify-center align-center>
-	<v-card class="text-center" style="width: 100%">
+	<div class="text-center" style="width: 100%">
 	    <v-tabs
 	      v-model="tab"
 	      align-with-title
@@ -20,7 +20,8 @@
 	        <div class="root">
 		         <div
 				    v-for="i in match"
-				   v-if="i.status==item"
+				   	v-if="i.status==item"
+				   	class="bg-color"
 				  > 
 				    <v-list-item three-line style="padding: 10px;margin: 10px;">
 				    	<v-card style="padding: 10px;" class="bg-light">
@@ -33,7 +34,7 @@
 						    			<h2 class="text-left">{{ i.match_name }}</h2>
 						    			<div class="d-flex">
 						    				<div style="margin-right: 10px;">
-						    					<span>Time : {{ formatDate(i.start_at) }} at {{ i.start_time }}</span>
+						    					<span class="time">Time : {{ formatDate(i.start_at) }} at {{ i.start_time }}</span>
 						    				</div>
 						    			</div>
 						    		</div>
@@ -84,7 +85,7 @@
 	        </div>
 	      </v-tab-item>
 	    </v-tabs-items>
-	 </v-card>
+	 </div>
 </v-layout>
 </template>
 
@@ -151,6 +152,20 @@ export default {
 </script>
 
 <style>
+	.bg-color{
+		background: #C91F4E;
+	}
+	@media only screen and (max-width: 320px) {
+		.time{
+			font-size: 12px!important;
+		}
+	}
+	.v-slide-group__prev--disabled{
+		display: none!important;
+	}
+	.v-tab{
+		margin-left: 0px!important;
+	}
 	.bg-light{
 		background: #F5F5F5!important;
 	}
