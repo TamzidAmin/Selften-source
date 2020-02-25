@@ -131,7 +131,9 @@
 </script>
 
 <style>
-
+	.w-50{
+		width: 50%;
+	}
 	.v-list-item__action{
 		width: 30px;
 	    height: 30px;

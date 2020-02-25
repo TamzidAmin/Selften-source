@@ -29,7 +29,7 @@
 				</v-list-item>
 
 				<v-list-item>
-					<nuxt-link to="addwallet">
+					<nuxt-link to="wallet">
 						<img src="~/assets/wallet.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
 						My Wallet
 					</nuxt-link>

@@ -154,6 +154,7 @@ export default {
 <style>
 	.bg-color{
 		background: #C91F4E;
+		margin:5px;
 	}
 	@media only screen and (max-width: 320px) {
 		.time{

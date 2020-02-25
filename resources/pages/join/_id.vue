@@ -57,8 +57,8 @@
 								</v-radio-group>
 							 </td>
 						</tr>
-						<tr>
-							<td>
+						<tr class="text-center">
+							<td class="text-center">
 								Enter Your Exact {{ i.product.name }} Name
 							</td>
 						</tr>
@@ -220,6 +220,9 @@ export default {
 }
 </script>
 <style>
+.v-input--radio-group__input{
+	text-transform: capitalize;
+}
 .bg-light{
 	background: #F5F5F5!important;
 }
