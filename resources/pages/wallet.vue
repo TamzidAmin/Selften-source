@@ -24,7 +24,7 @@
 					p
 				</div>
 	    	</div>
-	        {{ authuser }}
+	       
 	    </v-card-text>
 	</v-card>
 </div>
