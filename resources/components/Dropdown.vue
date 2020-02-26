@@ -5,10 +5,11 @@
 				<v-btn
 					color="primary"
 					dark
+					small
 
 					v-on="on"
 				>
-					{{  user.username }} 
+					{{  user.username.substring(0, 10) }} 
 					<img src="~/assets/downarrow.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
 				</v-btn>
 			</template>

@@ -14,60 +14,161 @@
 		    			<h2>৳ {{ authuser.wallet }}</h2>
 		    		</div>
 		    		<div class="w-50">
-		    			<h4>Wining</h4>
+		    			<h4>Winning</h4>
 		    			<h2>৳ {{ authuser.earn_wallet }}</h2>
 		    		</div>
 		    	</div>
+		    	<p class="pt-3 f-10">You Can withdraw Only Winning Amount</p>
 	    	</div>
-	    	<div class="d-flex" >
-				<div>
-					p
+	    	<div class="d-flex getw">
+				<div style="width: 25%;">
+					<div class="p-2 text-capitalize pointer" v-bind:class="{ active: name=='addmoney' ? true : '' }" @click="addmoney('addmoney')">
+				     	<img src="~/assets/wallet.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
+				     	<p>add money</p>
+				    </div>
 				</div>
+				<div style="width: 25%;">
+					<div class="p-2 text-capitalize pointer" v-bind:class="{ active: name=='withdraw' ? true : '' }" @click="withdraw('withdraw')">
+				     	<img src="~/assets/wallet.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
+				     	<p>Withdraw</p>
+				    </div>
+				</div>
+				<div style="width: 25%;">
+					<div class="p-2 text-capitalize pointer" v-bind:class="{ active: name=='transfer' ? true : '' }" @click="transfer('transfer')">
+				     	<img src="~/assets/wallet.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
+				     	<p>Transfer</p>
+				    </div>
+				</div>
+				<div style="width: 25%;">
+					<div class="p-2 text-capitalize pointer" v-bind:class="{ active: name=='transaction' ? true : '' }" @click="transaction('transaction')">
+				     	<img src="~/assets/wallet.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
+				     	<p>Transaction</p>
+				    </div>
+				</div>
+	    	</div> 
+	    	<div v-if="name=='addmoney'">
+	    		<v-list class="p-2">
+					<nuxt-link v-for="paymentmethod in data" :to="/addwallet/+paymentmethod.id">
+						<v-list-item>
+					      	<v-list-item-avatar style="margin-left: 21px;">
+					          	<v-img :src="'https://admin.selften.com/uploads/payment/'+paymentmethod.logo"></v-img>
+					        </v-list-item-avatar>
+
+					        <v-list-item-content class="text-left">
+					          	<v-list-item-title>{{ paymentmethod.name }} ( {{ paymentmethod.info }} )</v-list-item-title>
+					        </v-list-item-content>
+					    </v-list-item>
+					</nuxt-link>
+	    		</v-list>
 	    	</div>
-	       
+	    	<div v-if="name=='transfer'">
+	    		<p>Comming Soon</p>
+	    	</div>
+	    	<div v-if="name=='transaction'">
+	    		<v-simple-table dark>
+				    <template v-slot:default>
+				      <thead>
+				        <tr>
+				          <th class="text-center">Amount</th>
+				          <th class="text-center">Number</th>
+				          <th class="text-center">Date</th>
+				        </tr>
+				      </thead>
+				      <tbody>
+				        <tr v-for="item in data" :key="item.name">
+				          <td>৳ {{ item.amount }}</td>
+				          <td>{{ item.number }}</td>
+				          <td>{{ item.created_at }}</td>
+				        </tr>
+				      </tbody>
+				    </template>
+				</v-simple-table>
+	    	</div>
+	    	<div v-if="name=='withdraw'">
+	    		<v-list class="p-2">
+					<nuxt-link v-for="paymentmethod in data" :to="/withdraw/+paymentmethod.id">
+						<v-list-item>
+					      	<v-list-item-avatar style="margin-left: 21px;">
+					          	<v-img :src="'https://admin.selften.com/uploads/payment/'+paymentmethod.logo"></v-img>
+					        </v-list-item-avatar>
+
+					        <v-list-item-content class="text-left">
+					          	<v-list-item-title>{{ paymentmethod.name }} ( {{ paymentmethod.info }} )</v-list-item-title>
+					        </v-list-item-content>
+					    </v-list-item>
+					</nuxt-link>
+	    		</v-list>
+	    	</div>
 	    </v-card-text>
 	</v-card>
 </div>
 </template>
+
 <script>
 import { mapMutations, mapGetters } from 'vuex'
+import axios from '~/plugins/axios'
 export default {
 	data: () => ({
 		valid: true,
-		name: '',
-		nameRules: [
-			v => !!v || 'Name is required',
-			v => (v && v.length <= 10) || 'Name must be less than 10 characters',
-		],
-		email: '',
-		emailRules: [
-			v => !!v || 'E-mail is required',
-			v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-		],
-		select: null,
-		items: [
-			'Item 1',
-			'Item 2',
-			'Item 3',
-			'Item 4',
-		],
-		checkbox: false,
+		name: 'addmoney',
+		isActive:true,
+		data:[],
 	}),
 	computed: mapGetters({
 	   authuser: 'authuser'
 	}),
 	methods: {
-		validate () {
-			if (this.$refs.form.validate()) {
-				this.snackbar = true
-			}
+		addmoney(name){
+			var self = this;
+			this.name=name;
+			axios.get(`/api/paymentMethod/`)
+			.then((res) => {
+				self.data=res.data
+			})
 		},
-		reset () {
-			this.$refs.form.reset()
+		withdraw(name){
+			this.name=name;
+			var self = this;
+			console.log(this.name);
+			axios.get(`/api/paymentMethod`)
+			.then((res) => {
+				self.data=res.data
+			})
 		},
-		resetValidation () {
-			this.$refs.form.resetValidation()
+		transfer(name){
+			this.name=name;
+			console.log(this.name);
+			// axios.get(`/api/userwallet/${name}`)
+			// .then((res) => {
+				
+			// })
 		},
+		transaction(name){
+			var self = this;
+			this.name=name;
+			console.log(this.name);
+			axios.get(`/api/usertransaction/${this.authuser.id}`)
+			.then((res) => {
+				self.data=res.data
+			})
+		}
 	},
+	asyncData () {
+		return axios.get(`/api/paymentMethod`)
+		.then((res) => {
+			return { data: res.data }
+		})
+	}
 }
 </script>
+
+<style>
+	.active{
+		border: 1px solid #ED1944;
+	}
+	@media only screen and (max-width: 375px) {
+		.getw p{
+			font-size: 10px;
+		}
+	}
+</style>

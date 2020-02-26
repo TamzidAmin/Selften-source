@@ -4,9 +4,6 @@
 		<div>
 			<h4>QUICK LINKS</h4>
 			<a href="#">About US</a><br>
-			<a href="#">Terms of Use</a><br>
-			<a href="#">FAQs / Help</a><br>
-			<a href="#">Privacy Policy</a>
 		</div>
 		<div>
 			<h4>Around The Web</h4>
@@ -16,7 +13,7 @@
 		</div>
 		<div>
 			<h4>ABOUT FRELANCER</h4>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.! Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+			<p>Lorem ipsum dolor</p>
 		</div>
 	</div>
 </footer>

@@ -31,9 +31,9 @@
 						    			<img :src="base_url+'/uploads/product/'+i.product.logo" alt="!opps" style="object-fit: contain;width: 75px;height: 75px;">
 						    		</div>
 						    		<div class="content">
-						    			<h2 class="text-left">{{ i.match_name }}</h2>
+						    			<h2 class="text-left">{{ i.match_name.substring(0, 20) }}</h2>
 						    			<div class="d-flex">
-						    				<div style="margin-right: 10px;">
+						    				<div>
 						    					<span class="time">Time : {{ formatDate(i.start_at) }} at {{ i.start_time }}</span>
 						    				</div>
 						    			</div>
@@ -60,7 +60,7 @@
 				    				</div>
 									<div style="margin-right: 10px;">
 				    					<h5>PLATFORM</h5>
-				    					<span>{{ i.platform }}</span>
+				    					<span class="text-capitalize">{{ i.platform }}</span>
 				    				</div>
 					    			<div style="margin-right: 10px;">
 				    					<h5>MAP</h5>
@@ -160,6 +160,15 @@ export default {
 		.time{
 			font-size: 12px!important;
 		}
+		.content{
+			font-size: 20px;
+		}
+		.content h2{
+			font-size: 17px;
+		}
+		h5{
+			font-size: 11px;
+		}
 	}
 	.v-slide-group__prev--disabled{
 		display: none!important;
@@ -196,6 +205,8 @@ export default {
 	}
 	.content{
 		margin-left: 10px;
+		color: black;
+		font-weight: 700;
 	}
 	.v-slide-group__content{
 		justify-content: center!important;

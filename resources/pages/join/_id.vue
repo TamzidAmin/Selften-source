@@ -115,7 +115,7 @@
 								<div> 
 									<v-btn v-if="(authuser.wallet+authuser.earn_wallet)>=totalfee && isjoined==0" @click="join" depressed small color="primary">Join</v-btn>
 									<v-btn v-else-if="isjoined==1" depressed small color="success">Joined</v-btn>
-									<nuxt-link to="/addwallet" v-else>
+									<nuxt-link to="/wallet" v-else>
 										<v-btn depressed small color="primary">Add Money</v-btn>
 									</nuxt-link>
 								</div>
@@ -264,30 +264,30 @@ span{
 </style>
 <style scoped>
 .card_2nd_right{
-			padding: 0px 10px;
-		font-size: 15px;
+	padding: 0px 10px;
+	font-size: 15px;
 }
 .playzone{
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		color: #000000;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	color: #000000;
 }
 .playzone img{
-		object-fit:cover;
+	object-fit:cover;
 }
 .single-playzone{
 	display: flex;
 }
 .playzone > div {
 	padding: 10px;
-		min-width: 320px;
-		max-width: 320px;
-		margin: 10px;
-		background: #F1F1F1;
-		-webkit-box-shadow: 3px 3px 5px 6px #ccc;
-		-moz-box-shadow: 3px 3px 5px 6px #ccc;
-		box-shadow: -2px 2px 8px 6px #ccc;
+	min-width: 320px;
+	max-width: 320px;
+	margin: 10px;
+	background: #F1F1F1;
+	-webkit-box-shadow: 3px 3px 5px 6px #ccc;
+	-moz-box-shadow: 3px 3px 5px 6px #ccc;
+	box-shadow: -2px 2px 8px 6px #ccc;
 }
 ul{
 	list-style: none;
