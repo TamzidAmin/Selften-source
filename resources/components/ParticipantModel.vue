@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
 	<div class="my-2 text-center">
-    	<v-btn small class="w-300" color="secondary" dark @click.stop="dialog = true">RULES</v-btn>
+    	<v-btn small class="w-300" color="secondary" dark @click.stop="dialog = true">Participants</v-btn>
   	</div>
 
 	<v-dialog
@@ -9,20 +9,20 @@
 	  max-width="290"
 	>
 	  <v-card>
-		<v-simple-table> 
+		<h4 class="text-center py-2">Registered Participants</h4>
+		<hr>
+		<v-simple-table class="table-sm">
 		    <template v-slot:default>
-		      <thead> 
+		      <thead>
 		        <tr>
-		          <th class="text-left">Position</th>
-		          <th class="text-left">Prize</th>
-		          <th class="text-left">Pro Points</th>
+		          <th class="text-left">S.NO</th>
+		          <th class="text-left">Game Name</th>
 		        </tr>
 		      </thead>
 		      <tbody>
-		        <tr v-for="(item,index) in match.prizes" :key="item.name">
-		          <td>{{ item.lavel }}</td>
-		          <td>{{ item.prize }}</td>
-		          <td>{{ item.propoints }}</td>
+		        <tr v-for="(item,index) in match.users" :key="item.name">
+		          <td>{{ index+1 }}</td>
+		          <td>{{ item.pivot.gamename }}</td>
 		        </tr>
 		      </tbody>
 		    </template>

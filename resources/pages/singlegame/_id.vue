@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="max-width-320">
 		<span style="visibility: hidden;">{{ check() }}  {{ isjoined }}</span>
 		<div class="text-center">
 			<img :src="base_url+'/uploads/product/'+match.product.logo" alt="!opps" style="object-fit: contain;width: 120px;height: 120px;">
@@ -7,10 +7,15 @@
 		<h2 class="text-center">{{ match.match_name.substring(0, 30) }}</h2>
 		
 		<div class="text-center">
-			<v-btn tile small color="success" v-if="match.status=='upcoming'">
-		      <v-icon left>mdi-check</v-icon> Registration open
-		    </v-btn>
-		    <v-btn tile small class="danger" v-if="match.status=='ongoing'">
+			<div v-if="match.status=='upcoming'">
+				<v-btn tile small class="danger" v-if="match.users.length>=match.max_join">
+			      <v-icon left>mdi-check</v-icon> Registration Closed
+			    </v-btn>
+			    <v-btn tile small color="success" v-else>
+			      <v-icon left>mdi-check</v-icon> Registration open
+			    </v-btn>
+			</div>
+		    <v-btn tile small class="danger" v-else-if="match.status=='ongoing'">
 		      <v-icon left>mdi-check</v-icon> Live
 		    </v-btn>
 		</div>
@@ -39,46 +44,22 @@
 		</div>
 
       	<PrizeModel :match='match'/>
-      	<PulesModel :match='match'/>
-
-      	<div class="my-2 text-center">
-        	
+      	<RulesModel :match='match'/>
+      	<div v-if="match.status=='result'">
+      		<ResultModel :match='match'/>
       	</div>
-
-      	<div class="my-2 text-center">
-        	<v-btn small class="w-300" color="secondary" dark>Participant</v-btn>
+      	<div v-else>
+      		<ParticipantModel :match='match'/>
       	</div>
-
-		
-		<br>
-		<h2 class="text-center">Users</h2>
-		<v-simple-table dark class="table-sm">
-		    <template v-slot:default>
-		      <thead>
-		        <tr>
-		          <th class="text-left">S.NO</th>
-		          <th class="text-left">Game Name</th>
-		          <th class="text-left">Total Kill</th>
-		          <th class="text-left">Total Win</th>
-		        </tr>
-		      </thead>
-		      <tbody>
-		        <tr v-for="(item,index) in match.users" :key="item.name">
-		          <td>{{ index+1 }}</td>
-		          <td>{{ item.pivot.gamename }}</td>
-		          <td>{{ item.pivot.total_kill }}</td>
-		          <td>{{ item.pivot.total_earn }}</td>
-		        </tr>
-		      </tbody>
-		    </template>
-		</v-simple-table>
 	</div>
 </template>
 
 <script>
 import Card from '~/components/Card'
 import PrizeModel from '~/components/PrizeModel'
-import PulesModel from '~/components/PulesModel'
+import RulesModel from '~/components/RulesModel'
+import ParticipantModel from '~/components/ParticipantModel'
+import ResultModel from '~/components/ResultModel'
 import { mapMutations, mapGetters } from 'vuex'
 import axios from '~/plugins/axios'
 export default {
@@ -86,7 +67,9 @@ export default {
 	components:{
 		Card,
 		PrizeModel,
-		PulesModel
+		RulesModel,
+		ParticipantModel,
+		ResultModel
 	},
     data () {
       return {

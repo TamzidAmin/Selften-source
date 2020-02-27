@@ -21,7 +21,7 @@
 		      <tbody>
 		        <tr v-for="(item,index) in match.prizes" :key="item.name">
 		          <td>{{ item.lavel }}</td>
-		          <td>{{ item.prize }}</td>
+		          <td>BDT {{ item.prize }}</td>
 		          <td>{{ item.propoints }}</td>
 		        </tr>
 		      </tbody>
