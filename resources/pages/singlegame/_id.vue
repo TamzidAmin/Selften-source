@@ -1,18 +1,21 @@
 <template>
-	<div style="width: 80%;margin: auto;">
-		<h2 class="text-center">Prize   {{ check() }}  {{ isjoined }}</h2>
+	<div>
+		<h2 class="text-center">Prize   <span style="visibility: hidden;">{{ check() }}  {{ isjoined }}</span></h2>
+
+		<v-list-item-avatar>
+          <v-img :src="match.product.name"></v-img>
+        </v-list-item-avatar>
+
 		<v-simple-table dark> 
 		    <template v-slot:default>
 		      <thead> 
 		        <tr>
-		          <th class="text-left">S.NO</th>
 		          <th class="text-left">Lavel</th>
 		          <th class="text-left">Prize</th>
 		        </tr>
 		      </thead>
 		      <tbody>
 		        <tr v-for="(item,index) in match.prizes" :key="item.name">
-		          <td>{{ index+1 }}</td>
 		          <td>{{ item.lavel }}</td>
 		          <td>{{ item.prize }}</td>
 		        </tr>
@@ -21,7 +24,7 @@
 		</v-simple-table>
 		<br>
 		<h2 class="text-center">Users</h2>
-		<v-simple-table dark>
+		<v-simple-table dark class="table-sm">
 		    <template v-slot:default>
 		      <thead>
 		        <tr>
@@ -82,12 +85,14 @@ export default {
 		},
 		check(){
 			let exists=0;
-			for (var i = this.match.users.length - 1; i >= 0; i--) {
-				let exists = Object.values(this.match.users[i]).includes(this.authuser.id);
-				if(exists==true){
-					this.isjoined=1;
-					console.log(this.isjoined);
-					break;
+			if(this.authuser){
+				for (var i = this.match.users.length - 1; i >= 0; i--) {
+					let exists = Object.values(this.match.users[i]).includes(this.authuser.id);
+					if(exists==true){
+						this.isjoined=1;
+						console.log(this.isjoined);
+						break;
+					}
 				}
 			}
 		}
@@ -103,5 +108,7 @@ export default {
 </script>
 
 <style>
-	
+	.v-data-table__wrapper td th{
+		height: 40px;
+	}
 </style>

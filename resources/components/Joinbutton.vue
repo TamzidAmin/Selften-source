@@ -29,13 +29,15 @@
 	    },
 		methods:{
 			check(){
-				let exists=0;
-				for (var i = this.match.users.length - 1; i >= 0; i--) {
-					let exists = Object.values(this.match.users[i]).includes(this.authuser.id);
-					if(exists==true){
-						this.isjoined=1;
-						console.log(this.isjoined);
-						break;
+				if(this.authuser){
+					let exists=0;
+					for (var i = this.match.users.length - 1; i >= 0; i--) {
+						let exists = Object.values(this.match.users[i]).includes(this.authuser.id);
+						if(exists==true){
+							this.isjoined=1;
+							console.log(this.isjoined);
+							break;
+						}
 					}
 				}
 			}

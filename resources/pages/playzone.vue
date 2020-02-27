@@ -31,7 +31,7 @@
 						    			<img :src="base_url+'/uploads/product/'+i.product.logo" alt="!opps" style="object-fit: contain;width: 75px;height: 75px;">
 						    		</div>
 						    		<div class="content">
-						    			<h2 class="text-left">{{ i.match_name.substring(0, 20) }}</h2>
+						    			<h2 class="text-left">{{ i.match_name.substring(0, 16) }}</h2>
 						    			<div class="d-flex">
 						    				<div>
 						    					<span class="time">Time : {{ formatDate(i.start_at) }} at {{ i.start_time }}</span>
@@ -75,7 +75,12 @@
 									Only {{ i.max_join-i.users.length }} spots left</span> {{ i.users.length }}/{{ i.max_join }}
 		    					</div>
 		    					<div style="width: 25%">
-		    						<Joinbutton :match="i" :authuser='authuser'/>
+		    						<div v-if="i.users.length>=i.max_join">
+										<button class="v-btn disabled v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">Closed</button>
+									</div>
+		    						<div v-else>
+		    							<Joinbutton :match="i" :authuser='authuser'/>
+		    						</div>
 		    					</div>
 		    				</div>
 				    	</v-card>
