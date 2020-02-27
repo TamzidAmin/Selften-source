@@ -1,7 +1,7 @@
 <template>
 	<v-card
 		class="mx-auto"
-		min-width="344"
+		min-width="300"
 		text-align="center"
 	>
 		<v-card-text>
@@ -18,42 +18,26 @@
 			    outlined
 			  >
 			      <v-list-item-content>
-			        <h2>৳{{ authuser.wallet }}</h2>
+			        <h2>৳{{ authuser.wallet+authuser.earn_wallet }}</h2>
 			        <h5>Available Balance</h5>
 			      </v-list-item-content>
 			</v-card>
 
 			<div class="root">
-				<v-card
-				    class="mx-auto"
-				    max-width="320"
-				    outlined
-				  >
-				      <v-list-item-content>
-				        <h4>{{ authuser.matchesplayed }}</h4>
-				        <h6>Match Played</h6>
-				      </v-list-item-content>
-				</v-card>
-				<v-card
-				    class="mx-auto"
-				    max-width="320"
-				    outlined
-				  >
-				      <v-list-item-content>
-				        <h4>{{ authuser.totalkills }}</h4>
-				        <h6>Total Kills</h6>
-				      </v-list-item-content>
-				</v-card>
-				<v-card
-				    class="mx-auto"
-				    max-width="320"
-				    outlined
-				  >
-				      <v-list-item-content>
-				        <h4>{{ authuser.winamounts }}</h4>
-				        <h6>Winnings</h6>
-				      </v-list-item-content>
-				</v-card>
+		      <v-list-item-content>
+		        <h4>{{ authuser.matchesplayed }}</h4>
+		        <h6>Match Played</h6>
+		      </v-list-item-content>
+		
+		      <v-list-item-content>
+		        <h4>{{ authuser.totalkills }}</h4>
+		        <h6>Total Kills</h6>
+		      </v-list-item-content>
+	
+		      <v-list-item-content>
+		        <h4>{{ authuser.winamounts }}</h4>
+		        <h6>Winnings</h6>
+		      </v-list-item-content>
 			</div>
 
 			<div class="text--primary">
@@ -68,6 +52,12 @@
 		computed: mapGetters({
 		   authuser: 'authuser'
 		}),
+		asyncData () {
+			return axios.get(`/api/updateuser/`+authuser.id)
+			.then((res) => {
+				return { authuser: res.data }
+			})
+		}
 	}
 </script>
 <style scoped="">

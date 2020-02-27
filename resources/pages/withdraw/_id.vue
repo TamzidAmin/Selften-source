@@ -3,6 +3,7 @@
 	<v-card
 	    class="mx-auto p-3"
 	    max-width="400"
+	    min-width="300"
 	  >
 	  <v-list>
 	  		<v-list-item>
@@ -11,7 +12,7 @@
 		        </v-list-item-avatar>
 
 		        <v-list-item-content class="text-left">
-		          <v-list-item-title>{{ paymentmethod.name }} ( {{ paymentmethod.info }} )</v-list-item-title>
+		          <v-list-item-title>{{ paymentmethod.name }}</v-list-item-title>
 		        </v-list-item-content>
 		    </v-list-item>
 	  </v-list>
@@ -23,24 +24,33 @@
 			<v-text-field
 			  v-model="amount"
 			  :rules="nameRules"
-			  label="Amount To Add"
+			  label="Amount To Withdraw"
 			  required
 			></v-text-field>
 
 			<v-text-field
 			  v-model="number"
 			  :rules="nameRules"
-			  label="Sender Number"
+			  label="Receiver Number"
 			  required
 			></v-text-field>
-		
 			<v-btn
 			  :disabled="!valid"
 			  color="success"
 			  class="mr-4"
+			  v-if="authuser.earn_wallet>=amount"
 			  @click="addwallet"
 			>
-			  Add
+			  Withdraw
+			</v-btn>
+			<v-btn
+			  disabled
+			  color="success"
+			  class="mr-4"
+			  v-else
+			 
+			>
+			  Withdraw
 			</v-btn>
 			<br><br>
 			<v-alert
@@ -69,7 +79,7 @@ export default {
   		alert: false,
   		nameRules: [
 			v => !!v || 'Amount is required',
-	  	],
+	  	]
     }),
     computed:mapGetters({
 		authuser: 'authuser'

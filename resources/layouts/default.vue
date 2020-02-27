@@ -131,6 +131,9 @@
 </script>
 
 <style>
+	.v-menu__content--fixed{
+		top: 30px!important;
+	}
 	.w-50{
 		width: 50%;
 	}

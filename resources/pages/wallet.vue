@@ -29,19 +29,19 @@
 				</div>
 				<div style="width: 25%;">
 					<div class="p-2 text-capitalize pointer" v-bind:class="{ active: name=='withdraw' ? true : '' }" @click="withdraw('withdraw')">
-				     	<img src="~/assets/wallet.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
+				     	<img src="~/assets/withdrow.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
 				     	<p>Withdraw</p>
 				    </div>
 				</div>
 				<div style="width: 25%;">
 					<div class="p-2 text-capitalize pointer" v-bind:class="{ active: name=='transfer' ? true : '' }" @click="transfer('transfer')">
-				     	<img src="~/assets/wallet.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
+				     	<img src="~/assets/transfer.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
 				     	<p>Transfer</p>
 				    </div>
 				</div>
 				<div style="width: 25%;">
 					<div class="p-2 text-capitalize pointer" v-bind:class="{ active: name=='transaction' ? true : '' }" @click="transaction('transaction')">
-				     	<img src="~/assets/wallet.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
+				     	<img src="~/assets/transaction.svg" alt="" style="width: 13px;margin-left: 7px;margin-right: 10px;">
 				     	<p>Transaction</p>
 				    </div>
 				</div>
@@ -55,7 +55,7 @@
 					        </v-list-item-avatar>
 
 					        <v-list-item-content class="text-left">
-					          	<v-list-item-title>{{ paymentmethod.name }} ( {{ paymentmethod.info }} )</v-list-item-title>
+					          	<v-list-item-title>{{ paymentmethod.name }}</v-list-item-title>
 					        </v-list-item-content>
 					    </v-list-item>
 					</nuxt-link>
@@ -65,12 +65,13 @@
 	    		<p>Comming Soon</p>
 	    	</div>
 	    	<div v-if="name=='transaction'">
-	    		<v-simple-table dark>
+	    		<v-simple-table>
 				    <template v-slot:default>
 				      <thead>
 				        <tr>
 				          <th class="text-center">Amount</th>
 				          <th class="text-center">Number</th>
+				          <th class="text-center">Status</th>
 				          <th class="text-center">Date</th>
 				        </tr>
 				      </thead>
@@ -78,7 +79,11 @@
 				        <tr v-for="item in data" :key="item.name">
 				          <td>৳ {{ item.amount }}</td>
 				          <td>{{ item.number }}</td>
-				          <td>{{ item.created_at }}</td>
+				          <td>
+				          	<v-btn x-small color="error" dark v-if="item.status=='cancel'">{{ item.status }}</v-btn>
+				          	<v-btn x-small color="success" dark v-else="item.status=='cancel'">{{ item.status }}</v-btn>
+				          </td>
+				          <td>{{ item.created_at.substring(0,10) }}</td>
 				        </tr>
 				      </tbody>
 				    </template>
@@ -93,7 +98,7 @@
 					        </v-list-item-avatar>
 
 					        <v-list-item-content class="text-left">
-					          	<v-list-item-title>{{ paymentmethod.name }} ( {{ paymentmethod.info }} )</v-list-item-title>
+					          	<v-list-item-title>{{ paymentmethod.name }} </v-list-item-title>
 					        </v-list-item-content>
 					    </v-list-item>
 					</nuxt-link>

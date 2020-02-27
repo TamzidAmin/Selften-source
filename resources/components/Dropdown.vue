@@ -87,7 +87,9 @@
 </style>
 
 <style>
-
+	.v-list-item:hover{
+		background: #F6F6F6;
+	}
 	.dropdown img{
 		margin-right: 10px!important;
 	}

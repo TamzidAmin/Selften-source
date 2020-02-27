@@ -3,55 +3,56 @@
 	<v-card
 	    class="mx-auto p-3"
 	    max-width="400"
+	    min-width="310"
+	>
+  	<v-list>
+  		<v-list-item>
+	      	<v-list-item-avatar>
+	          <v-img :src="'https://admin.selften.com/uploads/payment/'+paymentmethod.logo"></v-img>
+	        </v-list-item-avatar>
+
+	        <v-list-item-content class="text-left">
+	          <v-list-item-title>{{ paymentmethod.name }} ( {{ paymentmethod.info }} )</v-list-item-title>
+	        </v-list-item-content>
+	    </v-list-item>
+  	</v-list>
+	<v-form
+		ref="form"
+		v-model="valid"
+		lazy-validation
 	  >
-	  <v-list>
-	  		<v-list-item>
-		      	<v-list-item-avatar>
-		          <v-img :src="'https://admin.selften.com/uploads/payment/'+paymentmethod.logo"></v-img>
-		        </v-list-item-avatar>
+		<v-text-field
+		  v-model="amount"
+		  :rules="amountRules"
+		  label="Amount To Add"
+		  required
+		></v-text-field>
 
-		        <v-list-item-content class="text-left">
-		          <v-list-item-title>{{ paymentmethod.name }} ( {{ paymentmethod.info }} )</v-list-item-title>
-		        </v-list-item-content>
-		    </v-list-item>
-	  </v-list>
-		<v-form
-			ref="form"
-			v-model="valid"
-			lazy-validation
-		  >
-			<v-text-field
-			  v-model="amount"
-			  :rules="nameRules"
-			  label="Amount To Add"
-			  required
-			></v-text-field>
-
-			<v-text-field
-			  v-model="number"
-			  :rules="nameRules"
-			  label="Sender Number"
-			  required
-			></v-text-field>
-		
-			<v-btn
-			  :disabled="!valid"
-			  color="success"
-			  class="mr-4"
-			  @click="addwallet"
-			>
-			  Add
-			</v-btn>
-			<br><br>
-			<v-alert
-		      v-model="alert"
-			    outlined
-		      	type="success"
-		     	text
-		    >
-		      Request sent successfully
-		    </v-alert>
-		</v-form>
+		<v-text-field
+		  v-model="number"
+		  :rules="nameRules"
+		  label="Sender Number"
+		  required
+		></v-text-field>
+	
+		<v-btn
+		  :disabled="!valid"
+		  color="success"
+		  class="mr-4"
+		  @click="addwallet"
+		>
+		  Add
+		</v-btn>
+		<br><br>
+		<v-alert
+	      v-model="alert"
+		    outlined
+	      	type="success"
+	     	text
+	    >
+	      Request sent successfully
+	    </v-alert>
+	</v-form>
 	</v-card>
 </v-layout>
 </template>
@@ -69,6 +70,10 @@ export default {
   		alert: false,
   		nameRules: [
 			v => !!v || 'Amount is required',
+	  	],
+	  	amountRules: [
+			v => !!v || 'Amount is required',
+			v => (v && v.length <= 4) || 'Name must be less than 4 Digit',
 	  	],
     }),
     computed:mapGetters({
