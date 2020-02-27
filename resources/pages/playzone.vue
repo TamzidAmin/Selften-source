@@ -163,7 +163,7 @@ export default {
 	}
 	@media only screen and (max-width: 320px) {
 		.time{
-			font-size: 12px!important;
+			font-size: 11px!important;
 		}
 		.content{
 			font-size: 20px;
