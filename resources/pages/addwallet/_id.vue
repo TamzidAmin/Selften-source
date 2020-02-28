@@ -5,7 +5,7 @@
 	    max-width="400"
 	    min-width="310"
 	>
-  	<v-list>
+  	<v-list> 
   		<v-list-item>
 	      	<v-list-item-avatar>
 	          <v-img :src="'https://admin.selften.com/uploads/payment/'+paymentmethod.logo"></v-img>
