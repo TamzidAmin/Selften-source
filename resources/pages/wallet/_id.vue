@@ -48,7 +48,7 @@
 	    	</div> 
 	    	<div v-if="name=='addmoney'">
 	    		<v-list class="p-2">
-					<nuxt-link v-for="paymentmethod in data" :to="/addwallet/+paymentmethod.id">
+					<nuxt-link v-for="paymentmethod in data" :to="/addwallet/+paymentmethod.id" :key="paymentmethod.id">
 						<v-list-item>
 					      	<v-list-item-avatar style="margin-left: 21px;">
 					          	<v-img :src="'https://admin.selften.com/uploads/payment/'+paymentmethod.logo"></v-img>
@@ -92,7 +92,7 @@
 	    	</div>
 	    	<div v-if="name=='withdraw'">
 	    		<v-list class="p-2">
-					<nuxt-link v-for="paymentmethod in data" :to="/withdraw/+paymentmethod.id">
+					<nuxt-link v-for="paymentmethod in data" :to="/withdraw/+paymentmethod.id" :key="paymentmethod.id">
 						<v-list-item>
 					      	<v-list-item-avatar style="margin-left: 21px;">
 					          	<v-img :src="'https://admin.selften.com/uploads/payment/'+paymentmethod.logo"></v-img>
