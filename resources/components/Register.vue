@@ -111,7 +111,8 @@ const Cookie = process.client ? require('js-cookie') : undefined
 			    username: this.username,
 			    phone: this.phone,
 			    email: this.email,
-			    password: this.password
+			    password: this.password,
+			    password_confirmation:this.password
 			})
 			.then(function (response) {
 				self.loading=false
