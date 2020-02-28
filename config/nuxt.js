@@ -49,6 +49,12 @@ module.exports = {
 		'@nuxtjs/axios',
 		'@nuxtjs/pwa',
 	],
+
+	pwa: {
+	  icon: {
+	    iconSrc:'~/assets/selften.png',
+	  }
+	},
 	/*
 	** Axios module configuration
 	** See https://axios.nuxtjs.org/options
