@@ -1,8 +1,6 @@
 <template>
 <v-layout column justify-center align-center>
-	<div>
-		<h1>Home Pages</h1>
-	</div>
+	<Carousels :banner="banner"/>
 </v-layout>
 </template>
 
@@ -10,12 +8,25 @@
 import Carousels from '~/components/Carousels'
 import Navmanu from '~/components/Navmanu'
 import Card from '~/components/Card'
+import axios from '~/plugins/axios'
 export default {
 	components:{
 		Carousels,
 		Card,
 		Navmanu
-	}
+	},
+	data () {
+      return {
+      	banner:[],
+      }
+    },
+	asyncData ({ params }) {
+	    return axios.get(`/api/banner/`)
+	      	.then((res) => {
+	      		console.log(res.data);
+	        	return { banner: res.data }
+	    })
+  	}
 }
 </script>
 <style scoped>

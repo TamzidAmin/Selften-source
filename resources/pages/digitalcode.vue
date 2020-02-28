@@ -39,6 +39,18 @@ export default {
 		Carousels,
 		Card,
 		Navmanu
-	}
+	},
+	data () {
+      return {
+      	banner:[],
+      }
+    },
+	asyncData ({ params }) {
+	    return axios.get(`/api/banner/`)
+	      	.then((res) => {
+	      		console.log(res.data);
+	        	return { banner: res.data }
+	    })
+  	}
 }
 </script>
