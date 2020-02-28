@@ -47,7 +47,7 @@
 		<v-alert
 	      v-model="alert"
 		    outlined
-		    @click="clode"
+		    @click="clode()"
 	      	type="success"
 	     	text
 	    >

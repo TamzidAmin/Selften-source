@@ -37,6 +37,11 @@
 					  @click:append="show1 = !show1"
 					  required
 					></v-text-field>
+					<div>
+						<nuxt-link to="forgetpassword">
+							forgot password ?
+						</nuxt-link>
+					</div>
 					<p style="color: red;" v-if="error!=null">{{ error }}</p>
 					<v-btn
 					  :disabled="!valid"
@@ -111,7 +116,7 @@ const Cookie = process.client ? require('js-cookie') : undefined
 					self.$store.commit('setUser', response.data) // mutating to store for client rendering
 					Cookie.set('auth', auth) // saving token in cookie for server rendering
 					Cookie.set('user', response.data) // saving token in cookie for server rendering
-					self.$router.push('/')
+					self.$router.push('/profile/'+response.data.id)
 				  }, 1000)
 				}
 			})

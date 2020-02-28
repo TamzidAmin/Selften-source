@@ -124,8 +124,8 @@ const Cookie = process.client ? require('js-cookie') : undefined
 		        self.$store.commit('setAuth', auth) // mutating to store for client rendering
 		        self.$store.commit('setUser', response.data) // mutating to store for client rendering
 		        Cookie.set('auth', auth) // saving token in cookie for server rendering
-		         Cookie.set('user', response.data) // saving token in cookie for server rendering
-		        self.$router.push('/')
+		        Cookie.set('user', response.data) // saving token in cookie for server rendering
+		        self.$router.push('/profile/'+response.data.id)
 		      }, 1000)
 			})
 			.catch(function (error) {
