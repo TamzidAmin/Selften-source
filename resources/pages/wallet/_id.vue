@@ -81,7 +81,8 @@
 				          <td>{{ item.number }}</td>
 				          <td>
 				          	<v-btn x-small color="error" dark v-if="item.status=='cancel'">{{ item.status }}</v-btn>
-				          	<v-btn x-small color="success" dark v-else="item.status=='cancel'">{{ item.status }}</v-btn>
+				          	<v-btn x-small color="primary" dark v-else-if="item.status=='pending'">{{ item.status }}</v-btn>
+				          	<v-btn x-small color="success" dark v-else>{{ item.status }}</v-btn>
 				          </td>
 				          <td>{{ item.created_at.substring(0,10) }}</td>
 				        </tr>
