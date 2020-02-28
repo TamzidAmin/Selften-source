@@ -53,6 +53,9 @@ module.exports = {
 	pwa: {
 	  icon: {
 	    iconSrc:'~/assets/selften.png',
+	  },
+	  manifest: {
+	    name: 'Selften',
 	  }
 	},
 	/*
