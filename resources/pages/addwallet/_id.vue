@@ -47,6 +47,7 @@
 		<v-alert
 	      v-model="alert"
 		    outlined
+		    @click="clode"
 	      	type="success"
 	     	text
 	    >
@@ -80,6 +81,9 @@ export default {
 		authuser: 'authuser'
     }),
     methods:{
+    	clode(){
+			this.alert=false
+		},
     	addwallet ({ params }) {
 			if (this.$refs.form.validate()) {
 			  	var self = this;

@@ -1,3 +1,6 @@
+.text-right{
+	text-align: right!important;
+}
 .text-capitalize{
 	text-transform: capitalize;
 }
@@ -22,6 +25,9 @@ p{
 .danger{
 	background: red!important;
 	color: #fff!important;
+}
+.w-50{
+	width: 50%;
 }
 .w-33{
 	width: 33.33%!important;

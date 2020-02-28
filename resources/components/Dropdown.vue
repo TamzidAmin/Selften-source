@@ -16,7 +16,7 @@
 
 			<v-list>
 				<v-list-item>
-					<nuxt-link to="/profile">
+					<nuxt-link :to="/profile/+user.id">
 						<img src="~/assets/user.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
 						My Profile
 					</nuxt-link>
@@ -30,7 +30,7 @@
 				</v-list-item>
 
 				<v-list-item>
-					<nuxt-link to="/wallet">
+					<nuxt-link :to="/wallet/+user.id">
 						<img src="~/assets/wallet.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
 						My Wallet
 					</nuxt-link>

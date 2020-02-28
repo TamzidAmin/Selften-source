@@ -124,6 +124,16 @@
 					</tbody>
 				</template>
 			</v-simple-table>
+			<br>
+			<v-alert
+		      v-model="alert"
+			    outlined
+		      	type="success"
+		     	text
+		     	@click="clode"
+		    >
+		      Joined successfully
+		    </v-alert>
 		</v-card>
 	</v-form>		
 	</div>
@@ -146,6 +156,7 @@ export default {
 	data () {
 		return {
 			error:null,
+			alert: false,
   			valid: true,
 			dialog: false,
 			totalfee:0,
@@ -171,9 +182,13 @@ export default {
 		base_url:'base_url'
 	}),
 	methods: {
+		clode(){
+			this.alert=false
+		},
 		join(){
 			var self = this;
 			if (this.$refs.form.validate()) {
+				self.isjoined=1;
 				axios.post(`/api/join/${this.i.id}`,{
 					user_id: this.authuser.id,
 					match_id: this.i.id,
@@ -185,7 +200,7 @@ export default {
 					fee:this.totalfee
 				})
 				.then((res) => {
-					self.isjoined=1;
+					self.alert=true
 					console.log(res);
 				})
 			}

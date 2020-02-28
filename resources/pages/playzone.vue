@@ -68,14 +68,26 @@
 				    				</div>
 					    		</div>
 						    </nuxt-link>
-							<div class="" style="display: flex;">
-		    					<div style="width: 75%;margin-top: 12px">
-		    						<Prograsvar :abcd="(i.users.length/i.max_join)*100"/>
-									<span style="font-size: 12px;">
-									Only {{ i.max_join-i.users.length }} spots left</span> {{ i.users.length }}/{{ i.max_join }}
+							<div style="display: flex;" class="text-left">
+		    					<div style="width: 100%;margin-top: 12px">
+		    						<Prograsvar   :abcd="(i.users.length/i.max_join)*100"/>
+									<div class="d-flex">
+										<div class="w-50" style="font-size: 12px;">
+											Only {{ i.max_join-i.users.length }} spots left
+										</div>
+										<div class="w-50 text-right">
+											{{ i.users.length }}/{{ i.max_join }}
+										</div>
+									</div>
 		    					</div>
-		    					<div style="width: 25%">
+
+		    				</div>
+		    				<div style="display: flex;">
+			    				<div style="width: 100%">
 		    						<div v-if="i.users.length>=i.max_join">
+										<button class="v-btn disabled v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">Closed</button>
+									</div>
+									<div v-else-if="i.status=='result'">
 										<button class="v-btn disabled v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">Closed</button>
 									</div>
 		    						<div v-else>
@@ -86,7 +98,6 @@
 				    	</v-card>
 				    </v-list-item>
 				 </div>
-				 
 	        </div>
 	      </v-tab-item>
 	    </v-tabs-items>

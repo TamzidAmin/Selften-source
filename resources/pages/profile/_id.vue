@@ -3,7 +3,7 @@
 		class="mx-auto"
 		min-width="300"
 		text-align="center"
-	>
+	> 
 		<v-card-text>
 		   <v-avatar color="indigo">
 		      <v-icon dark>mdi-account-circle</v-icon>
@@ -48,15 +48,19 @@
 </template>
 <script>
 	import { mapMutations, mapGetters } from 'vuex'
+	import axios from '~/plugins/axios'
 	export default {
-		computed: mapGetters({
-		   authuser: 'authuser'
-		}),
-		asyncData () {
-			return axios.get(`/api/updateuser/`+authuser.id)
-			.then((res) => {
-				return { authuser: res.data }
-			})
+		middleware: 'authenticated',
+		computed: {
+			...mapGetters({
+			   authuser: 'authuser'
+			}),
+		},
+		fetch ({ store, params }) {
+		    return axios.get(`/api/updateuser/`+params.id)
+		    .then((res) => {
+		      store.commit('setUser', res.data)
+		    })
 		}
 	}
 </script>
