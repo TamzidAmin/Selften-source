@@ -1,17 +1,30 @@
 <template>
 <v-layout column justify-center align-center>
 	<Carousels :banner="banner"/>
+	<div class="mt-3">
+		<p>Timing</p>
+	</div>
+	<div class="mt-3 d-flex flex-wrap">
+		<SuperSaleCart/>
+		<SuperSaleCart/>
+		<SuperSaleCart/>
+		<SuperSaleCart/>
+		<SuperSaleCart/>
+		<SuperSaleCart/>
+	</div>
 </v-layout>
 </template>
 
 <script>
 import Carousels from '~/components/Carousels'
+import SuperSaleCart from '~/components/SuperSaleCart'
 import Navmanu from '~/components/Navmanu'
 import Card from '~/components/Card'
 import axios from '~/plugins/axios'
 export default {
 	components:{
 		Carousels,
+		SuperSaleCart,
 		Card,
 		Navmanu
 	},

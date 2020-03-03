@@ -1,7 +1,6 @@
 <template>
 	<v-carousel
 		cycle
-		height="471"
 		width="100%"
 		hide-delimiter-background
 		show-arrows-on-hover
@@ -9,7 +8,7 @@
 		<v-carousel-item
 			v-for="(slide, i) in banner"
 			:key="i"
-			
+			height="auto"
 		>
 			<img :src="'https://admin.selften.com/uploads/banner/'+slide.banner" alt="" style="object-fit: cover;width: 100%;">
 		</v-carousel-item>
@@ -39,3 +38,11 @@
 		},
 	}
 </script>
+<style>
+	.v-carousel__item{
+		height: auto!important;
+	}
+	.v-window--show-arrows-on-hover{
+		height: auto!important;
+	}
+</style>

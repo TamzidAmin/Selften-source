@@ -1,3 +1,10 @@
+.flex-wrap{
+	flex-wrap: wrap!important;
+	justify-content: center;
+}
+.m-2{
+	margin: 10px;
+}
 .text-danger{
 	color: red;
 	font-weight: 700;

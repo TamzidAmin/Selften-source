@@ -1,0 +1,119 @@
+<template>
+ <div class="product-card m-2">
+		<div class="product-pic">
+			<img src="~/assets/4.png" alt="" width="100%">
+		</div>
+		<div class="text-center">
+			<div>
+				<a href="">aaaaaaaaaaaa</a>
+			</div>
+			<div class="product-price">$90</div>
+		</div>
+		<div class="text-center">
+			<v-btn color="primary">
+				Order now
+			</v-btn>
+		</div>
+	</div>
+</template>
+<script>
+	export default {
+
+	}
+</script>
+
+<style>
+.product-card{
+	width: 310px;
+	background: #ecedef;
+	padding: 15px;
+	text-transform: uppercase;
+}
+.product-card:hover{
+	-webkit-box-shadow: 2.736px 7.518px 20px 0px rgba(0, 0, 0, 0.14);
+    -moz-box-shadow: 2.736px 7.518px 20px 0px rgba(0, 0, 0, 0.14);
+    -o-box-shadow: 2.736px 7.518px 20px 0px rgba(0, 0, 0, 0.14);
+    box-shadow: 2.736px 7.518px 20px 0px rgba(0, 0, 0, 0.14);
+    -webkit-transform: translate(0, -5px);
+    -moz-transform: translate(0, -5px);
+    -ms-transform: translate(0, -5px);
+    -o-transform: translate(0, -5px);
+    transform: translate(0, -5px);
+    transition: .3s all;
+}
+.product-card h1{
+	font-size: 22px;
+	margin-bottom: 4px;
+}
+.product-card p{
+	font-size: 13px;
+	color: #bbb;
+}
+.product-pic{
+	width: 100%;
+	height: 200px;
+	background-size: cover;
+	background-position: center;
+	transition: .6s linear;
+}
+.product-colors{
+	margin-bottom: 40px;
+	display: flex;
+	justify-content: center;
+}
+
+.product-colors span{
+	width: 14px;
+	height: 14px;
+	margin: 0 10px;
+	border-radius: 50%;
+	cursor: pointer;
+	position: relative;
+}
+.blue{
+	background: #7ed6df;
+}
+.green{
+	background: #badc58;
+}
+.yellow{
+	background: #f9ca24;
+}
+.rose{
+	background: #ff7979;
+}
+
+.product-colors .active:after{
+	content: "";
+	width: 22px;
+	height: 22px;
+	border: 2px solid #8888;
+	position: absolute;
+	border-radius: 50%;
+	box-sizing: border-box;
+	left: -4px;
+	top: -4px;
+}
+.product-info{
+	display: flex;
+	align-items: center;
+}
+.product-price{
+	color: #7ed6df;
+	font-size: 26px;
+}
+.product-button{
+	margin-left: auto;
+	color: #7ed6df;
+	text-decoration: none;
+	border: 2px solid;
+	padding: 8px 24px;
+	border-radius: 20px;
+	transition: .4s linear;
+}
+
+.product-button:hover{
+	transform: scale(1.06);
+}
+
+</style>
