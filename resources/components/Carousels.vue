@@ -1,15 +1,17 @@
 <template>
 	<v-carousel
 		cycle
-		height="500"
+		height="471"
+		width="100%"
 		hide-delimiter-background
 		show-arrows-on-hover
 	>
 		<v-carousel-item
 			v-for="(slide, i) in banner"
 			:key="i"
-			:src="'https://admin.selften.com/uploads/banner/'+slide.banner"
+			
 		>
+			<img :src="'https://admin.selften.com/uploads/banner/'+slide.banner" alt="" style="object-fit: cover;width: 100%;">
 		</v-carousel-item>
 	</v-carousel>
 </template>

@@ -1,3 +1,7 @@
+.text-danger{
+	color: red;
+	font-weight: 700;
+}
 .text-right{
 	text-align: right!important;
 }

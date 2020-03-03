@@ -22,7 +22,7 @@
 					</nuxt-link>
 				</v-list-item>
 
-				<v-list-item>
+				<v-list-item class="d-none">
 					<nuxt-link to="/profile">
 						<img src="~/assets/cart.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
 						My Orders
@@ -36,14 +36,14 @@
 					</nuxt-link>
 				</v-list-item>
 
-				<v-list-item>
+				<v-list-item class="d-none">
 					<nuxt-link to="/profile">
 						<img src="~/assets/supprot.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
 						Support
 					</nuxt-link>
 				</v-list-item>
 
-				<v-list-item>
+				<v-list-item class="d-none">
 					<nuxt-link to="/profile">
 						<img src="~/assets/users.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
 						Refer And Earn
