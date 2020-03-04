@@ -10,7 +10,7 @@
 			:key="i"
 			height="auto"
 		>
-			<img :src="'https://admin.selften.com/uploads/banner/'+slide.banner" alt="" style="object-fit: cover;width: 100%;">
+			<img :src="'https://admin.selften.com/uploads/banner/'+slide.banner" alt="" style="object-fit: cover;width: 100%;max-height: 50vh;">
 		</v-carousel-item>
 	</v-carousel>
 </template>
