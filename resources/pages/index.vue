@@ -2,10 +2,25 @@
 <v-layout column justify-center align-center>
 	<Carousels :banner="banner"/>
 	<div class="mt-3">
-		<p>Timing</p>
+		<TimeCountDown 
+         starttime="Jun 5, 2020 15:37:25" 
+         endtime="Nov 8, 2021 16:37:25" 
+         trans='{  
+         "day":"Day",
+         "hours":"Hours",
+         "minutes":"Minuts",
+         "seconds":"Seconds",
+         "expired":"Event has been expired.",
+         "running":"Till the end of event.",
+         "upcoming":"Till start of event.",
+         "status": {
+	        "expired":"Expired",
+	        "running":"Running",
+	        "upcoming":"Future"
+	       }}'
+        ></TimeCountDown>
 	</div>
 	<div class="mt-3 d-flex flex-wrap">
-		<SuperSaleCart/>
 		<SuperSaleCart/>
 		<SuperSaleCart/>
 		<SuperSaleCart/>
@@ -17,6 +32,7 @@
 
 <script>
 import Carousels from '~/components/Carousels'
+import TimeCountDown from '~/components/TimeCountDown'
 import SuperSaleCart from '~/components/SuperSaleCart'
 import Navmanu from '~/components/Navmanu'
 import Card from '~/components/Card'
@@ -26,7 +42,8 @@ export default {
 		Carousels,
 		SuperSaleCart,
 		Card,
-		Navmanu
+		Navmanu,
+		TimeCountDown
 	},
 	data () {
       return {
