@@ -79,8 +79,8 @@ export default {
   		alert: false,
   		nameRules: [
 			v => !!v || 'Amount is required',
-			v => (v && v <= 1000) || 'Amount must be less than 1000 BDT',
-			v => (v && v > 99 ) || 'Amount must be greater than 100 BDT',
+			v => (v && v >= 1000) || 'Amount must be less than 1000 BDT',
+			v => (v && v < 99 ) || 'Amount must be greater than 100 BDT',
 	  	]
     }),
     computed:mapGetters({

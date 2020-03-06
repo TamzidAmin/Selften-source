@@ -3,8 +3,8 @@
 	<Carousels :banner="banner"/>
 	<div class="mt-3">
 		<TimeCountDown 
-         starttime="Jun 5, 2020 15:37:25" 
-         endtime="Nov 8, 2021 16:37:25" 
+         :starttime="dateformate(offerproduct[0].start_at)" 
+         :endtime="dateformate(offerproduct[0].end_at)" 
          trans='{  
          "day":"Day",
          "hours":"Hours",
@@ -21,11 +21,7 @@
         ></TimeCountDown>
 	</div>
 	<div class="mt-3 d-flex flex-wrap">
-		<SuperSaleCart/>
-		<SuperSaleCart/>
-		<SuperSaleCart/>
-		<SuperSaleCart/>
-		<SuperSaleCart/>
+		<SuperSaleCart v-for="(product,key) in offerproduct" :product="product" :key="key" />
 	</div>
 </v-layout>
 </template>
@@ -48,14 +44,30 @@ export default {
 	data () {
       return {
       	banner:[],
+      	offerproduct:[]
       }
     },
-	asyncData ({ params }) {
-	    return axios.get(`/api/banner/`)
-	      	.then((res) => {
-	      		console.log(res.data);
-	        	return { banner: res.data }
-	    })
+    methods:{
+    	dateformate(date){
+    		var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+			  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+			];
+    		console.log(date);
+    		var t = new Date(date);
+    		console.log(t);
+  			var date1= t.getDate() + ' ' + monthShortNames[t.getMonth()] + ', ' + t.getFullYear()+' '+t.getHours()+':'+t.getMinutes()+':'+t.getSeconds();
+  			// console.log(date1);
+  			return date1;
+    	},
+    },
+	async asyncData ({ params }) {
+	    let banner = await axios.get(`/api/banner/`)
+	    let offerproduct = await axios.get(`/api/offerproduct/`)
+
+	   	return {
+	       banner: banner.data,
+	       offerproduct: offerproduct.data
+	    }
   	}
 }
 </script>

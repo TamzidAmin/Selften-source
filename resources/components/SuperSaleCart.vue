@@ -1,24 +1,63 @@
 <template>
  <div class="product-card m-2">
-		<div class="product-pic">
-			<img src="~/assets/4.png" alt="" width="100%">
+		<div class="product-pic" style="overflow: hidden;">
+			<img :src="'https://admin.selften.com/uploads/product/'+product.logo" alt="" width="100%">
 		</div>
 		<div class="text-center">
 			<div>
-				<a href="">aaaaaaaaaaaa</a>
+				<a href="">{{ product.name }}</a>
 			</div>
-			<div class="product-price">$90</div>
+			<div class="product-price">{{ product.price }} BDT</div>
 		</div>
 		<div class="text-center">
-			<v-btn color="primary">
+			<v-btn color="primary" @click="placeorder(product.id)">
 				Order now
 			</v-btn>
 		</div>
+		<v-alert
+		      v-model="alert"
+			    outlined
+		      	type="success"
+		     	text
+		    >
+		      Request sent successfully
+		    </v-alert>
 	</div>
 </template>
 <script>
+	import { mapMutations, mapGetters } from 'vuex'
+	import axios from '~/plugins/axios'
 	export default {
-
+		props:['product','key'],
+		data: () => ({
+	  		alert: false,
+	    }),
+		computed:mapGetters({
+			authuser: 'authuser'
+	    }),
+	    methods:{
+	    	placeorder(id){
+	    		var self= this;
+	    		if(this.authuser){
+	    			axios.post('/api/addwallet', {
+						product_id : product_id,
+						user_id : this.authuser.id,
+						amount : this.product.price,
+						date   : new Date(),
+					})
+					.then(function (response) {
+						if(response.data=='success'){
+							self.alert=true
+						}
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
+	    		}else{
+	    			alert("Please Login to order");
+	    		}
+	    	}
+	    }
 	}
 </script>
 
