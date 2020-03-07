@@ -21,7 +21,7 @@
         ></TimeCountDown>
 	</div>
 	<div class="mt-3 d-flex flex-wrap">
-		<SuperSaleCart v-for="(product,key) in offerproduct" :product="product" :key="key" />
+		<SuperSaleCart v-for="(product,key) in offerproduct" :product="product" />
 	</div>
 </v-layout>
 </template>

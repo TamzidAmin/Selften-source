@@ -1,6 +1,5 @@
 <template>
 <div>
-	<h1 class="text-white">Offer Countdown Timer</h1>
 	<div class="timer">
 	  <div v-show ="statusType !== 'expired'">
 		<div class="day">

@@ -19,11 +19,11 @@
 	      >
 	        <div class="root">
 		         <div
+		         	style="border-radius: 15px;"
 				    v-for="i in match"
 				   	v-if="i.status==item"
-				   	class="bg-color"
 				  > 
-				    <v-list-item three-line style="padding: 10px;margin: 10px;">
+				    <v-list-item three-line style="padding: 10px;margin: 10px;border: 3px solid #C91F4E;border-radius: 15px;overflow: hidden">
 				    	<v-card style="padding: 10px;" class="bg-light">
 				    		<nuxt-link :to="/singlegame/+i.id">
 						    	<div class="d-flex">
@@ -41,29 +41,29 @@
 						    	</div>
 					    		<div class="d-flex single-box">
 									<div style="margin-right: 10px;">
-				    					<h5>TOTAL PRIZE</h5>
+				    					<h5 style="font-size: 10px">TOTAL PRIZE</h5>
 				    					<span>৳ {{ i.total_prize }}</span>
 				    				</div>
 									<div style="margin-right: 10px;">
-				    					<h5>PER KILL</h5>
+				    					<h5 style="font-size: 10px">PER KILL</h5>
 				    					<span>৳ {{ i.perkill }}</span>
 				    				</div>
 					    			<div style="margin-right: 10px;">
-				    					<h5>ENTRY FEE</h5>
+				    					<h5 style="font-size: 10px">ENTRY FEE</h5>
 				    					<span>৳ {{ i.entryfee }}</span>
 				    				</div>
 					    		</div>
 					    		<div class="d-flex single-box">
 									<div style="margin-right: 10px;">
-				    					<h5>TYPE</h5>
+				    					<h5 style="font-size: 10px">TYPE</h5>
 				    					<span style="text-transform: capitalize">{{ i.type }}</span>
 				    				</div>
 									<div style="margin-right: 10px;">
-				    					<h5>PLATFORM</h5>
+				    					<h5 style="font-size: 10px">PLATFORM</h5>
 				    					<span class="text-capitalize">{{ i.platform }}</span>
 				    				</div>
 					    			<div style="margin-right: 10px;">
-				    					<h5>MAP</h5>
+				    					<h5 style="font-size: 10px">MAP</h5>
 				    					<span>{{ i.map.name }}</span>
 				    				</div>
 					    		</div>

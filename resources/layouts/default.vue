@@ -9,17 +9,32 @@
 		>
 			<v-list>
 				<v-list-item
-					v-for="(item, i) in items"
-					:key="i"
-					:to="item.to"
+					:to="'/'"
 					router
 					exact
 				>
 					<v-list-item-action>
-						<svg style="width: 40px;height: 40px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="gamepad-alt" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="svg-inline--fa fa-gamepad-alt fa-w-20 fa-2x"><path fill="currentColor" d="M638.59 368.22l-33.37-211.59c-8.86-50.26-48.4-90.77-100.66-103.13h-.07a803.19 803.19 0 0 0-369 0C83.17 65.86 43.64 106.36 34.78 156.63L1.41 368.22C-8.9 426.73 38.8 480 101.51 480c49.67 0 93.77-30.07 109.48-74.64l7.52-21.36h203l7.49 21.36C444.72 449.93 488.82 480 538.49 480c62.71 0 110.41-53.27 100.1-111.78zM280 236a12 12 0 0 1-12 12h-52v52a12 12 0 0 1-12 12h-24a12 12 0 0 1-12-12v-52h-52a12 12 0 0 1-12-12v-24a12 12 0 0 1 12-12h52v-52a12 12 0 0 1 12-12h24a12 12 0 0 1 12 12v52h52a12 12 0 0 1 12 12zm152 76a40 40 0 1 1 40-40 40 40 0 0 1-40 40zm64-96a40 40 0 1 1 40-40 40 40 0 0 1-40 40z" class=""></path></svg>
+						<div>
+							<img src="~/assets/sidebaricon/home.svg" alt="" style="height: 30px;width: 30px;">
+						</div>
 					</v-list-item-action>
 					<v-list-item-content>
-						<v-list-item-title v-text="item.title" />
+						<v-list-item-title v-text="'Home'" />
+					</v-list-item-content>
+				</v-list-item>
+
+				<v-list-item
+					:to="'/playzone'"
+					router
+					exact
+				>
+					<v-list-item-action>
+						<div>
+							<img src="~/assets/sidebaricon/play.svg" alt="" style="height: 30px;width: 30px;">
+						</div>
+					</v-list-item-action>
+					<v-list-item-content>
+						<v-list-item-title v-text="'PlayZone'" />
 					</v-list-item-content>
 				</v-list-item>
 
@@ -80,27 +95,26 @@
 					{
 						icon: 'mdi-apps',
 						title: 'Home',
-						to: '/'
+						to: '/',
+						src:"assets/sidebaricon/home.svg"
 					},
 					{
 						icon: 'mdi-apps',
 						title: 'PlayZone',
-						to: '/playzone'
+						to: '/playzone',
+						src:"assets/sidebaricon/play.svg"
 					},
 					{
 						icon: 'mdi-apps',
 						title: 'Top-Up',
-						to: '/topup'
-					},
-					{
-						icon: 'mdi-apps',
-						title: 'Digital Code',
-						to: '/digitalcode'
+						to: '/topup',
+						src:"assets/sidebaricon/play.svg"
 					},
 					{
 						icon: 'mdi-apps',
 						title: 'Leaderboard',
-						to: '/leaderboard'
+						to: '/leaderboard',
+						src:"assets/sidebaricon/play.svg"
 					},
 				],
 				miniVariant: false,

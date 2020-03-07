@@ -1,34 +1,34 @@
 <template>
- <div class="product-card m-2">
-		<div class="product-pic" style="overflow: hidden;">
-			<img :src="'https://admin.selften.com/uploads/product/'+product.logo" alt="" width="100%">
-		</div>
-		<div class="text-center">
-			<div>
-				<a href="">{{ product.name }}</a>
-			</div>
-			<div class="product-price">{{ product.price }} BDT</div>
-		</div>
-		<div class="text-center">
-			<v-btn color="primary" @click="placeorder(product.id)">
-				Order now
-			</v-btn>
-		</div>
-		<v-alert
-		      v-model="alert"
-			    outlined
-		      	type="success"
-		     	text
-		    >
-		      Request sent successfully
-		    </v-alert>
+<div class="product-card">
+	<div class="product-pic" style="overflow: hidden;">
+		<img :src="'https://admin.selften.com/uploads/product/'+product.logo" alt="" width="100%">
 	</div>
+	<div class="text-center">
+		<div>
+			<a href="">{{ product.name }}</a>
+		</div>
+		<div class="product-price">{{ product.price }} BDT</div>
+	</div>
+	<div class="text-center">
+		<v-btn color="primary" @click="placeorder(product.id)" desable>
+			Order now
+		</v-btn>
+	</div>
+	<v-alert
+	      v-model="alert"
+		    outlined
+	      	type="success"
+	     	text
+	    >
+	      Request sent successfully
+	</v-alert>
+</div>
 </template>
 <script>
 	import { mapMutations, mapGetters } from 'vuex'
 	import axios from '~/plugins/axios'
 	export default {
-		props:['product','key'],
+		props:['product'],
 		data: () => ({
 	  		alert: false,
 	    }),
@@ -39,13 +39,13 @@
 	    	placeorder(id){
 	    		var self= this;
 	    		if(this.authuser){
-	    			axios.post('/api/addwallet', {
-						product_id : product_id,
+	    			axios.post('/api/order', {
+						product_id : this.product.id,
 						user_id : this.authuser.id,
 						amount : this.product.price,
-						date   : new Date(),
 					})
 					.then(function (response) {
+						console.log(response);
 						if(response.data=='success'){
 							self.alert=true
 						}
@@ -65,7 +65,6 @@
 .product-card{
 	width: 310px;
 	background: #ecedef;
-	padding: 15px;
 	text-transform: uppercase;
 }
 .product-card:hover{

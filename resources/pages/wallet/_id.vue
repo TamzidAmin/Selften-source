@@ -6,8 +6,8 @@
 	  >
 	    <v-card-text style="padding: 0px;">
 	    	<div style="background: #D0254B;color: #fff;padding: 10px;">
-	    		<h4 style="font-size: 25px;padding: 18px;">Balance</h4>
-		    	<h2 style="font-size: 35px;">৳ {{ authuser.wallet+authuser.earn_wallet }}</h2>
+	    		<h4 style="font-size: 20px;padding: 18px;">Available Balance</h4>
+		    	<h2 style="font-size: 27px;">৳ {{ authuser.wallet+authuser.earn_wallet }}</h2>
 		    	<div class="d-flex" >
 		    		<div class="w-50">
 		    			<h4>Diposite</h4>
@@ -165,6 +165,12 @@ export default {
 		.then((res) => {
 			return { data: res.data }
 		})
+	},
+	fetch ({ store, params }) {
+	    return axios.get(`/api/updateuser/`+params.id)
+	    .then((res) => {
+	      store.commit('setUser', res.data)
+	    })
 	}
 }
 </script>
