@@ -51,7 +51,7 @@
 				<span class="text-danger">Once Self-Ten Verify your payment details, Within 1 hours your money will be added.</span>
 		  	</v-card>
 		</v-dialog>
-	</div> {{ authuser }}
+	</div>
 	<v-form
 		ref="form"
 		v-model="valid"

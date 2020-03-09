@@ -115,7 +115,7 @@
 								<div> 
 									<v-btn v-if="(authuser.wallet+authuser.earn_wallet)>=totalfee && isjoined==0" @click="join" depressed small color="primary">Join</v-btn>
 									<v-btn v-else-if="isjoined==1" depressed small color="success">Joined</v-btn>
-									<nuxt-link to="/wallet" v-else>
+									<nuxt-link :to="/wallet/+authuser.id" v-else>
 										<v-btn depressed small color="primary">Add Money</v-btn>
 									</nuxt-link>
 								</div>

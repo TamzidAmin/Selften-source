@@ -169,7 +169,8 @@ export default {
 	fetch ({ store, params }) {
 	    return axios.get(`/api/updateuser/`+params.id)
 	    .then((res) => {
-	      // store.commit('setUser', res.data)
+	    	console.log(res.data);
+	      store.commit('setUser', res.data)
 	    })
 	}
 }
