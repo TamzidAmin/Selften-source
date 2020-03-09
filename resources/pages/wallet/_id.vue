@@ -84,7 +84,7 @@
 				          	<v-btn x-small color="primary" dark v-else-if="item.status=='pending'">{{ item.status }}</v-btn>
 				          	<v-btn x-small color="success" dark v-else>{{ item.status }}</v-btn>
 				          </td>
-				          <td>{{ item.created_at.substring(0,10) }}</td>
+				          <td v-if="item.created_at">{{ item.created_at.substring(0,10) }}</td>
 				        </tr>
 				      </tbody>
 				    </template>
@@ -169,7 +169,7 @@ export default {
 	fetch ({ store, params }) {
 	    return axios.get(`/api/updateuser/`+params.id)
 	    .then((res) => {
-	      store.commit('setUser', res.data)
+	      // store.commit('setUser', res.data)
 	    })
 	}
 }

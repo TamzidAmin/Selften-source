@@ -9,7 +9,7 @@
 
 					v-on="on"
 				>
-					{{  user.username.substring(0, 10) }} 
+					{{  user.username }} 
 					<img src="~/assets/downarrow.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
 				</v-btn>
 			</template>
