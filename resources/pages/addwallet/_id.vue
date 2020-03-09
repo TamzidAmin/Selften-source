@@ -98,6 +98,7 @@ import axios from '~/plugins/axios'
 import { mapMutations, mapGetters } from 'vuex'
 
 export default {
+	middleware: 'authenticated',
 	data: () => ({
      	amount:null,
      	number:null,
