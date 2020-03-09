@@ -87,7 +87,7 @@
 	      	type="success"
 	     	text
 	    >
-	      Request sent successfully
+	      {{ resmassage  }}
 	    </v-alert>
 	</v-form>
 	</v-card>
@@ -105,6 +105,7 @@ export default {
      	isopen:false,
      	dialog:false,
      	error:null,
+     	resmassage:'Request sent successfully',
   		valid: true,
   		paymentmethod:{},
   		alert: false,
@@ -139,6 +140,10 @@ export default {
 				})
 				.then(function (response) {
 					if(response.data=='success'){
+						self.alert=true
+						self.amount=null
+					}else{
+						self.resmassage=response.data
 						self.alert=true
 						self.amount=null
 					}
