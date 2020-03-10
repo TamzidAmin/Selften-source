@@ -140,6 +140,20 @@
 		      this.$store.commit('setAuth', null)
 		      this.$store.commit('setUser', null)
 		    }
+		},
+		mounted() {
+		    this.$OneSignal.push(() => {
+		        this.$OneSignal.isPushNotificationsEnabled((isEnabled) => {
+		        if (isEnabled) {
+		          this.$OneSignal.getUserId( function(userId) {
+		              console.log('player_id of the subscribed user is : ' + userId);
+		              // Make a POST call to your server with the user ID        
+		          });
+		        } else {
+		          console.log('Push notifications are not enabled yet.')
+		        }
+		      })
+		    })
 		}
 	}
 </script>

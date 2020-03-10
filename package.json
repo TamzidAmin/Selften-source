@@ -23,11 +23,12 @@
     "@adonisjs/session": "^1.0.19",
     "@adonisjs/shield": "^1.0.4",
     "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/onesignal": "^3.0.0-beta.16",
     "@nuxtjs/pwa": "^3.0.0-0",
+    "@nuxtjs/vuetify": "^1.0.0",
     "cookieparser": "^0.1.0",
     "cross-env": "^5.2.0",
     "js-cookie": "^2.2.1",
-    "@nuxtjs/vuetify": "^1.0.0",
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
