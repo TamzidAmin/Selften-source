@@ -7,12 +7,22 @@
 	    >
 	      <v-tabs-slider color="yellow"></v-tabs-slider>
 
-	      <v-tab style="justify-content: center;" v-for="item in items" :key="item">
+	      <v-tab style="justify-content: center;" v-for="item in items" @click="fetchdata(item)" :key="item">
 	        {{ item }}
 	      </v-tab>
 	    </v-tabs>
-
+		
 	    <v-tabs-items v-model="tab">  
+		
+			<div v-if="loding">
+				<v-progress-circular
+			      :size="70"
+			      :width="7"
+			      color="purple"
+			      indeterminate
+			    ></v-progress-circular>
+			</div>
+
 	      <v-tab-item
 	        v-for="item in items"
 	        :key="item"
@@ -127,6 +137,7 @@ export default {
       	match:[],
         tab: null,
         knowledge: 0,
+        loding:false,
         items: [
           'upcoming','ongoing','result',
         ],
@@ -139,6 +150,16 @@ export default {
 		})
 	},
 	methods: {
+		fetchdata(item){
+			this.loding=true;
+			console.log(item);
+			var self = this;
+			axios.get(`/api/matchs/`+item)
+		      .then((res) => {
+		      	self.loding=false;
+		      	self.match=res.data;
+		    })
+		},
 	  	formatDate(date) {
 	  		var d = new Date(date);
 	  		var day = d.getDate();
@@ -159,7 +180,7 @@ export default {
 		}
 	},
 	asyncData ({ params }) {
-	    return axios.get(`/api/match/`)
+	    return axios.get(`/api/matchs/upcoming`)
 	      .then((res) => {
 	        return { match: res.data }
 	    })
