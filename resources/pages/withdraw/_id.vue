@@ -30,7 +30,7 @@
 
 			<v-text-field
 			  v-model="number"
-			  :rules="nameRules"
+			  :rules="namen"
 			  label="Receiver Number"
 			  required
 			></v-text-field>
@@ -77,10 +77,12 @@ export default {
   		valid: true,
   		paymentmethod:{},
   		alert: false,
+  		namen:[
+			v => !!v || 'Amount is required',
+  		],
   		nameRules: [
 			v => !!v || 'Amount is required',
-			v => (v && v >= 1000) || 'Amount must be less than 1000 BDT',
-			v => (v && v < 99 ) || 'Amount must be greater than 100 BDT',
+			v => (v && v > 99 ) || 'Amount must be greater than 100 BDT',
 	  	]
     }),
     computed:mapGetters({
