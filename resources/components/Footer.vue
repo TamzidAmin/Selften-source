@@ -17,7 +17,7 @@
 			>
 				{{ link }}
 			</v-btn>
-			<a  href="https://wa.me/01301997184"
+			<a  href="https://wa.me/+8801301997184"
 				color="white"
 				target='_blank'
 				text
