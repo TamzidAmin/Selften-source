@@ -84,13 +84,7 @@
 		    				</div>
 		    				<div style="display: flex;">
 			    				<div style="width: 100%">
-		    						<div v-if="i.users.length>=i.max_join">
-										<button class="v-btn disabled v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">Closed</button>
-									</div>
-									<div v-else-if="i.status=='result'">
-										<button class="v-btn disabled v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">Closed</button>
-									</div>
-		    						<div v-else>
+		    						<div>
 		    							<Joinbutton :match="i" :authuser='authuser'/>
 		    						</div>
 		    					</div>
@@ -164,7 +158,7 @@ export default {
 	        return { match: res.data }
 	    })
   	}
-}
+};
 </script>
 
 <style>
