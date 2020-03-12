@@ -10,7 +10,9 @@
 			:key="i"
 			height="auto"
 		>
-			<img :src="'https://admin.selften.com/uploads/banner/'+slide.banner" alt="" style="object-fit: cover;width: 100%;max-height: 50vh;    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);;border: 2px solid;">
+			<a :href="slide.link" target="_blank">
+				<img :src="'https://admin.selften.com/uploads/banner/'+slide.banner" alt="" style="object-fit: cover;width: 100%;max-height: 50vh;    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);;border: 2px solid;">
+			</a>
 		</v-carousel-item>
 	</v-carousel>
 </template>
