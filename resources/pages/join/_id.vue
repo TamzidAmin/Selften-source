@@ -216,10 +216,8 @@ export default {
 		check(){
 			let exists=0;
 			for (var i = this.i.users.length - 1; i >= 0; i--) {
-				let exists = Object.values(this.i.users[i]).includes(this.authuser.id);
-				if(exists==true){
+				if(this.i.users[i].id==this.authuser.id){
 					this.isjoined=1;
-					console.log(this.isjoined);
 					break;
 				}
 			}

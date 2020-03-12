@@ -26,13 +26,14 @@
 		<button class="v-btn disabled v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">Closed</button>
 	</div>
 
-	<div v-if="match.users.length>=match.max_join">
+	<div v-else-if="match.users.length>=match.max_join">
 		<button class="v-btn disabled v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">Closed</button>
 	</div>
 
 	<div v-else-if="match.status=='result'">
 		<button class="v-btn disabled v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">Closed</button>
 	</div>
+
 
 	<nuxt-link :to="/join/+match.id" v-else-if="authuser && isjoined==0">
 		<button class="v-btn v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">join</button>
@@ -57,12 +58,9 @@ export default {
 		},
 		check(){
 			if(this.authuser){
-				let exists=false;
 				for (var i = this.match.users.length - 1; i >= 0; i--) {
-					let exists = Object.values(this.match.users[i]).includes(this.authuser.id);
-					if(exists==true){
+					if(this.match.users[i].id==this.authuser.id){
 						this.isjoined=1;
-						console.log(this.isjoined);
 						break;
 					}
 				}
