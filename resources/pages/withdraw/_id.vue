@@ -94,7 +94,7 @@ export default {
     	addwallet ({ params }) {
 			if (this.$refs.form.validate()) {
 			  	var self = this;
-				axios.post('/api/addwallet', {
+				axios.post('/api/withdrawwallet', {
 					amount : this.amount,
 					number : this.number,
 					purpose : 'withdraw',
