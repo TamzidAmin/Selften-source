@@ -12,7 +12,7 @@
 		        </v-list-item-avatar>
 
 		        <v-list-item-content class="text-left">
-		          <v-list-item-title>{{ paymentmethod.name }}</v-list-item-title>
+		          	<v-list-item-title>{{ paymentmethod.name }} ( {{ paymentmethod.info }} )</v-list-item-title>
 		        </v-list-item-content>
 		    </v-list-item>
 	  </v-list>
@@ -56,10 +56,10 @@
 			<v-alert
 		      v-model="alert"
 			    outlined
-		      	type="success"
+		      	:type="type"
 		     	text
 		    >
-		      Request sent successfully
+		      {{ message }}
 		    </v-alert>
 		</v-form>
 	</v-card>
@@ -74,6 +74,8 @@ export default {
      	amount:null,
      	number:null,
      	error:null,
+     	type:'success',
+     	message:"Request sent successfully",
   		valid: true,
   		paymentmethod:{},
   		alert: false,
@@ -100,10 +102,9 @@ export default {
 					user_id: this.authuser.id
 				})
 				.then(function (response) {
-					if(response.data=='success'){
-						self.alert=true
-						self.amount=null
-					}
+					self.alert=true
+					self.message=response.data
+					self.amount=null
 				})
 				.catch(function (error) {
 					console.log(error);
