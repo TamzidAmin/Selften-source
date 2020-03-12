@@ -13,7 +13,6 @@
 			  required
 			></v-text-field>
 
-			
 			<div class="text-right">
 				<v-btn
 				  :disabled="!valid"
@@ -26,6 +25,7 @@
 				  Login
 				</v-btn>
 			</div>
+			 
 			<br>
 			<v-alert
 		      v-model="alert"
