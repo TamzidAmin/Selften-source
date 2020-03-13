@@ -37,6 +37,21 @@
 						<v-list-item-title v-text="'PlayZone'" />
 					</v-list-item-content>
 				</v-list-item>
+					
+				<v-list-item
+					:to="'/topup/1'"
+					router
+					exact
+				>
+					<v-list-item-action>
+						<div>
+							<img src="~/assets/sidebaricon/topup.svg" alt="" style="height: 30px;width: 30px;">
+						</div>
+					</v-list-item-action>
+					<v-list-item-content>
+						<v-list-item-title v-text="'Top-Up'" />
+					</v-list-item-content>
+				</v-list-item>
 
 			</v-list>
 		</v-navigation-drawer>
@@ -135,10 +150,11 @@
 		}),
 		methods: {
 		    logout () {
-		      Cookie.remove('auth')
-		      Cookie.remove('setUser')
-		      this.$store.commit('setAuth', null)
-		      this.$store.commit('setUser', null)
+		     	Cookie.remove('auth')
+		      	Cookie.remove('setUser')
+		      	this.$store.commit('setAuth', null)
+		      	this.$store.commit('setUser', null)
+				this.$router.push('/')
 		    }
 		},
 		mounted() {

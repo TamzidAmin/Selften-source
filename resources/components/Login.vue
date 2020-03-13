@@ -1,70 +1,70 @@
 <template>
-	<v-row justify="center">
-		<v-btn
-			color="primary"
-			dark
-			@click.stop="dialog = true"
-			outlined
-			small
-		>
-			Login
-		</v-btn>
-		
-		<v-dialog
-			v-model="dialog"
-			max-width="600"
-		>
-			<v-card style="padding: 20px;">
-				<h2 class="text-center" style="padding: 20px">Login</h2>
-				  <v-form
-					ref="form"
-					v-model="valid"
-					lazy-validation
-				  >
-					<v-text-field
-					  v-model="email"
-					  :rules="emailRules"
-					  label="E-mail"
-					  required
-					></v-text-field>
+<v-row justify="center">
+	<v-btn
+		color="primary"
+		dark
+		@click.stop="dialog = true"
+		outlined
+		small
+	>
+		Login
+	</v-btn>
+	
+	<v-dialog
+		v-model="dialog"
+		max-width="600"
+	>
+		<v-card style="padding: 20px;">
+			<h2 class="text-center" style="padding: 20px">Login</h2>
+			  <v-form
+				ref="form"
+				v-model="valid"
+				lazy-validation
+			  >
+				<v-text-field
+				  v-model="email"
+				  :rules="emailRules"
+				  label="E-mail"
+				  required
+				></v-text-field>
 
-					<v-text-field
-					  v-model="password"
-					  :rules="nameRules"
-					  label="Password"
-					  :type="show1 ? 'text' : 'password'"
-					  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-					  @click:append="show1 = !show1"
-					  required
-					></v-text-field>
-					<div>
-						<nuxt-link to="forgetpassword">
-							forgot password ?
-						</nuxt-link>
-					</div>
-					<p style="color: red;" v-if="error!=null">{{ error }}</p>
-					<v-btn
-					  :disabled="!valid"
-					  color="success"
-					  class="mr-4"
-					  :loading="loading"
-					  @click="validate"
+				<v-text-field
+				  v-model="password"
+				  :rules="nameRules"
+				  label="Password"
+				  :type="show1 ? 'text' : 'password'"
+				  :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+				  @click:append="show1 = !show1"
+				  required
+				></v-text-field>
+				<div>
+					<nuxt-link to="forgetpassword">
+						forgot password ?
+					</nuxt-link>
+				</div>
+				<p style="color: red;" v-if="error!=null">{{ error }}</p>
+				<v-btn
+				  :disabled="!valid"
+				  color="success"
+				  class="mr-4"
+				  :loading="loading"
+				  @click="validate"
 
-					>
-					  Login
-					</v-btn>
+				>
+				  Login
+				</v-btn>
 
-					<v-btn
-					  color="error"
-					  class="mr-4"
-					  @click.stop="dialog = false"
-					>
-					  Cancel
-					</v-btn>
-				  </v-form>
-			</v-card>
-		</v-dialog>
-	</v-row>
+				<v-btn
+				  color="error"
+				  class="mr-4"
+				  @click.stop="dialog = false"
+				>
+				  Cancel
+				</v-btn>
+			  </v-form>
+		</v-card>
+	</v-dialog>
+</v-row>
 </template>
 
 
