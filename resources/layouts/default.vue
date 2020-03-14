@@ -53,6 +53,21 @@
 					</v-list-item-content>
 				</v-list-item>
 
+				<v-list-item
+					:to="'/leaderboard'"
+					router
+					exact
+				>
+					<v-list-item-action>
+						<div>
+							<img src="~/assets/sidebaricon/play.svg" alt="" style="height: 30px;width: 30px;">
+						</div>
+					</v-list-item-action>
+					<v-list-item-content>
+						<v-list-item-title v-text="'Leaderboard'" />
+					</v-list-item-content>
+				</v-list-item>
+
 			</v-list>
 		</v-navigation-drawer>
 		<v-app-bar :clipped-left="clipped" fixed app>
