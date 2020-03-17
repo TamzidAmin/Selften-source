@@ -39,7 +39,7 @@
 				</v-list-item>
 					
 				<v-list-item
-					:to="'/topup/1'"
+					:to="'/topup'"
 					router
 					exact
 				>

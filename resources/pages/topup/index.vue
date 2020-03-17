@@ -73,7 +73,7 @@
 				  	 <div class="col-md-3 col-12 col-sm-4 text-center" v-for="getway in getways" :key="getway.id">
 			  			<label :for="'g'+getway.id" class="mb-0 w-100 list-group-item p-2 d-block"  style="position: relative;    overflow: hidden;display: flex!important;padding-left: 25px;align-items: center;">
 			  				<span :class="selectedmgetway.id==getway.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
-			  				<img :src="getway.logo" :alt="getway.name" style="width: 35px;height: 35px;">
+			  				<img :src="'https://admin.selften.com/uploads/payment/'+getway.logo" :alt="getway.name" style="width: 35px;height: 35px;">
 				  			<input style="visibility: hidden;" :id="'g'+getway.id" @change="changegetway(getway)" name="getway" :value="getway.id" type="radio">
 							{{ getway.name }}
 				  		</label>
@@ -109,6 +109,7 @@
 </template>
 
 <script>
+	import axios from '~/plugins/axios'
 	export default {
 		data(){
 			return{
@@ -162,8 +163,16 @@
 			changegetway(p){
 				console.log(p);
 				this.selectedmgetway=p;
-			}
-		}
+			},
+		},
+		async asyncData ({ params }) {
+		    let pack = await axios.get(`/api/topuppackage/`)
+		    let paymentMethod =  await axios.get(`/api/paymentMethod`)
+		    return { 
+		    	packages: pack.data,
+		    	getways: paymentMethod.data,
+		    }
+	  	}
 	}
 </script>
 
