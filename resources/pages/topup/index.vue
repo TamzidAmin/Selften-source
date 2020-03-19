@@ -1,5 +1,10 @@
 <template>
-<v-container>
+<div>
+	 <v-form
+				ref="form"
+				v-model="valid"
+				lazy-validation
+			  >
     <v-row>
     	<v-col cols="12" md="4" lg="4">
     		<div class="product-top-banner__container">
@@ -36,7 +41,8 @@
 			    <div class="pl-3">
 			        <v-text-field
 				        label="Enter Player ID"
-				        required
+				        v-model="playerid"
+				  		:rules="nameRules"
 				    ></v-text-field>
 
 			        <!--<span class="ico-question">?</span>
@@ -52,14 +58,14 @@
 			    </h2>
 			    <div class="pl-3">
 					<div class="row">
-				  	 <div class="col-md-3 col-12 col-sm-4 text-center" v-for="game in packages" :key="game.id">
-			  			<label :for="game.id" class="mb-0 w-100 list-group-item p-2 d-block"  style="position: relative;    overflow: hidden;">
-			  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
-				  			<input style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
-							{{ game.name }}
-				  		</label>
-				  	</div> 
-				  </div>
+					  	<div class="col-md-3 col-12 col-sm-4 text-center" v-for="game in packages" :key="game.id">
+				  			<label :for="game.id" class="mb-0 w-100 list-group-item p-2 d-block"  style="position: relative;    overflow: hidden;">
+				  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
+					  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
+								{{ game.name }}
+					  		</label>
+					  	</div> 
+				  	</div>
 			    </div>
 			</div>
 
@@ -71,11 +77,19 @@
 			    <div class="pl-3">
 					<div class="row">
 				  	 <div class="col-md-3 col-12 col-sm-4 text-center" v-for="getway in getways" :key="getway.id">
-			  			<label :for="'g'+getway.id" class="mb-0 w-100 list-group-item p-2 d-block"  style="position: relative;    overflow: hidden;display: flex!important;padding-left: 25px;align-items: center;">
-			  				<span :class="selectedmgetway.id==getway.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
-			  				<img :src="'https://admin.selften.com/uploads/payment/'+getway.logo" :alt="getway.name" style="width: 35px;height: 35px;">
-				  			<input style="visibility: hidden;" :id="'g'+getway.id" @change="changegetway(getway)" name="getway" :value="getway.id" type="radio">
-							{{ getway.name }}
+			  			<label :for="'g'+getway.id" class="mb-0 w-100 list-group-item p-2 d-block" style="position: relative;overflow: hidden;padding-left: 25px;">
+			  				<div style="display: flex!important;align-items: center;justify-content: space-between;">
+			  					<div style="display: flex!important;align-items: center;justify-content: space-between;">
+				  					<span :class="selectedmgetway.id==getway.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
+					  				<img :src="'https://admin.selften.com/uploads/payment/'+getway.logo" :alt="getway.name" style="width: 35px;height: 35px;">
+						  			<input required style="visibility: hidden;" :id="'g'+getway.id" @change="changegetway(getway)" name="getway" :value="getway.id" type="radio">
+									<p>{{ getway.name }}</p>
+				  				</div>
+								<div v-if="selectedpackage.price">
+									<h4>Price :</h4>
+									<h4>BDT {{ selectedpackage.price }}</h4>
+								</div>
+			  				</div>
 				  		</label>
 				  	</div> 
 				  </div>
@@ -92,23 +106,41 @@
 						 <div class="col-md-12">
 						 	<v-text-field
 					            label="Email Address"
-					            required
+					            v-model="emailaddress"
+				  				:rules="emailRules"
 					          ></v-text-field>
 						 </div>
 						  <div class="col-md-12 text-right">
-						  	 <div>
-						        <v-btn depressed color="primary">Buy Now</v-btn>
+						  	 <div v-if="authuser">
+						        <v-btn  :disabled="!valid" :loading="loading" depressed color="primary" @click="buynow()">Buy Now</v-btn>
 						      </div>
+						      <div v-else>
+						      	<nuxt-link to="/login">
+									<v-btn depressed small color="primary">Buy Now</v-btn>
+								</nuxt-link>
+						      </div>
+
+							<v-alert
+						      v-model="alert"
+							    outlined
+						      	type="success"
+						     	text
+						    >
+						      {{ resmessage }}
+						    </v-alert>
 						  </div>
 				  	</div>
 			    </div>
 			</div>
     	</v-col>
     </v-row>
-</v-container>
+			  </v-form>
+
+</div>
 </template>
 
 <script>
+	import { mapMutations, mapGetters } from 'vuex'
 	import axios from '~/plugins/axios'
 	export default {
 		data(){
@@ -153,8 +185,26 @@
 				],
 				selectedpackage:[],
 				selectedmgetway:[],
+				playerid:'',
+				emailaddress:'',
+				nameRules: [
+					v => !!v || 'Name is required',
+				],
+				emailRules: [
+					v => !!v || 'E-mail is required',
+					v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+				],
+				loading:false,
+	  			valid: true,
+				alert: false,
+				resmessage:"Order successfully"
+
 			}
 		},
+		computed: mapGetters({
+			authuser: 'authuser',
+			base_url:'base_url'
+		}),
 		methods:{
 			changepackage(g){
 				console.log(g);
@@ -164,6 +214,31 @@
 				console.log(p);
 				this.selectedmgetway=p;
 			},
+			buynow(){
+				this.loading=true;
+				var self = this
+				if (this.$refs.form.validate()) {
+					axios.post('/api/packageorder', {
+					    topuppackage_id: this.selectedpackage.id,
+					    user_id:this.authuser.id,
+					    status: 'pending',
+					    amount:this.selectedpackage.price,
+					    payment_method:this.selectedmgetway.id
+					})
+					.then(function (response) {
+					    console.log(response);
+					    self.loading=false
+						self.alert=true
+						resmessage=response
+					})
+					.catch(function (error) {
+						self.loading=false;
+					    console.log(error);
+					});
+				}else{
+					this.loading=false;
+				}
+			}
 		},
 		async asyncData ({ params }) {
 		    let pack = await axios.get(`/api/topuppackage/`)

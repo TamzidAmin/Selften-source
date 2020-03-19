@@ -102,7 +102,6 @@ const Cookie = process.client ? require('js-cookie') : undefined
 				password: this.password
 			})
 			.then(function (response) {
-				console.log(response.data);
 				if(response.data.message){
 					self.loading=false
 					self.error=response.data.message
