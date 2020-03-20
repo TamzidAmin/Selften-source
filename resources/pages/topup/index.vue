@@ -59,7 +59,7 @@
 			    <div class="pl-3">
 					<div class="row">
 					  	<div class="col-md-3 col-12 col-sm-4 text-center" v-for="game in packages" :key="game.id">
-				  			<label :for="game.id" class="mb-0 w-100 list-group-item p-2 d-block"  style="position: relative;    overflow: hidden;">
+				  			<label :for="game.id" class="mb-0 w-100 list-group-item p-2 d-block"  style="width:97%;position: relative;    overflow: hidden;">
 				  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
 					  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
 								{{ game.name }}
@@ -105,9 +105,9 @@
 					<div class="row">
 						 <div class="col-md-12">
 						 	<v-text-field
-					            label="Email Address"
+					            label="Phone Number"
 					            v-model="emailaddress"
-				  				:rules="emailRules"
+				  				:rules="nameRules"
 					          ></v-text-field>
 						 </div>
 						  <div class="col-md-12 text-right">
@@ -221,6 +221,7 @@
 					axios.post('/api/packageorder', {
 					    topuppackage_id: this.selectedpackage.id,
 					    user_id:this.authuser.id,
+					    playerid:this.playerid,
 					    status: 'pending',
 					    amount:this.selectedpackage.price,
 					    payment_method:this.selectedmgetway.id

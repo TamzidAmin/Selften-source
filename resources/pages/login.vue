@@ -63,6 +63,7 @@ const Cookie = process.client ? require('js-cookie') : undefined
 		error:null,
 	  	valid: true,
 		dialog: false,
+		notice:[],
 	  name: '',
 	  nameRules: [
 		v => !!v || 'Name is required',
@@ -120,6 +121,12 @@ const Cookie = process.client ? require('js-cookie') : undefined
 		this.$refs.form.resetValidation()
 	  },
 	},
+	async asyncData ({ params }) {
+	    let notice = await axios.get(`/api/notice/`)
+	    return { 
+	    	notice: notice.data,
+	    }
+  	}
   }
 </script>
 

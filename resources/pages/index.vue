@@ -20,6 +20,9 @@
 	       }}'
         ></TimeCountDown>
 	</div>
+    <div class="mt-3" style="width: 100%;">
+        <marquee><span v-for="n in notice" style="font-size: 30px;color: #C81F4E;">{{ n.notice }}</span></marquee>
+    </div>
 	<div class="mt-3 d-flex flex-wrap">
 		<SuperSaleCart v-for="(product,key) in offerproduct" key="key" :product="product" />
 	</div>
@@ -44,7 +47,8 @@ export default {
 	data () {
       return {
       	banner:[],
-      	offerproduct:[]
+      	offerproduct:[],
+        notice:[]
       }
     },
     methods:{
@@ -61,12 +65,14 @@ export default {
     	},
     },
 	async asyncData ({ params }) {
-	    let banner = await axios.get(`/api/banner/`)
+        let banner = await axios.get(`/api/banner/`)
+	    let notice = await axios.get(`/api/notice/`)
 	    let offerproduct = await axios.get(`/api/offerproduct/`)
 
 	   	return {
 	       banner: banner.data,
-	       offerproduct: offerproduct.data
+           offerproduct: offerproduct.data,
+	       notice: notice.data,
 	    }
   	}
 }
