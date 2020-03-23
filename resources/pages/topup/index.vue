@@ -1,123 +1,173 @@
 <template>
 <div>
-	 <v-form
-				ref="form"
-				v-model="valid"
-				lazy-validation
-			  >
-    <v-row>
-    	<v-col cols="12" md="4" lg="4" v-if="packageinfo[0]">
-    		<div class="product-top-banner__container">
-		    	<img :src="'https://admin.selften.com/uploads/topupinfo/'+packageinfo[0].banner" alt="" class="w-100">
-		    </div>
-		    <div class="product__name">Free Fire</div>
-		    <div :class="active ? 'product__description' : ''" v-html="packageinfo[0].content">
-		    	
-		    </div>
-		    <a href="#" @click="seemore">See more</a>
-    	</v-col>
-    	<v-col cols="12" md="8" lg="8">
-    		<div class="section select-server">
-			    <h2 class="circle">
-			        <span>1</span>
-			        Enter Player ID
-			    </h2>
-			    <div class="pl-3">
-			        <v-text-field
-				        label="Enter Player ID"
-				        v-model="playerid"
-				  		:rules="nameRules"
-				    ></v-text-field>
+	<v-form
+		ref="form"
+		v-model="valid"
+		lazy-validation
+	>
+		<div v-if="orders">
+		 	<div style="width: 320px; margin: auto;border: 1px solid #CA1F4D;padding: 5px;">
+		 		<v-alert
+		 		class="text-center"
+			      v-model="alert1"
+				    outlined
+			      	type="success"
+			     	text
+			    >
+			      {{ resmessage }}
+			    </v-alert>
+		 		<p class="text-center" v-if="orders.paymentmathod">{{ orders.paymentmathod.info }}</p>
+		 		<hr>
+		 		<v-simple-table>
+				    <template v-slot:default>
+				      <tbody style="font-size: 15px;font-weight: 700;">
+					        <tr>
+				 				<td>Transaction id: </td>
+				 				<td>{{ orders.id }}</td>
+				 			</tr>
+				 			<tr>
+				 				<td>Player id: </td>
+				 				<td>{{ orders.playerid }}</td>
+				 			</tr>
+				 			<tr>
+				 				<td>Amount: </td>
+				 				<td>{{ orders.amount }} BDT</td>
+				 			</tr>
+				 			<tr>
+				 				<td>Time: </td>
+				 				<td>{{ orders.created_at }}</td>
+				 			</tr>
+				 			<tr>
+				 				<td>Status</td>
+				 				<td>
+				 					<v-btn v-if="orders.status=='pending'" small color="primary">{{ orders.status }}</v-btn>
+				 					<v-btn v-else small color="error">{{ orders.status }}</v-btn>
+				 				</td>
+				 			</tr>
+				      </tbody>
+				    </template>
+				  </v-simple-table>
 
-			        <!--<span class="ico-question">?</span>
-			        <p class="form__field-instruction-text">Your player ID is shown on the profile page in the app. Example: “5363266446".</p>
-			    -->
+				<div class="my-2 text-center">
+					<nuxt-link class="primary" to='/'>
+						Back To Home
+					</nuxt-link>
 			    </div>
-			</div>
-
-			<div class="section select-server">
-			    <h2 class="circle">
-			        <span>2</span>
-			        Select Recharge
-			    </h2>
-			    <div class="pl-3">
-					<div class="row">
-					  	<div class="col-md-3 col-6 col-sm-4 text-center" v-for="game in packages" :key="game.id">
-				  			<label :for="game.id" class="mb-0 w-100 list-group-item p-2 d-block"  style="font-size: 11px;width:97%;position: relative;    overflow: hidden;">
-				  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
-					  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
-								{{ game.name }}
-					  		</label>
-					  	</div> 
-				  	</div>
+		 	</div>
+		</div>
+	    <v-row v-else>
+	    	<v-col cols="12" md="4" lg="4" v-if="packageinfo[0]">
+	    		<div class="product-top-banner__container">
+			    	<img :src="'https://admin.selften.com/uploads/topupinfo/'+packageinfo[0].banner" alt="" class="w-100">
 			    </div>
-			</div>
+			    <div :class="active ? 'product__description' : ''" v-html="packageinfo[0].content">
+			    	
+			    </div>
+			    <a href="#" @click="seemore">See more</a>
+	    	</v-col>
+	    	<v-col cols="12" md="8" lg="8">
+	    		<div class="section select-server">
+				    <h2 class="circle">
+				        <span>1</span>
+				        Enter Player ID
+				    </h2>
+				    <div class="pl-3">
+				        <v-text-field
+					        label="Enter Player ID"
+					        v-model="playerid"
+					  		:rules="nameRules"
+					    ></v-text-field>
 
-			<div class="section select-server">
-			    <h2 class="circle">
-			        <span>3</span>
-			        Select payment
-			    </h2>
-			    <div class="pl-3">
-					<div class="row">
-				  	 <div class="col-md-3 col-12 col-sm-4 text-center" v-for="getway in getways" :key="getway.id">
-			  			<label :for="'g'+getway.id" class="mb-0 w-100 list-group-item p-2 d-block" style="position: relative;overflow: hidden;padding-left: 25px;">
-			  				<div style="display: flex!important;align-items: center;justify-content: space-between;">
-			  					<div style="display: flex!important;align-items: center;justify-content: space-between;">
-				  					<span :class="selectedmgetway.id==getway.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
-					  				<img :src="'https://admin.selften.com/uploads/payment/'+getway.logo" :alt="getway.name" style="width: 35px;height: 35px;">
-						  			<input required style="visibility: hidden;" :id="'g'+getway.id" @change="changegetway(getway)" name="getway" :value="getway.id" type="radio">
-									<p style="margin-bottom: 0px;">{{ getway.name }}</p>
+				        <!--<span class="ico-question">?</span>
+				        <p class="form__field-instruction-text">Your player ID is shown on the profile page in the app. Example: “5363266446".</p>
+				    -->
+				    </div>
+				</div>
+
+				<div class="section select-server">
+				    <h2 class="circle">
+				        <span>2</span>
+				        Select Recharge
+				    </h2>
+				    <div>
+						<div class="row">
+						  	<div class="col-md-3 col-6 col-sm-6 text-center" v-for="game in packages" :key="game.id">
+					  			<label :for="game.id" class="mb-0 w-100 list-group-item p-2 d-block"  style="font-size: 11px;width:97%;position: relative;    overflow: hidden;">
+					  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
+						  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
+									{{ game.name }}
+						  		</label>
+						  	</div> 
+					  	</div>
+				    </div>
+				</div>
+
+				<div class="section select-server">
+				    <h2 class="circle">
+				        <span>3</span>
+				        Select payment
+				    </h2>
+				    <div>
+						<div class="row">
+					  	 <div class="col-md-6 col-12 col-sm-6 text-center" v-for="getway in getways" :key="getway.id">
+				  			<label :for="'g'+getway.id" class="mb-0 w-100 list-group-item p-2 d-block" style="position: relative;overflow: hidden;padding-left: 25px;">
+				  				<div style="display: flex!important;align-items: center;justify-content: space-between;">
+				  					<div style="display: flex!important;align-items: center;justify-content: space-between;">
+					  					<span :class="selectedmgetway.id==getway.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
+						  				<img :src="'https://admin.selften.com/uploads/payment/'+getway.logo" :alt="getway.name" style="width: 35px;height: 35px;">
+							  			<input required style="visibility: hidden;" :id="'g'+getway.id" @change="changegetway(getway)" name="getway" :value="getway.id" type="radio">
+										<p style="margin-bottom: 0px;">{{ getway.name }}</p>
+					  				</div>
+									<div v-if="selectedpackage.price">
+										<h4>Price :</h4>
+										<h4>BDT {{ selectedpackage.price }}</h4>
+									</div>
 				  				</div>
-								<div v-if="selectedpackage.price">
-									<h4>Price :</h4>
-									<h4>BDT {{ selectedpackage.price }}</h4>
-								</div>
-			  				</div>
-				  		</label>
-				  	</div> 
-				  </div>
-			    </div>
-			</div>
-			<div class="section select-server">
-			    <h2 class="circle">
-			        <span>4</span>
-			       	Buy!
-			    </h2>
-			    <div class="pl-3">
-					<div class="row">
-						 <div class="col-md-12">
-						 	<v-text-field
-					            label="Phone Number"
-					            v-model="emailaddress"
-				  				:rules="nameRules"
-					          ></v-text-field>
-						 </div>
-						  <div class="col-md-12 text-right">
-						  	 <div v-if="authuser">
-						        <v-btn  :disabled="!valid" :loading="loading" depressed color="primary" @click="buynow()">Buy Now</v-btn>
-						      </div>
-						      <div v-else>
-						      	<nuxt-link to="/login">
-									<v-btn depressed small color="primary">Buy Now</v-btn>
-								</nuxt-link>
-						      </div>
-
-							<v-alert
-						      v-model="alert"
-							    outlined
-						      	type="success"
-						     	text
-						    >
-						      {{ resmessage }}
-						    </v-alert>
-						  </div>
-				  	</div>
-			    </div>
-			</div>
-    	</v-col>
-    </v-row>
-</v-form>
+					  		</label>
+				  			<p v-if="selectedmgetway.id==getway.id" class="text-left mb-0" style="background: #EEEEEE;padding:5px;">Pay with bKash</p>
+					  	</div> 
+					  </div>
+				    </div>
+				</div>
+				<div class="section select-server">
+				    <h2 class="circle">
+				        <span>4</span>
+				       	{{ selectedmgetway.info }}
+				    </h2>
+				    <div>
+						<div class="row">
+							 <div class="col-md-12">
+							 	<v-text-field
+						            label="Sender Number"
+						            v-model="emailaddress"
+					  				:rules="nameRules"
+						          ></v-text-field>
+							 </div>
+							  <div class="col-md-12 text-right">
+							  	 <div v-if="authuser">
+							        <v-btn  :disabled="!valid" :loading="loading" depressed color="primary" @click="buynow()">Buy Now</v-btn>
+							      </div>
+							      <div v-else>
+							      	<nuxt-link to="/login">
+										<v-btn depressed small color="primary">Buy Now</v-btn>
+									</nuxt-link>
+							      </div>
+								<br>
+								<v-alert
+							      v-model="alert"
+								    outlined
+							      	type="success"
+							     	text
+							    >
+							      {{ resmessage }}
+							    </v-alert>
+							  </div>
+					  	</div>
+				    </div>
+				</div>
+	    	</v-col>
+	    </v-row>
+	</v-form>
 </div>
 </template>
 
@@ -127,6 +177,8 @@
 	export default {
 		data(){
 			return{
+				alert1:true,
+				orders:[],
 				packages:[
 					{
 						id:1,
@@ -211,13 +263,12 @@
 					    playerid:this.playerid,
 					    status: 'pending',
 					    amount:this.selectedpackage.price,
-					    payment_method:this.selectedmgetway.id
+					    payment_mathod:this.selectedmgetway.id
 					})
 					.then(function (response) {
-					    console.log(response);
 					    self.loading=false
 						self.alert=true
-						resmessage=response
+						self.orders=response.data
 					})
 					.catch(function (error) {
 						self.loading=false;
@@ -226,6 +277,12 @@
 				}else{
 					this.loading=false;
 				}
+			}
+		},
+		async mounted(){
+			if(this.authuser){
+			    let orders = await axios.get(`/api/pendingorder/`+this.authuser.id)
+			    this.orders=orders.data
 			}
 		},
 		async asyncData ({ params }) {
@@ -242,6 +299,10 @@
 </script>
 
 <style>
+	.primary{
+		color: #fff!important; 
+		padding: 10px;
+	}
 	.product__description{
 		height: 29px;
 		overflow: hidden;

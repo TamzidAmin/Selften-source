@@ -7,21 +7,22 @@
 			justify="center"
 			no-gutters
 		>
-			<v-btn
+			<a
+				href="#"
 				v-for="link in links"
 				:key="link"
 				color="white"
 				text
 				rounded
-				class="my-2"
+				style="color: #fff;margin: 15px !important;font-size: 16px;" 
 			>
 				{{ link }}
-			</v-btn>
-			<a  href="https://wa.me/+8801301997184"
+			</a>
+			<a href="https://m.me/selften"
 				color="white"
 				target='_blank'
 				text
-				style="color: #fff;margin-top: 15px !important;font-size: 16px;" 
+				style="color: #fff;margin: 15px !important;font-size: 16px;" 
 			>
 				Message Us
 			</a>
