@@ -1,5 +1,5 @@
 <template>
-<div>
+<div> <span style="visibility: hidden">{{ datat() }}</span>
 	<v-form
 		ref="form"
 		v-model="valid"
@@ -124,7 +124,7 @@
 									</div>
 				  				</div>
 					  		</label>
-				  			<p v-if="selectedmgetway.id==getway.id" class="text-left mb-0" style="background: #EEEEEE;padding:5px;">Pay with bKash</p>
+				  			<p v-if="selectedmgetway.id==getway.id" class="text-left mb-0" style="background: #EEEEEE;padding:5px;">Pay with {{ selectedmgetway.name }} Using Send Money </p>
 					  	</div> 
 					  </div>
 				    </div>
@@ -261,6 +261,7 @@
 					    topuppackage_id: this.selectedpackage.id,
 					    user_id:this.authuser.id,
 					    playerid:this.playerid,
+					    emailaddress:this.emailaddress,
 					    status: 'pending',
 					    amount:this.selectedpackage.price,
 					    payment_mathod:this.selectedmgetway.id
@@ -277,12 +278,12 @@
 				}else{
 					this.loading=false;
 				}
-			}
-		},
-		async mounted(){
-			if(this.authuser){
-			    let orders = await axios.get(`/api/pendingorder/`+this.authuser.id)
-			    this.orders=orders.data
+			},
+			async datat(){
+				if(this.authuser){
+				    let orders = await axios.get(`/api/pendingorder/`+this.authuser.id)
+				    this.orders=orders.data
+				}
 			}
 		},
 		async asyncData ({ params }) {
