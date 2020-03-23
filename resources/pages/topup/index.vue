@@ -6,31 +6,15 @@
 				lazy-validation
 			  >
     <v-row>
-    	<v-col cols="12" md="4" lg="4">
+    	<v-col cols="12" md="4" lg="4" v-if="packageinfo[0]">
     		<div class="product-top-banner__container">
-		    	<img src="https://cdn1.codashop.com/S/content/common/images/mno/freefire_640x241_in.jpg" alt="" class="w-100">
+		    	<img :src="'https://admin.selften.com/uploads/topupinfo/'+packageinfo[0].banner" alt="" class="w-100">
 		    </div>
 		    <div class="product__name">Free Fire</div>
-		    <div class="product__description">Top up using bKash and get a 7D Gear set for Free + 30BDT cashback from bKash.
-		        <br>
-		        <br>
-		        <b>Free Fire Terms and Conditions:</b>
-		        <br> Get a Free 7D Gear set with any top-up using bKash (Once during an entire month)
-		        <br>
-		        <br> Content of 7D Gear Set - 7D Blood Moon Scar,7D New Year MP40, 7D Carnival M4A1,7D Shimada AK,7D Rome Fama, 7D Pharoah M1014 ,and 7D Cheetah SKS .
-		        <br>
-		        <br> The gift will be sent on the following day of the top-up via in-game mail between 15:00 - 18:00 GMT+8.
-		        <br>
-		        <br>
-		        <b>bKash Terms and Conditions:</b>
-		        <br> Customer is entitled for 30 BDT cashback on purchase of BDT 200 or above
-		        <br>
-		        <br> Customers can avail this offer only one time in the whole campaign period from 12th March till 8th April 2020.
-		        <br>
-		        <br> Offer applicable for PUBG Mobile &amp; Free Fire available <a href="">here</a>
-		        <br>
-		        <br> Free Fire direct Top-up! Buy Free Fire diamonds on Codashop and pay using bKash. Simply enter your Player ID, and diamonds will be added in your game account as soon as your payment has been confirmed. No credit card, registration or login required. This is the best way to buy diamonds online without a credit card!
+		    <div :class="active ? 'product__description' : ''" v-html="packageinfo[0].content">
+		    	
 		    </div>
+		    <a href="#" @click="seemore">See more</a>
     	</v-col>
     	<v-col cols="12" md="8" lg="8">
     		<div class="section select-server">
@@ -58,8 +42,8 @@
 			    </h2>
 			    <div class="pl-3">
 					<div class="row">
-					  	<div class="col-md-3 col-12 col-sm-4 text-center" v-for="game in packages" :key="game.id">
-				  			<label :for="game.id" class="mb-0 w-100 list-group-item p-2 d-block"  style="width:97%;position: relative;    overflow: hidden;">
+					  	<div class="col-md-3 col-6 col-sm-4 text-center" v-for="game in packages" :key="game.id">
+				  			<label :for="game.id" class="mb-0 w-100 list-group-item p-2 d-block"  style="font-size: 11px;width:97%;position: relative;    overflow: hidden;">
 				  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
 					  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
 								{{ game.name }}
@@ -83,7 +67,7 @@
 				  					<span :class="selectedmgetway.id==getway.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
 					  				<img :src="'https://admin.selften.com/uploads/payment/'+getway.logo" :alt="getway.name" style="width: 35px;height: 35px;">
 						  			<input required style="visibility: hidden;" :id="'g'+getway.id" @change="changegetway(getway)" name="getway" :value="getway.id" type="radio">
-									<p>{{ getway.name }}</p>
+									<p style="margin-bottom: 0px;">{{ getway.name }}</p>
 				  				</div>
 								<div v-if="selectedpackage.price">
 									<h4>Price :</h4>
@@ -101,7 +85,6 @@
 			       	Buy!
 			    </h2>
 			    <div class="pl-3">
-			    	<p>OPTIONAL: If you would like a receipt of the purchase by email, please enter an email address</p>
 					<div class="row">
 						 <div class="col-md-12">
 						 	<v-text-field
@@ -134,8 +117,7 @@
 			</div>
     	</v-col>
     </v-row>
-			  </v-form>
-
+</v-form>
 </div>
 </template>
 
@@ -197,7 +179,9 @@
 				loading:false,
 	  			valid: true,
 				alert: false,
-				resmessage:"Order successfully"
+				resmessage:"Order successfully",
+				active:true,
+				packageinfo:[]
 
 			}
 		},
@@ -206,6 +190,9 @@
 			base_url:'base_url'
 		}),
 		methods:{
+			seemore(){
+				this.active=!this.active
+			},
 			changepackage(g){
 				console.log(g);
 				this.selectedpackage=g;
@@ -244,15 +231,21 @@
 		async asyncData ({ params }) {
 		    let pack = await axios.get(`/api/topuppackage/`)
 		    let paymentMethod =  await axios.get(`/api/paymentMethod`)
+		    let packageinfo =  await axios.get(`/api/topupinfo`)
 		    return { 
 		    	packages: pack.data,
 		    	getways: paymentMethod.data,
+		    	packageinfo: packageinfo.data,
 		    }
 	  	}
 	}
 </script>
 
 <style>
+	.product__description{
+		height: 29px;
+		overflow: hidden;
+	}
 	.list-group-item {
 	    display: table-cell;
 	    text-decoration: none;
