@@ -1,7 +1,7 @@
 <template>
 <v-layout column justify-center align-center>
 	<Carousels :banner="banner"/>
-	<div class="mt-3" v-if="courrentdate >= dateformate(offerproduct[0].start_at)">
+	<div class="mt-3">
 		<TimeCountDown 
          :starttime="dateformate(offerproduct[0].start_at)" 
          :endtime="dateformate(offerproduct[0].end_at)" 
@@ -23,7 +23,7 @@
     <div class="mt-3" style="width: 100%;">
         <marquee><span v-for="n in notice" style="font-size: 30px;color: #C81F4E;">{{ n.notice }}</span></marquee>
     </div>
-	<div class="mt-3 d-flex flex-wrap" v-if="courrentdate >= dateformate(offerproduct[0].start_at)">
+	<div class="mt-3 d-flex flex-wrap" >
 		<SuperSaleCart v-for="(product,key) in offerproduct" key="key" :product="product" />
 	</div>
 </v-layout>
