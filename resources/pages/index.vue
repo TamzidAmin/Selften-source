@@ -1,6 +1,7 @@
 <template>
 <v-layout column justify-center align-center>
 	<Carousels :banner="banner"/>
+    <p style="visibility: hidden;">v-if="courrentdate >= dateformate(offerproduct[0].start_at)"</p>
 	<div class="mt-3">
 		<TimeCountDown 
          :starttime="dateformate(offerproduct[0].start_at)" 

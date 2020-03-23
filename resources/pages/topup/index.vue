@@ -4,8 +4,8 @@
 		ref="form"
 		v-model="valid"
 		lazy-validation
-	>
-		<div v-if="orders">
+	> 
+		<div v-if="orders && authuser">
 		 	<div style="width: 320px; margin: auto;border: 1px solid #CA1F4D;padding: 5px;">
 		 		<v-alert
 		 		class="text-center"
