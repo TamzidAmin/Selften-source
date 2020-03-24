@@ -14,7 +14,7 @@
 				color="white"
 				text
 				rounded
-				style="color: #fff;margin: 15px !important;font-size: 16px;" 
+				style="color: #fff;margin: 11px !important;font-size: 13px;" 
 			>
 				{{ link }}
 			</a>
@@ -22,7 +22,7 @@
 				color="white"
 				target='_blank'
 				text
-				style="color: #fff;margin: 15px !important;font-size: 16px;" 
+				style="color: #fff;margin: 11px !important;font-size: 13px;" 
 			>
 				Message Us
 			</a>
@@ -39,3 +39,9 @@
 		}),
 	}
 </script>
+
+<style scoped>
+	.primary{
+		padding: 0px!important;
+	}
+</style>

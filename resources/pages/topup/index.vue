@@ -1,5 +1,5 @@
 <template>
-<div> <span style="visibility: hidden">{{ datat() }}</span>
+<div style="margin-top: -35px;"> <span style="visibility: hidden">{{ datat() }}</span>
 	<v-form
 		ref="form"
 		v-model="valid"
@@ -101,30 +101,18 @@
 					  	</div>
 				    </div>
 				</div>
-
-				<div class="section select-server">
+				<div class="section select-server" v-if="authuser && selectedpackage.price>(authuser.wallet+authuser.earn_wallet)">
 				    <h2 class="circle">
 				        <span>3</span>
-				        Select payment
 				    </h2>
 				    <div>
 						<div class="row">
-					  	 <div class="col-md-6 col-12 col-sm-6 text-center" v-for="getway in getways" :key="getway.id">
-				  			<label :for="'g'+getway.id" class="mb-0 w-100 list-group-item p-2 d-block" style="position: relative;overflow: hidden;padding-left: 25px;">
-				  				<div style="display: flex!important;align-items: center;justify-content: space-between;">
-				  					<div style="display: flex!important;align-items: center;justify-content: space-between;">
-					  					<span :class="selectedmgetway.id==getway.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
-						  				<img :src="'https://admin.selften.com/uploads/payment/'+getway.logo" :alt="getway.name" style="width: 35px;height: 35px;">
-							  			<input required style="visibility: hidden;" :id="'g'+getway.id" @change="changegetway(getway)" name="getway" :value="getway.id" type="radio">
-										<p style="margin-bottom: 0px;">{{ getway.name }}</p>
-					  				</div>
-									<div v-if="selectedpackage.price">
-										<h4>Price :</h4>
-										<h4>BDT {{ selectedpackage.price }}</h4>
-									</div>
-				  				</div>
-					  		</label>
-				  			<p v-if="selectedmgetway.id==getway.id" class="text-left mb-0" style="background: #EEEEEE;padding:5px;">Pay with {{ selectedmgetway.name }} Using Send Money </p>
+					  	 <div class="col-md-12 col-12 col-sm-12 text-center mt-4">
+				  			 <p>Your Available Balance {{ authuser.wallet+authuser.earn_wallet }} BDT</p>
+				  			 <p>You Need {{ selectedpackage.price }} BDT to purchase the product</p>
+					  		<nuxt-link :to="/wallet/+authuser.id">
+								<v-btn depressed small color="primary">Add Money</v-btn>
+							</nuxt-link>
 					  	</div> 
 					  </div>
 				    </div>
@@ -145,7 +133,8 @@
 							 </div>
 							  <div class="col-md-12 text-right">
 							  	 <div v-if="authuser">
-							        <v-btn  :disabled="!valid" :loading="loading" depressed color="primary" @click="buynow()">Buy Now</v-btn>
+							        <v-btn :loading="loading" depressed color="primary" v-if="selectedpackage.price>(authuser.wallet+authuser.earn_wallet)" disabled>Buy Now</v-btn>
+							        <v-btn  :disabled="!valid" :loading="loading" depressed color="primary" @click="buynow()" v-else>Buy Now</v-btn>
 							      </div>
 							      <div v-else>
 							      	<nuxt-link to="/login">
@@ -254,29 +243,31 @@
 				this.selectedmgetway=p;
 			},
 			buynow(){
-				this.loading=true;
-				var self = this
-				if (this.$refs.form.validate()) {
-					axios.post('/api/packageorder', {
-					    topuppackage_id: this.selectedpackage.id,
-					    user_id:this.authuser.id,
-					    playerid:this.playerid,
-					    emailaddress:this.emailaddress,
-					    status: 'pending',
-					    amount:this.selectedpackage.price,
-					    payment_mathod:this.selectedmgetway.id
-					})
-					.then(function (response) {
-					    self.loading=false
-						self.alert=true
-						self.orders=response.data
-					})
-					.catch(function (error) {
-						self.loading=false;
-					    console.log(error);
-					});
-				}else{
-					this.loading=false;
+				let con= confirm("The Money Will Take From your Wallet. Are You Sure Want to Confirm?? ");
+					if(con){
+					this.loading=true;
+					var self = this
+					if (this.$refs.form.validate()) {
+						axios.post('/api/packageorder', {
+						    topuppackage_id: this.selectedpackage.id,
+						    user_id:this.authuser.id,
+						    playerid:this.playerid,
+						    emailaddress:this.emailaddress,
+						    status: 'pending',
+						    amount:this.selectedpackage.price,
+						})
+						.then(function (response) {
+						    self.loading=false
+							self.alert=true
+							self.orders=response.data
+						})
+						.catch(function (error) {
+							self.loading=false;
+						    console.log(error);
+						});
+					}else{
+						this.loading=false;
+					}
 				}
 			},
 			async datat(){
