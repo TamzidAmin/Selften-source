@@ -60,7 +60,7 @@
 				>
 					<v-list-item-action>
 						<div>
-							<img src="~/assets/sidebaricon/play.svg" alt="" style="height: 30px;width: 30px;">
+							<img src="~/assets/tropy.svg" alt="" style="height: 30px;width: 30px;">
 						</div>
 					</v-list-item-action>
 					<v-list-item-content>

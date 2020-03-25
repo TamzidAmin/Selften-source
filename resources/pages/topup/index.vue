@@ -56,14 +56,16 @@
 		 	</div>
 		</div>
 	    <v-row v-else>
-	    	<v-col cols="12" md="4" lg="4" v-if="packageinfo[0]">
-	    		<div class="product-top-banner__container">
-			    	<img :src="'https://admin.selften.com/uploads/topupinfo/'+packageinfo[0].banner" alt="" class="w-100">
+	    	<v-col cols="12" md="4" lg="4">
+	    		<div v-if="packageinfo[0]">
+		    		<div class="product-top-banner__container">
+				    	<img :src="'https://admin.selften.com/uploads/topupinfo/'+packageinfo[0].banner" alt="" class="w-100">
+				    </div>
+				    <div :class="active ? 'product__description' : ''" v-html="packageinfo[0].content">
+				    	
+				    </div>
+				    <a href="#" @click="seemore">See more</a>
 			    </div>
-			    <div :class="active ? 'product__description' : ''" v-html="packageinfo[0].content">
-			    	
-			    </div>
-			    <a href="#" @click="seemore">See more</a>
 	    	</v-col>
 	    	<v-col cols="12" md="8" lg="8">
 	    		<div class="section select-server">
@@ -108,8 +110,8 @@
 				    <div v-if="authuser && selectedpackage.price>(authuser.wallet+authuser.earn_wallet)">
 						<div class="row">
 					  	 <div class="col-md-12 col-12 col-sm-12 text-center mt-4">
-				  			 <p>Your Available Balance {{ authuser.wallet+authuser.earn_wallet }} BDT</p>
-				  			 <p>You Need {{ selectedpackage.price }} BDT to purchase the product</p>
+				  			 <p>Your Available Balance BDT {{ authuser.wallet+authuser.earn_wallet }}</p>
+				  			 <p>You Need BDT <span v-if="selectedpackage.price">{{ selectedpackage.price }}</span><span v-else>0</span> to purchase the product</p>
 					  		<nuxt-link :to="/wallet/+authuser.id">
 								<v-btn depressed small color="primary">Add Money</v-btn>
 							</nuxt-link>
@@ -119,15 +121,15 @@
 				    <div v-else-if="authuser">
 				    	<div class="row">
 						  	 <div class="col-md-12 col-12 col-sm-12 text-center mt-4">
-					  			 <p>Your Available Balance {{ authuser.wallet+authuser.earn_wallet }} BDT</p>
-					  			 <p>You Need {{ selectedpackage.price }} BDT to purchase the product</p>
+					  			 <p>Your Available Balance BDT {{ authuser.wallet+authuser.earn_wallet }}</p>
+					  			 <p>You Need BDT <span v-if="selectedpackage.price">{{ selectedpackage.price }}</span><span v-else>0</span> to purchase the product</p>
 						  	</div> 
 						 </div>
 				    </div>
 				    <div v-else>
 				    	<div class="row">
 						  	<div class="col-md-12 col-12 col-sm-12 text-center mt-4">
-					  			<p>You Need {{ selectedpackage.price }} BDT to purchase the product</p>
+					  			<p>You Need BDT <span v-if="selectedpackage.price">{{ selectedpackage.price }}</span><span v-else>0</span> to purchase the product</p>
 						  	</div> 
 						 </div>
 				    </div>

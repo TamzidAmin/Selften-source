@@ -22,8 +22,8 @@
 					</nuxt-link>
 				</v-list-item>
 
-				<v-list-item class="d-none">
-					<nuxt-link to="/profile">
+				<v-list-item>
+					<nuxt-link :to="/myorder/+user.id">
 						<img src="~/assets/cart.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
 						My Orders
 					</nuxt-link>

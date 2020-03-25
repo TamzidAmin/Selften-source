@@ -1,6 +1,7 @@
 <template>
 <v-row justify="center">
 	<v-btn
+		style="margin-top: 6px;"
 		color="primary"
 		dark
 		@click.stop="dialog = true"
