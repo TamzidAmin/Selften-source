@@ -10,9 +10,9 @@
 		<div class="product-price">{{ product.price }} BDT</div>
 	</div>
 	<div class="text-center">
-		<v-btn color="primary" @click="placeorder(product.id)" desable>
+		<nuxt-link class="primary" :to="'offerorder/'+product.id">
 			Order now
-		</v-btn>
+		</nuxt-link>
 	</div>
 	<v-alert
 	      v-model="alert"
@@ -35,29 +35,6 @@
 		computed:mapGetters({
 			authuser: 'authuser'
 	    }),
-	    methods:{
-	    	placeorder(id){
-	    		var self= this;
-	    		if(this.authuser){
-	    			axios.post('/api/order', {
-						product_id : this.product.id,
-						user_id : this.authuser.id,
-						amount : this.product.price,
-					})
-					.then(function (response) {
-						console.log(response);
-						if(response.data=='success'){
-							self.alert=true
-						}
-					})
-					.catch(function (error) {
-						console.log(error);
-					});
-	    		}else{
-	    			alert("Please Login to order");
-	    		}
-	    	}
-	    }
 	}
 </script>
 
