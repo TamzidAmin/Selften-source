@@ -183,6 +183,7 @@ export default {
 </script>
 
 <style>
+	
 	.bg-color{
 		background: #C91F4E;
 		margin:5px;
