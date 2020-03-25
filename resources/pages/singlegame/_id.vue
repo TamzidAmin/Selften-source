@@ -31,7 +31,7 @@
 			</div>
 			<div class="text-center w-33 font-limit">
 				<v-btn color="#C91F4E" fab small dark>
-	              <img src="~/assets/tropy.svg" alt=""  width="25px">
+	              <img src="~/assets/tropy1.svg" alt=""  width="25px">
 	            </v-btn>
 	            <p class="mb-0">BDT {{ match.total_prize }}</p>
 			</div>

@@ -30,6 +30,10 @@
 				 				<td>{{ orders.playerid }}</td>
 				 			</tr>
 				 			<tr>
+				 				<td>Package: </td>
+				 				<td v-if="orders.topuppackage">{{ orders.topuppackage.name }}</td>
+				 			</tr>
+				 			<tr>
 				 				<td>Amount: </td>
 				 				<td>{{ orders.amount }} BDT</td>
 				 			</tr>
