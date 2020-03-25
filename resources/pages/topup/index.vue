@@ -92,7 +92,7 @@
 				    <div>
 						<div class="row">
 						  	<div class="col-md-3 col-6 col-sm-6 text-center" v-for="game in packages" :key="game.id">
-					  			<label :for="game.id" class="mb-0 w-100 list-group-item p-2 d-block"  style="font-size: 11px;width:97%;position: relative;    overflow: hidden;">
+					  			<label :for="game.id" class="mb-0 w-100 list-group-item p-2 d-block"  style="font-size: 11px;width:100%;position: relative;    overflow: hidden;">
 					  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
 						  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
 									{{ game.name }}
@@ -101,11 +101,11 @@
 					  	</div>
 				    </div>
 				</div>
-				<div class="section select-server" v-if="authuser && selectedpackage.price>(authuser.wallet+authuser.earn_wallet)">
+				<div class="section select-server">
 				    <h2 class="circle">
 				        <span>3</span>
 				    </h2>
-				    <div>
+				    <div v-if="authuser && selectedpackage.price>(authuser.wallet+authuser.earn_wallet)">
 						<div class="row">
 					  	 <div class="col-md-12 col-12 col-sm-12 text-center mt-4">
 				  			 <p>Your Available Balance {{ authuser.wallet+authuser.earn_wallet }} BDT</p>
@@ -116,21 +116,25 @@
 					  	</div> 
 					  </div>
 				    </div>
+				    <div v-else-if="authuser">
+				    	<div class="row">
+						  	 <div class="col-md-12 col-12 col-sm-12 text-center mt-4">
+					  			 <p>Your Available Balance {{ authuser.wallet+authuser.earn_wallet }} BDT</p>
+					  			 <p>You Need {{ selectedpackage.price }} BDT to purchase the product</p>
+						  	</div> 
+						 </div>
+				    </div>
+				    <div v-else>
+				    	<div class="row">
+						  	<div class="col-md-12 col-12 col-sm-12 text-center mt-4">
+					  			<p>You Need {{ selectedpackage.price }} BDT to purchase the product</p>
+						  	</div> 
+						 </div>
+				    </div>
 				</div>
-				<div class="section select-server">
-				    <h2 class="circle">
-				        <span>4</span>
-				       	{{ selectedmgetway.info }}
-				    </h2>
+				<div>
 				    <div>
 						<div class="row">
-							 <div class="col-md-12">
-							 	<v-text-field
-						            label="Sender Number"
-						            v-model="emailaddress"
-					  				:rules="nameRules"
-						          ></v-text-field>
-							 </div>
 							  <div class="col-md-12 text-right">
 							  	 <div v-if="authuser">
 							        <v-btn :loading="loading" depressed color="primary" v-if="selectedpackage.price>(authuser.wallet+authuser.earn_wallet)" disabled>Buy Now</v-btn>
@@ -252,7 +256,7 @@
 						    topuppackage_id: this.selectedpackage.id,
 						    user_id:this.authuser.id,
 						    playerid:this.playerid,
-						    emailaddress:this.emailaddress,
+						    emailaddress:'111',
 						    status: 'pending',
 						    amount:this.selectedpackage.price,
 						})
@@ -367,4 +371,7 @@
 	    text-align: center;
 	    cursor: pointer;
 	}
+/* 	.select-server{
+		background: #C81F4F!important;
+	} */
 </style>
