@@ -50,7 +50,7 @@
 				      @click:append="show1 = !show1"
 				      required
 				    ></v-text-field>
-
+				    <p style="color: red;" v-if="message!=null">{{ message }}</p>
 				    <v-btn
 				      :disabled="!valid"
 				      color="success"
@@ -60,7 +60,7 @@
 				    >
 				      Register
 				    </v-btn>
-
+					
 				    <v-btn
 				      color="error"
 				      class="mr-4"
@@ -69,6 +69,8 @@
 				      Cancel
 				    </v-btn>
 				  </v-form>
+
+
 			</v-card>
 		</v-dialog>
 	</v-row>
@@ -84,6 +86,7 @@ const Cookie = process.client ? require('js-cookie') : undefined
 		dialog: false,
 		show1: false,
 		loading:false,
+		message:null,
 		phone:'',
       	username: '',
       	required:[
@@ -115,18 +118,23 @@ const Cookie = process.client ? require('js-cookie') : undefined
 			    password_confirmation:this.password
 			})
 			.then(function (response) {
-				self.loading=false
-			    console.log(response.data);
-			    setTimeout(() => { // we simulate the async request with timeout.
-		        const auth = {
-		          accessToken: response.data.token
-		        }
-		        self.$store.commit('setAuth', auth) // mutating to store for client rendering
-		        self.$store.commit('setUser', response.data) // mutating to store for client rendering
-		        Cookie.set('auth', auth) // saving token in cookie for server rendering
-		        Cookie.set('user', response.data) // saving token in cookie for server rendering
-		        self.$router.push('/profile/'+response.data.id)
-		      }, 1000)
+				console.log(response);
+				if(response.data[0].message){
+					self.loading=false
+					self.message=response.data[0].message
+				}else{
+					self.loading=false
+				    setTimeout(() => { // we simulate the async request with timeout.
+			        const auth = {
+			          accessToken: response.data.token
+			        }
+			        self.$store.commit('setAuth', auth) // mutating to store for client rendering
+			        self.$store.commit('setUser', response.data) // mutating to store for client rendering
+			        Cookie.set('auth', auth) // saving token in cookie for server rendering
+			        Cookie.set('user', response.data) // saving token in cookie for server rendering
+			        self.$router.push('/profile/'+response.data.id)
+			      }, 1000)
+				}
 			})
 			.catch(function (error) {
 			    console.log(error);

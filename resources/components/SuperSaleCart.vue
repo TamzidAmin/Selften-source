@@ -1,13 +1,13 @@
 <template>
-<div class="product-card">
+<div class="product-card pb-5">
 	<div class="product-pic" style="overflow: hidden;">
 		<img :src="'https://admin.selften.com/uploads/product/'+product.logo" alt="" width="100%">
 	</div>
-	<div class="text-center">
+	<div class="text-center my-2">
 		<div>
 			<a href="">{{ product.name }}</a>
 		</div>
-		<div class="product-price">{{ product.price }} BDT</div>
+		<div class="product-price my-2">{{ product.price }} BDT</div>
 	</div>
 	<div class="text-center">
 		<nuxt-link class="primary" :to="'offerorder/'+product.id">
@@ -40,6 +40,8 @@
 
 <style>
 .product-card{
+	border-radius: 15px;
+	overflow: hidden;
 	width: 310px;
 	background: #ecedef;
 	text-transform: uppercase;

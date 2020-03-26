@@ -4,7 +4,7 @@
 		min-width="300"
 		text-align="center"
 	> 
-		<v-card-text>
+		<v-card-text v-if="authuser">
 		   <v-avatar color="indigo">
 		      <v-icon dark>mdi-account-circle</v-icon>
 		    </v-avatar>
