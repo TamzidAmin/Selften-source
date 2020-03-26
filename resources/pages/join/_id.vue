@@ -171,6 +171,9 @@ export default {
 			knowledge: 0,
 			nameRules: [
 				v => !!v || 'Player Name is required',
+				v =>
+		          /[A-z]/g.test(v) ||
+		          "Player id contains at least one character"
 			],
 			items: [
 				'upcoming','ongoing','result',

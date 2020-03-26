@@ -4,8 +4,7 @@
 		    <template v-slot:default>
 		      <thead>
 		        <tr>
-		          <th class="text-left">ID</th>
-		          <th class="text-left">Phone</th>
+		          <th class="text-left">Order ID</th>
 		          <th class="text-left">Package</th>
 		          <th class="text-left">Status</th>
 		        </tr>
@@ -13,7 +12,6 @@
 		      <tbody>
 		        <tr v-for="item in myorder" :key="item.id">
 		          <td>{{ item.id }}</td>
-		          <td>{{ item.phone }}</td>
 		          <td>{{ item.topuppackage.name }}</td>
 		          <td>{{ item.status }}</td>
 		        </tr>
