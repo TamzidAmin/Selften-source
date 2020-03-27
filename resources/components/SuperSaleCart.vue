@@ -9,11 +9,12 @@
 		</div>
 		<div class="product-price my-2">{{ product.price }} BDT</div>
 	</div>
-	<div class="text-center">
+	<div class="text-center" v-if="product && dateformate(product.start_at) && courrentdate >= dateformate(product.start_at)">
 		<nuxt-link class="primary" :to="'offerorder/'+product.id">
 			Order now
 		</nuxt-link>
 	</div>
+	<div v-else class="text-center">Expired</div>
 	<v-alert
 	      v-model="alert"
 		    outlined
@@ -32,9 +33,31 @@
 		data: () => ({
 	  		alert: false,
 	    }),
-		computed:mapGetters({
-			authuser: 'authuser'
-	    }),
+		computed:{
+			...mapGetters({
+				authuser: 'authuser'
+	    	}),
+	        courrentdate(){
+	            var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+	              "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+	            ];
+	            var t = new Date();
+	            var date1 = t.getDate() + ' ' + monthShortNames[t.getMonth()] + ', ' + t.getFullYear()+' '+t.getHours()+':'+t.getMinutes()+':'+t.getSeconds();
+	            return date1;
+	        }
+	    },
+	    methods:{
+	    	dateformate(date){
+	    		var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+				  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+				];
+	    		var t = new Date(date);
+	    		console.log(t);
+	  			var date1 = t.getDate() + ' ' + monthShortNames[t.getMonth()] + ', ' + t.getFullYear()+' '+t.getHours()+':'+t.getMinutes()+':'+t.getSeconds();
+	  			// console.log(date1);
+	  			return date1;
+	    	},
+	    },
 	}
 </script>
 
