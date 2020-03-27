@@ -172,7 +172,7 @@ export default {
 			nameRules: [
 				v => !!v || 'Player Name is required',
 				v =>
-		          /[A-z]/g.test(v) ||
+		          /[^0-9]/g.test(v) ||
 		          "Player id contains at least one character"
 			],
 			items: [
