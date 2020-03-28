@@ -5,8 +5,7 @@
     <div class="mt-3" style="width: 100%;">
         <marquee><span v-for="n in notice" style="font-size: 30px;color: #C81F4E;">{{ n.notice }}</span></marquee>
     </div>
-
-	<div class="mt-3" v-if="offerproduct[0] && dateformate(offerproduct[0].start_at) && courrentdate >= dateformate(offerproduct[0].start_at)">
+	<div class="mt-3" v-if="offerproduct[0].start_at!='NULL'">
 		<TimeCountDown 
          :starttime="dateformate(offerproduct[0].start_at)" 
          :endtime="dateformate(offerproduct[0].end_at)" 

@@ -10,7 +10,7 @@
 		<div class="product-price my-2">{{ product.price }} BDT</div>
 	</div>
 	<div v-if="authuser">
-		<div class="text-center" v-if="product && dateformate(product.start_at) && courrentdate >= dateformate(product.start_at)">
+		<div class="text-center" v-if="product">
 			<nuxt-link class="primary" :to="'offerorder/'+product.id">
 				Order now
 			</nuxt-link>

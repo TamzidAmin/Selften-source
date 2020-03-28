@@ -1,18 +1,19 @@
 <template>
-<div style="width: 500px;margin: auto;text-align: center;" v-if="authuser">
+<div style="width: 300px;margin: auto;text-align: center;" v-if="authuser">
 	<p v-if="packageinfo[1]" v-html="offerproduct.rules"></p>
 	<v-form
 		ref="form"
 		v-model="valid"
 		lazy-validation
 	>
+
 		<v-text-field
 			v-model="playerid"
 			:rules="nameRules"
 			:label="'Player Id'"
 			required
 		></v-text-field>
-		<v-btn v-if="authuser && authuser.wallet+authuser.earn_wallet>=offerproduct.price" color="primary" @click="placeorder(offerproduct.id)" desable>
+		<v-btn v-if="authuser && authuser.wallet+authuser.earn_wallet>=offerproduct.price && offerproduct.start_at!='NULL'" color="primary" @click="placeorder(offerproduct.id)" desable>
 			Order now
 		</v-btn>
 		<div v-if="authuser">
