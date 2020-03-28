@@ -1,6 +1,6 @@
 <template>
 <div style="width: 500px;margin: auto;text-align: center;" v-if="authuser">
-	<p v-if="packageinfo[1]" v-html="packageinfo[1].content"></p>
+	<p v-if="packageinfo[1]" v-html="offerproduct.rules"></p>
 	<v-form
 		ref="form"
 		v-model="valid"
@@ -16,11 +16,13 @@
 			Order now
 		</v-btn>
 		<div v-if="authuser">
-			<p>Your Available Balance BDT {{ authuser.wallet+authuser.earn_wallet }}</p>
-			<p>You Need BDT <span v-if="offerproduct.price">{{ offerproduct.price }}</span><span v-else>0</span> to purchase the product</p>
-	  		<nuxt-link :to="/wallet/+authuser.id">
+			<div v-if="authuser.wallet+authuser.earn_wallet>=offerproduct.price">
+				<p>Your Available Balance BDT {{ authuser.wallet+authuser.earn_wallet }}</p>
+				<p>You Need BDT <span v-if="offerproduct.price">{{ offerproduct.price }}</span><span v-else>0</span> to purchase the product</p>
+			</div>
+	  		<nuxt-link :to="/wallet/+authuser.id" v-else>
 				<v-btn depressed small color="primary">Add Money</v-btn>
-		</nuxt-link>
+			</nuxt-link>
 		</div>
 		<nuxt-link v-else to="/login" class="primary">
 			Please Login

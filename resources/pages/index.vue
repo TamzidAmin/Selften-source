@@ -69,9 +69,7 @@ export default {
 			  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 			];
     		var t = new Date(date);
-    		console.log(t);
   			var date1 = t.getDate() + ' ' + monthShortNames[t.getMonth()] + ', ' + t.getFullYear()+' '+t.getHours()+':'+t.getMinutes()+':'+t.getSeconds();
-  			// console.log(date1);
   			return date1;
     	},
     },
