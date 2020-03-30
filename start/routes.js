@@ -3,7 +3,7 @@
 /*
 |--------------------------------------------------------------------------
 | Routes
-|--------------------------------------------------------------------------
+|---------------- ----------------------------------------------------------
 |
 | Http routes are entry points to your web application. You can create
 | routes for different URL's and bind Controller actions to them.
