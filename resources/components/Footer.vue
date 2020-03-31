@@ -8,7 +8,7 @@
 			no-gutters
 		>
 			<a
-				href="#"
+				href="#" 
 				v-for="link in links"
 				:key="link"
 				color="white"
