@@ -9,8 +9,6 @@ module.exports = {
 	** Headers of the page
 	*/
 	head: {
-		titleTemplate: '%s - ' + process.env.npm_package_name,
-		title: process.env.npm_package_name || '',
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -47,25 +45,8 @@ module.exports = {
 	modules: [
 		// Doc: https://axios.nuxtjs.org/usage
 		'@nuxtjs/axios',
-		'@nuxtjs/onesignal',
 		'@nuxtjs/pwa',
 	],
-
-	// Options
-	oneSignal: {
-	  init: {
-	    appId: 'a7c8cd5b-cd30-40a8-9e7c-ce688d1b0445',
-	    allowLocalhostAsSecureOrigin: true,
-	    welcomeNotification: {
-	        disable: false
-	    },
-	  },
-	  // Use CDN
-	  cdn: true,
-
-	  // Use any custom URL
-	  OneSignalSDK: 'https://cdn.onesignal.com/sdks/OneSignalSDK.js'
-	},
 
 	pwa: {
 	  icon: {
