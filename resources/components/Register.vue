@@ -119,7 +119,7 @@ const Cookie = process.client ? require('js-cookie') : undefined
 			})
 			.then(function (response) {
 				console.log(response);
-				if(response.data[0].message){
+				if(response.data[0]){
 					self.loading=false
 					self.message=response.data[0].message
 				}else{
