@@ -1,6 +1,6 @@
 <template>
 <v-layout column justify-center align-center>
-	<Carousels :banner="banner"/>  Test
+	<Carousels :banner="banner"/>  Test1
     
     <div class="mt-3" style="width: 100%;">
         <marquee><span v-for="n in notice" style="font-size: 30px;color: #C81F4E;">{{ n.notice }}</span></marquee>
