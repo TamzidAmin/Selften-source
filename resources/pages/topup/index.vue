@@ -167,6 +167,7 @@
 	    	</v-col>
 	    </v-row>
 	</v-form>
+	<p style="visibility: hidden">{{ users() }}</p>
 </div>
 </template>
 
@@ -178,6 +179,7 @@
 			return{
 				alert1:true,
 				orders:[],
+				cal:0,
 				packages:[
 					{
 						id:1,
@@ -241,15 +243,21 @@
 			base_url:'base_url'
 		}),
 		methods:{
+			async users(){
+				if(this.authuser && this.cal==0){
+					this.cal=1;
+					let { data } = await axios.get(`/api/updateuser/`+this.authuser.id);
+					this.$store.commit('setUser', data)
+					console.log(data);
+				}
+			},
 			seemore(){
 				this.active=!this.active
 			},
 			changepackage(g){
-				console.log(g);
 				this.selectedpackage=g;
 			},
 			changegetway(p){
-				console.log(p);
 				this.selectedmgetway=p;
 			},
 			buynow(){

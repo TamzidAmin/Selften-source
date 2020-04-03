@@ -106,6 +106,7 @@
 	      </v-tab-item>
 	    </v-tabs-items>
 	 </div>
+	 <p style="visibility: hidden">{{ users() }}</p>
 </v-layout>
 </template>
 
@@ -130,6 +131,7 @@ export default {
       return {
       	match:[],
         tab: null,
+        cal:0,
         knowledge: 0,
         loding:false,
         items: [
@@ -144,6 +146,14 @@ export default {
 		})
 	},
 	methods: {
+		async users(){
+			if(this.authuser && this.cal==0){
+				this.cal=1;
+				let { data } = await axios.get(`/api/updateuser/`+this.authuser.id);
+				this.$store.commit('setUser', data)
+				console.log(data);
+			}
+		},
 		fetchdata(item){
 			this.loding=true;
 			console.log(item);
