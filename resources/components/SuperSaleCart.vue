@@ -9,14 +9,14 @@
 		</div>
 		<div class="product-price my-2">{{ product.price }} BDT</div>
 	</div>
-	<div v-if="authuser">
+	<div v-if="authuser && dateformate(product.end_at)>courrentdate">
 		<div class="text-center" v-if="product">
 			<nuxt-link class="primary" :to="'offerorder/'+product.id">
 				Order now
 			</nuxt-link>
 		</div>
 	</div>
-	<div v-else>
+	<div v-else-if="!authuser">
 		<div class="text-center">
 			<nuxt-link class="primary" :to="'/login'">
 				Login
