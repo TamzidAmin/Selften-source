@@ -304,6 +304,15 @@
 		    	getways: paymentMethod.data,
 		    	packageinfo: packageinfo.data,
 		    }
+	  	},
+	  	head () {
+	    return {
+		    title: "Free Fire diamond",
+		    meta: [
+		        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+		        { hid: 'diamond', name: 'diamond', content: 'Free Fire diamond' }
+		      ]
+		    }
 	  	}
 	}
 </script>
