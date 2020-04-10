@@ -67,8 +67,8 @@ const Cookie = process.client ? require('js-cookie') : undefined
 			if (this.$refs.form.validate()) {
 			  this.snackbar = true
 			  var self = this;
-				axios.post('api/change', {
-					email: this.email,
+				axios.post('api/change/'+this.authuser.id, {
+					username: this.username,
 				})
 				.then(function (response) {
 					self.res=response.data
