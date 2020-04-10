@@ -1,5 +1,5 @@
 <template>
-	<div class="text-center dropdown">
+	<div class="text-center dropdown" style="width: 150px;">
 		<v-menu open-on-hover top offset-y>
 			<template v-slot:activator="{ on }">
 				<v-btn
@@ -33,6 +33,13 @@
 					<nuxt-link :to="/wallet/+user.id">
 						<img src="~/assets/wallet.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
 						My Wallet
+					</nuxt-link>
+				</v-list-item>
+
+				<v-list-item>
+					<nuxt-link :to="/settings/+user.id">
+						<img src="~/assets/setting.svg" alt="" style="width: 16px;margin-left: 7px;margin-right: 10px;">
+						Settings
 					</nuxt-link>
 				</v-list-item>
 

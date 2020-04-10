@@ -1,6 +1,8 @@
 <template>
 <v-layout column justify-center align-center width="100%">
     <template width="100%">
+        <img :src="'https://admin.selften.com/uploads/leaderboard/'+leaderbordinfo[0].banner" alt="" style="object-fit: cover;width: 100%;max-height: 50vh;    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);;border: 2px solid;">
+        <br>
         <div class="v-data-table v-data-table--fixed-height theme--light box-shodow" style="min-width: 350px;">
             <vue-scroll>
                 <div style="height: 523px;">
@@ -35,13 +37,16 @@
                     </table>
                     <div v-else-if="active=='prizes'">
 				        <h2 class="text-primary pt-3 text-center">Weekly Competition</h2>
-				        <div class="p-3 mt-2 text-center">
-				            <span class="text-primary pt-1 font-weight-bold">Top 3 Prizes:</span>
-				            <p class="m-0">1. <span class="font-weight-bold" style="font-size: 25px;">400</span></p>
-				            <p class="m-0">2. 200</p>
-				            <p class="m-0">3. 100</p>
+				        <div class="p-3 mt-2 text-center" v-if="leaderbordinfo[1]" v-html="leaderbordinfo[1].content">
+				            
 				        </div>
 				    </div>
+                    <div v-else-if="active=='rules'">
+                        <h2 class="text-primary pt-3 text-center">Weekly Competition</h2>
+                        <div class="p-3 mt-2 text-center" v-if="leaderbordinfo[2]" v-html="leaderbordinfo[2].content">
+                            
+                        </div>
+                    </div>
                 </div>
             </vue-scroll>
             <table v-if="authuser" style="background: black;display: none;">
@@ -75,10 +80,11 @@ export default {
         base_url:'base_url'
     }),
     data () {
-            return {
-                leaderboard:[],
-                active:'players'
-            }
+        return {
+            leaderboard:[],
+            active:'players',
+            leaderbordinfo:[]
+        }
     },
     methods:{
     	change(d){
@@ -86,9 +92,11 @@ export default {
     	}
     },
     async asyncData ({ params }) {
-        let leaderboard = await axios.get(`/api/leaderboard/`)
+        let { data } = await axios.get(`/api/leaderboard/`)
+        let  leaderbordinfo = await axios.get(`/api/leaderbordinfo/`)
         return { 
-            leaderboard: leaderboard.data,
+            leaderboard: data,
+            leaderbordinfo: leaderbordinfo.data,
         }
     }
 }

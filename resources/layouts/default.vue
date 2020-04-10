@@ -121,32 +121,6 @@
 				clipped: false,
 				drawer: false,
 				fixed: false,
-				items: [
-					{
-						icon: 'mdi-apps',
-						title: 'Home',
-						to: '/',
-						src:"assets/sidebaricon/home.svg"
-					},
-					{
-						icon: 'mdi-apps',
-						title: 'PlayZone',
-						to: '/playzone',
-						src:"assets/sidebaricon/play.svg"
-					},
-					{
-						icon: 'mdi-apps',
-						title: 'Top-Up',
-						to: '/topup',
-						src:"assets/sidebaricon/play.svg"
-					},
-					{
-						icon: 'mdi-apps',
-						title: 'Leaderboard',
-						to: '/leaderboard',
-						src:"assets/sidebaricon/play.svg"
-					},
-				],
 				miniVariant: false,
 				right: true,
 				rightDrawer: false,
