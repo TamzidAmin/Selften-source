@@ -54,12 +54,8 @@ export default {
     },
     computed:{
         courrentdate(){
-            var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-              "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-            ];
-            var t = new Date();
-            var date1 = t.getDate() + ' ' + monthShortNames[t.getMonth()] + ', ' + t.getFullYear()+' '+t.getHours()+':'+t.getMinutes()+':'+t.getSeconds();
-            return date1;
+            var t = new Date().getTime();
+            return t
         }
     },
     methods:{

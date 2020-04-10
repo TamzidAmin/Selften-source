@@ -8,7 +8,7 @@
 			<a href="">{{ product.name }}</a>
 		</div>
 		<div class="product-price my-2">{{ product.price }} BDT</div>
-	</div>
+	</div> 
 	<div v-if="authuser && dateformate(product.end_at)>courrentdate">
 		<div class="text-center" v-if="product">
 			<nuxt-link class="primary" :to="'offerorder/'+product.id">
@@ -47,23 +47,13 @@
 				authuser: 'authuser'
 	    	}),
 	        courrentdate(){
-	            var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-	              "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-	            ];
-	            var t = new Date();
-	            var date1 = t.getDate() + ' ' + monthShortNames[t.getMonth()] + ', ' + t.getFullYear()+' '+t.getHours()+':'+t.getMinutes()+':'+t.getSeconds();
-	            return date1;
+	            var t = new Date().getTime();
+	            return t
 	        }
 	    },
 	    methods:{
 	    	dateformate(date){
-	    		var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-				  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-				];
-	    		var t = new Date(date);
-	    		console.log(t);
-	  			var date1 = t.getDate() + ' ' + monthShortNames[t.getMonth()] + ', ' + t.getFullYear()+' '+t.getHours()+':'+t.getMinutes()+':'+t.getSeconds();
-	  			// console.log(date1);
+	    		let date1 = new Date(date).getTime()
 	  			return date1;
 	    	},
 	    },
