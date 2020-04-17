@@ -1,5 +1,8 @@
 <template>
 	<v-card style="padding: 20px;" max-width="600"><p style="visibility: hidden;">{{ username=authuser.username }}</p>
+		User id : {{ authuser.id }}
+		email   : {{ authuser.email }}
+
 		<h2 class="text-center" style="padding: 20px">Settings</h2>
 		  <v-form
 			ref="form"
