@@ -6,6 +6,8 @@
 		        <tr>
 		          <th class="text-left">Order ID</th>
 		          <th class="text-left">Package</th>
+		          <th class="text-left">Player ID</th>
+		          <th class="text-left">Amount</th>
 		          <th class="text-left">Status</th>
 		        </tr>
 		      </thead>
@@ -13,6 +15,8 @@
 		        <tr v-for="item in myorder" :key="item.id">
 		          <td>{{ item.id }}</td>
 		          <td>{{ item.topuppackage.name }}</td>
+		          <td>{{ item.playerid }}</td>
+		          <td>{{ item.amount }}</td>
 		          <td>{{ item.status }}</td>
 		        </tr>
 		      </tbody>
