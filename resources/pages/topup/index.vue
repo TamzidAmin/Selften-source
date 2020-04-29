@@ -73,7 +73,7 @@
 	    	</v-col>
 	    	<v-col cols="12" md="8" lg="8">
 				<v-row>
-		    		<v-col ols="6" md="6" lg="6" class="d-none">
+		    		<v-col md="6" lg="6" class="d-none">
 
 			    		<div class="section select-server">
 						    <h2 class="circle">
@@ -93,7 +93,7 @@
 						</div>
 					</v-col>
 
-					<v-col ols="6" md="6" lg="6">
+					<v-col md="6" lg="6">
 
 			    		<div class="section select-server">
 						    <h2 class="circle">
@@ -114,7 +114,7 @@
 						</div>
 					</v-col>
 						    
-					<v-col cols="6" md="6" lg="6">
+					<v-col md="6" lg="6">
 
 			    		<div class="section select-server">
 						    <h2 class="circle">
