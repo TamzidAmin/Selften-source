@@ -14,7 +14,7 @@
 		      <tbody>
 		        <tr v-for="item in myorder" :key="item.id">
 		          <td>{{ item.id }}</td>
-		          <td>{{ item.topuppackage.name }}</td>
+		          <td>{{ item.name }}</td>
 		          <td>{{ item.playerid }}</td>
 		          <td>{{ item.amount }}</td>
 		          <td>{{ item.status }}</td>

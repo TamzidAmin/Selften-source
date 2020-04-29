@@ -1,11 +1,11 @@
 <template>
-<div style="margin-top: -35px;"> <span style="visibility: hidden">{{ datat() }}</span>
+<div style="margin-top: -35px;">
 	<v-form
 		ref="form"
 		v-model="valid"
 		lazy-validation
 	>   
-		<div v-if="orders && authuser">
+		<div v-if="0">
 		 	<div style="width: 320px; margin: auto;border: 1px solid #CA1F4D;padding: 5px;">
 		 		<v-alert
 		 		class="text-center"
@@ -72,23 +72,72 @@
 			    </div>
 	    	</v-col>
 	    	<v-col cols="12" md="8" lg="8">
-	    		<div class="section select-server">
-				    <h2 class="circle">
-				        <span>1</span>
-				        Enter Player ID
-				    </h2>
-				    <div class="pl-3">
-				        <v-text-field
-					        label="Enter Player ID"
-					        v-model="playerid"
-					  		:rules="nameRules"
-					    ></v-text-field>
+				<v-row>
+		    		<v-col ols="6" md="6" lg="6" class="d-none">
 
-				        <!--<span class="ico-question">?</span>
-				        <p class="form__field-instruction-text">Your player ID is shown on the profile page in the app. Example: “5363266446".</p>
-				    -->
-				    </div>
-				</div>
+			    		<div class="section select-server">
+						    <h2 class="circle">
+						        <span>1</span>
+						        Enter Player ID
+						    </h2>
+						    <div class="pl-3">
+						        <v-text-field
+							        label="Enter Player ID"
+							        v-model="playerid"
+							    ></v-text-field>
+
+						        <!--<span class="ico-question">?</span>
+						        <p class="form__field-instruction-text">Your player ID is shown on the profile page in the app. Example: “5363266446".</p>
+						    -->
+						    </div>
+						</div>
+					</v-col>
+
+					<v-col ols="6" md="6" lg="6">
+
+			    		<div class="section select-server">
+						    <h2 class="circle">
+						        <span>1</span>
+						        Facebook/Gmail ID
+						    </h2>
+						    <div class="pl-3">
+						        <v-text-field
+							        label="Facebook/Gmail ID"
+							        v-model="ingameid"
+							  		:rules="nameRules"
+							    ></v-text-field>
+
+						        <!--<span class="ico-question">?</span>
+						        <p class="form__field-instruction-text">Your player ID is shown on the profile page in the app. Example: “5363266446".</p>
+						    -->
+						    </div>
+						</div>
+					</v-col>
+						    
+					<v-col cols="6" md="6" lg="6">
+
+			    		<div class="section select-server">
+						    <h2 class="circle">
+						        <span>1</span>
+						        Password
+						    </h2>
+						    <div class="pl-3">
+						        <v-text-field
+							        label="Password"
+							        v-model="ingamepassword"
+							  		:rules="nameRules"
+							    ></v-text-field>
+
+						        <!--<span class="ico-question">?</span>
+						        <p class="form__field-instruction-text">Your player ID is shown on the profile page in the app. Example: “5363266446".</p>
+						    -->
+						    </div>
+						</div>
+					</v-col>
+
+					<p class="form__field-instruction-text ml-3">Facebook/Gmail ID & Password Required</p>
+
+				</v-row>
 
 				<div class="section select-server">
 				    <h2 class="circle">
@@ -179,6 +228,8 @@
 			return{
 				alert1:true,
 				orders:[],
+				ingameid:'',
+				ingamepassword:'',
 				cal:0,
 				packages:[
 					{
@@ -220,10 +271,10 @@
 				],
 				selectedpackage:[],
 				selectedmgetway:[],
-				playerid:'',
+				playerid:null,
 				emailaddress:'',
 				nameRules: [
-					v => !!v || 'Name is required',
+					v => !!v || 'is required',
 				],
 				emailRules: [
 					v => !!v || 'E-mail is required',
@@ -268,6 +319,9 @@
 					if (this.$refs.form.validate()) {
 						axios.post('/api/packageorder', {
 						    topuppackage_id: this.selectedpackage.id,
+						    name: this.selectedpackage.name,
+						    ingameid: this.ingameid,
+						    ingamepassword: this.ingamepassword,
 						    user_id:this.authuser.id,
 						    playerid:this.playerid,
 						    emailaddress:'111',
@@ -277,6 +331,9 @@
 						.then(function (response) {
 						    self.loading=false
 							self.alert=true
+							if(response=='faliled'){
+								self.resmessage=response
+							}
 							self.orders=response.data
 						})
 						.catch(function (error) {
