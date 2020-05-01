@@ -47,6 +47,9 @@ module.exports = {
 		// Doc: https://axios.nuxtjs.org/usage
 		'@nuxtjs/axios',
 		'@nuxtjs/pwa',
+		['@nuxtjs/google-adsense', {
+      		id: 'ca-pub-2716727174821674'
+    	}]
 	],
 
 	pwa: {
