@@ -73,7 +73,7 @@
 	    	</v-col>
 	    	<v-col cols="12" md="8" lg="8">
 				<v-row>
-		    		<v-col md="6" lg="6" class="d-none">
+		    		<v-col md="12" lg="12" >
 
 			    		<div class="section select-server">
 						    <h2 class="circle">
@@ -93,7 +93,7 @@
 						</div>
 					</v-col>
 
-					<v-col md="6" lg="6">
+					<v-col md="6" lg="6"  class="d-none">
 
 			    		<div class="section select-server">
 						    <h2 class="circle">
@@ -114,7 +114,7 @@
 						</div>
 					</v-col>
 						    
-					<v-col md="6" lg="6">
+					<v-col md="6" lg="6"  class="d-none">
 
 			    		<div class="section select-server">
 						    <h2 class="circle">
@@ -135,7 +135,7 @@
 						</div>
 					</v-col>
 
-					<p class="form__field-instruction-text ml-3">Facebook/Gmail ID & Password Required</p>
+					<p class="form__field-instruction-text ml-3 d-none">Facebook/Gmail ID & Password Required</p>
 
 				</v-row>
 
