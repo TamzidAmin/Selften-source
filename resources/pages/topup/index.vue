@@ -104,7 +104,6 @@
 						    <div class="pl-3">
 						        <v-text-field
 							        label="Facebook/Gmail ID"
-							  		:rules="nameRules"
 							    ></v-text-field>
 
 						        <!--<span class="ico-question">?</span>
