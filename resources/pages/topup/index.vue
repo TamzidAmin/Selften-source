@@ -84,6 +84,7 @@
 						        <v-text-field
 							        label="Enter Player ID"
 							        v-model="playerid"
+							  		:rules="nameRules"
 							    ></v-text-field>
 
 						        <!--<span class="ico-question">?</span>
@@ -103,7 +104,6 @@
 						    <div class="pl-3">
 						        <v-text-field
 							        label="Facebook/Gmail ID"
-							        v-model="ingameid"
 							  		:rules="nameRules"
 							    ></v-text-field>
 
@@ -125,7 +125,6 @@
 						        <v-text-field
 							        label="Password"
 							        v-model="ingamepassword"
-							  		:rules="nameRules"
 							    ></v-text-field>
 
 						        <!--<span class="ico-question">?</span>
@@ -228,8 +227,8 @@
 			return{
 				alert1:true,
 				orders:[],
-				ingameid:'',
-				ingamepassword:'',
+				ingameid:null,
+				ingamepassword:null,
 				cal:0,
 				packages:[
 					{
