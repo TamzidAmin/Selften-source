@@ -1,54 +1,49 @@
 <template>
 <div class="p-2 h-screen overflow-hidden flex items-center justify-center">
-    <div class="bg-white shadow-lg rounded-lg px-10">
+    <div class="bg-white shadow-lg rounded-lg px-10 bg-gray-300">
 		<div v-if="mustVerifyEmail" class="alert alert-success" role="alert">
 			verify_email_address
 		</div>
 		<div v-else title="register">
-			<div class="max-w-xs m-auto">
+			<div class="w-full px-6 py-16">
+                <div class="mb-4 font-light tracking-widest text-2xl text-center font-bold">LOGIN</div>
 				<form @submit.prevent="register" class="rounded px-8 pt-6 pb-8 mb-4 capitalize">
 					<!-- Name -->
 					<div class="form-group row">
-						<label class="block text-green-500 text-sm font-bold mb-2 text-left">name</label>
-						<div class="col-md-7">
-							<input v-model="name" :class="{ 'is-invalid': errors }" class="block w-full bg-gray-200 focus:outline-none focus:bg-white focus:shadow-md rounded-full pl-12 pr-4 py-3" type="text" placeholder="Name" name="name">
-						</div>
+						<div class="mb-4">
+	                        <label for="email" class="mb-2 font-bold">User Name</label>
+	                        <input type="email" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full" placeholder="Email" style="transition: all 0.15s ease 0s;">
+                    	</div>
 					</div>
 
 					<!-- Email -->
 					<div class="form-group row">
-						<label class="block text-green-500 text-sm font-bold mb-2 text-left">email</label>
-						<div class="col-md-7">
-							<input v-model="email" :class="{ 'is-invalid': 'email' }" class="block w-full bg-gray-200 focus:outline-none focus:bg-white focus:shadow-md rounded-full pl-12 pr-4 py-3" placeholder="Email" type="email" name="email">
-						</div>
+						<div class="mb-4">
+	                        <label for="email" class="mb-2 font-bold">Email</label>
+	                        <input type="email" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full" placeholder="Email" style="transition: all 0.15s ease 0s;">
+                    	</div>
 					</div>
 
 					<!-- Password -->
 					<div class="form-group row">
-						<label class="block text-green-500 text-sm font-bold mb-2 text-left">password</label>
-						<div class="col-md-7">
-							<input v-model="password" :class="{ 'is-invalid': 'password' }" class="block w-full bg-gray-200 focus:outline-none focus:bg-white focus:shadow-md rounded-full pl-12 pr-4 py-3" placeholder="Password" type="password" name="password">
-						</div>
+						<div class="mb-4">
+	                        <label for="email" class="mb-2 font-bold">Password</label>
+	                        <input type="email" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full" placeholder="Email" style="transition: all 0.15s ease 0s;">
+                    	</div>
 					</div>
 
 					<!-- Password Confirmation -->
 					<div class="form-group row">
-						<label class="block text-green-500 text-sm font-bold mb-2 text-left">confirm_password</label>
-						<div class="col-md-7">
-							<input v-model="password_confirmation" :class="{ 'is-invalid': 'password_confirmation' }" class="block w-full bg-gray-200 focus:outline-none focus:bg-white focus:shadow-md rounded-full pl-12 pr-4 py-3" placeholder="Confirm Password" type="password" name="password_confirmation">
-						</div>
+						<div class="mb-4">
+	                        <label for="email" class="mb-2 font-bold">Confirm Password</label>
+	                        <input type="email" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full" placeholder="Email" style="transition: all 0.15s ease 0s;">
+                    	</div>
 					</div>
 
 					<div class="form-group row">
 						<div class="text-center mt-2">
-							<!-- Submit Button -->
-							<v-button :loading="busy">
-								register
-							</v-button>
-
-							<!-- GitHub Register Button -->
-							<login-with-github />
-						</div>
+						<button type="submit" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">REGISTER</button>
+					</div>
 					</div>
 				</form>
 			</div>

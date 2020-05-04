@@ -12,6 +12,9 @@ export const getters = {
   user (state) {
 	return state.user
   },
+  token (state) {
+	return state.token
+  },
   base_url (state) {
 	return state.base_url
   }
