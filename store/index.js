@@ -2,15 +2,15 @@ const cookieparser = process.server ? require('cookieparser') : undefined
 
 export const state = () => {
 	return {
-		auth: null,
-		authuser:[],
+		token: null,
+		user:[],
 		base_url:"https://admin.selften.com/"
 	}
 }
 
 export const getters = {
-  authuser (state) {
-	return state.authuser
+  user (state) {
+	return state.user
   },
   base_url (state) {
 	return state.base_url
@@ -19,28 +19,28 @@ export const getters = {
 
 
 export const mutations = {
-	setAuth (state, auth) {
-		state.auth = auth
+	setToken (state, token) {
+		state.token = token
 	},
 	setUser (state, user) {
-		state.authuser = user
+		state.user = user
 	}
 }
 
 export const actions = {
 	nuxtServerInit ({ commit }, { req }) {
-		let auth = null
+		let token = null
 		let user = null
 		if (req.headers.cookie) {
 			const parsed = cookieparser.parse(req.headers.cookie)
 			try {
-				auth = JSON.parse(parsed.auth)
+				token = JSON.parse(parsed.token)
 				user = JSON.parse(parsed.user)
 			} catch (err) {
 				// No valid cookie found
 			}
 		}
-		commit('setAuth', auth)
+		commit('setToken', token)
 		commit('setUser', user)
 	}
 }

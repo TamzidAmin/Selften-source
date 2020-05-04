@@ -3,11 +3,9 @@
 	<header class=" mx-auto container">
 		<div class="py-1">
 			<nav class="flex items-center justify-between flex-wrap">
-				<div class="flex items-center flex-no-shrink text-white mr-6 ">
-					<nuxt-link to="/">
-						<img src="~/assets/selften.png" alt="" class="w-40">
-					</nuxt-link>
-				</div>
+				<nuxt-link to="/">
+					<img src="~/assets/selften.png" alt="" class="w-40">
+				</nuxt-link>
 				<div class="block lg:hidden">
 							<button
 							@click="toggle()"
@@ -47,10 +45,10 @@
 								</button>
 							</template>
 							<template v-else>
-								<nuxt-link class="bg-white hover:text-white hover:bg-green-100 text-green-800 font-semibold py-2 uppercase px-4 border border-green-100 rounded shadow" :to="{ name: 'login' }">
+								<nuxt-link class="bg-white hover:text-white hover:bg-green-100 text-green-800 font-semibold py-2 uppercase px-4 border border-green-100 rounded shadow" to="login">
 									login
 								</nuxt-link>
-								<nuxt-link class="ml-3 bg-green-100 hover:bg-green-200 text-white font-semibold py-2 px-4 rounded uppercase" :to="{ name: 'register' }">
+								<nuxt-link class="ml-3 bg-green-100 hover:bg-green-200 text-white font-semibold py-2 px-4 rounded uppercase" to="register">
 									register
 								</nuxt-link>
 							</template>
