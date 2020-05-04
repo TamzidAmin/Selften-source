@@ -24,8 +24,8 @@
 								PLAYZONE
 							</nuxt-link>
 							<nuxt-link to="/topup"
-								class="block lg:inline-block text-md font-bold  text-gray-900  sm:hover:border-indigo-400  hover:text-orange-500 mx-2 focus:text-blue-500  p-1 hover:bg-gray-300 sm:hover:bg-transparent rounded-lg">
-								TOPUP
+								class="block lg:inline-block text-md font-bold hover:text-red-900 mx-2 p-1 rounded-lg">
+								TOP-UP
 							</nuxt-link>
 							<nuxt-link to="/shop"
 								class="block lg:inline-block text-md font-bold  text-gray-900  sm:hover:border-indigo-400  hover:text-green-100 mx-2 focus:text-blue-500  p-1 hover:bg-gray-300 sm:hover:bg-transparent rounded-lg">
@@ -48,7 +48,7 @@
 								<nuxt-link class="bg-white hover:text-white hover:bg-green-100 text-green-800 font-semibold py-2 uppercase px-4 border border-green-100 rounded shadow" to="login">
 									login
 								</nuxt-link>
-								<nuxt-link class="ml-3 bg-green-100 hover:bg-green-200 text-white font-semibold py-2 px-4 rounded uppercase" to="register">
+								<nuxt-link class="ml-3 bg-green-100 border border-green-100 hover:bg-green-200 text-white font-semibold py-2 px-4 rounded uppercase" to="register">
 									register
 								</nuxt-link>
 							</template>
@@ -92,8 +92,8 @@
 		}),
 
 		computed: mapGetters({
-			user: 'auth/user',
-			token: 'auth/token',
+			user: 'user',
+			token: 'token',
 			ismobile: 'sidebar/ismobile'
 		}),
 
@@ -104,7 +104,7 @@
 			},
 			async logout () {
 				this.activeClass=!this.activeClass
-				await this.$store.dispatch('auth/logout')
+				await this.$store.dispatch('logout')
 				this.$router.push({ name: 'login' })
 			}
 		},

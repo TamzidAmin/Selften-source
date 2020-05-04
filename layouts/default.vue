@@ -16,3 +16,10 @@
 		},
 	}
 </script>
+
+<style>
+	.nuxt-link-exact-active{
+		color: #D81C4B;
+		background: #fff;
+	}
+</style>
