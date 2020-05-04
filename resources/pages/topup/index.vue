@@ -73,7 +73,7 @@
 	    	</v-col>
 	    	<v-col cols="12" md="8" lg="8">
 				<v-row>
-		    		<v-col md="12" lg="12" >
+		    		<v-col md="12" lg="12" class="d-none">
 
 			    		<div class="section select-server">
 						    <h2 class="circle">
@@ -84,7 +84,6 @@
 						        <v-text-field
 							        label="Enter Player ID"
 							        v-model="playerid"
-							  		:rules="nameRules"
 							    ></v-text-field>
 
 						        <!--<span class="ico-question">?</span>
@@ -94,7 +93,7 @@
 						</div>
 					</v-col>
 
-					<v-col md="6" lg="6"  class="d-none">
+					<v-col md="6" lg="6">
 
 			    		<div class="section select-server">
 						    <h2 class="circle">
@@ -104,6 +103,8 @@
 						    <div class="pl-3">
 						        <v-text-field
 							        label="Facebook/Gmail ID"
+							        v-model="ingameid"
+							  		:rules="nameRules"
 							    ></v-text-field>
 
 						        <!--<span class="ico-question">?</span>
@@ -124,6 +125,7 @@
 						        <v-text-field
 							        label="Password"
 							        v-model="ingamepassword"
+							  		:rules="nameRules"
 							    ></v-text-field>
 
 						        <!--<span class="ico-question">?</span>
@@ -133,7 +135,7 @@
 						</div>
 					</v-col>
 
-					<p class="form__field-instruction-text ml-3 d-none">Facebook/Gmail ID & Password Required</p>
+					<p class="form__field-instruction-text ml-3 ">Facebook/Gmail ID & Password Required</p>
 
 				</v-row>
 
