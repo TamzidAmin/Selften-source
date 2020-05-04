@@ -62,7 +62,7 @@
 	    <v-row v-else>
 	    	<v-col cols="12" md="4" lg="4">
 	    		<div v-if="packageinfo[0]">
-		    		<div class="product-top-banner__container">
+		    		<div class="product-top-banner__container mt-4">
 				    	<img :src="'https://admin.selften.com/uploads/topupinfo/'+packageinfo[0].banner" alt="" class="w-100">
 				    </div>
 				    <div :class="active ? 'product__description' : ''" v-html="packageinfo[0].content">
@@ -114,7 +114,7 @@
 						</div>
 					</v-col>
 						    
-					<v-col md="6" lg="6"  class="d-none">
+					<v-col md="6" lg="6">
 
 			    		<div class="section select-server">
 						    <h2 class="circle">
