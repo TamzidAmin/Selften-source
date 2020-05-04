@@ -19,18 +19,18 @@
 				</div>
 				<div id="main-nav" class="w-full flex-grow lg:flex items-center lg:w-auto hidden">
 						<div class="text-sm lg:flex-grow mt-2 animated jackinthebox xl:mx-8">
-							<a href="#home"
+							<nuxt-link to="/"
 								class="block lg:inline-block text-md font-bold  text-gray-900  sm:hover:border-indigo-400  hover:text-orange-500 mx-2 focus:text-blue-500  p-1 hover:bg-gray-300 sm:hover:bg-transparent rounded-lg">
-								ROAD & STORY
-							</a>
-							<a href="#home"
+								PLAYZONE
+							</nuxt-link>
+							<nuxt-link to="/topup"
 								class="block lg:inline-block text-md font-bold  text-gray-900  sm:hover:border-indigo-400  hover:text-orange-500 mx-2 focus:text-blue-500  p-1 hover:bg-gray-300 sm:hover:bg-transparent rounded-lg">
-								ACCOMMODATION
-							</a>
-							<a href="#home"
-								class="block lg:inline-block text-md font-bold  text-gray-900  sm:hover:border-indigo-400  hover:text-orange-500 mx-2 focus:text-blue-500  p-1 hover:bg-gray-300 sm:hover:bg-transparent rounded-lg">
-								TOURS
-							</a>
+								TOPUP
+							</nuxt-link>
+							<nuxt-link to="/shop"
+								class="block lg:inline-block text-md font-bold  text-gray-900  sm:hover:border-indigo-400  hover:text-green-100 mx-2 focus:text-blue-500  p-1 hover:bg-gray-300 sm:hover:bg-transparent rounded-lg">
+								SHOP
+							</nuxt-link>
 							<a href="#home"
 								class="block lg:inline-block text-md font-bold  text-gray-900  sm:hover:border-indigo-400  hover:text-orange-500 mx-2 focus:text-blue-500  p-1 hover:bg-gray-300 sm:hover:bg-transparent rounded-lg">
 								CONTACT US
