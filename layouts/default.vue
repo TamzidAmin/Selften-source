@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="bg-gray-100">
 	<Navbar/>
 	<div class="container mx-auto">
 		<nuxt />
