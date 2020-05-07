@@ -40,15 +40,15 @@
 						<div class="flex">
 							<template v-if="token"> 
 								<button id="userButton" class="flex items-center focus:outline-none mr-3" @click="dropdown()">
-									<avatar :username="user.name" v-if="user" backgroundColor="#276749" :size="30"></avatar>
-									<span v-if="user" class="hidden md:inline-block ml-1">Hi, {{ user.name }}</span>
+									<avatar :username="user.username" v-if="user" backgroundColor="#276749" :size="30"></avatar>
+									<span v-if="user" class="hidden md:inline-block ml-1">Hi, {{ user.username }}</span>
 								</button>
 							</template>
 							<template v-else>
-								<nuxt-link class="bg-white hover:text-white hover:bg-green-100 text-green-800 font-semibold py-2 uppercase px-4 border border-green-100 rounded shadow" to="login">
+								<nuxt-link class="bg-white hover:text-white hover:bg-green-100 text-green-800 font-semibold py-2 uppercase px-4 border border-green-100 rounded shadow" to="/login">
 									login
 								</nuxt-link>
-								<nuxt-link class="ml-3 bg-green-100 border border-green-100 hover:bg-green-200 text-white font-semibold py-2 px-4 rounded uppercase" to="register">
+								<nuxt-link class="ml-3 bg-green-100 border border-green-100 hover:bg-green-200 text-white font-semibold py-2 px-4 rounded uppercase" to="/register">
 									register
 								</nuxt-link>
 							</template>
@@ -106,6 +106,9 @@
 				this.activeClass=!this.activeClass
 				await this.$store.dispatch('logout')
 				this.$router.push({ name: 'login' })
+			},
+			dropdown(){
+				this.activeClass=!this.activeClass
 			}
 		},
 	};

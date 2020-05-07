@@ -18,6 +18,7 @@
 			    </h2>
 			    <div class="pl-3">
 			        <input
+			        	class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
 				        label="Enter Player ID"
 				        v-model="playerid"
 				    />
@@ -28,16 +29,14 @@
 			        <span>2</span>
 			        Select Recharge
 			    </h2>
-			    <div>
-					<div class="flex ">
-					  	<div class="text-center w-64" v-for="game in packages" :key="game.id">
-				  			<label :for="game.id" class="mb-0 w-100 list-group-item p-2 d-block"  style="font-size: 11px;width:100%;position: relative;    overflow: hidden;">
-				  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
-					  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
-								{{ game.name }}
-					  		</label>
-					  	</div> 
-				  	</div>
+			    <div class="flex flex-wrap">
+				  	<div class="text-center m-2" v-for="game in packages" :key="game.id">
+			  			<label :for="game.id" class="mb-0 w-full list-group-item p-2 d-block"  style="font-size: 11px;width:100%;position: relative;    overflow: hidden;">
+			  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
+				  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
+							{{ game.name }}
+				  		</label>
+				  	</div> 
 			    </div>
 			</div>
 			<div class="section select-server">
@@ -76,23 +75,15 @@
 					<div class="row">
 						  <div class="col-md-12 text-right">
 						  	 <div v-if="authuser">
-						        <v-btn :loading="loading" depressed color="primary" v-if="selectedpackage.price>(authuser.wallet+authuser.earn_wallet)" disabled>Buy Now</v-btn>
-						        <v-btn  :disabled="!valid" :loading="loading" depressed color="primary" @click="buynow()" v-else>Buy Now</v-btn>
+						  	 	<button v-if="selectedpackage.price>(authuser.wallet+authuser.earn_wallet)" disabled>Buy Now</button>
+						  	 	<button  @click="buynow()">Buy Now</button>
 						      </div>
 						      <div v-else>
 						      	<nuxt-link to="/login">
-									<v-btn depressed small color="primary">Buy Now</v-btn>
+									<button>Buy Now</button>
 								</nuxt-link>
 						      </div>
 							<br>
-							<v-alert
-						      v-model="alert"
-							    outlined
-						      	type="success"
-						     	text
-						    >
-						      {{ resmessage }}
-						    </v-alert>
 						  </div>
 				  	</div>
 			    </div>

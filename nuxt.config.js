@@ -29,7 +29,8 @@ export default {
 	** Plugins to load before mounting the App
 	*/
 	plugins: [
-		{ src: '~/plugins/common', ssr: false }
+		{ src: '~/plugins/common', ssr: false },
+		{ src: '~/plugins/validator'},
 	],
 	/*
 	** Nuxt.js dev-modules
