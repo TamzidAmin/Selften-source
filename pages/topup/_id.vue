@@ -1,220 +1,105 @@
 <template>
-<div style="margin-top: -35px;">
-	<v-form
-		ref="form"
-		v-model="valid"
-		lazy-validation
-	>   
-		<div v-if="0">
-		 	<div style="width: 320px; margin: auto;border: 1px solid #CA1F4D;padding: 5px;">
-		 		<v-alert
-		 		class="text-center"
-			      v-model="alert1"
-				    outlined
-			      	type="success"
-			     	text
-			    >
-			      {{ resmessage }}
-			    </v-alert>
-		 		<p class="text-center" v-if="orders.paymentmathod">{{ orders.paymentmathod.info }}</p>
-		 		<hr>
-		 		<v-simple-table>
-				    <template v-slot:default>
-				      <tbody style="font-size: 15px;font-weight: 700;">
-					        <tr>
-				 				<td>Transaction id: </td>
-				 				<td>{{ orders.id }}</td>
-				 			</tr>
-				 			<tr>
-				 				<td>Player id: </td>
-				 				<td>{{ orders.playerid }}</td>
-				 			</tr>
-				 			<tr>
-				 				<td>Package: </td>
-				 				<td v-if="orders.topuppackage">{{ orders.topuppackage.name }}</td>
-				 			</tr>
-				 			<tr>
-				 				<td>Amount: </td>
-				 				<td>{{ orders.amount }} BDT</td>
-				 			</tr>
-				 			<tr>
-				 				<td>Time: </td>
-				 				<td>{{ orders.created_at }}</td>
-				 			</tr>
-				 			<tr>
-				 				<td>Status</td>
-				 				<td>
-				 					<v-btn v-if="orders.status=='pending'" small color="primary">{{ orders.status }}</v-btn>
-				 					<v-btn v-else small color="error">{{ orders.status }}</v-btn>
-				 				</td>
-				 			</tr>
-				      </tbody>
-				    </template>
-				  </v-simple-table>
-
-				<div class="my-2 text-center">
-					<nuxt-link class="primary" to='/'>
-						Back To Home
-					</nuxt-link>
+<div class="container mx-auto">
+    <div class="my-3 flex">
+		<div class="w-1/3" v-if="packageinfo[0]">
+    		<div class="product-top-banner__container">
+		    	<img :src="'https://admin.selften.com/uploads/topupinfo/'+packageinfo[0].banner" alt="" class="w-100">
+		    </div>
+		    <div :class="active ? 'product__description' : ''" v-html="packageinfo[0].content">
+		    	
+		    </div>
+		    <a href="#" @click="seemore">See more</a>
+	    </div>
+		<div class="w-2/3">
+    		<div class="section select-server">
+			    <h2 class="circle">
+			        <span>1</span>
+			        Enter Player ID
+			    </h2>
+			    <div class="pl-3">
+			        <input
+				        label="Enter Player ID"
+				        v-model="playerid"
+				    />
 			    </div>
-		 	</div>
-		</div>
-	    <v-row v-else>
-	    	<v-col cols="12" md="4" lg="4">
-	    		<div v-if="packageinfo[0]">
-		    		<div class="product-top-banner__container">
-				    	<img :src="'https://admin.selften.com/uploads/topupinfo/'+packageinfo[0].banner" alt="" class="w-100">
-				    </div>
-				    <div :class="active ? 'product__description' : ''" v-html="packageinfo[0].content">
-				    	
-				    </div>
-				    <a href="#" @click="seemore">See more</a>
+			</div>
+			<div class="section select-server">
+			    <h2 class="circle">
+			        <span>2</span>
+			        Select Recharge
+			    </h2>
+			    <div>
+					<div class="flex ">
+					  	<div class="text-center w-64" v-for="game in packages" :key="game.id">
+				  			<label :for="game.id" class="mb-0 w-100 list-group-item p-2 d-block"  style="font-size: 11px;width:100%;position: relative;    overflow: hidden;">
+				  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
+					  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
+								{{ game.name }}
+					  		</label>
+					  	</div> 
+				  	</div>
 			    </div>
-	    	</v-col>
-	    	<v-col cols="12" md="8" lg="8">
-				<v-row>
-		    		<v-col md="12" lg="12" >
-
-			    		<div class="section select-server">
-						    <h2 class="circle">
-						        <span>1</span>
-						        Enter Player ID
-						    </h2>
-						    <div class="pl-3">
-						        <v-text-field
-							        label="Enter Player ID"
-							        v-model="playerid"
-							  		:rules="nameRules"
-							    ></v-text-field>
-
-						        <!--<span class="ico-question">?</span>
-						        <p class="form__field-instruction-text">Your player ID is shown on the profile page in the app. Example: “5363266446".</p>
-						    -->
-						    </div>
-						</div>
-					</v-col>
-
-					<v-col md="6" lg="6"  class="d-none">
-
-			    		<div class="section select-server">
-						    <h2 class="circle">
-						        <span>1</span>
-						        Facebook/Gmail ID
-						    </h2>
-						    <div class="pl-3">
-						        <v-text-field
-							        label="Facebook/Gmail ID"
-							    ></v-text-field>
-
-						        <!--<span class="ico-question">?</span>
-						        <p class="form__field-instruction-text">Your player ID is shown on the profile page in the app. Example: “5363266446".</p>
-						    -->
-						    </div>
-						</div>
-					</v-col>
-						    
-					<v-col md="6" lg="6"  class="d-none">
-
-			    		<div class="section select-server">
-						    <h2 class="circle">
-						        <span>1</span>
-						        Password
-						    </h2>
-						    <div class="pl-3">
-						        <v-text-field
-							        label="Password"
-							        v-model="ingamepassword"
-							    ></v-text-field>
-
-						        <!--<span class="ico-question">?</span>
-						        <p class="form__field-instruction-text">Your player ID is shown on the profile page in the app. Example: “5363266446".</p>
-						    -->
-						    </div>
-						</div>
-					</v-col>
-
-					<p class="form__field-instruction-text ml-3 d-none">Facebook/Gmail ID & Password Required</p>
-
-				</v-row>
-
-				<div class="section select-server">
-				    <h2 class="circle">
-				        <span>2</span>
-				        Select Recharge
-				    </h2>
-				    <div>
-						<div class="row">
-						  	<div class="col-md-3 col-6 col-sm-6 text-center" v-for="game in packages" :key="game.id">
-					  			<label :for="game.id" class="mb-0 w-100 list-group-item p-2 d-block"  style="font-size: 11px;width:100%;position: relative;    overflow: hidden;">
-					  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
-						  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
-									{{ game.name }}
-						  		</label>
-						  	</div> 
-					  	</div>
-				    </div>
-				</div>
-				<div class="section select-server">
-				    <h2 class="circle">
-				        <span>3</span>
-				    </h2>
-				    <div v-if="authuser && selectedpackage.price>(authuser.wallet+authuser.earn_wallet)">
-						<div class="row">
+			</div>
+			<div class="section select-server">
+			    <h2 class="circle">
+			        <span>3</span>
+			    </h2>
+			    <div v-if="authuser && selectedpackage.price>(authuser.wallet+authuser.earn_wallet)">
+					<div class="row">
+				  	 <div class="col-md-12 col-12 col-sm-12 text-center mt-4">
+			  			 <p>Your Available Balance BDT {{ authuser.wallet+authuser.earn_wallet }}</p>
+			  			 <p>You Need BDT <span v-if="selectedpackage.price">{{ selectedpackage.price }}</span><span v-else>0</span> to purchase the product</p>
+				  		<nuxt-link :to="/wallet/+authuser.id">
+							<v-btn depressed small color="primary">Add Money</v-btn>
+						</nuxt-link>
+				  	</div> 
+				  </div>
+			    </div>
+			    <div v-else-if="authuser">
+			    	<div class="row">
 					  	 <div class="col-md-12 col-12 col-sm-12 text-center mt-4">
 				  			 <p>Your Available Balance BDT {{ authuser.wallet+authuser.earn_wallet }}</p>
 				  			 <p>You Need BDT <span v-if="selectedpackage.price">{{ selectedpackage.price }}</span><span v-else>0</span> to purchase the product</p>
-					  		<nuxt-link :to="/wallet/+authuser.id">
-								<v-btn depressed small color="primary">Add Money</v-btn>
-							</nuxt-link>
 					  	</div> 
-					  </div>
-				    </div>
-				    <div v-else-if="authuser">
-				    	<div class="row">
-						  	 <div class="col-md-12 col-12 col-sm-12 text-center mt-4">
-					  			 <p>Your Available Balance BDT {{ authuser.wallet+authuser.earn_wallet }}</p>
-					  			 <p>You Need BDT <span v-if="selectedpackage.price">{{ selectedpackage.price }}</span><span v-else>0</span> to purchase the product</p>
-						  	</div> 
-						 </div>
-				    </div>
-				    <div v-else>
-				    	<div class="row">
-						  	<div class="col-md-12 col-12 col-sm-12 text-center mt-4">
-					  			<p>You Need BDT <span v-if="selectedpackage.price">{{ selectedpackage.price }}</span><span v-else>0</span> to purchase the product</p>
-						  	</div> 
-						 </div>
-				    </div>
-				</div>
-				<div>
-				    <div>
-						<div class="row">
-							  <div class="col-md-12 text-right">
-							  	 <div v-if="authuser">
-							        <v-btn :loading="loading" depressed color="primary" v-if="selectedpackage.price>(authuser.wallet+authuser.earn_wallet)" disabled>Buy Now</v-btn>
-							        <v-btn  :disabled="!valid" :loading="loading" depressed color="primary" @click="buynow()" v-else>Buy Now</v-btn>
-							      </div>
-							      <div v-else>
-							      	<nuxt-link to="/login">
-										<v-btn depressed small color="primary">Buy Now</v-btn>
-									</nuxt-link>
-							      </div>
-								<br>
-								<v-alert
-							      v-model="alert"
-								    outlined
-							      	type="success"
-							     	text
-							    >
-							      {{ resmessage }}
-							    </v-alert>
-							  </div>
-					  	</div>
-				    </div>
-				</div>
-	    	</v-col>
-	    </v-row>
-	</v-form>
-	<p style="visibility: hidden">{{ users() }}</p>
+					 </div>
+			    </div>
+			    <div v-else>
+			    	<div class="row">
+					  	<div class="col-md-12 col-12 col-sm-12 text-center mt-4">
+				  			<p>You Need BDT <span v-if="selectedpackage.price">{{ selectedpackage.price }}</span><span v-else>0</span> to purchase the product</p>
+					  	</div> 
+					 </div>
+			    </div>
+			</div>
+			<div>
+			    <div>
+					<div class="row">
+						  <div class="col-md-12 text-right">
+						  	 <div v-if="authuser">
+						        <v-btn :loading="loading" depressed color="primary" v-if="selectedpackage.price>(authuser.wallet+authuser.earn_wallet)" disabled>Buy Now</v-btn>
+						        <v-btn  :disabled="!valid" :loading="loading" depressed color="primary" @click="buynow()" v-else>Buy Now</v-btn>
+						      </div>
+						      <div v-else>
+						      	<nuxt-link to="/login">
+									<v-btn depressed small color="primary">Buy Now</v-btn>
+								</nuxt-link>
+						      </div>
+							<br>
+							<v-alert
+						      v-model="alert"
+							    outlined
+						      	type="success"
+						     	text
+						    >
+						      {{ resmessage }}
+						    </v-alert>
+						  </div>
+				  	</div>
+			    </div>
+			</div>
+			<p style="visibility: hidden">{{ users() }}</p>
+		</div>
+    </div>
 </div>
 </template>
 
