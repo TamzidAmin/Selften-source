@@ -1,5 +1,6 @@
 <template>
 <div class="container mx-auto">
+	
     <div class="my-3 flex">
 		<div class="w-1/3" v-if="packageinfo[0]">
     		<div class="product-top-banner__container">
@@ -8,87 +9,94 @@
 		    <div :class="active ? 'product__description' : ''" v-html="packageinfo[0].content">
 		    	
 		    </div>
-		    <a href="#" @click="seemore">See more</a>
+		    <a href="#" v-if="packageinfo[0].content" @click="seemore">See more</a>
 	    </div>
 		<div class="w-2/3">
-    		<div class="section select-server">
-			    <h2 class="circle">
-			        <span>1</span>
-			        Enter Player ID
-			    </h2>
-			    <div class="pl-3">
-			        <input
-			        	class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-				        label="Enter Player ID"
-				        v-model="playerid"
-				    />
-			    </div>
-			</div>
-			<div class="section select-server">
-			    <h2 class="circle">
-			        <span>2</span>
-			        Select Recharge
-			    </h2>
-			    <div class="flex flex-wrap">
-				  	<div class="text-center m-2" v-for="game in packages" :key="game.id">
-			  			<label :for="game.id" class="mb-0 w-full list-group-item p-2 d-block"  style="font-size: 11px;width:100%;position: relative;    overflow: hidden;">
-			  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
-				  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
-							{{ game.name }}
-				  		</label>
-				  	</div> 
-			    </div>
-			</div>
-			<div class="section select-server">
-			    <h2 class="circle">
-			        <span>3</span>
-			    </h2>
-			    <div v-if="authuser && selectedpackage.price>(authuser.wallet+authuser.earn_wallet)">
-					<div class="row">
-				  	 <div class="col-md-12 col-12 col-sm-12 text-center mt-4">
-			  			 <p>Your Available Balance BDT {{ authuser.wallet+authuser.earn_wallet }}</p>
-			  			 <p>You Need BDT <span v-if="selectedpackage.price">{{ selectedpackage.price }}</span><span v-else>0</span> to purchase the product</p>
-				  		<nuxt-link :to="/wallet/+authuser.id">
-							<v-btn depressed small color="primary">Add Money</v-btn>
-						</nuxt-link>
-				  	</div> 
-				  </div>
-			    </div>
-			    <div v-else-if="authuser">
-			    	<div class="row">
+	     	<form @submit.prevent="buynow()" method="post">
+	    		<div class="section select-server">
+				    <h2 class="circle">
+				        <span>1</span>
+				        Enter Player ID
+				    </h2>
+				    <div class="pl-3">
+				        <input
+				        	class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+					       	placeholder="Enter Player ID"
+					        v-model="playerid"
+					    />
+				    </div>
+                    <div class="error text-red-900" v-if="!$v.playerid.required">Playerid is required</div>
+				</div>
+				<div class="section select-server">
+				    <h2 class="circle">
+				        <span>2</span>
+				        Select Recharge
+				    </h2>
+				    <div class="flex flex-wrap">
+					  	<div class="text-center m-2 w-48" v-for="game in packages" :key="game.id">
+				  			<label :for="game.id" class="mb-0 w-48 list-group-item p-2 d-block"  style="font-size: 11px;position: relative;    overflow: hidden;">
+				  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
+					  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
+								{{ game.name }}
+					  		</label>
+					  	</div> 
+				    </div>
+                    <div class="error text-red-900" v-if="!$v.selectedpackage.required">Package is required</div>
+				</div>
+				<div class="section select-server">
+				    <h2 class="circle">
+				        <span>3</span>
+				    </h2>
+				    <div v-if="authuser && selectedpackage.price>(authuser.wallet+authuser.earn_wallet)">
+						<div class="row">
 					  	 <div class="col-md-12 col-12 col-sm-12 text-center mt-4">
 				  			 <p>Your Available Balance BDT {{ authuser.wallet+authuser.earn_wallet }}</p>
 				  			 <p>You Need BDT <span v-if="selectedpackage.price">{{ selectedpackage.price }}</span><span v-else>0</span> to purchase the product</p>
+					  		<nuxt-link :to="'/profile/wallet/'+authuser.id">
+								<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Add Money</button>
+							</nuxt-link>
 					  	</div> 
-					 </div>
-			    </div>
-			    <div v-else>
-			    	<div class="row">
-					  	<div class="col-md-12 col-12 col-sm-12 text-center mt-4">
-				  			<p>You Need BDT <span v-if="selectedpackage.price">{{ selectedpackage.price }}</span><span v-else>0</span> to purchase the product</p>
-					  	</div> 
-					 </div>
-			    </div>
-			</div>
-			<div>
-			    <div>
-					<div class="row">
-						  <div class="col-md-12 text-right">
-						  	 <div v-if="authuser">
-						  	 	<button v-if="selectedpackage.price>(authuser.wallet+authuser.earn_wallet)" disabled>Buy Now</button>
-						  	 	<button  @click="buynow()">Buy Now</button>
-						      </div>
-						      <div v-else>
-						      	<nuxt-link to="/login">
-									<button>Buy Now</button>
-								</nuxt-link>
-						      </div>
-							<br>
-						  </div>
-				  	</div>
-			    </div>
-			</div>
-			<p style="visibility: hidden">{{ users() }}</p>
+					  </div>
+				    </div>
+				    <div v-else-if="authuser">
+				    	<div class="row">
+						  	 <div class="col-md-12 col-12 col-sm-12 text-center mt-4">
+					  			 <p>Your Available Balance BDT {{ authuser.wallet+authuser.earn_wallet }}</p>
+					  			 <p>You Need BDT <span v-if="selectedpackage.price">{{ selectedpackage.price }}</span><span v-else>0</span> to purchase the product</p>
+						  	</div> 
+						 </div>
+				    </div>
+				    <div v-else>
+				    	<div class="row">
+						  	<div class="col-md-12 col-12 col-sm-12 text-center mt-4">
+					  			<p>You Need BDT <span v-if="selectedpackage.price">{{ selectedpackage.price }}</span><span v-else>0</span> to purchase the product</p>
+						  	</div> 
+						 </div>
+				    </div>
+				</div>
+				<div>
+				    <div>
+						<div class="row">
+							  <div class="col-md-12 text-right">
+							  	 <div v-if="authuser">
+							  	 	<button v-if="selectedpackage.price>(authuser.wallet+authuser.earn_wallet)" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg opacity-50">Buy Now</button>
+							  	 	<button type="submit" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Buy Now</button>
+							      </div>
+							      <div v-else>
+							      	<nuxt-link to="/login">
+										<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Buy Now</button>
+									</nuxt-link>
+							      </div>
+								<br>
+							  </div>
+							<p class="text-red-500" v-if="submitStatus === 'OK'">{{  resmessage }}</p>
+							<p class="text-red-500" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
+							<p class="text-red-500" v-if="submitStatus === 'PENDING'">Sending...</p>
+					  	</div>
+				    </div>
+				</div>
+				<p style="visibility: hidden">{{ users() }}</p>
+   			</form>
 		</div>
     </div>
 </div>
@@ -96,6 +104,7 @@
 
 <script>
 	import { mapMutations, mapGetters } from 'vuex'
+	import { required } from 'vuelidate/lib/validators'
 	import axios from '~/plugins/axios'
 	export default {
 		data(){
@@ -147,24 +156,26 @@
 				selectedmgetway:[],
 				playerid:null,
 				emailaddress:'',
-				nameRules: [
-					v => !!v || 'is required',
-				],
-				emailRules: [
-					v => !!v || 'E-mail is required',
-					v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-				],
 				loading:false,
 	  			valid: true,
 				alert: false,
 				resmessage:"Order successfully",
 				active:true,
-				packageinfo:[]
+				packageinfo:[],
+				submitStatus:null
 
 			}
 		},
+		validations: {
+		    playerid: {
+		      required
+		    },
+		    selectedpackage: {
+		      required
+		    }
+		},
 		computed: mapGetters({
-			authuser: 'authuser',
+			authuser: 'user',
 			base_url:'base_url'
 		}),
 		methods:{
@@ -186,11 +197,16 @@
 				this.selectedmgetway=p;
 			},
 			buynow(){
-				let con= confirm("The Money Will Take From your Wallet. Are You Sure Want to Confirm?? ");
+					let con= confirm("The Money Will Take From your Wallet. Are You Sure Want to Confirm?? ");
 					if(con){
 					this.loading=true;
 					var self = this
-					if (this.$refs.form.validate()) {
+					this.$v.$touch()
+				  	this.loading=true;
+					if (this.$v.$invalid) {
+			    		this.submitStatus = 'ERROR'
+			  		}else {
+			  			this.submitStatus = 'PENDING'
 						axios.post('/api/packageorder', {
 						    topuppackage_id: this.selectedpackage.id,
 						    name: this.selectedpackage.name,
@@ -203,10 +219,11 @@
 						    amount:this.selectedpackage.price,
 						})
 						.then(function (response) {
+							self.submitStatus = 'OK'
 						    self.loading=false
 							self.alert=true
-							if(response=='faliled'){
-								self.resmessage=response
+							if(response.data=='faliled'){
+								self.resmessage="Please Add Money"
 							}
 							self.orders=response.data
 						})
@@ -214,8 +231,6 @@
 							self.loading=false;
 						    console.log(error);
 						});
-					}else{
-						this.loading=false;
 					}
 				}
 			},
