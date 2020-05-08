@@ -36,7 +36,7 @@
 								CONTACT US
 							</a>
 						</div>
-					<div>
+					<div class="relative">
 						<div class="flex">
 							<template v-if="token"> 
 								<button id="userButton" class="flex items-center focus:outline-none mr-3" @click="dropdown()">
@@ -53,7 +53,7 @@
 								</nuxt-link>
 							</template>
 						</div>
-						<div id="userMenu" v-bind:class="activeClass ? '' : 'hidden'"  class="bg-white nunito rounded shadow-md mt-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30">
+						<div id="userMenu" v-bind:class="activeClass ? '' : 'hidden'"  class="bg-white rounded shadow-md mt-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30">
 							<ul class="list-reset">
 								<li @click="dropdown()">
 									<router-link to="/settings" class="px-4 py-2 block text-gray-900 hover:bg-green-400 hover:text-white no-underline hover:no-underline">
@@ -85,11 +85,16 @@
 
 <script>
 	import { mapGetters } from 'vuex'
+	import Avatar from 'vue-avatar'
 	export default {
 		data: () => ({
 			appName:"a",
 			activeClass: false,
 		}),
+
+		components: {
+		    Avatar
+		},
 
 		computed: mapGetters({
 			user: 'user',
@@ -104,8 +109,11 @@
 			},
 			async logout () {
 				this.activeClass=!this.activeClass
-				await this.$store.dispatch('logout')
-				this.$router.push({ name: 'login' })
+				Cookie.remove('auth')
+		      	Cookie.remove('setUser')
+		      	this.$store.commit('setAuth', null)
+		      	this.$store.commit('setUser', null)
+				this.$router.push('/')
 			},
 			dropdown(){
 				this.activeClass=!this.activeClass
