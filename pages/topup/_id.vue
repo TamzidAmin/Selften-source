@@ -13,7 +13,7 @@
 	    </div>
 		<div class="w-2/3">
 	     	<form @submit.prevent="buynow()" method="post">
-	    		<div class="section select-server">
+	    		<div class="section select-server" v-if="packages.topuptype==1">
 				    <h2 class="circle">
 				        <span>1</span>
 				        Enter Player ID
@@ -27,13 +27,43 @@
 				    </div>
                     <div class="error text-red-900" v-if="!$v.playerid.required">Playerid is required</div>
 				</div>
+				<div v-else class="section select-server flex">
+					<div>
+						<h2 class="circle">
+					        <span>1</span>
+					        Enter Game ID
+					    </h2>
+					    <div class="pl-3">
+					        <input
+					        	class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+						       	placeholder="Enter Game ID"
+						        v-model="playerid"
+						    />
+					    </div>
+	                    <div class="error text-red-900" v-if="!$v.playerid.required">Gameid is required</div>
+					</div>
+
+                    <div>
+                    	<h2 class="circle">
+					        <span>1</span>
+					        Enter Game Password
+					    </h2>
+					    <div class="pl-3">
+					        <input
+					        	class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+						       	placeholder="Enter Game Password"
+						        v-model="gamepassword"
+						    />
+					    </div>
+                    </div>
+				</div>
 				<div class="section select-server">
 				    <h2 class="circle">
 				        <span>2</span>
 				        Select Recharge
 				    </h2>
 				    <div class="flex flex-wrap">
-					  	<div class="text-center m-2 w-48" v-for="game in packages" :key="game.id">
+					  	<div class="text-center m-2 w-48" v-for="game in packages.topuppackage" :key="game.id">
 				  			<label :for="game.id" class="mb-0 w-48 list-group-item p-2 d-block"  style="font-size: 11px;position: relative;    overflow: hidden;">
 				  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
 					  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
@@ -133,6 +163,7 @@
 				selectedmgetway:[],
 				playerid:null,
 				emailaddress:'',
+				gamepassword:'',
 				loading:false,
 	  			valid: true,
 				alert: false,
@@ -219,11 +250,11 @@
 			}
 		},
 		async asyncData ({ params }) {
-		    let pack = await axios.get(`/api/topuppackage/`)
+		    let pack = await axios.get(`/api/topuppackage/`+params.id)
 		    let paymentMethod =  await axios.get(`/api/paymentMethod`)
 		    let packageinfo =  await axios.get(`/api/topupinfo`)
 		    return { 
-		    	packages: pack.data,
+		    	packages: pack.data[0],
 		    	getways: paymentMethod.data,
 		    	packageinfo: packageinfo.data,
 		    }
