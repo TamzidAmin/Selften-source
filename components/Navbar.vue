@@ -56,14 +56,9 @@
 						<div id="userMenu" v-bind:class="activeClass ? '' : 'hidden'"  class="bg-white rounded shadow-md mt-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30">
 							<ul class="list-reset">
 								<li @click="dropdown()">
-									<router-link to="/settings" class="px-4 py-2 block text-gray-900 hover:bg-green-400 hover:text-white no-underline hover:no-underline">
-										My account
+									<router-link to="/profile" class="px-4 py-2 block text-gray-900 hover:bg-green-400 hover:text-white no-underline hover:no-underline">
+										MyAccount
 									</router-link>
-								</li>
-								<li>
-									<a href="#" class="px-4 py-2 block text-gray-900 hover:bg-green-400 hover:text-white no-underline hover:no-underline">
-										Notifications
-									</a>
 								</li>
 								<li>
 									<hr class="border-t mx-2 border-gray-400">
@@ -84,6 +79,7 @@
 </template>
 
 <script>
+	const Cookie = process.client ? require('js-cookie') : undefined
 	import { mapGetters } from 'vuex'
 	import Avatar from 'vue-avatar'
 	export default {
@@ -109,9 +105,9 @@
 			},
 			async logout () {
 				this.activeClass=!this.activeClass
-				Cookie.remove('auth')
+				Cookie.remove('token')
 		      	Cookie.remove('setUser')
-		      	this.$store.commit('setAuth', null)
+		      	this.$store.commit('setToken', null)
 		      	this.$store.commit('setUser', null)
 				this.$router.push('/')
 			},

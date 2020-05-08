@@ -135,10 +135,10 @@ export default {
 				        const auth = {
 				          accessToken: response.data.token
 				        }
-				        self.$store.commit('setToken', auth) // mutating to store for client rendering
-				        self.$store.commit('setUser', response.data) // mutating to store for client rendering
-				        Cookie.set('token', auth,{ expires: 365 }) // saving token in cookie for server rendering
-				        Cookie.set('user', response.data,{ expires: 365 }) // saving token in cookie for server rendering
+				        self.$store.commit('setToken', auth) //mutating to store for client rendering
+				        self.$store.commit('setUser', response.data) //mutating to store for client rendering
+				        Cookie.set('token', auth,{ expires: 365 }) //saving token in cookie for server rendering
+				        Cookie.set('user', response.data,{ expires: 365 }) //saving token in cookie for server rendering
 				        self.$router.push('/profile/'+response.data.id)
 				      }, 1000)
 					}
