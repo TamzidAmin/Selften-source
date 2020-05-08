@@ -115,30 +115,7 @@
 				ingamepassword:null,
 				cal:0,
 				packages:[
-					{
-						id:1,
-						name:"25 diamonds",
-					},
-					{
-						id:2,
-						name:"50 diamonds",
-					},
-					{
-						id:4,
-						name:"310 diamonds",
-					},
-					{
-						id:5,
-						name:"25 diamonds",
-					},
-					{
-						id:6,
-						name:"50 diamonds",
-					},
-					{
-						id:7,
-						name:"310 diamonds",
-					}
+					
 				],
 				getways:[
 					{
