@@ -85,7 +85,7 @@
 	    	</div>
 	    	<div v-if="name=='withdraw'">
 	    		<ul class="p-2">
-					<nuxt-link v-for="paymentmethod in data" :to="/withdraw/+paymentmethod.id" :key="paymentmethod.id">
+					<nuxt-link v-for="paymentmethod in data" :to="'/profile/wallet/withdraw/'+paymentmethod.id" :key="paymentmethod.id">
 						<li class="p-3">
 					        <img :src="'https://admin.selften.com/uploads/payment/'+paymentmethod.logo" class="w-10 h-10"/>
 

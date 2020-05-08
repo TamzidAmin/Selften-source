@@ -1,10 +1,10 @@
 <template>
-<div class="container mx-auto">
-	<div class="mx-auto p-3">
+<div class="container mx-auto text-center">
+	<div class="p-3 shadow-xl my-5 bg-white">
 
 	  	<ul> 
 	  		<li>
-		        <img :src="'https://admin.selften.com/uploads/payment/'+paymentmethod.logo"/>
+		        <img :src="'https://admin.selften.com/uploads/payment/'+paymentmethod.logo" class="h-8 w-8 mx-auto"/>
 		        <p>{{ paymentmethod.name }} ( {{ paymentmethod.info }} )</p>
 		    </li>
 	  	</ul>
@@ -42,35 +42,37 @@
 			  	</div>
 			</div>
 		</div>
-		<form>
+		<form @submit.prevent="addwallet" method="post">
 			<input
 			  v-model="amount"
 			  required
+			  class="px-3 my-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+			  placeholder="Amount To Add"
 			>
+            <div class="text-red-900" v-if="!$v.amount.required">Amount is required</div>
+            <div class="text-red-900" v-if="!$v.amount.between">
+            	Must be between {{$v.amount.$params.between.min}} and {{$v.amount.$params.between.max}}</div>
+            </span>
+
 
 			<input
 			  v-model="number"
 			  required
+			  placeholder="Sender Number"
+			  class="px-3 mb-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
 			/>
-		
+            <div class="error text-red-900" v-if="!$v.number.required">Number is required</div>
+
 			<button
 			  :disabled="!valid"
-			  color="success"
-			  class="mr-4"
-			  @click="addwallet"
+			  class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg"
 			>
 			  Add
 			</button>
+			<p class="text-red-500" v-if="submitStatus === 'OK'">{{  error }}</p>
+			<p class="text-red-500" v-if="submitStatus === 'ERROR'">{{ resmassage }}</p>
+			<p class="text-red-500" v-if="submitStatus === 'PENDING'">Sending...</p>
 			<br><br>
-			<v-alert
-		      v-model="alert"
-			    outlined
-			    @click="clode()"
-		      	type="success"
-		     	text
-		    >
-		      {{ resmassage  }}
-		    </v-alert>
 		</form>
 	</div>
 </div>
@@ -78,30 +80,35 @@
 <script>
 import axios from '~/plugins/axios'
 import { mapMutations, mapGetters } from 'vuex'
+import { required,between } from 'vuelidate/lib/validators'
 
 export default {
 	middleware: 'auth',
 	data: () => ({
+		submitStatus:null,
      	amount:null,
      	number:null,
      	isopen:false,
      	dialog:false,
      	error:null,
-     	resmassage:'Request sent successfully',
+     	resmassage:'Please fill the form correctly.',
   		valid: true,
   		paymentmethod:{},
   		alert: false,
-  		nameRules: [
-			v => !!v || 'Amount is required',
-	  	],
-	  	amountRules: [
-			v => !!v || 'Amount is required',
-			v => (v && v <= 5000) || 'Amount must be less than 5000 BDT',
-			v => (v && v > 14 ) || 'Amount must be greater than 15 BDT',
-	  	],
     }),
+
+	validations: {
+	    amount: {
+	      	required,
+	      	between: between(10, 90000)
+	    },
+	    number: {
+	      	required
+	    }
+	},
+
     computed:mapGetters({
-		authuser: 'authuser'
+		authuser: 'user'
     }),
     methods:{
     	clode(){
@@ -111,7 +118,12 @@ export default {
 			this.isopen=true;
 		},
     	addwallet ({ params }) {
-			if (this.$refs.form.validate()) {
+			this.$v.$touch()
+		  	this.loading=true;
+			if (this.$v.$invalid) {
+	    		this.submitStatus = 'ERROR'
+	  		}else {
+	  			this.submitStatus = 'PENDING'
 			  	var self = this;
 				axios.post('/api/addwallet', {
 					amount : this.amount,
@@ -121,13 +133,14 @@ export default {
 					user_id: this.authuser.id
 				})
 				.then(function (response) {
+					self.submitStatus = 'OK'
 					if(response.data=='success'){
-						self.alert=true
-						self.amount=null
+						self.submitStatus = 'ERROR'
+						self.resmassage="Request Send SuccessFully"
 					}else{
+						self.submitStatus = 'ERROR'
 						self.resmassage=response.data
 						self.alert=true
-						self.amount=null
 					}
 				})
 				.catch(function (error) {

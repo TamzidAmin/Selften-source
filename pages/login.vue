@@ -25,9 +25,9 @@
                             Forgot Your Password?
                         </a>
                     </div>
-                    	<p class="text-red-500" v-if="submitStatus === 'OK'">{{  error }}</p>
-						<p class="text-red-500" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
-						<p class="text-red-500" v-if="submitStatus === 'PENDING'">Sending...</p>
+                	<p class="text-red-500" v-if="submitStatus === 'OK'">{{  error }}</p>
+					<p class="text-red-500" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
+					<p class="text-red-500" v-if="submitStatus === 'PENDING'">Sending...</p>
                 </form>
             </div>
         </div>
