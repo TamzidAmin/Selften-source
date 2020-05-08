@@ -1,48 +1,38 @@
 <template>
-	<div
-		class="mx-auto"
-		min-width="300"
-		text-align="center"
-	> 
-		<div v-if="authuser">
-			<avatar :username="user.username" v-if="user" backgroundColor="#276749" :size="30"></avatar>
-			<p class="display-1 text--primary">
-				{{ authuser.username }}
-			</p>
+<div class="container mx-auto text-center"> 
+	<div v-if="user">
+		<div class="w-12 mx-auto py-3">
+			<avatar :username="user.username" v-if="user" backgroundColor="#276749" :size="40"></avatar>
+		</div>
+		<p class="font-extrabold">
+			{{ user.username }}
+		</p>
 
-			<div
-			    class="mx-auto"
-			    max-width="276"
-			    outlined
-			  >
-			      <div>
-			        <h2>৳{{ authuser.wallet+authuser.earn_wallet }}</h2>
-			        <h5>Available Balance</h5>
-			      </div>
-			</div>
+		<div class="my-5">
+	     	<div class="border-2 w-64 mx-auto p-3">
+	        	<h2 class="text-3xl font-bold">৳{{ user.wallet+user.earn_wallet }}</h2>
+	        	<h5 class="text-2xl font-bold">Available Balance</h5>
+	      	</div>
+		</div>
 
-			<div class="root">
-		      <div>
-		        <h4>{{ authuser.matchesplayed }}</h4>
-		        <h6>Match Played</h6>
-		      </div>
-		
-		      <div>
-		        <h4>{{ authuser.totalkills }}</h4>
-		        <h6>Total Kills</h6>
-		      </div>
+		<div class="flex items-center justify-center">
+	      <div class="p-2 font-semibold">
+	        <h4>{{ user.matchesplayed }}</h4>
+	        <h6>Match Played</h6>
+	      </div>
 	
-		      <div>
-		        <h4>{{ authuser.winamounts }}</h4>
-		        <h6>Winnings</h6>
-		      </div>
-			</div>
+	      <div class="p-2 font-semibold">
+	        <h4>{{ user.totalkills }}</h4>
+	        <h6>Total Kills</h6>
+	      </div>
 
-			<div class="text--primary">
-				
-			</div>
+	      <div class="p-2 font-semibold">
+	        <h4>{{ user.winamounts }}</h4>
+	        <h6>Winnings</h6>
+	      </div>
 		</div>
 	</div>
+</div>
 </template>
 <script>
 	import { mapMutations, mapGetters } from 'vuex'

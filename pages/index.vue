@@ -28,9 +28,9 @@ export default {
 		let offerproduct = await axios.get(`/api/offerproduct/`)
 
 		return {
-			 banner: banner.data,
-				 offerproduct: offerproduct.data,
-			 notice: notice.data,
+			banner: banner.data,
+			offerproduct: offerproduct.data,
+			notice: notice.data,
 		}
 	}
 }

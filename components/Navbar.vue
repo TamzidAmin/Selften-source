@@ -53,11 +53,26 @@
 								</nuxt-link>
 							</template>
 						</div>
-						<div id="userMenu" v-bind:class="activeClass ? '' : 'hidden'"  class="bg-white rounded shadow-md mt-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30">
-							<ul class="list-reset">
+						<div id="userMenu" v-if="token" v-bind:class="activeClass ? '' : 'hidden'"  class="bg-white rounded shadow-md mt-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30">
+							<ul class="list-reset w-40">
 								<li @click="dropdown()">
-									<router-link to="/profile" class="px-4 py-2 block text-gray-900 hover:bg-green-400 hover:text-white no-underline hover:no-underline">
-										MyAccount
+									<router-link :to="/profile/+user.id" class="px-4 py-2 block text-gray-900 hover:bg-green-400 hover:text-white no-underline hover:no-underline">
+										My Account
+									</router-link>
+								</li>
+								<li @click="dropdown()">
+									<router-link :to="'/profile/order/'+user.id" class="px-4 py-2 block text-gray-900 hover:bg-green-400 hover:text-white no-underline hover:no-underline">
+										My Order
+									</router-link>
+								</li>
+								<li @click="dropdown()">
+									<router-link :to="'/profile/wallet/'+user.id" class="px-4 py-2 block text-gray-900 hover:bg-green-400 hover:text-white no-underline hover:no-underline">
+										My wallet
+									</router-link>
+								</li>
+								<li @click="dropdown()">
+									<router-link :to="'/profile/settings/'+user.id" class="px-4 py-2 block text-gray-900 hover:bg-green-400 hover:text-white no-underline hover:no-underline">
+										Settings
 									</router-link>
 								</li>
 								<li>

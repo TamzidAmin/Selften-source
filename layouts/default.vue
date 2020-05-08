@@ -1,8 +1,10 @@
 <template>
 <div class="bg-gray-100">
-	<Navbar/>
-	<div class="mx-auto">
-		<nuxt />
+	<div class="min-h">
+		<Navbar/>
+		<div class="mx-auto">
+			<nuxt />
+		</div>
 	</div>
 	<Footer/>
 </div>
@@ -23,5 +25,8 @@
 	.nuxt-link-exact-active{
 		color: #D81C4B;
 		background: #fff;
+	}
+	.min-h{
+		min-height: 70vh!important;
 	}
 </style>
