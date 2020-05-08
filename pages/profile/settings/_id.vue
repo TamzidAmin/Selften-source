@@ -17,14 +17,6 @@
 				</button>
 			</div>
 			<br>
-			<v-alert
-		      v-model="alert"
-			    outlined
-		      	:type="res.type"
-		     	text
-		    >
-		      {{ res.message }}
-		    </v-alert>
 		  </form>
 	</div>
 </template>

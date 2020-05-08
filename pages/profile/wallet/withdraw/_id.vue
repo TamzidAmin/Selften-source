@@ -1,91 +1,94 @@
 <template>
-<v-layout column justify-center align-center>
-	<v-card
-	    class="mx-auto p-3"
-	    max-width="400"
-	    min-width="300"
-	  >
-	  <v-list>
-	  		<v-list-item>
-		      	<v-list-item-avatar>
-		          <v-img :src="'https://admin.selften.com/uploads/payment/'+paymentmethod.logo"></v-img>
-		        </v-list-item-avatar>
+<div class="container mx-auto my-5 shadow-lg bg-white p-5">
+	   
+	<ul>
+	  		<li>
+		        <img :src="'https://admin.selften.com/uploads/payment/'+paymentmethod.logo" class="h-8 w-8" />
 
-		        <v-list-item-content class="text-left">
-		          	<v-list-item-title>{{ paymentmethod.name }} ( {{ paymentmethod.info }} )</v-list-item-title>
-		        </v-list-item-content>
-		    </v-list-item>
-	  </v-list>
-		<v-form
-			ref="form"
-			v-model="valid"
-			lazy-validation
-		  >
-			<v-text-field
-			  v-model="amount"
-			  :rules="nameRules"
-			  label="Amount To Withdraw"
-			  required
-			></v-text-field>
+		        <p>{{ paymentmethod.name }} ( {{ paymentmethod.info }} )</p>
+		    </li>
+	</ul>
+	<form @submit.prevent="addwallet" method="post">
+		<input
+		  v-model="amount"
+		  required
+		  class="px-3 my-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+		  placeholder="Amount To Add"
+		>
+        <div class="text-red-900" v-if="!$v.amount.required">Amount is required</div>
+        <div class="text-red-900" v-if="!$v.amount.between">
+        	Must be between {{$v.amount.$params.between.min}} and {{$v.amount.$params.between.max}}</div>
+        </span>
 
-			<v-text-field
-			  v-model="number"
-			  :rules="namen"
-			  label="Receiver Number"
-			  required
-			></v-text-field>
-			<v-btn
-			  :disabled="!valid"
-			  color="success"
-			  class="mr-4"
-			  v-if="authuser.earn_wallet>=amount"
-			  @click="addwallet"
-			>
-			  Withdraw
-			</v-btn>
-			<v-btn
-			  disabled
-			  color="success"
-			  class="mr-4"
-			  v-else
-			 
-			>
-			  Withdraw
-			</v-btn>
-			<br><br>
-			<v-alert
-		      v-model="alert"
-			    outlined
-		      	:type="type"
-		     	text
-		    >
-		      {{ message }}
-		    </v-alert>
-		</v-form>
-	</v-card>
-</v-layout>
+
+		<input
+		  v-model="number"
+		  required
+		  placeholder="Sender Number"
+		  class="px-3 mb-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+		/>
+        <div class="error text-red-900" v-if="!$v.number.required">Number is required</div>
+
+		<button
+		  v-if="authuser.earn_wallet>=amount"
+		  @click="addwallet"
+		  class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg"
+		>
+		  Withdraw
+		</button>
+		<button
+		  disabled
+		  v-else
+		  class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 opacity-50 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg"
+		 
+		>
+		  Withdraw
+		</button>
+		<br><br>
+		<p class="text-red-500" v-if="submitStatus === 'OK'">{{  error }}</p>
+			<p class="text-red-500" v-if="submitStatus === 'ERROR'">{{ message }}</p>
+			<p class="text-red-500" v-if="submitStatus === 'PENDING'">Sending...</p>
+	</form>
+</div>
 </template>
 <script>
 import axios from '~/plugins/axios'
 import { mapMutations, mapGetters } from 'vuex'
-
+import { required,between } from 'vuelidate/lib/validators'
 export default {
 	data: () => ({
+		submitStatus:null,
      	amount:null,
      	number:null,
      	error:null,
      	type:'success',
-     	message:"Request sent successfully",
+     	message:"Please fill the form correctly.",
   		valid: true,
   		paymentmethod:{},
   		alert: false,
     }),
+
+	validations: {
+	    amount: {
+	      	required,
+	      	between: between(100, 90000)
+	    },
+	    number: {
+	      	required
+	    }
+	},
+
     computed:mapGetters({
 		authuser: 'user'
     }),
     methods:{
     	addwallet ({ params }) {
-			if (this.$refs.form.validate()) {
+			this.$v.$touch()
+		  	this.loading=true;
+			if (this.$v.$invalid) {
+	    		this.submitStatus = 'ERROR'
+	  		}else {
+	  			this.submitStatus = 'PENDING'
 			  	var self = this;
 				axios.post('/api/withdrawwallet', {
 					amount : this.amount,
@@ -95,6 +98,7 @@ export default {
 					user_id: this.authuser.id
 				})
 				.then(function (response) {
+					self.submitStatus = 'ERROR'
 					self.alert=true
 					self.message=response.data
 					self.amount=null
