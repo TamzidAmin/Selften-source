@@ -53,7 +53,7 @@
 									</label>
 								</div>
 								<div v-if="i.type=='squad'" class="d-flex" style="justify-content: center">
-									<label for="Solo">
+									<label for="solo">
 										<input type="radio" class="p-1 m-3" v-model="row" name="match" id="solo" value="solo"/>
 										<span class="mb-5">Solo</span>
 									</label>

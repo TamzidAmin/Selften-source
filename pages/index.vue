@@ -1,6 +1,6 @@
 <template>
 <div class="container mx-auto">
-	<p>Home Page</p>
+	<p class="my-10 text-xl">Home Page</p>
 </div>
 </template>
 
