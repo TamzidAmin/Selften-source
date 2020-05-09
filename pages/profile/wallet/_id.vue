@@ -20,25 +20,25 @@
 	    	<div class="flex">
 				<div style="width: 25%;">
 					<div class="p-2 text-capitalize cursor-pointer" v-bind:class="{ active: name=='addmoney' ? true : '' }" @click="addmoney('addmoney')">
-				     	<img src="~/assets/wallet.svg" alt="" class="w-8 h-8 mx-auto">
+				     	<img src="~/assets/wallet.svg" alt="" class="w-4 h-4 mx-auto">
 				     	<p>addmoney</p>
 				    </div>
 				</div>
 				<div style="width: 25%;">
 					<div class="p-2 text-capitalize cursor-pointer" v-bind:class="{ active: name=='withdraw' ? true : '' }" @click="withdraw('withdraw')">
-				     	<img src="~/assets/withdrow.svg" alt="" class="w-8 h-8 mx-auto">
+				     	<img src="~/assets/withdrow.svg" alt="" class="w-4 h-4 mx-auto">
 				     	<p>Withdraw</p>
 				    </div>
 				</div>
 				<div style="width: 25%;">
 					<div class="p-2 text-capitalize cursor-pointer" v-bind:class="{ active: name=='transfer' ? true : '' }" @click="transfer('transfer')">
-				     	<img src="~/assets/transfer.svg" alt="" class="w-8 h-8 mx-auto">
+				     	<img src="~/assets/transfer.svg" alt="" class="w-4 h-4 mx-auto">
 				     	<p>Transfer</p>
 				    </div>
 				</div>
 				<div style="width: 25%;">
 					<div class="p-2 text-capitalize cursor-pointer" v-bind:class="{ active: name=='transaction' ? true : '' }" @click="transaction('transaction')">
-				     	<img src="~/assets/transaction.svg" alt="" class="w-8 h-8 mx-auto">
+				     	<img src="~/assets/transaction.svg" alt="" class="w-4 h-4 mx-auto">
 				     	<p>Transaction</p>
 				    </div>
 				</div>
