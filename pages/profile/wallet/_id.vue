@@ -60,25 +60,25 @@
 	    		<p>Comming Soon</p>
 	    	</div>
 	    	<div v-if="name=='transaction'">
-	    		<table>
+	    		<table class="border-collapse w-full">
 				    <thead>
 				        <tr>
-				          	<th class="text-center">Amount</th>
-				          	<th class="text-center">Number</th>
-				          	<th class="text-center">Status</th>
-				          	<th class="text-center">Date</th>
+				          	<th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300">Amount</th>
+				          	<th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300">Number</th>
+				          	<th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300">Status</th>
+				          	<th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300">Date</th>
 				        </tr>
 				    </thead>
 				    <tbody>
 				        <tr v-for="item in data" :key="item.name">
-				          	<td>৳ {{ item.amount }}</td>
-				          	<td>{{ item.number }}</td>
-				          	<td>
-				          		<button color="error" v-if="item.status=='cancel'">{{ item.status }}</button>
+				          	<td class="p-3 text-gray-800 text-center border border-b">৳ {{ item.amount }}</td>
+				          	<td class="p-3 text-gray-800 text-center border border-b">{{ item.number }}</td>
+				          	<td class="p-3 text-gray-800 text-center border border-b">
+				          		<button color="error" v-if="item.status=='cancel'">canceled</button>
 				          		<button color="primary" v-else-if="item.status=='pending'">{{ item.status }}</button>
 				          		<button color="success" v-else>{{ item.status }}</button>
 				          	</td>
-				          <td v-if="item.created_at">{{ item.created_at.substring(0,10) }}</td>
+				          <td class="p-3 text-gray-800 text-center border border-b" v-if="item.created_at">{{ item.created_at.substring(0,10) }}</td>
 				        </tr>
 				    </tbody>
 				</table>

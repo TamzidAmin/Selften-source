@@ -1,17 +1,24 @@
 <template>
-<div class="container mx-auto">
+<div class="container mx-auto shadow-md">
 	
-    <div class="my-3 flex">
-		<div class="w-1/3" v-if="packageinfo[0]">
-    		<div class="product-top-banner__container">
-		    	<img :src="'https://admin.selften.com/uploads/topupinfo/'+packageinfo[0].banner" alt="" class="w-100">
+    <div class="my-3 md:flex p-3 bg-white">
+    	<div v-if="packages.topuptype==1" class="md:w-1/3">
+			<div v-if="packageinfo[0]">
+	    		<div class="product-top-banner__container">
+			    	<img :src="'https://admin.selften.com/uploads/topupinfo/'+packageinfo[0].banner" alt="" class="w-100">
+			    </div>
+			    <div :class="active ? 'product__description' : ''" v-html="packageinfo[0].content">
+			    	
+			    </div>
+			    <a href="#" v-if="packageinfo[0].content" @click="seemore">See more</a>
 		    </div>
-		    <div :class="active ? 'product__description' : ''" v-html="packageinfo[0].content">
-		    	
-		    </div>
-		    <a href="#" v-if="packageinfo[0].content" @click="seemore">See more</a>
-	    </div>
-		<div class="w-2/3">
+		</div>
+		<div v-else class="md:w-1/3">
+			<div v-html="packages.rules">
+			    
+			</div>
+		</div>
+		<div class="md:w-2/3">
 	     	<form @submit.prevent="buynow()" method="post">
 	    		<div class="section select-server" v-if="packages.topuptype==1">
 				    <h2 class="circle">
@@ -25,33 +32,33 @@
 					        v-model="playerid"
 					    />
 				    </div>
-                    <div class="error text-red-900" v-if="!$v.playerid.required">Playerid is required</div>
+                    <div class="error text-red-900 ml-3" v-if="!$v.playerid.required">Playerid is required</div>
 				</div>
 				<div v-else class="section select-server flex">
 					<div>
 						<h2 class="circle">
 					        <span>1</span>
-					        Enter Game ID
+					        Number/Gmail
 					    </h2>
 					    <div class="pl-3">
 					        <input
 					        	class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-						       	placeholder="Enter Game ID"
+						       	placeholder="Enter Number/Gmail"
 						        v-model="playerid"
 						    />
 					    </div>
-	                    <div class="error text-red-900" v-if="!$v.playerid.required">Gameid is required</div>
+	                    <div class="error text-red-900 ml-3" v-if="!$v.playerid.required">Number/Gmail is required</div>
 					</div>
 
                     <div>
                     	<h2 class="circle">
 					        <span>1</span>
-					        Enter Game Password
+					        Password
 					    </h2>
 					    <div class="pl-3">
 					        <input
 					        	class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-						       	placeholder="Enter Game Password"
+						       	placeholder="Enter Password"
 						        v-model="ingamepassword"
 						    />
 					    </div>
@@ -71,7 +78,7 @@
 					  		</label>
 					  	</div> 
 				    </div>
-                    <div class="error text-red-900" v-if="!$v.selectedpackage.required">Package is required</div>
+                    <div class="error text-red-900 ml-3" v-if="!$v.selectedpackage.required">Package is required</div>
 				</div>
 				<div class="section select-server">
 				    <h2 class="circle">

@@ -42,9 +42,9 @@
 					<div class="relative">
 						<div class="flex">
 							<template v-if="token"> 
-								<button id="userButton" class="flex items-center focus:outline-none mr-3" @click="dropdown()">
+								<button id="userButton" class="flex items-center focus:outline-none mr-3 ml-3" @click="dropdown()">
 									<avatar :username="user.username" v-if="user" backgroundColor="#276749" :size="30"></avatar>
-									<span v-if="user" class="hidden md:inline-block ml-1">Hi, {{ user.username }}</span>
+									<span v-if="user" class="md:inline-block ml-1">Hi, {{ user.username }}</span>
 								</button>
 							</template>
 							<template v-else>
