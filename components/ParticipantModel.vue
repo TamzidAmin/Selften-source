@@ -11,17 +11,17 @@
 	  <div>
 		<h4 class="text-center py-2">Registered Participants</h4>
 		<hr>
-		<table class="table-sm">
+		<table class="border-collapse w-full">
 		      <thead>
 		        <tr>
-		          <th class="text-left">S.NO</th>
-		          <th class="text-left">Game Name</th>
+		          <th class="p-3 text-gray-800 text-center border border-b">S.NO</th>
+		          <th class="p-3 text-gray-800 text-center border border-b">Game Name</th>
 		        </tr>
 		      </thead>
 		      <tbody>
 		        <tr v-for="(item,index) in match.users" :key="item.name">
-		          <td>{{ index+1 }}</td>
-		          <td>{{ item.pivot.gamename }}</td>
+		          <td class="p-3 text-gray-800 text-center border border-b">{{ index+1 }}</td>
+		          <td class="p-3 text-gray-800 text-center border border-b">{{ item.pivot.gamename }}</td>
 		        </tr>
 		      </tbody>
 		</table>

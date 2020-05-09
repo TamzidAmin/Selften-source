@@ -12,7 +12,7 @@
 		</button>
 
 		<nuxt-link :to="'/playzone/join/'+match.id">
-			<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg" style="margin-top: 10px;">joined</button>
+			<button class="align-middle bg-green-500 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg" style="margin-top: 10px;">Joined</button>
 		</nuxt-link>
 
 		<div v-if="roomactive">
@@ -36,7 +36,7 @@
 
 
 	<nuxt-link :to="'/playzone/join/'+match.id" v-else-if="authuser && isjoined==0">
-		<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg" style="margin-top: 10px;">join</button>
+		<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg" style="margin-top: 10px;">Join</button>
 	</nuxt-link>
 	
 </div>

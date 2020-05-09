@@ -1,8 +1,6 @@
 <template>
-<div class="min-h-screen">
-	<div class="container">
-		<p>Home Page</p>
-	</div>
+<div class="container mx-auto">
+	<p>Home Page</p>
 </div>
 </template>
 

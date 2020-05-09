@@ -18,6 +18,7 @@
 		"nuxt": "^2.0.0",
 		"vue-avatar": "^2.2.0",
 		"vue2-siema": "^0.2.2",
+		"vuejs-loading-plugin": "^1.0.51",
 		"vuejs-progress-bar": "^1.2.2",
 		"vuelidate": "^0.7.5"
 	},

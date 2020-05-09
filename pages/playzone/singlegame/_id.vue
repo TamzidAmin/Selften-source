@@ -1,42 +1,42 @@
 <template>
-	<div class="container mx-auto">
+	<div class="container mx-auto shadow-xl my-5 bg-white p-5">
 		<span style="visibility: hidden;">{{ check() }}  {{ isjoined }}</span>
 		<div class="text-center">
-			<img :src="base_url+'/uploads/product/'+match.product.logo" alt="!opps" style="object-fit: contain;width: 120px;height: 120px;">
+			<img :src="base_url+'/uploads/product/'+match.product.logo" alt="!opps" class="h-20 w-20 mx-auto object-contain">
 		</div>
-		<h2 class="text-center">{{ match.match_name.substring(0, 30) }}</h2>
+		<h2 class="text-center text-xl font-bold">{{ match.match_name.substring(0, 30) }}</h2>
 		
 		<div class="text-center">
 			<div v-if="match.status=='upcoming'">
-				<button tile small class="danger" v-if="match.users.length>=match.max_join">
+				<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg"  v-if="match.users.length>=match.max_join">
 			       Registration Closed
 			    </button>
-			    <button tile small color="success" v-else>
+			    <button color="success" v-else class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg" >
 			      Registration open
 			    </button>
 			</div>
-		    <button tile small class="danger" v-else-if="match.status=='ongoing'">
+		    <button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg"  v-else-if="match.status=='ongoing'">
 		       Live
 		    </button>
 		</div>
 
 		<p class="py-3 text-center text-capitalize mb-0">Platform: {{ match.platform }}</p>
 		
-		<div class="d-flex">
-			<div class="text-center w-33 font-limit">
-				<button color="#C91F4E" fab small dark>
-	              a
+		<div class="flex justify-center">
+			<div class="text-center w-32 font-limit">
+				<button class="align-middle bg-green-100 hover:bg-green-300 p-1 my-2">
+	              <img src="~/assets/tropy1.svg" alt=""  width="25px">
 	            </button>
 	            <p class="mb-0">{{ match.start_time }}</p>
 			</div>
-			<div class="text-center w-33 font-limit">
-				<button color="#C91F4E" fab small dark>
+			<div class="text-center w-32 font-limit">
+				<button class="align-middle bg-green-100 hover:bg-green-300 p-1 my-2">
 	              <img src="~/assets/tropy1.svg" alt=""  width="25px">
 	            </button>
 	            <p class="mb-0">BDT {{ match.total_prize }}</p>
 			</div>
-			<div class="text-center w-33 font-limit">
-				<button color="#C91F4E" fab small dark>
+			<div class="text-center w-32 font-limit">
+				<button class="align-middle bg-green-100 hover:bg-green-300 p-1 my-2">
 	              <img src="~/assets/userp.svg" alt=""  width="25px">
 	            </button>
 	            <p class="mb-0">{{ match.users.length }}/{{ match.max_join }}</p>

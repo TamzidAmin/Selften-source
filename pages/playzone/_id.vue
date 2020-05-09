@@ -7,20 +7,18 @@
         		{{ item }}
       		</li>
       	</ul>
-		
-		
-	      <div
+	    <div
 	        v-for="item in items"
 	        :key="item"
-	      >
+	    >
 	        <div class="root flex">
 		         <div
 		         	style="border-radius: 15px;"
 				    v-for="i in match"
 				   	v-if="i.status==item"
 				  > 
-				    <div style="padding: 10px;margin: 10px;border: 3px solid #C91F4E;border-radius: 15px;overflow: hidden">
-				    	<div style="padding: 10px;" class="bg-light">
+				    <div class="shadow-md hover:shadow-xl rounded-lg overflow-hidden m-3 border-2 border-red-500 border-r-5">
+				    	<div class="p-5">
 				    		<nuxt-link :to="'/playzone/singlegame/'+i.id">
 						    	<div class="flex">
 						    		<div>
@@ -64,8 +62,11 @@
 		    					<div style="width: 100%;margin-top: 12px">
 		    						<Prograsvar :abcd="(i.users.length/i.max_join)*100"/>
 									<div class="flex justify-between">
-										<div class="w-50" style="font-size: 12px;">
+										<div class="w-50" style="font-size: 12px;" v-if="i.max_join-i.users.length>0">
 											Only {{ i.max_join-i.users.length }} spots left
+										</div>
+										<div v-else class="text-green-500 font-bold">
+											Match is full!
 										</div>
 										<div class="w-50 text-right">
 											{{ i.users.length }}/{{ i.max_join }}
@@ -103,17 +104,17 @@
 			Prograsvar
 		},
 	    data () {
-	      return {
-	      	match:[],
-	        tab: null,
-	        cal:0,
-	        knowledge: 0,
-	        loding:false,
-	        items: [
-	          'upcoming','ongoing','result',
-	        ],
-	        active:'upcoming'
-	      }
+	      	return {
+		      	match:[],
+		        tab: null,
+		        cal:0,
+		        knowledge: 0,
+		        loding:false,
+		        items: [
+		          'upcoming','ongoing','result',
+		        ],
+		        active:'upcoming'
+	      	}
 	    },
 		computed: {
 			...mapGetters({
@@ -131,12 +132,14 @@
 				}
 			},
 			fetchdata(item){
+				this.$loading(true)
 				this.active=item
 				this.loding=true;
 				console.log(item);
 				var self = this;
 				axios.get(`/api/matchs/`+item)
 			      .then((res) => {
+					self.$loading(false)
 			      	self.loding=false;
 			      	self.match=res.data;
 			    })

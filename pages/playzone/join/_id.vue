@@ -1,11 +1,11 @@
 <template>
-<div class="container mx-auto my-5">
+<div class="container mx-auto my-5 shadow-xl bg-white p-3">
 	<div class="text-center">
 		<div>
-			<div>{{ check() }}
+			<div class="w-64 mx-auto">{{ check() }}
 				<tbody style="text-align: center;">
 					<tr>
-						<td style="background: black;color: white;text-align: center;">{{ i.match_name }}</td>
+						<td>{{ i.match_name }}</td>
 					</tr>
 					<tr><td>Available Balance: ৳{{ authuser.wallet }}</td></tr>
 					<tr><td>Match Entry Fee Per Person: ৳{{ i.entryfee }}</td></tr>
@@ -16,9 +16,8 @@
 				</tbody>
 			</div>
 		</div>
-		<br>
 		<form>
-		 	<div style="padding: 10px;" width="320px" class="bg-light">
+		 	<div>
 				<table>
 					<tbody>
 						<tr>

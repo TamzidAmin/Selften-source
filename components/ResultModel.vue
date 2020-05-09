@@ -11,21 +11,21 @@
 	  <div>
 		<h4 class="text-center py-2">Result</h4>
 		<hr>
-		<table class="table-sm table-bordered text-center">
+		<table class="border-collapse w-full">
 		      <thead>
 		        <tr>
-		          <th class="text-center">S.NO</th>
-		          <th class="text-center">Game Name</th>
-		          <th class="text-center">Kills</th>
-		          <th class="text-center">Winning</th>
+		          <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300">S.NO</th>
+		          <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300">Game Name</th>
+		          <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300">Kills</th>
+		          <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300">Winning</th>
 		        </tr>
 		      </thead>
 		      <tbody>
 		        <tr v-for="(item,index) in match.users" :key="item.name">
-		          <td>{{ index+1 }}</td>
-		          <td>{{ item.pivot.gamename }}</td>
-		          <td>{{ item.pivot.total_kill }}</td>
-		          <td>{{ item.pivot.total_earn }}</td>
+		          	<td class="p-3 text-gray-800 text-center border border-b">{{ index+1 }}</td>
+		          	<td class="p-3 text-gray-800 text-center border border-b">{{ item.pivot.gamename }}</td>
+		          	<td class="p-3 text-gray-800 text-center border border-b">{{ item.pivot.total_kill }}</td>
+		          	<td class="p-3 text-gray-800 text-center border border-b">{{ item.pivot.total_earn }}</td>
 		        </tr>
 		      </tbody>
 		</table>
