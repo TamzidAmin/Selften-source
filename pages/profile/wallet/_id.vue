@@ -46,7 +46,7 @@
 	    	<div v-if="name=='addmoney'">
 	    		<div class="p-2">
 					<nuxt-link v-for="paymentmethod in data" :to="'/profile/wallet/addwallet/'+paymentmethod.id" :key="paymentmethod.id">
-						<div class="p-3 text-center">
+						<div class="p-3 text-center hover:border-2">
 					       <img :src="'https://admin.selften.com/uploads/payment/'+paymentmethod.logo" class="w-10 h-10"></img>
 
 					        <div class="text-left">
