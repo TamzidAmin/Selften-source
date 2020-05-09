@@ -1,6 +1,6 @@
 <template>
 <div class="container mx-auto my-5">
-	<p class="my-10 text-xl text-green-100" v-if="notice"> <marquee>{{ notice[0].notice }}</marquee> </p>
+	<p class="my-10 text-xl text-green-100" v-if="notice[0]"> <marquee>{{ notice[0].notice }}</marquee> </p>
 	<siema ref="siema" auto-play>
 		<div class="slide" v-for="b in banner">
 		  	<a :href="b.link" target="_blank"><img :src="'https://admin.selften.com/uploads/banner/'+b.banner" alt="" class="mx-auto"/></a>
