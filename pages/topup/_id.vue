@@ -34,7 +34,7 @@
 				    </div>
                     <div class="error text-red-900 ml-3" v-if="!$v.playerid.required">Playerid is required</div>
 				</div>
-				<div v-else class="section select-server flex">
+				<div v-else class="section select-server flex flex-wrap justify-center">
 					<div>
 						<h2 class="circle">
 					        <span>1</span>
@@ -69,7 +69,7 @@
 				        <span>2</span>
 				        Select Recharge
 				    </h2>
-				    <div class="flex flex-wrap">
+				    <div class="flex flex-wrap justify-center">
 					  	<div class="text-center m-2 w-48" v-for="game in packages.topuppackage" :key="game.id">
 				  			<label :for="game.id" class="mb-0 w-48 list-group-item p-2 d-block"  style="font-size: 11px;position: relative;    overflow: hidden;">
 				  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
@@ -78,7 +78,7 @@
 					  		</label>
 					  	</div> 
 				    </div>
-                    <div class="error text-red-900 ml-3" v-if="!$v.selectedpackage.required">Package is required</div>
+                    <div class="error text-red-900 ml-3 text-center" v-if="!$v.selectedpackage.required">Package is required</div>
 				</div>
 				<div class="section select-server">
 				    <h2 class="circle">

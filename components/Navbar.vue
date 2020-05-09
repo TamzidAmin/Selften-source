@@ -48,12 +48,14 @@
 								</button>
 							</template>
 							<template v-else>
-								<nuxt-link class="bg-white hover:text-white hover:bg-green-100 text-green-800 font-semibold py-2 uppercase px-4 border border-green-100 rounded shadow" to="/login">
-									login
-								</nuxt-link>
-								<nuxt-link class="ml-3 bg-green-100 border border-green-100 hover:bg-green-200 text-white font-semibold py-2 px-4 rounded uppercase" to="/register">
-									register
-								</nuxt-link>
+								<div class="p-3">
+									<nuxt-link class="bg-white hover:text-white hover:bg-green-100 text-green-800 font-semibold py-2 uppercase px-4 border border-green-100 rounded shadow" to="/login">
+										login
+									</nuxt-link>
+									<nuxt-link class="ml-3 bg-green-100 border border-green-100 hover:bg-green-200 text-white font-semibold py-2 px-4 rounded uppercase" to="/register">
+										register
+									</nuxt-link>
+								</div>
 							</template>
 						</div>
 						<div id="userMenu" v-if="token" v-bind:class="activeClass ? '' : 'hidden'"  class="bg-white rounded shadow-md mt-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30">
