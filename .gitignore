@@ -6,11 +6,11 @@
 # dbpass=Ad009257
 # phpmyadmin=**+**-**/12
 
-# pm2 restart /var/www/server/server.js --name app
+# pm2 start npm --name "client" -- start
 
 # mdemontoc9@gmail.com
 
-
+ 
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template

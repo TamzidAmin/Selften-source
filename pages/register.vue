@@ -1,11 +1,11 @@
 <template>
 <div class="p-2 h-screen overflow-hidden flex items-center justify-center">
-    <div class="bg-white shadow-lg rounded-lg px-10 bg-gray-300">
+    <div class="bg-white shadow-lg rounded-lg bg-gray-300">
 		<div v-if="mustVerifyEmail" class="alert alert-success" role="alert">
 			verify_email_address
 		</div>
 		<div v-else title="register">
-			<div class="w-full px-6 py-16">
+			<div class="w-full py-16">
                 <div class="mb-4 font-light tracking-widest text-2xl text-center font-bold uppercase">register</div>
 				<form @submit.prevent="register" class="rounded px-8 pt-6 pb-8 mb-4 capitalize">
 					<!-- Name -->
