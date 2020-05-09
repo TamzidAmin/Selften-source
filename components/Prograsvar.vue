@@ -28,7 +28,7 @@
 				  },
 				  layout: {
 				    height: 5,
-				    width: 190,
+				    width: 260,
 				    verticalTextAlign: 61,
 				    horizontalTextAlign: 43,
 				    zeroOffset: 0,

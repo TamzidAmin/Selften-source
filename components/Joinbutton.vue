@@ -2,17 +2,17 @@
 <div> {{ check() }}
 		
 	<div v-if="!authuser">
-		<button onclick="return alert('Please Login to Join');" class="v-btn disabled v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">join</button>
+		<button onclick="return alert('Please Login to Join');" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg" style="margin-top: 10px;">join</button>
 	</div>
 
 	<div v-else-if="isjoined">
 
-		<button @click="roomactives" class="v-btn v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small success--text" style="margin-top: 10px;">
+		<button @click="roomactives" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg" style="margin-top: 10px;">
 			Room Details
 		</button>
 
-		<nuxt-link :to="/join/+match.id">
-			<button class="v-btn v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small success--text" style="margin-top: 10px;">joined</button>
+		<nuxt-link :to="'/playzone/join/'+match.id">
+			<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg" style="margin-top: 10px;">joined</button>
 		</nuxt-link>
 
 		<div v-if="roomactive">
@@ -23,20 +23,20 @@
 	</div>
 
 	<div v-else-if="match.status=='ongoing'">
-		<button class="v-btn disabled v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">Closed</button>
+		<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg" style="margin-top: 10px;">Closed</button>
 	</div>
 
 	<div v-else-if="match.users.length>=match.max_join">
-		<button class="v-btn disabled v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">Closed</button>
+		<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg" style="margin-top: 10px;">Closed</button>
 	</div>
 
 	<div v-else-if="match.status=='result'">
-		<button class="v-btn disabled v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">Closed</button>
+		<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg" style="margin-top: 10px;">Closed</button>
 	</div>
 
 
-	<nuxt-link :to="/join/+match.id" v-else-if="authuser && isjoined==0">
-		<button class="v-btn v-btn--depressed v-btn--flat v-btn--outlined theme--dark v-size--small primary--text" style="margin-top: 10px;">join</button>
+	<nuxt-link :to="'/playzone/join/'+match.id" v-else-if="authuser && isjoined==0">
+		<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg" style="margin-top: 10px;">join</button>
 	</nuxt-link>
 	
 </div>

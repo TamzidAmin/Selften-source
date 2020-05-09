@@ -2,8 +2,8 @@
 <div>
 	<div class="text-center" style="width: 100%">
 
-      	<ul>
-      		<li style="justify-content: center;" v-for="item in items" @click="fetchdata(item)" :key="item">
+      	<ul class="flex justify-center p-3">
+      		<li class="cursor-pointer p-3" :class="active==item ? 'text-red-500' : ''" v-for="item in items" @click="fetchdata(item)" :key="item">
         		{{ item }}
       		</li>
       	</ul>
@@ -13,29 +13,25 @@
 	        v-for="item in items"
 	        :key="item"
 	      >
-	        <div class="root">
+	        <div class="root flex">
 		         <div
 		         	style="border-radius: 15px;"
 				    v-for="i in match"
 				   	v-if="i.status==item"
 				  > 
-				    <div three-line style="padding: 10px;margin: 10px;border: 3px solid #C91F4E;border-radius: 15px;overflow: hidden">
+				    <div style="padding: 10px;margin: 10px;border: 3px solid #C91F4E;border-radius: 15px;overflow: hidden">
 				    	<div style="padding: 10px;" class="bg-light">
-				    		<nuxt-link :to="/singlegame/+i.id">
-						    	<div class="d-flex">
+				    		<nuxt-link :to="'/playzone/singlegame/'+i.id">
+						    	<div class="flex">
 						    		<div>
 						    			<img :src="base_url+'/uploads/product/'+i.product.logo" alt="!opps" style="object-fit: contain;width: 75px;height: 75px;">
 						    		</div>
 						    		<div class="content">
 						    			<h2 class="text-left">{{ i.match_name.substring(0, 16) }}</h2>
-						    			<div class="d-flex">
-						    				<div>
-						    					<span class="time">Time : {{ formatDate(i.start_at) }} at {{ i.start_time }}</span>
-						    				</div>
-						    			</div>
+					    				<span class="text-sm">Time : {{ formatDate(i.start_at) }} at {{ i.start_time }}</span>
 						    		</div>
 						    	</div>
-					    		<div class="d-flex single-box">
+					    		<div class="flex single-box">
 									<div style="margin-right: 10px;">
 				    					<h5 style="font-size: 10px">TOTAL PRIZE</h5>
 				    					<span>৳ {{ i.total_prize }}</span>
@@ -49,7 +45,7 @@
 				    					<span>৳ {{ i.entryfee }}</span>
 				    				</div>
 					    		</div>
-					    		<div class="d-flex single-box">
+					    		<div class="flex single-box">
 									<div style="margin-right: 10px;">
 				    					<h5 style="font-size: 10px">TYPE</h5>
 				    					<span style="text-transform: capitalize">{{ i.type }}</span>
@@ -66,8 +62,8 @@
 						    </nuxt-link>
 							<div style="display: flex;" class="text-left">
 		    					<div style="width: 100%;margin-top: 12px">
-		    						<Prograsvar   :abcd="(i.users.length/i.max_join)*100"/>
-									<div class="d-flex">
+		    						<Prograsvar :abcd="(i.users.length/i.max_join)*100"/>
+									<div class="flex justify-between">
 										<div class="w-50" style="font-size: 12px;">
 											Only {{ i.max_join-i.users.length }} spots left
 										</div>
@@ -96,91 +92,89 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
-import Joinbutton from '~/components/Joinbutton'
-import Prograsvar from '~/components/Prograsvar'
-import axios from '~/plugins/axios'
-export default {
-	props:['matches'],
-	components:{
-		Joinbutton,
-		Prograsvar
-	},
-    data () {
-      return {
-      	match:[],
-        tab: null,
-        cal:0,
-        knowledge: 0,
-        loding:false,
-        items: [
-          'upcoming','ongoing','result',
-        ],
-      }
-    },
-	computed: {
-		...mapGetters({
-		   authuser: 'user',
-		   base_url:'base_url'
-		})
-	},
-	methods: {
-		async users(){
-			if(this.authuser && this.cal==0){
-				this.cal=1;
-				let { data } = await axios.get(`/api/updateuser/`+this.authuser.id);
-				this.$store.commit('setUser', data)
-				console.log(data);
-			}
+	import { mapMutations, mapGetters } from 'vuex'
+	import Joinbutton from '~/components/Joinbutton'
+	import Prograsvar from '~/components/Prograsvar'
+	import axios from '~/plugins/axios'
+	export default {
+		props:['matches'],
+		components:{
+			Joinbutton,
+			Prograsvar
 		},
-		fetchdata(item){
-			this.loding=true;
-			console.log(item);
-			var self = this;
-			axios.get(`/api/matchs/`+item)
-		      .then((res) => {
-		      	self.loding=false;
-		      	self.match=res.data;
-		    })
+	    data () {
+	      return {
+	      	match:[],
+	        tab: null,
+	        cal:0,
+	        knowledge: 0,
+	        loding:false,
+	        items: [
+	          'upcoming','ongoing','result',
+	        ],
+	        active:'upcoming'
+	      }
+	    },
+		computed: {
+			...mapGetters({
+			   authuser: 'user',
+			   base_url:'base_url'
+			})
 		},
-	  	formatDate(date) {
-	  		var d = new Date(date);
-	  		var day = d.getDate();
-		  	var monthIndex = d.getMonth();
-		  	var year = d.getFullYear();
-		  	return day + '/' + ++monthIndex + '/' + year;
-		},
-		check(){
-			let exists=0;
-			for (var i = this.i.users.length - 1; i >= 0; i--) {
-				let exists = Object.values(this.i.users[i]).includes(this.authuser.id);
-				if(exists==true){
-					this.isjoined=1;
-					console.log(this.isjoined);
-					break;
+		methods: {
+			async users(){
+				if(this.authuser && this.cal==0){
+					this.cal=1;
+					let { data } = await axios.get(`/api/updateuser/`+this.authuser.id);
+					this.$store.commit('setUser', data)
+					console.log(data);
+				}
+			},
+			fetchdata(item){
+				this.active=item
+				this.loding=true;
+				console.log(item);
+				var self = this;
+				axios.get(`/api/matchs/`+item)
+			      .then((res) => {
+			      	self.loding=false;
+			      	self.match=res.data;
+			    })
+			},
+		  	formatDate(date) {
+		  		var d = new Date(date);
+		  		var day = d.getDate();
+			  	var monthIndex = d.getMonth();
+			  	var year = d.getFullYear();
+			  	return day + '/' + ++monthIndex + '/' + year;
+			},
+			check(){
+				let exists=0;
+				for (var i = this.i.users.length - 1; i >= 0; i--) {
+					let exists = Object.values(this.i.users[i]).includes(this.authuser.id);
+					if(exists==true){
+						this.isjoined=1;
+						console.log(this.isjoined);
+						break;
+					}
 				}
 			}
-		}
-	},
-	asyncData ({ params }) {
-	    return axios.get(`/api/matchs/upcoming`)
-	      .then((res) => {
-	        return { match: res.data }
-	    })
-  	}
-};
+		},
+		asyncData ({ params }) {
+		    return axios.get(`/api/matchs/upcoming`)
+		      .then((res) => {
+		        return { match: res.data }
+		    })
+	  	}
+	};
 </script>
 
 <style>
-	
 	.bg-color{
 		background: #C91F4E;
 		margin:5px;
 	}
 	@media only screen and (max-width: 320px) {
-		.time{
-			font-size: 11px!important;
-		}
 		.content{
 			font-size: 20px;
 		}
@@ -264,17 +258,6 @@ export default {
 	    -webkit-box-shadow: 3px 3px 5px 6px #ccc;
 	    -moz-box-shadow: 3px 3px 5px 6px #ccc;
 	    box-shadow: -2px 2px 8px 6px #ccc;
-	}
-	ul{
-		list-style: none;
-		padding: 0px!important;
-		margin: 0px;
-		
-	}
-	ul li{
-		padding: 0px!important;
-		margin: 0px!important;
-
 	}
 	ul p{
 		margin-bottom: 0px!important;
