@@ -1,32 +1,32 @@
 <template>
-  <v-row justify="center">
+  <div>
 	<div class="my-2 text-center">
-    	<v-btn small class="w-300" color="secondary" dark @click.stop="dialog = true">RULES</v-btn>
+    	<button small class="w-300" color="secondary" dark @click.stop="dialog = true">RULES</button>
   	</div>
 
-	<v-dialog
+	<div
 	  v-model="dialog"
 	  max-width="290"
 	>
-	  <v-card>
+	  <div>
 		<h2 class="text-center">Rules</h2>
 		<div v-html="match.product.rules">
 		 	
 		</div>
 
 		<div class="text-right">
-		  <v-btn
+		  <button
 		  	class="m-3"
 			color="primary"
 			small
 			@click="dialog = false"
 		  >
 			Close
-		  </v-btn>
+		  </button>
 		</div>
-	  </v-card>
-	</v-dialog>
-  </v-row>
+	  </div>
+	</div>
+  </div>
 </template>
 <script>
   export default {

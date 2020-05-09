@@ -1,9 +1,8 @@
 <template>
-<v-layout column justify-center align-center>
-<div>
-	<v-card style="padding: 10px;" width="320px" class="bg-light">
-		<v-simple-table>{{ check() }}
-			<template v-slot:default>
+<div class="container mx-auto">
+	<div>
+		<div style="padding: 10px;" width="320px" class="bg-light">
+			<div>{{ check() }}
 				<tbody style="text-align: center;">
 					<tr>
 						<td style="background: black;color: white;text-align: center;">{{ i.match_name }}</td>
@@ -13,20 +12,18 @@
 					<tr v-if="row=='solo'" style="visibility: hidden;"><td>Team Entry Fee : ৳{{ totalfee=i.entryfee }}</td></tr>
 					<tr v-if="row=='duo'"><td>Team Entry Fee : ৳{{ totalfee=i.entryfee*2 }}</td></tr>
 					<tr v-if="row=='squad'"><td>Team Entry Fee : ৳{{ totalfee=i.entryfee*4 }}</td></tr>
-					<tr><td><v-btn small color="primary">{{ i.max_join-i.users.length }} Spots Left</v-btn></td></tr>
+					<tr><td><button small color="primary">{{ i.max_join-i.users.length }} Spots Left</button></td></tr>
 				</tbody>
-			</template>
-		</v-simple-table>
-	</v-card>
-	<br>
-	<v-form
-		ref="form"
-		v-model="valid"
-		lazy-validation
-	>
-	 	<v-card style="padding: 10px;" width="320px" class="bg-light">
-			<v-simple-table>
-				<template v-slot:default>
+			</div>
+		</div>
+		<br>
+		<form
+			ref="form"
+			v-model="valid"
+			lazy-validation
+		>
+		 	<div style="padding: 10px;" width="320px" class="bg-light">
+				<table>
 					<tbody>
 						<tr>
 							<td style="background: black;color: white;text-align: center;text-transform: capitalize;">{{ i.type }} Registration</td>
@@ -40,21 +37,19 @@
 						</tr>
 						<tr style="text-align: center;">
 							 <td>
-								 <v-radio-group v-model="row" row style="justify-content: center;">
-									<div v-if="i.type=='duo'" class="d-flex" style="justify-content: center">
-										<v-radio label="Solo" value="solo"></v-radio>
-										<v-radio label="Duo" value="duo"></v-radio>
-									</div>
-									{{  }}
-									<div v-if="i.type=='solo'" style="text-align: center">
-										<v-radio  label="solo" value="solo"></v-radio>
-									</div>
-									<div v-if="i.type=='squad'" class="d-flex" style="justify-content: center">
-										<v-radio label="solo" value="solo"></v-radio>
-										<v-radio label="duo" value="duo"></v-radio>
-										<v-radio label="squad" value="squad"></v-radio>
-									</div>
-								</v-radio-group>
+								<div v-if="i.type=='duo'" class="d-flex" style="justify-content: center">
+									<input type="redio" label="Solo" value="solo"/>
+									<input type="redio" label="Duo" value="duo"/>
+								</div>
+								{{  }}
+								<div v-if="i.type=='solo'" style="text-align: center">
+									<input type="redio"  label="solo" value="solo"/>
+								</div>
+								<div v-if="i.type=='squad'" class="d-flex" style="justify-content: center">
+									<input type="redio" label="solo" value="solo"/>
+									<input type="redio" label="duo" value="duo"/>
+									<input type="redio" label="squad" value="squad"/>
+								</div>
 							 </td>
 						</tr>
 						<tr class="text-center">
@@ -65,79 +60,69 @@
 						<tr style="text-align: center;">
 							<td>
 								<div v-if="row=='solo'" style="padding: 10px">
-										<v-text-field
+										<input
 											v-model="player1"
 											:rules="nameRules"
 											:label="'Player 1 '+i.product.name+' Name'"
 											required
-										></v-text-field>
+										/>
 								</div>
 								<div v-if="row=='duo'" style="padding: 10px">
-										<v-text-field
+										<input
 											v-model="player1"
 											:rules="nameRules"
 											 :label="'Player 1 '+i.product.name+' Name'"
 											required
-										></v-text-field>
-										<v-text-field
+										/>
+										<input
 											v-model="player2"
 											:rules="nameRules"
 											:label="'Player 2 '+i.product.name+' Name'"
 											required
-										></v-text-field>
+										/>
 								</div>
 								<div v-if="row=='squad'" style="padding: 10px">
-										<v-text-field
+										<input
 											v-model="player1"
 											:rules="nameRules"
 											 :label="'Player 1 '+i.product.name+' Name'"
 											required
-										></v-text-field>
-										<v-text-field
+										/>
+										<input
 											v-model="player2"
 											:rules="nameRules"
 											 :label="'Player 2 '+i.product.name+' Name'"
 											required
-										></v-text-field>
-										<v-text-field
+										/>
+										<input
 											v-model="player3"
 											:rules="nameRules"
 											 :label="'Player 3 '+i.product.name+' Name'"
 											required
-										></v-text-field>
-										<v-text-field
+										/>
+										<input
 											v-model="player4"
 											:rules="nameRules"
 											:label="'Player 4 '+i.product.name+' Name'"
 											required
-										></v-text-field>
+										/>
 								</div>
 								<div> 
-									<v-btn v-if="(authuser.wallet+authuser.earn_wallet)>=totalfee && isjoined==0" @click="join" depressed small color="primary">Join</v-btn>
-									<v-btn v-else-if="isjoined==1" depressed small color="success">Joined</v-btn>
+									<button v-if="(authuser.wallet+authuser.earn_wallet)>=totalfee && isjoined==0" @click="join" depressed small color="primary">Join</button>
+									<button v-else-if="isjoined==1" depressed small color="success">Joined</button>
 									<nuxt-link :to="/wallet/+authuser.id" v-else>
-										<v-btn depressed small color="primary">Add Money</v-btn>
+										<button depressed small color="primary">Add Money</button>
 									</nuxt-link>
 								</div>
 								</td>
 							</tr>
 					</tbody>
-				</template>
-			</v-simple-table>
-			<br>
-			<v-alert
-		      v-model="alert"
-			    outlined
-		      	type="success"
-		     	text
-		     	@click="clode"
-		    >
-		      Joined successfully
-		    </v-alert>
-		</v-card>
-	</v-form>		
+				</table>
+				<br>
+			</div>
+		</form>		
 	</div>
-</v-layout>
+</div>
 </template>
 
 <script>
@@ -161,19 +146,13 @@ export default {
 			tab: null,
 			isjoined:0,
 			knowledge: 0,
-			nameRules: [
-				v => !!v || 'Player Name is required',
-				v =>
-		          /[^0-9]/g.test(v) ||
-		          "Player id contains at least one character"
-			],
 			items: [
 				'upcoming','ongoing','result',
 			],
 		}
 	},
 	computed: mapGetters({
-		authuser: 'authuser',
+		authuser: 'user',
 		base_url:'base_url'
 	}),
 	methods: {

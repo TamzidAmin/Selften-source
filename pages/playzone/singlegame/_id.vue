@@ -81,7 +81,7 @@ export default {
       }
     },
 	computed: mapGetters({
-		authuser: 'authuser',
+		authuser: 'user',
 		base_url:'base_url'
 	}),
 	methods: {

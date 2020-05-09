@@ -1,18 +1,17 @@
 <template>
-  <v-row justify="center">
+  <div justify="center">
 	<div class="my-2 text-center">
-    	<v-btn small class="w-300" color="secondary" dark @click.stop="dialog = true">Result</v-btn>
+    	<button small class="w-300" color="secondary" dark @click.stop="dialog = true">Result</button>
   	</div>
 
-	<v-dialog
+	<div
 	  v-model="dialog"
 	  max-width="290"
 	>
-	  <v-card>
+	  <div>
 		<h4 class="text-center py-2">Result</h4>
 		<hr>
-		<v-simple-table class="table-sm table-bordered text-center">
-		    <template v-slot:default>
+		<table class="table-sm table-bordered text-center">
 		      <thead>
 		        <tr>
 		          <th class="text-center">S.NO</th>
@@ -29,22 +28,21 @@
 		          <td>{{ item.pivot.total_earn }}</td>
 		        </tr>
 		      </tbody>
-		    </template>
-		</v-simple-table>
+		</table>
 
 		<div class="text-right">
-		  <v-btn
+		  <button
 		  	class="m-3"
 			color="primary"
 			small
 			@click="dialog = false"
 		  >
 			Close
-		  </v-btn>
+		  </button>
 		</div>
-	  </v-card>
-	</v-dialog>
-  </v-row>
+	  </div>
+	</div>
+  </div>
 </template>
 <script>
   export default {
