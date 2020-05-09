@@ -52,7 +52,7 @@
 					        <input
 					        	class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
 						       	placeholder="Enter Game Password"
-						        v-model="gamepassword"
+						        v-model="ingamepassword"
 						    />
 					    </div>
                     </div>
@@ -119,7 +119,7 @@
 							      </div>
 								<br>
 							  </div>
-							<p class="text-red-500" v-if="submitStatus === 'OK'">{{  resmessage }}</p>
+							<p class="text-red-500 font-extrabold text-2xl" v-if="submitStatus === 'OK'">{{  resmessage }}</p>
 							<p class="text-red-500" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
 							<p class="text-red-500" v-if="submitStatus === 'PENDING'">Sending...</p>
 					  	</div>
@@ -163,7 +163,6 @@
 				selectedmgetway:[],
 				playerid:null,
 				emailaddress:'',
-				gamepassword:'',
 				loading:false,
 	  			valid: true,
 				alert: false,
