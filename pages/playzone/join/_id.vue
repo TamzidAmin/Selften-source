@@ -1,7 +1,7 @@
 <template>
-<div class="container mx-auto">
-	<div>
-		<div style="padding: 10px;" width="320px" class="bg-light">
+<div class="container mx-auto my-5">
+	<div class="text-center">
+		<div>
 			<div>{{ check() }}
 				<tbody style="text-align: center;">
 					<tr>
@@ -17,11 +17,7 @@
 			</div>
 		</div>
 		<br>
-		<form
-			ref="form"
-			v-model="valid"
-			lazy-validation
-		>
+		<form>
 		 	<div style="padding: 10px;" width="320px" class="bg-light">
 				<table>
 					<tbody>
@@ -38,17 +34,17 @@
 						<tr style="text-align: center;">
 							 <td>
 								<div v-if="i.type=='duo'" class="d-flex" style="justify-content: center">
-									<input type="redio" label="Solo" value="solo"/>
-									<input type="redio" label="Duo" value="duo"/>
+									<input type="radio" v-model="row" name="match" label="Solo" value="solo"/>
+									<input type="radio" v-model="row" name="match" label="Duo" value="duo"/>
 								</div>
 								{{  }}
 								<div v-if="i.type=='solo'" style="text-align: center">
-									<input type="redio"  label="solo" value="solo"/>
+									<input type="radio" v-model="row" name="match" label="solo" value="solo"/>
 								</div>
 								<div v-if="i.type=='squad'" class="d-flex" style="justify-content: center">
-									<input type="redio" label="solo" value="solo"/>
-									<input type="redio" label="duo" value="duo"/>
-									<input type="redio" label="squad" value="squad"/>
+									<input type="radio" v-model="row" name="match" label="solo" value="solo"/>
+									<input type="radio" v-model="row" name="match" label="duo" value="duo"/>
+									<input type="radio" v-model="row" name="match" label="squad" value="squad"/>
 								</div>
 							 </td>
 						</tr>
@@ -60,60 +56,64 @@
 						<tr style="text-align: center;">
 							<td>
 								<div v-if="row=='solo'" style="padding: 10px">
-										<input
-											v-model="player1"
-											:rules="nameRules"
-											:label="'Player 1 '+i.product.name+' Name'"
-											required
-										/>
+									<input
+										v-model="player1"
+										class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+										:placeholder="'Player 1 '+i.product.name+' Name'"
+										required
+									/>
+                        			<div class="error text-red-900" v-if="!$v.player1.required">Player is required</div>
 								</div>
 								<div v-if="row=='duo'" style="padding: 10px">
 										<input
 											v-model="player1"
-											:rules="nameRules"
-											 :label="'Player 1 '+i.product.name+' Name'"
+											class="px-3 py-3 my-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+											 :placeholder="'Player 1 '+i.product.name+' Name'"
 											required
 										/>
 										<input
 											v-model="player2"
-											:rules="nameRules"
-											:label="'Player 2 '+i.product.name+' Name'"
+											class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+											:placeholder="'Player 2 '+i.product.name+' Name'"
 											required
 										/>
 								</div>
 								<div v-if="row=='squad'" style="padding: 10px">
 										<input
 											v-model="player1"
-											:rules="nameRules"
-											 :label="'Player 1 '+i.product.name+' Name'"
+											class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+											 :placeholder="'Player 1 '+i.product.name+' Name'"
 											required
 										/>
 										<input
 											v-model="player2"
-											:rules="nameRules"
-											 :label="'Player 2 '+i.product.name+' Name'"
+											class="px-3 py-3 my-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+											 :placeholder="'Player 2 '+i.product.name+' Name'"
 											required
 										/>
 										<input
 											v-model="player3"
-											:rules="nameRules"
-											 :label="'Player 3 '+i.product.name+' Name'"
+											class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+											 :placeholder="'Player 3 '+i.product.name+' Name'"
 											required
 										/>
 										<input
 											v-model="player4"
-											:rules="nameRules"
-											:label="'Player 4 '+i.product.name+' Name'"
+											class="px-3 py-3 my-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+											:placeholder="'Player 4 '+i.product.name+' Name'"
 											required
 										/>
 								</div>
 								<div> 
-									<button v-if="(authuser.wallet+authuser.earn_wallet)>=totalfee && isjoined==0" @click="join" depressed small color="primary">Join</button>
-									<button v-else-if="isjoined==1" depressed small color="success">Joined</button>
+									<button v-if="(authuser.wallet+authuser.earn_wallet)>=totalfee && isjoined==0" @click="join" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Join</button>
+									<button v-else-if="isjoined==1" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg opacity-50">Joined</button>
 									<nuxt-link :to="/wallet/+authuser.id" v-else>
-										<button depressed small color="primary">Add Money</button>
+										<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Add Money</button>
 									</nuxt-link>
 								</div>
+								<p class="text-red-500" v-if="submitStatus === 'OK'">{{  error }}</p>
+								<p class="text-red-500" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
+								<p class="text-red-500" v-if="submitStatus === 'PENDING'">Sending...</p>
 								</td>
 							</tr>
 					</tbody>
@@ -128,6 +128,8 @@
 <script>
 import { mapMutations, mapGetters } from 'vuex'
 import axios from '~/plugins/axios'
+import { required } from 'vuelidate/lib/validators'
+
 export default {
 	props:['matches'],
 	data () {
@@ -149,19 +151,30 @@ export default {
 			items: [
 				'upcoming','ongoing','result',
 			],
+			submitStatus:null
 		}
 	},
 	computed: mapGetters({
 		authuser: 'user',
 		base_url:'base_url'
 	}),
+	validations: {
+	    player1: {
+	      required
+	    },
+	},
 	methods: {
 		clode(){
 			this.alert=false
 		},
 		join(){
 			var self = this;
-			if (this.$refs.form.validate()) {
+			this.$v.$touch()
+		  	this.loading=true;
+			if (this.$v.$invalid) {
+	    		this.submitStatus = 'ERROR'
+	  		}else {
+	  			this.submitStatus = 'PENDING'
 				self.isjoined=1;
 				axios.post(`/api/join/${this.i.id}`,{
 					user_id: this.authuser.id,
@@ -174,6 +187,7 @@ export default {
 					fee:this.totalfee
 				})
 				.then((res) => {
+					self.submitStatus = 'OK'
 					self.alert=true
 					console.log(res);
 				})

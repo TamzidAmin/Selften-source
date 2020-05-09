@@ -1,5 +1,5 @@
 <template>
-	<div class="max-width-320">
+	<div class="container mx-auto">
 		<span style="visibility: hidden;">{{ check() }}  {{ isjoined }}</span>
 		<div class="text-center">
 			<img :src="base_url+'/uploads/product/'+match.product.logo" alt="!opps" style="object-fit: contain;width: 120px;height: 120px;">
