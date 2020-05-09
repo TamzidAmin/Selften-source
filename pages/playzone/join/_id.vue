@@ -2,58 +2,79 @@
 <div class="container mx-auto my-5 shadow-xl bg-white p-3">
 	<div class="text-center">
 		<div>
-			<div class="w-64 mx-auto">{{ check() }}
-				<tbody style="text-align: center;">
-					<tr>
-						<td>{{ i.match_name }}</td>
-					</tr>
-					<tr><td>Available Balance: ৳{{ authuser.wallet }}</td></tr>
-					<tr><td>Match Entry Fee Per Person: ৳{{ i.entryfee }}</td></tr>
-					<tr v-if="row=='solo'" style="visibility: hidden;"><td>Team Entry Fee : ৳{{ totalfee=i.entryfee }}</td></tr>
-					<tr v-if="row=='duo'"><td>Team Entry Fee : ৳{{ totalfee=i.entryfee*2 }}</td></tr>
-					<tr v-if="row=='squad'"><td>Team Entry Fee : ৳{{ totalfee=i.entryfee*4 }}</td></tr>
-					<tr><td><button small color="primary">{{ i.max_join-i.users.length }} Spots Left</button></td></tr>
-				</tbody>
+			<div class="text-center">{{ check() }}
+				<table class="border-collapse w-full">
+					<tbody>
+						<tr class="p-3 text-gray-800 text-center border border-b">
+							<td class="text-xl font-bold bg-green-100 text-white py-3">{{ i.match_name }}</td>
+						</tr>
+						<tr>
+							<td class="p-3 text-gray-800 text-center border border-b font-bold">Available Balance: ৳{{ authuser.wallet }}</td>
+						</tr>
+						<tr><td class="p-3 text-gray-800 text-center border border-b font-bold">Match Entry Fee Per Person: ৳{{ i.entryfee }}</td></tr>
+						<tr v-if="row=='solo'" style="visibility: hidden;"><td class="p-3 text-gray-800 text-center border border-b font-bold">Team Entry Fee : ৳{{ totalfee=i.entryfee }}</td></tr>
+						<tr v-if="row=='duo'"><td class="p-3 text-gray-800 text-center border border-b font-bold">Team Entry Fee : ৳{{ totalfee=i.entryfee*2 }}</td></tr>
+						<tr v-if="row=='squad'"><td class="p-3 text-gray-800 text-center border border-b font-bold">Team Entry Fee : ৳{{ totalfee=i.entryfee*4 }}</td></tr>
+						<tr><td class="p-3 text-gray-800 text-center border border-b"><button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg my-3">{{ i.max_join-i.users.length }} Spots Left</button></td></tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 		<form>
 		 	<div>
-				<table>
+				<table class="border-collapse w-full">
 					<tbody>
 						<tr>
-							<td style="background: black;color: white;text-align: center;text-transform: capitalize;">{{ i.type }} Registration</td>
+							<td class="text-xl font-bold bg-green-100 text-white capitalize py-3">{{ i.type }} Registration</td>
 						</tr>
 						<tr>
-							<td style="padding: 5px;text-align: center;">
+							<td class="p-3 text-gray-800 text-center border border-b font-extrabold">
 								<span v-if="i.type=='duo'">This is Duo match.You can join as Solo or Duo.</span>
 								<span v-if="i.type=='solo'">This is Solo match.You can join as Solo.</span>
 								<span v-if="i.type=='squad'">This is Squad match.You can join as Solo,Duo or Squad</span>
 							</td>
 						</tr>
 						<tr style="text-align: center;">
-							 <td>
+							 <td class="p-3 text-gray-800 text-center border border-b font-extrabold">
 								<div v-if="i.type=='duo'" class="d-flex" style="justify-content: center">
-									<input type="radio" v-model="row" name="match" label="Solo" value="solo"/>
-									<input type="radio" v-model="row" name="match" label="Duo" value="duo"/>
+									<label for="Solo" class="py-3">
+										<input type="radio" v-model="row" name="match" id="Solo" value="solo"/>
+										<span class="mb-5">Solo</span>
+									</label>
+									<label for="Duo">
+										<input type="radio" v-model="row" name="match" id="Duo" value="duo"/>
+										<span class="mb-5">Duo</span>
+									</label>
 								</div>
-								{{  }}
 								<div v-if="i.type=='solo'" style="text-align: center">
-									<input type="radio" v-model="row" name="match" label="solo" value="solo"/>
+									<label for="solo">
+										<input type="radio" v-model="row" name="match" id="solo" value="solo"/>
+										<span class="mb-5">Solo</span>
+									</label>
 								</div>
 								<div v-if="i.type=='squad'" class="d-flex" style="justify-content: center">
-									<input type="radio" v-model="row" name="match" label="solo" value="solo"/>
-									<input type="radio" v-model="row" name="match" label="duo" value="duo"/>
-									<input type="radio" v-model="row" name="match" label="squad" value="squad"/>
+									<label for="Solo">
+										<input type="radio" class="p-1 m-3" v-model="row" name="match" id="solo" value="solo"/>
+										<span class="mb-5">Solo</span>
+									</label>
+									<label for="duo">
+										<input type="radio" class="p-1 m-3" v-model="row" name="match" id="duo" value="duo"/>
+										<span class="mb-5">Duo</span>
+									</label>
+									<label for="squad">
+										<input type="radio" class="p-1 m-3" v-model="row" name="match" id="squad" value="squad"/>
+										<span class="mb-5">Squad</span>
+									</label>
 								</div>
 							 </td>
 						</tr>
 						<tr class="text-center">
-							<td class="text-center">
+							<td class="p-3 text-gray-800 text-center border border-b font-extrabold">
 								Enter Your Exact {{ i.product.name }} Name
 							</td>
 						</tr>
 						<tr style="text-align: center;">
-							<td>
+							<td class="p-3 text-gray-800 text-center border border-b font-extrabold">
 								<div v-if="row=='solo'" style="padding: 10px">
 									<input
 										v-model="player1"
