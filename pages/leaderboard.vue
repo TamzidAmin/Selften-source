@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="container mx-auto">
     <img :src="'https://admin.selften.com/uploads/leaderboard/'+leaderbordinfo[0].banner" alt="" style="object-fit: cover;width: 100%;max-height: 50vh;    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);;border: 2px solid;">
     <br>
     <div class="v-data-table v-data-table--fixed-height theme--light box-shodow" style="min-width: 350px;">
