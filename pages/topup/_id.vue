@@ -224,6 +224,7 @@
 						axios.post('/api/packageorder', {
 						    topuppackage_id: this.selectedpackage.id,
 						    name: this.selectedpackage.name,
+						    product_id: this.selectedpackage.product_id,
 						    ingameid: this.ingameid,
 						    ingamepassword: this.ingamepassword,
 						    user_id:this.authuser.id,
@@ -231,6 +232,7 @@
 						    emailaddress:'111',
 						    status: 'pending',
 						    amount:this.selectedpackage.price,
+						    bprice:this.selectedpackage.bprice,
 						})
 						.then(function (response) {
 							self.submitStatus = 'OK'
@@ -266,13 +268,12 @@
 		    }
 	  	},
 	  	head () {
-	    return {
-		    title: "Free Fire diamond",
-		    meta: [
-		        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
-		        { hid: 'diamond', name: 'diamond', content: 'Free Fire diamond' }
-		      ]
-		    }
+		    return {
+			    title: "Free Fire diamond",
+			    meta: [
+			        { hid: 'diamond', name: 'diamond', content: 'Free Fire diamond' }
+			    ]
+			}
 	  	}
 	}
 </script>
