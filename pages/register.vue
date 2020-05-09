@@ -1,5 +1,5 @@
 <template>
-<div class="p-2 h-screen overflow-hidden flex items-center justify-center">
+<div class="p-2 h-screen overflow-hidden flex items-center justify-center"><span class="loading-screen loading-circle loading-text"></span>
     <div class="bg-white shadow-lg rounded-lg bg-gray-300">
 		<div v-if="mustVerifyEmail" class="alert alert-success" role="alert">
 			verify_email_address 

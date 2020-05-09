@@ -46,7 +46,19 @@ export default {
 		// Doc: https://axios.nuxtjs.org/usage
 		'@nuxtjs/axios',
 		'@nuxtjs/pwa',
+		['@nuxtjs/google-adsense', {
+      		id: 'ca-pub-2716727174821674'
+    	}]
 	],
+
+	pwa: {
+	  icon: {
+	    iconSrc:'~/assets/selften.png',
+	  },
+	  manifest: {
+	    name: 'Selften',
+	  }
+	},
 	/*
 	** Axios module configuration
 	** See https://axios.nuxtjs.org/options
