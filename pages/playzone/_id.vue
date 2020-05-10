@@ -3,7 +3,7 @@
 	<div class="text-center" style="width: 100%">
 
       	<ul class="flex justify-center p-3">
-      		<li class="cursor-pointer p-3" :class="active==item ? 'text-red-500' : ''" v-for="item in items" @click="fetchdata(item)" :key="item">
+      		<li class="cursor-pointer p-2 capitalize" :class="active==item ? 'text-red-500 border-2 border-green-100 rounded-full' : ''" v-for="item in items" @click="fetchdata(item)" :key="item">
         		{{ item }}
       		</li>
       	</ul>
