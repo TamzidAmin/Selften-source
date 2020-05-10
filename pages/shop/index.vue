@@ -2,20 +2,22 @@
 	<div class="container mx-auto my-3">
 
 		<div class="flex flex-wrap">
-			<div class="m-1 w-64 cursor-pointer border b-gray-400 rounded flex flex-col justify-center items-center text-center p-6 bg-white">
+			<div class="m-1 hover:shadow-xl w-64 cursor-pointer border b-gray-400 rounded flex flex-col justify-center items-center text-center p-6 bg-white">
 			  <div class="w-32 h-32 flex items-center justify-center">
 			   <svg class="h-20" viewBox="0 0 81 73" xmlns="http://www.w3.org/2000/svg"><g fill-rule="nonzero" fill="none"><path d="M35.288 26.431a2.283 2.283 0 01-4.218-1.746 19.025 19.025 0 0117.582-11.75c10.506 0 19.022 8.516 19.022 19.022 0 2.155-.36 4.264-1.055 6.26a2.283 2.283 0 01-4.311-1.502c.528-1.515.8-3.116.8-4.758 0-7.985-6.472-14.457-14.456-14.457a14.46 14.46 0 00-13.364 8.931zM71.248 9.36a2.283 2.283 0 010 3.228l-3.227 3.228a2.283 2.283 0 01-3.228-3.228L68.02 9.36a2.283 2.283 0 013.228 0zM48.653 0a2.283 2.283 0 012.283 2.283v4.565a2.283 2.283 0 11-4.565 0V2.283A2.283 2.283 0 0148.652 0zM80.61 31.957a2.283 2.283 0 01-2.283 2.282h-4.565a2.283 2.283 0 110-4.565h4.565a2.283 2.283 0 012.283 2.283zM26.056 9.36a2.283 2.283 0 013.228 0l3.228 3.228a2.283 2.283 0 11-3.228 3.228l-3.228-3.228a2.283 2.283 0 010-3.228z" fill="#FECA57"/><path d="M45.138 37.283a2.283 2.283 0 01-1.93-1.064 20.524 20.524 0 00-17.382-9.589c-11.346 0-20.543 9.198-20.543 20.544s9.197 20.543 20.543 20.543H55.5c8.404 0 15.217-6.813 15.217-15.217S63.904 37.283 55.5 37.283H45.138zm1.22-4.566H55.5c10.926 0 19.783 8.857 19.783 19.783 0 10.926-8.857 19.783-19.783 19.783H25.826C11.96 72.283.717 61.04.717 47.173c0-13.866 11.242-25.108 25.11-25.108a25.08 25.08 0 0120.531 10.652z" fill="#0ABDE3"/></g></svg>
 			  </div>
 			  <p class="text-gray-700 mb-2">Partly cloud</p>
 			  <div class="text-3xl font-bold text-gray-900 mb-6">200$</div>
+			   <button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Add To Cart</button>
 			</div>
 
-			<div class="m-1 w-64 cursor-pointer border b-gray-400 rounded flex flex-col justify-center items-center text-center p-6 bg-white">
+			<div class="m-1 w-64 hover:shadow-xl cursor-pointer border b-gray-400 rounded flex flex-col justify-center items-center text-center p-6 bg-white">
 			  <div class="w-32 h-32 flex items-center justify-center">
 			   <svg class="h-20" viewBox="0 0 81 73" xmlns="http://www.w3.org/2000/svg"><g fill-rule="nonzero" fill="none"><path d="M35.288 26.431a2.283 2.283 0 01-4.218-1.746 19.025 19.025 0 0117.582-11.75c10.506 0 19.022 8.516 19.022 19.022 0 2.155-.36 4.264-1.055 6.26a2.283 2.283 0 01-4.311-1.502c.528-1.515.8-3.116.8-4.758 0-7.985-6.472-14.457-14.456-14.457a14.46 14.46 0 00-13.364 8.931zM71.248 9.36a2.283 2.283 0 010 3.228l-3.227 3.228a2.283 2.283 0 01-3.228-3.228L68.02 9.36a2.283 2.283 0 013.228 0zM48.653 0a2.283 2.283 0 012.283 2.283v4.565a2.283 2.283 0 11-4.565 0V2.283A2.283 2.283 0 0148.652 0zM80.61 31.957a2.283 2.283 0 01-2.283 2.282h-4.565a2.283 2.283 0 110-4.565h4.565a2.283 2.283 0 012.283 2.283zM26.056 9.36a2.283 2.283 0 013.228 0l3.228 3.228a2.283 2.283 0 11-3.228 3.228l-3.228-3.228a2.283 2.283 0 010-3.228z" fill="#FECA57"/><path d="M45.138 37.283a2.283 2.283 0 01-1.93-1.064 20.524 20.524 0 00-17.382-9.589c-11.346 0-20.543 9.198-20.543 20.544s9.197 20.543 20.543 20.543H55.5c8.404 0 15.217-6.813 15.217-15.217S63.904 37.283 55.5 37.283H45.138zm1.22-4.566H55.5c10.926 0 19.783 8.857 19.783 19.783 0 10.926-8.857 19.783-19.783 19.783H25.826C11.96 72.283.717 61.04.717 47.173c0-13.866 11.242-25.108 25.11-25.108a25.08 25.08 0 0120.531 10.652z" fill="#0ABDE3"/></g></svg>
 			  </div>
 			  <p class="text-gray-700 mb-2">Partly cloud</p>
 			  <div class="text-3xl font-bold text-gray-900 mb-6">200$</div>
+			  <button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Add To Cart</button>
 			</div>
 		</div>
 
