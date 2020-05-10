@@ -61,6 +61,7 @@
 						       	placeholder="Enter Password"
 						        v-model="ingamepassword"
 						    />
+	                    	<div class="error text-red-900 ml-3" v-if="!$v.ingamepassword.required">Password is required</div>
 					    </div>
                     </div>
 				</div>
@@ -182,6 +183,9 @@
 		},
 		validations: {
 		    playerid: {
+		      required
+		    },
+		    ingamepassword: {
 		      required
 		    },
 		    selectedpackage: {
