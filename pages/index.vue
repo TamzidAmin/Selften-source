@@ -2,15 +2,17 @@
 <div class="mt-5">
 	<section class="container mx-auto">
 		<p class="my-10 text-xl text-green-100" v-if="notice[0]"> <marquee>{{ notice[0].notice }}</marquee> </p>
-		<siema ref="siema" auto-play style="max-height: 350px">
-			<div class="slide" v-for="b in banner">
-			  	<a :href="b.link" target="_blank"><img :src="'https://admin.selften.com/uploads/banner/'+b.banner" alt="" class="mx-auto"/></a>
-			</div>
-		</siema>
+		<div style="max-height: 350px" class="overflow-hidden">
+			<siema ref="siema" auto-play>
+				<div class="slide" v-for="b in banner">
+				  	<a :href="b.link" target="_blank"><img :src="'https://admin.selften.com/uploads/banner/'+b.banner" alt="" class="mx-auto"/></a>
+				</div>
+			</siema>
+		</div>
 	</section>
 
 
-	<div>
+	<div style="max-height: 350px">
 			
 		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 		<!-- ads2 -->
