@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="container mx-auto">
 	<div class="text-center" style="width: 100%">
 
       	<ul class="flex justify-center p-3">
