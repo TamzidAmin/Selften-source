@@ -21,9 +21,9 @@
                     <div class="block md:flex items-center justify-between">
                         <button type="submit" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg" :disabled="submitStatus === 'PENDING'">LOGIN</button>
 
-                        <a class="text-gray-600 hover:text-gray-700 no-underline block mt-3" href="/password/reset">
-                            Forgot Your Password?
-                        </a>
+                        <nuxt-link class="text-gray-600 hover:text-gray-700 no-underline block mt-3" to="forgetpassword">
+                        	Forgot Your Password?
+                        </nuxt-link>
                     </div>
                 	<p class="text-red-500" v-if="submitStatus === 'OK'">{{  error }}</p>
 					<p class="text-red-500" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>

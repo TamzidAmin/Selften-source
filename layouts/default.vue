@@ -27,6 +27,6 @@
 		background: #fff;
 	}
 	.min-h{
-		min-height: 70vh!important;
+		min-height: 93vh!important;
 	}
 </style>
