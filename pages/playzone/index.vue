@@ -21,6 +21,23 @@
 			<button class="ml-3 bg-green-100 border border-green-100 hover:bg-green-200 text-white font-semibold py-2 px-4 rounded uppercase">See All</button>
 		</div>
 	</section>
+	
+	<div style="min-height: 350px;max-height: 350px">
+			
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<!-- ads2 -->
+		<ins class="adsbygoogle"
+		     style="display:block"
+		     data-ad-client="ca-pub-2716727174821674"
+		     data-ad-slot="7639053074"
+		     data-ad-format="auto"
+		     data-full-width-responsive="true"></ins>
+		<script>
+		     (adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+
+	</div>
+
 </div>
 </template>
 

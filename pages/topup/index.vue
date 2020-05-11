@@ -16,8 +16,8 @@
 	<section class="container mx-auto">
 		<h3 class="font-bold text-green-100 mt-4 text-xl">VOUCHER PURCHASE</h3>
 		<div class="flex flex-wrap justify-center">
-			<div class="mt-5 hover:shadow-xl w-1/2 mx-3 sm:w-1/4 md:w-1/5 xl:w-1/6 border-2 border-green-500" v-for="product in topupproduct">
-			    <div class="text-center shadow-lg pt-5">
+			<div class="mt-5 hover:shadow-xl shadow-lg w-1/2 mx-3 sm:w-1/4 md:w-1/5 xl:w-1/6 border-2 border-green-500" v-for="product in topupproduct">
+			    <div class="text-center pt-5">
 			        <nuxt-link :to="/topup/+product.id">
 			            <div class="text-center">
 			            	<img class="w-32 h-32 mx-auto object-contain" :src="'https://admin.selften.com/uploads/product/'+product.logo" :alt=" product.name"/>
