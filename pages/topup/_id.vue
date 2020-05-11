@@ -21,7 +21,7 @@
 		<div class="md:w-2/3">
 	     	<form @submit.prevent="buynow()" method="post">
 	    		<div class="section select-server" v-if="packages.topuptype==1">
-				    <h2 class="circle">
+				    <h2 class="circle font-bold">
 				        <span>1</span>
 				        Enter Player ID
 				    </h2>
@@ -32,36 +32,36 @@
 					        v-model="playerid"
 					    />
 				    </div>
-                    <div class="error text-red-900 ml-3" v-if="!$v.playerid.required">Playerid is required</div>
+                    <div class="error text-red-900 ml-3 mb-3" v-if="!$v.playerid.required">Playerid is required</div>
 				</div>
 				<div v-else class="section select-server flex flex-wrap justify-center">
-					<div>
-						<h2 class="circle">
+					<div class="w-full md:w-1/2">
+						<h2 class="circle font-bold">
 					        <span>1</span>
-					        Number/Gmail
 					    </h2>
-					    <div class="pl-3">
+					    <div class="pl-3 mt-5">
+					    	<label class="font-semibold">Number/Gmail</label>
 					        <input
 					        	class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
 						       	placeholder="Enter Number/Gmail"
 						        v-model="playerid"
 						    />
 					    </div>
-	                    <div class="error text-red-900 ml-3" v-if="!$v.playerid.required">Number/Gmail is required</div>
+	                    <div class="error text-red-900 ml-3 mb-3" v-if="!$v.playerid.required">Number/Gmail is required</div>
 					</div>
 
-                    <div>
-                    	<h2 class="circle">
+                    <div class="w-full md:w-1/2">
+                    	<h2 class="circle font-bold">
 					        <span>1</span>
-					        Password
 					    </h2>
-					    <div class="pl-3">
+					    <div class="mt-5 pl-3">
+					    	<label class="font-semibold">Password</label>
 					        <input
 					        	class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
 						       	placeholder="Enter Password"
 						        v-model="ingamepassword"
 						    />
-	                    	<div class="error text-red-900 ml-3" v-if="!$v.ingamepassword.required">Password is required</div>
+	                    	<div class="error text-red-900 mb-3" v-if="!$v.ingamepassword.required">Password is required</div>
 					    </div>
                     </div>
 				</div>
@@ -328,8 +328,7 @@
 	    position: relative;
 	}
 	.circle {
-	    font-weight: 400;
-	    font-size: 20px;
+	    font-size: 15px;
 	    color: #333;
 	    padding-left: 55px;
 	    margin-top: -12px;
@@ -346,9 +345,9 @@
 	    position: absolute;
 	    top: -10px;
 	    left: 10px;
-	    line-height: 36px;
-	    width: 46px;
-	    height: 46px;
+	    line-height: 30px;
+	    width: 36px;
+	    height: 36px;
 	    text-align: center;
 	}
 	.ico-question {
@@ -362,7 +361,4 @@
 	    text-align: center;
 	    cursor: pointer;
 	}
-/* 	.select-server{
-		background: #C81F4F!important;
-	} */
 </style>
