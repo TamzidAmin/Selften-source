@@ -1,15 +1,7 @@
 <template>
-  <div justify="center">
-	<div class="my-2 text-center">
-    	<button small class="w-300" color="secondary" dark @click.stop="dialog = true">Result</button>
-  	</div>
 
-	<div
-	  v-model="dialog"
-	  max-width="290"
-	>
 	  <div>
-		<h4 class="text-center py-2">Result</h4>
+		<h4 class="text-center font-bold text-3xl">Result</h4>
 		<hr>
 		<table class="border-collapse w-full">
 		      <thead>
@@ -30,19 +22,7 @@
 		      </tbody>
 		</table>
 
-		<div class="text-right">
-		  <button
-		  	class="m-3"
-			color="primary"
-			small
-			@click="dialog = false"
-		  >
-			Close
-		  </button>
-		</div>
 	  </div>
-	</div>
-  </div>
 </template>
 <script>
   export default {

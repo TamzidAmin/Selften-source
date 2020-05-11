@@ -116,19 +116,3 @@ export default {
   	}
 }
 </script>
-
-<style>
-	.v-data-table__wrapper td th{
-		height: 40px;
-	}
-	.font-limit{
-		font-size: 10px;
-    	font-weight: 700;
-	}
-	.font-limit p{
-		padding-top:5px; 
-	}
-	.font-limit p button i{
-		font-size: 14px;
-	}
-</style>
