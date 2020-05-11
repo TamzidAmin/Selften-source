@@ -248,6 +248,9 @@
 							if(response.data=='faliled'){
 								self.resmessage="Please Add Money"
 							}
+							if(response.data=='StockOut'){
+								self.resmessage="Stock Out"
+							}
 							self.orders=response.data
 						})
 						.catch(function (error) {
