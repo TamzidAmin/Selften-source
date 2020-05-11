@@ -215,6 +215,9 @@
 				this.selectedmgetway=p;
 			},
 			buynow(){
+					if(this.packages.topuptype==1){
+						this.ingamepassword="IDCODE"
+					}
 					let con= confirm("The Money Will Take From your Wallet. Are You Sure Want to Confirm?? ");
 					if(con){
 					this.loading=true;
