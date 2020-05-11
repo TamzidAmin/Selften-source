@@ -286,10 +286,6 @@
 </script>
 
 <style>
-	.primary{
-		color: #fff!important; 
-		padding: 10px;
-	}
 	.product__description{
 		height: 29px;
 		overflow: hidden;
