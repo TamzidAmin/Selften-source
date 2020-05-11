@@ -45,7 +45,7 @@
 				<input
 				  v-model="amount"
 				  required
-				  class="px-3 py-3 font-black placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+				  class="px-3 py-3 font-normal rounded shadow focus:outline-none focus:shadow-outline w-full"
 				  placeholder="Amount To Add"
 				>
 	            <div class="text-green-100 text-left" v-if="!$v.amount.required">Amount is required</div>
@@ -60,7 +60,7 @@
 				  v-model="number"
 				  required
 				  placeholder="Sender Number"
-				  class="px-3 py-3 font-black placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+				  class="px-3 py-3 font-normal rounded shadow focus:outline-none focus:shadow-outline w-full"
 				/>
 	            <div class="error text-green-100 text-left" v-if="!$v.number.required">Number is required</div>
 			</div>

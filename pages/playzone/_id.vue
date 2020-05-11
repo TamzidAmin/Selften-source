@@ -3,7 +3,7 @@
 	<div class="text-center" style="width: 100%">
 
       	<ul class="flex justify-center p-3">
-      		<li class="cursor-pointer p-2 capitalize" :class="active==item ? 'text-red-500 border-2 border-green-100 rounded-full' : ''" v-for="item in items" @click="fetchdata(item)" :key="item">
+      		<li class="cursor-pointer p-2 capitalize w-1/3" :class="active==item ? 'text-red-500 border-2 border-green-100 rounded-full' : ''" v-for="item in items" @click="fetchdata(item)" :key="item">
         		{{ item }}
       		</li>
       	</ul>
@@ -62,10 +62,10 @@
 		    					<div style="width: 100%;margin-top: 12px">
 		    						<Prograsvar :abcd="(i.users.length/i.max_join)*100"/>
 									<div class="flex justify-between">
-										<div class="w-50" style="font-size: 12px;" v-if="i.max_join-i.users.length>0">
+										<div class="text-green-500 font-bold text-sm" v-if="i.max_join-i.users.length>0">
 											Only {{ i.max_join-i.users.length }} spots left
 										</div>
-										<div v-else class="text-green-500 font-bold">
+										<div v-else class="text-green-500 font-bold text-sm">
 											Match is full!
 										</div>
 										<div class="w-50 text-right">

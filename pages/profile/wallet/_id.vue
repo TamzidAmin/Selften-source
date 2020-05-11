@@ -2,15 +2,15 @@
 <div class="container mx-auto">
 	<div class="mx-auto text-center shadow-xl my-5">
 	    <div>
-	    	<div style="background: #D0254B;color: #fff;padding: 10px;">
-	    		<h4 style="font-size: 20px;padding: 18px;">Available Balance</h4>
-		    	<h2 style="font-size: 27px;">৳ {{ authuser.wallet+authuser.earn_wallet }}</h2>
-		    	<div class="d-flex" >
-		    		<div class="w-50">
+	    	<div class="bg-green-100 p-5 text-white">
+	    		<h4 class="font-semibold text-lg">Available Balance</h4>
+		    	<h2>৳ {{ authuser.wallet+authuser.earn_wallet }}</h2>
+		    	<div class="flex">
+		    		<div class="w-1/2">
 		    			<h4>Deposit</h4>
 		    			<h2>৳ {{ authuser.wallet }}</h2>
 		    		</div>
-		    		<div class="w-50">
+		    		<div class="w-1/2">
 		    			<h4>Winning</h4>
 		    			<h2>৳ {{ authuser.earn_wallet }}</h2>
 		    		</div>
@@ -18,25 +18,25 @@
 		    	<p class="pt-3 f-10">You Can withdraw Only Winning Amount</p>
 	    	</div>
 	    	<div class="flex">
-				<div style="width: 25%;">
+				<div class="w-1/4">
 					<div class="p-2 text-capitalize cursor-pointer" v-bind:class="{ active: name=='addmoney' ? true : '' }" @click="addmoney('addmoney')">
 				     	<img src="~/assets/wallet.svg" alt="" class="w-4 h-4 mx-auto">
 				     	<p>addmoney</p>
 				    </div>
 				</div>
-				<div style="width: 25%;">
+				<div class="w-1/4">
 					<div class="p-2 text-capitalize cursor-pointer" v-bind:class="{ active: name=='withdraw' ? true : '' }" @click="withdraw('withdraw')">
 				     	<img src="~/assets/withdrow.svg" alt="" class="w-4 h-4 mx-auto">
 				     	<p>Withdraw</p>
 				    </div>
 				</div>
-				<div style="width: 25%;">
+				<div class="w-1/4">
 					<div class="p-2 text-capitalize cursor-pointer" v-bind:class="{ active: name=='transfer' ? true : '' }" @click="transfer('transfer')">
 				     	<img src="~/assets/transfer.svg" alt="" class="w-4 h-4 mx-auto">
 				     	<p>Transfer</p>
 				    </div>
 				</div>
-				<div style="width: 25%;">
+				<div class="w-1/4">
 					<div class="p-2 text-capitalize cursor-pointer" v-bind:class="{ active: name=='transaction' ? true : '' }" @click="transaction('transaction')">
 				     	<img src="~/assets/transaction.svg" alt="" class="w-4 h-4 mx-auto">
 				     	<p>Transaction</p>

@@ -12,11 +12,11 @@
 		<input
 		  v-model="amount"
 		  required
-		  class="px-3 my-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+		  class="px-3 py-3 font-normal rounded shadow focus:outline-none focus:shadow-outline w-full"
 		  placeholder="Amount To Add"
 		>
-        <div class="text-red-900" v-if="!$v.amount.required">Amount is required</div>
-        <div class="text-red-900" v-if="!$v.amount.between">
+        <div class="text-green-100" v-if="!$v.amount.required">Amount is required</div>
+        <div class="text-green-100" v-if="!$v.amount.between">
         	Must be between {{$v.amount.$params.between.min}} and {{$v.amount.$params.between.max}}</div>
         </span>
 
@@ -25,9 +25,9 @@
 		  v-model="number"
 		  required
 		  placeholder="Sender Number"
-		  class="px-3 mb-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+		  class="px-3 py-3 font-normal rounded shadow focus:outline-none focus:shadow-outline w-full"
 		/>
-        <div class="error text-red-900" v-if="!$v.number.required">Number is required</div>
+        <div class="error text-green-100" v-if="!$v.number.required">Number is required</div>
 
 		<button
 		  v-if="authuser.earn_wallet>=amount"
