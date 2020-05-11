@@ -115,7 +115,7 @@
 				<div>
 				    <div>
 						<div class="row">
-							  <div class="col-md-12 text-right">
+							<div class="col-md-12 text-right">
 							  	 <div v-if="authuser">
 							  	 	<button v-if="selectedpackage.price>(authuser.wallet+authuser.earn_wallet)" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg opacity-50">Buy Now</button>
 							  	 	<button type="submit" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Buy Now</button>
@@ -126,7 +126,7 @@
 									</nuxt-link>
 							      </div>
 								<br>
-							  </div>
+							</div>
 							<p class="text-red-500 font-extrabold text-2xl" v-if="submitStatus === 'OK'">{{  resmessage }}</p>
 							<p class="text-red-500" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
 							<p class="text-red-500" v-if="submitStatus === 'PENDING'">Sending...</p>
