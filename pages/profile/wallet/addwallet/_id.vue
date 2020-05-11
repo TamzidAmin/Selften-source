@@ -10,10 +10,7 @@
 	  	</ul>
 
 		<div class="text-center">
-			<button
-			  color="primary"
-			  small class="w-300" dark @click.stop="dialog = true"
-			>
+			<button class="bg-green-100 py-1 px-2 text-white font-bold">
 			  How to add money?
 			</button>
 			<div
@@ -22,7 +19,7 @@
 			>
 			  	<div class="p-3" style="font-size: 14px;">
 			  		<p>Follow below steps 👇</p>
-					Step 1: 
+					<h3 class="font-bold">Step 1: </h3>
 					<ol>
 						<li> Dial *247# or *167#</li>
 						<li> Select Send Money Option.</li>
@@ -31,8 +28,8 @@
 						<li> Enter Reference Number "PlayZone".</li>
 						<li> Now Enter your PIN.</li>
 					</ol>
-					Almost Done. Now follow step 2. 
-					Step 2: 
+					<h3 class="font-bold">Almost Done. Now follow Step 2:
+					</h3>
 					<ol class="mt-2">
 						<li> Visit Self-Ten Website or Open App.</li>
 						<li> Go to My Wallet and Select your Mobile Banking Service(bKash or Nagad).</li>
@@ -43,29 +40,34 @@
 			</div>
 		</div>
 		<form @submit.prevent="addwallet" method="post">
-			<input
-			  v-model="amount"
-			  required
-			  class="px-3 my-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-			  placeholder="Amount To Add"
-			>
-            <div class="text-red-900" v-if="!$v.amount.required">Amount is required</div>
-            <div class="text-red-900" v-if="!$v.amount.between">
-            	Must be between {{$v.amount.$params.between.min}} and {{$v.amount.$params.between.max}}</div>
-            </span>
+			<div class="text-left my-3">
+				<label class="font-normal">Amount To Add</label>
+				<input
+				  v-model="amount"
+				  required
+				  class="px-3 py-3 font-black placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+				  placeholder="Amount To Add"
+				>
+	            <div class="text-green-100 text-left" v-if="!$v.amount.required">Amount is required</div>
+	            <div class="text-green-100 text-left" v-if="!$v.amount.between">
+	            	Must be between {{$v.amount.$params.between.min}} and {{$v.amount.$params.between.max}}</div>
+	            </span>
+	        </div>
 
-
-			<input
-			  v-model="number"
-			  required
-			  placeholder="Sender Number"
-			  class="px-3 mb-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-			/>
-            <div class="error text-red-900" v-if="!$v.number.required">Number is required</div>
+			<div class="text-left my-3">
+				<label class="font-normal">Sender Number</label>
+				<input
+				  v-model="number"
+				  required
+				  placeholder="Sender Number"
+				  class="px-3 py-3 font-black placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+				/>
+	            <div class="error text-green-100 text-left" v-if="!$v.number.required">Number is required</div>
+			</div>
 
 			<button
 			  :disabled="!valid"
-			  class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg"
+			  class="align-middle bg-green-100 hover:bg-green-300 text-center px-5 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg"
 			>
 			  Add
 			</button>
