@@ -164,7 +164,7 @@
 			}
 		},
 		asyncData ({ params }) {
-		    return axios.get(`/api/matchs/upcoming`)
+		    return axios.get(`/api/matchs/upcoming/`+params.id)
 		      .then((res) => {
 		        return { match: res.data }
 		    })
