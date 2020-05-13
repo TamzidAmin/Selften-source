@@ -1,7 +1,7 @@
 <template>
     <div class="p-2 h-screen overflow-hidden flex items-center justify-center">
         <div class="bg-gray-300 shadow-lg rounded-lg px-10">
-            <div class="w-full px-6 py-16">
+            <div class="w-full px-0 md:px-6 py-16">
                 <div class="mb-4 font-light tracking-widest text-2xl text-center font-bold">LOGIN</div>
                 <form @submit.prevent="validate" method="post">
                     <div class="mb-4">

@@ -14,7 +14,7 @@
 					</button>
 				</div>
 				<nuxt-link to="/">
-					<img src="~/assets/selften.png" alt="" class="w-20 md:w-40">
+					<img src="~/assets/selften.png" alt="" class="w-24 md:w-40">
 				</nuxt-link>
 				
 				<div class="w-full flex-grow lg:flex items-center lg:w-auto hidden">
@@ -52,10 +52,10 @@
 						</template>
 						<template v-else>
 							<div class="p-3">
-								<nuxt-link class="bg-white hover:text-white hover:bg-green-100 text-green-800 font-semibold py-2 uppercase px-4 border border-green-100 rounded shadow" to="/login">
+								<nuxt-link class="bg-white hover:text-white hover:bg-green-100 text-green-800 font-semibold text-sm py-2 uppercase px-1 md:px-4 border border-green-100 rounded shadow" to="/login">
 									login
 								</nuxt-link>
-								<nuxt-link class="ml-3 bg-green-100 border border-green-100 hover:bg-green-200 text-white font-semibold py-2 px-4 rounded uppercase" to="/register">
+								<nuxt-link class="ml-3 bg-green-100 border border-green-100 hover:bg-green-200 text-white text-sm font-semibold py-2 px-1 md:px-4 rounded uppercase" to="/register">
 									register
 								</nuxt-link>
 							</div>
@@ -116,7 +116,7 @@
 					class="block lg:inline-block text-md font-bold hover:text-red-900 mx-2 p-1 rounded-lg uppercase">
 					leaderboard
 				</nuxt-link>
-				<a href="https://t.me/joinchat/Q77WBk4Jli5iqWsgJqatKw" target="_blank" @click.native="remove()"
+				<a href="https://t.me/joinchat/Q77WBk4Jli5iqWsgJqatKw" target="_blank" @click="remove()"
 					class="block lg:inline-block text-md font-bold hover:text-red-900 mx-2 p-1 rounded-lg">
 					CONTACT US
 				</a>
