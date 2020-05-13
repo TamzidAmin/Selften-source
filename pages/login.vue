@@ -2,7 +2,16 @@
     <div class="p-2 h-screen overflow-hidden flex items-center justify-center">
         <div class="bg-gray-300 shadow-lg rounded-lg px-10">
             <div class="w-full px-0 md:px-6 py-16">
-                <div class="mb-4 font-light tracking-widest text-2xl text-center font-bold">LOGIN</div>
+            	<div class="rounded-t mb-0 px-6 py-6">
+                    <div class="text-center mb-3">
+                    <h6 class="text-gray-600 text-sm font-bold">Sign in with</h6></div>
+                    <div class="btn-wrapper text-center">
+                       <LoginWithFacebook/>
+                       <LoginWithGoogle/>
+                    </div>
+                    <hr class="mt-6 border-b-1 border-gray-400">
+                </div>
+                <div class="text-gray-500 text-center mb-3 font-bold"><small>Or sign in with credentials</small></div>	
                 <form @submit.prevent="validate" method="post">
                     <div class="mb-4">
                         <label for="email" class="mb-2 font-bold">Email</label>
@@ -16,7 +25,7 @@
                     </div>
                     <label class="mb-4 flex items-center">
                         <input type="checkbox" class="form-checkbox" name="remeber" id="remeber" checked="">
-                        <span class="ml-2">I want to remember you ?</span>
+                        <span class="ml-2">Remember me</span>
                     </label>
                     <div class="block md:flex items-center justify-between">
                         <button type="submit" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg" :disabled="submitStatus === 'PENDING'">LOGIN</button>
@@ -38,6 +47,8 @@
 <script>
 import axios from '~/plugins/axios'
 import { required } from 'vuelidate/lib/validators'
+import LoginWithFacebook from '~/components/LoginWithFacebook'
+import LoginWithGoogle from '~/components/LoginWithGoogle'
 const Cookie = process.client ? require('js-cookie') : undefined
   export default {
 	data: () => ({
@@ -51,6 +62,12 @@ const Cookie = process.client ? require('js-cookie') : undefined
 	  	password:'',
 	  	submitStatus: null
 	}),
+
+	components:{
+    	LoginWithFacebook,
+    	LoginWithGoogle,
+    },
+
 	validations: {
 	    email: {
 	      required
