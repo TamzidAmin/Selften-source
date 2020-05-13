@@ -36,14 +36,32 @@
 				</div>
 				<div v-else class="section select-server flex flex-wrap justify-center">
 					<div class="w-full md:w-1/3">
+                    	<h2 class="circle font-bold">
+					        <span>1</span>
+					    </h2>
+					    <div class="mt-5 pl-3">
+					    	<label class="font-semibold">Account Type</label>
+					        <select v-model="accounttype" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full">
+					        	<option value="null">Select And Option</option>
+					        	<option value="facebook">Facebook</option>
+					        	<option value="gmail">Gmail</option>
+					        </select>
+	                    	<div class="error text-red-900 mb-3" v-if="!$v.accounttype.required">Account type is required</div>
+					    </div>
+                    </div>
+
+					<div class="w-full md:w-1/3">
 						<h2 class="circle font-bold">
 					        <span>1</span>
 					    </h2>
 					    <div class="pl-3 mt-5">
-					    	<label class="font-semibold">Facebook/Gmail</label>
+					    	<label class="font-semibold">
+					    		<span v-if="accounttype=='gmail'">Your Gmail</span>
+					    		<span v-else>Facebook Number</span>
+					    	</label>
 					        <input
 					        	class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-						       	placeholder="Enter Number/Gmail"
+						       	:placeholder="accounttype=='gmail' ? 'Enter Email' : 'Enter Number'"
 						        v-model="playerid"
 						    />
 					    </div>
@@ -62,21 +80,6 @@
 						        v-model.trim="$v.ingamepassword.$model"
 						    />
 	                    	<div class="error text-red-900 mb-3" v-if="!$v.ingamepassword.required">Password is required</div>
-					    </div>
-                    </div>
-
-                    <div class="w-full md:w-1/3">
-                    	<h2 class="circle font-bold">
-					        <span>1</span>
-					    </h2>
-					    <div class="mt-5 pl-3">
-					    	<label class="font-semibold">Account Type</label>
-					        <select v-model="accounttype" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full">
-					        	<option value="0">Select And Option</option>
-					        	<option value="gmail">Gmail</option>
-					        	<option value="facebook">Facebook</option>
-					        </select>
-	                    	<div class="error text-red-900 mb-3" v-if="!$v.accounttype.required">Account type is required</div>
 					    </div>
                     </div>
 				</div>
@@ -245,7 +248,6 @@
 			buynow(){
 					if(this.packages.topuptype==1){
 						this.ingamepassword="IDCODE"
-					}else{
 						this.accounttype="1"
 					}
 					let con= confirm("The Money Will Take From your Wallet. Are You Sure Want to Confirm?? ");
