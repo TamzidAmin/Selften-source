@@ -174,7 +174,7 @@
 				ingameid:null,
 				ingamepassword:null,
 				cal:0,
-				accounttype:0,
+				accounttype:null,
 				packages:[
 					
 				],
@@ -245,6 +245,8 @@
 			buynow(){
 					if(this.packages.topuptype==1){
 						this.ingamepassword="IDCODE"
+					}else{
+						this.accounttype="1"
 					}
 					let con= confirm("The Money Will Take From your Wallet. Are You Sure Want to Confirm?? ");
 					if(con){
