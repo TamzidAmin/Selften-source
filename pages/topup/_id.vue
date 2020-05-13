@@ -47,7 +47,7 @@
 						        v-model="playerid"
 						    />
 					    </div>
-	                    <div class="error text-red-900 ml-3 mb-3" v-if="!$v.playerid.required">Number/Gmail is required</div>
+	                    <div class="error text-red-900 ml-3 mb-3" v-if="!$v.playerid.required">Facebook/Gmail is required</div>
 					</div>
 
                     <div class="w-full md:w-1/3">
@@ -59,7 +59,7 @@
 					        <input
 					        	class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
 						       	placeholder="Enter Password"
-						        v-model="ingamepassword"
+						        v-model.trim="$v.ingamepassword.$model"
 						    />
 	                    	<div class="error text-red-900 mb-3" v-if="!$v.ingamepassword.required">Password is required</div>
 					    </div>
@@ -76,7 +76,7 @@
 					        	<option value="gmail">Gmail</option>
 					        	<option value="facebook">Facebook</option>
 					        </select>
-	                    	<div class="error text-red-900 mb-3" v-if="!$v.ingamepassword.required">Password is required</div>
+	                    	<div class="error text-red-900 mb-3" v-if="!$v.accounttype.required">Account type is required</div>
 					    </div>
                     </div>
 				</div>
@@ -86,12 +86,14 @@
 				        Select Recharge
 				    </h2>
 				    <div class="flex flex-wrap justify-center">
-					  	<div class="text-center m-2 w-48" v-for="game in packages.topuppackage" :key="game.id">
-				  			<label :for="game.id" class="mb-0 w-48 list-group-item p-2 d-block"  style="font-size: 11px;position: relative;    overflow: hidden;">
-				  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
-					  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
-								{{ game.name }}
-					  		</label>
+					  	<div class="text-center w-40" v-for="game in packages.topuppackage" :key="game.id">
+					  		<div class="m-1">
+					  			<label :for="game.id" class="mb-0 w-40 list-group-item p-2 d-block"  style="font-size: 11px;position: relative;    overflow: hidden;">
+					  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
+						  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
+									{{ game.name }}
+						  		</label>
+						  	</div>
 					  	</div> 
 				    </div>
                     <div class="error text-red-900 ml-3 text-center" v-if="!$v.selectedpackage.required">Package is required</div>
@@ -102,14 +104,14 @@
 				    </h2>
 				    <div v-if="authuser && selectedpackage.price>(authuser.wallet+authuser.earn_wallet)">
 						<div class="row">
-					  	 <div class="col-md-12 col-12 col-sm-12 text-center mt-4">
-				  			 <p>Your Available Balance BDT {{ authuser.wallet+authuser.earn_wallet }}</p>
-				  			 <p>You Need BDT <span v-if="selectedpackage.price">{{ selectedpackage.price }}</span><span v-else>0</span> to purchase the product</p>
-					  		<nuxt-link :to="'/profile/wallet/'+authuser.id">
-								<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Add Money</button>
-							</nuxt-link>
-					  	</div> 
-					  </div>
+						  	<div class="col-md-12 col-12 col-sm-12 text-center mt-4">
+					  			 <p>Your Available Balance BDT {{ authuser.wallet+authuser.earn_wallet }}</p>
+					  			 <p>You Need BDT <span v-if="selectedpackage.price">{{ selectedpackage.price }}</span><span v-else>0</span> to purchase the product</p>
+						  		<nuxt-link :to="'/profile/wallet/'+authuser.id">
+									<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Add Money</button>
+								</nuxt-link>
+						  	</div> 
+						</div>
 				    </div>
 				    <div v-else-if="authuser">
 				    	<div class="row">
@@ -198,8 +200,7 @@
 				resmessage:"Order successfully",
 				active:true,
 				packageinfo:[],
-				submitStatus:null
-
+				submitStatus: null
 			}
 		},
 		components:{
@@ -213,6 +214,9 @@
 		      required
 		    },
 		    selectedpackage: {
+		      required
+		    },
+		    accounttype: {
 		      required
 		    }
 		},
@@ -254,6 +258,7 @@
 			  			this.submitStatus = 'PENDING'
 						axios.post('/api/packageorder', {
 						    topuppackage_id: this.selectedpackage.id,
+						    accounttype: this.accounttype,
 						    name: this.selectedpackage.name,
 						    product_id: this.selectedpackage.product_id,
 						    ingameid: this.ingameid,
