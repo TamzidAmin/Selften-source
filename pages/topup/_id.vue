@@ -35,12 +35,12 @@
                     <div class="error text-red-900 ml-3 mb-3" v-if="!$v.playerid.required">Playerid is required</div>
 				</div>
 				<div v-else class="section select-server flex flex-wrap justify-center">
-					<div class="w-full md:w-1/2">
+					<div class="w-full md:w-1/3">
 						<h2 class="circle font-bold">
 					        <span>1</span>
 					    </h2>
 					    <div class="pl-3 mt-5">
-					    	<label class="font-semibold">Number/Gmail</label>
+					    	<label class="font-semibold">Facebook/Gmail</label>
 					        <input
 					        	class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
 						       	placeholder="Enter Number/Gmail"
@@ -50,7 +50,7 @@
 	                    <div class="error text-red-900 ml-3 mb-3" v-if="!$v.playerid.required">Number/Gmail is required</div>
 					</div>
 
-                    <div class="w-full md:w-1/2">
+                    <div class="w-full md:w-1/3">
                     	<h2 class="circle font-bold">
 					        <span>1</span>
 					    </h2>
@@ -61,6 +61,21 @@
 						       	placeholder="Enter Password"
 						        v-model="ingamepassword"
 						    />
+	                    	<div class="error text-red-900 mb-3" v-if="!$v.ingamepassword.required">Password is required</div>
+					    </div>
+                    </div>
+
+                    <div class="w-full md:w-1/3">
+                    	<h2 class="circle font-bold">
+					        <span>1</span>
+					    </h2>
+					    <div class="mt-5 pl-3">
+					    	<label class="font-semibold">Account Type</label>
+					        <select v-model="accounttype" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full">
+					        	<option value="0">Select And Option</option>
+					        	<option value="gmail">Gmail</option>
+					        	<option value="facebook">Facebook</option>
+					        </select>
 	                    	<div class="error text-red-900 mb-3" v-if="!$v.ingamepassword.required">Password is required</div>
 					    </div>
                     </div>
@@ -118,7 +133,11 @@
 							<div class="col-md-12 text-right">
 							  	 <div v-if="authuser">
 							  	 	<button v-if="selectedpackage.price>(authuser.wallet+authuser.earn_wallet)" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg opacity-50">Buy Now</button>
-							  	 	<button type="submit" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Buy Now</button>
+										
+									<t-button class="mt-3" :loading="loading">
+										Buy Now
+									</t-button>
+
 							      </div>
 							      <div v-else>
 							      	<nuxt-link to="/login">
@@ -141,6 +160,7 @@
 </template>
 
 <script>
+	import TButton from '~/components/Button'
 	import { mapMutations, mapGetters } from 'vuex'
 	import { required } from 'vuelidate/lib/validators'
 	import axios from '~/plugins/axios'
@@ -152,6 +172,7 @@
 				ingameid:null,
 				ingamepassword:null,
 				cal:0,
+				accounttype:0,
 				packages:[
 					
 				],
@@ -181,6 +202,9 @@
 
 			}
 		},
+		components:{
+	    	TButton
+	    },
 		validations: {
 		    playerid: {
 		      required
