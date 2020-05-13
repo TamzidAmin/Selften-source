@@ -17,14 +17,14 @@
 		<h3 class="font-bold text-green-100 mt-4 text-xl">VOUCHER PURCHASE</h3>
 		<div class="flex flex-wrap justify-center">
 			<div class="w-1/2 sm:w-1/3 md:w-1/4 xl:w-1/6" v-for="product in topupproduct">
-				<div class="mt-5 hover:shadow-xl shadow-lg>
+				<div class="hover:shadow-xl shadow-lg m-2 border-2 border-green-500">
 				    <div class="text-center pt-5">
 				        <nuxt-link :to="/topup/+product.id">
 				            <div class="text-center">
 				            	<img class="w-32 h-32 mx-auto object-contain" :src="'https://admin.selften.com/uploads/product/'+product.logo" :alt=" product.name"/>
 				            </div>
 				            <div>
-				                <p class="text-green-100 font-bold py-3 text-sm">{{ product.name }}</p>
+				                <p class="text-green-100 font-bold py-3 text-xs md:text-sm">{{ product.name }}</p>
 				            </div>
 				        </nuxt-link>
 				    </div>

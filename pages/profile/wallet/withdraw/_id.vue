@@ -9,18 +9,19 @@
 		    </li>
 	</ul>
 	<form @submit.prevent="addwallet" method="post">
+		<label class="font-normal">Amount To Withdraw</label>
 		<input
 		  v-model="amount"
 		  required
 		  class="px-3 py-3 font-normal rounded shadow focus:outline-none focus:shadow-outline w-full"
-		  placeholder="Amount To Add"
+		  placeholder="Amount To Withdraw"
 		>
         <div class="text-green-100" v-if="!$v.amount.required">Amount is required</div>
         <div class="text-green-100" v-if="!$v.amount.between">
         	Must be between {{$v.amount.$params.between.min}} and {{$v.amount.$params.between.max}}</div>
         </span>
 
-
+		<label class="font-normal">Sender Number</label>
 		<input
 		  v-model="number"
 		  required
@@ -28,18 +29,15 @@
 		  class="px-3 py-3 font-normal rounded shadow focus:outline-none focus:shadow-outline w-full"
 		/>
         <div class="error text-green-100" v-if="!$v.number.required">Number is required</div>
+		
+		<t-button class="mt-3" :loading="loading" v-if="authuser.earn_wallet>=amount" @click="addwallet">
+			Withdraw
+		</t-button>
 
-		<button
-		  v-if="authuser.earn_wallet>=amount"
-		  @click="addwallet"
-		  class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg"
-		>
-		  Withdraw
-		</button>
 		<button
 		  disabled
 		  v-else
-		  class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 opacity-50 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg"
+		  class="mt-3 cursor-not-allowed align-middle bg-green-100 hover:bg-green-300 text-center px-4 opacity-50 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg"
 		 
 		>
 		  Withdraw
@@ -53,12 +51,14 @@
 </template>
 <script>
 import axios from '~/plugins/axios'
+import TButton from '~/components/Button'
 import { mapMutations, mapGetters } from 'vuex'
 import { required,between } from 'vuelidate/lib/validators'
 export default {
 	data: () => ({
 		submitStatus:null,
      	amount:null,
+     	loading:false,
      	number:null,
      	error:null,
      	type:'success',
@@ -67,6 +67,10 @@ export default {
   		paymentmethod:{},
   		alert: false,
     }),
+
+    components:{
+    	TButton
+    },
 
 	validations: {
 	    amount: {
@@ -98,6 +102,7 @@ export default {
 					user_id: this.authuser.id
 				})
 				.then(function (response) {
+					this.loading=false;
 					self.submitStatus = 'ERROR'
 					self.alert=true
 					self.message=response.data
