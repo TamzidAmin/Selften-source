@@ -64,13 +64,11 @@
 				/>
 	            <div class="error text-green-100 text-left" v-if="!$v.number.required">Number is required</div>
 			</div>
+				
+			<t-button :disabled="!valid" class="mt-3" :loading="loading">
+				Add
+			</t-button>
 
-			<button
-			  :disabled="!valid"
-			  class="align-middle bg-green-100 hover:bg-green-300 text-center px-5 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg"
-			>
-			  Add
-			</button>
 			<p class="text-red-500" v-if="submitStatus === 'OK'">{{  error }}</p>
 			<p class="text-red-500" v-if="submitStatus === 'ERROR'">{{ resmassage }}</p>
 			<p class="text-red-500" v-if="submitStatus === 'PENDING'">Sending...</p>
@@ -81,6 +79,7 @@
 </template>
 <script>
 import axios from '~/plugins/axios'
+import TButton from '~/components/Button'
 import { mapMutations, mapGetters } from 'vuex'
 import { required,between } from 'vuelidate/lib/validators'
 
@@ -90,6 +89,7 @@ export default {
 		submitStatus:null,
      	amount:null,
      	number:null,
+     	loading:false,
      	isopen:false,
      	dialog:false,
      	error:null,
@@ -98,6 +98,10 @@ export default {
   		paymentmethod:{},
   		alert: false,
     }),
+
+	components:{
+    	TButton
+    },
 
 	validations: {
 	    amount: {
@@ -135,6 +139,7 @@ export default {
 					user_id: this.authuser.id
 				})
 				.then(function (response) {
+					self.loading=false;
 					self.submitStatus = 'OK'
 					if(response.data=='success'){
 						self.submitStatus = 'ERROR'

@@ -2,11 +2,11 @@
 <div class="container mx-auto my-5 shadow-lg bg-white p-5">
 	   
 	<ul>
-	  		<li>
-		        <img :src="'https://admin.selften.com/uploads/payment/'+paymentmethod.logo" class="h-8 w-8" />
+  		<li>
+	        <img :src="'https://admin.selften.com/uploads/payment/'+paymentmethod.logo" class="h-8 w-8" />
 
-		        <p>{{ paymentmethod.name }} ( {{ paymentmethod.info }} )</p>
-		    </li>
+	        <p>{{ paymentmethod.name }} ( {{ paymentmethod.info }} )</p>
+	    </li>
 	</ul>
 	<form @submit.prevent="addwallet" method="post">
 		<label class="font-normal">Amount To Withdraw</label>
@@ -44,8 +44,8 @@
 		</button>
 		<br><br>
 		<p class="text-red-500" v-if="submitStatus === 'OK'">{{  error }}</p>
-			<p class="text-red-500" v-if="submitStatus === 'ERROR'">{{ message }}</p>
-			<p class="text-red-500" v-if="submitStatus === 'PENDING'">Sending...</p>
+		<p class="text-red-500" v-if="submitStatus === 'ERROR'">{{ message }}</p>
+		<p class="text-red-500" v-if="submitStatus === 'PENDING'">Sending...</p>
 	</form>
 </div>
 </template>
