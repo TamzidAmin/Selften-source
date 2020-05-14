@@ -52,10 +52,10 @@
 						</template>
 						<template v-else>
 							<div class="p-3">
-								<nuxt-link class="bg-white hover:text-white hover:bg-green-100 text-green-800 font-semibold text-sm py-2 uppercase px-1 md:px-4 border border-green-100 rounded shadow" to="/login">
+								<nuxt-link class="bg-white hover:text-white hover:bg-green-100 text-green-800 font-semibold text-sm uppercase px-1 py-1 md:px-4 border border-green-100 rounded shadow" to="/login">
 									login
 								</nuxt-link>
-								<nuxt-link class="ml-3 bg-green-100 border border-green-100 hover:bg-green-200 text-white text-sm font-semibold py-2 px-1 md:px-4 rounded uppercase" to="/register">
+								<nuxt-link class="ml-3 bg-green-100 border border-green-100 hover:bg-green-200 text-white text-sm font-semibold py-1 px-1 md:px-4 rounded uppercase" to="/register">
 									register
 								</nuxt-link>
 							</div>
