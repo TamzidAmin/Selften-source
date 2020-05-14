@@ -113,7 +113,8 @@
 		        items: [
 		          'upcoming','ongoing','result',
 		        ],
-		        active:'upcoming'
+		        active:'upcoming',
+		        product_id:0;
 	      	}
 	    },
 		computed: {
@@ -137,7 +138,7 @@
 				this.loding=true;
 				console.log(item);
 				var self = this;
-				axios.get(`/api/matchs/`+item)
+				axios.get(`/api/matchs/`+item+"/"+this.product_id)
 			      .then((res) => {
 					self.$loading(false)
 			      	self.loding=false;
@@ -166,7 +167,10 @@
 		asyncData ({ params }) {
 		    return axios.get(`/api/matchs/upcoming/`+params.id)
 		      .then((res) => {
-		        return { match: res.data }
+		        return { 
+		        	match: res.data,
+		        	product_id:params.id	
+		        }
 		    })
 	  	}
 	};
