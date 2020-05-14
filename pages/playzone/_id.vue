@@ -114,7 +114,7 @@
 		          'upcoming','ongoing','result',
 		        ],
 		        active:'upcoming',
-		        product_id:0;
+		        product_id:0
 	      	}
 	    },
 		computed: {
@@ -164,14 +164,12 @@
 				}
 			}
 		},
-		asyncData ({ params }) {
-		    return axios.get(`/api/matchs/upcoming/`+params.id)
-		      .then((res) => {
-		        return { 
-		        	match: res.data,
-		        	product_id:params.id	
-		        }
-		    })
+		async asyncData ({ params }) {
+		    let res = await axios.get(`/api/matchs/upcoming/`+params.id)
+	       	return { 
+	        	match: res.data,
+	        	product_id:params.id	
+	        }
 	  	}
 	};
 </script>
