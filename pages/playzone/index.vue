@@ -3,17 +3,19 @@
 	<section class="container mx-auto">
 		<h3 class="font-bold text-green-100 mt-4 text-xl">PLAYZONE</h3>
 		<div class="flex flex-wrap justify-center">
-			<div class="mt-5 hover:shadow-xl w-1/2 mx-3 sm:w-1/4 md:w-1/5 xl:w-1/6 border-2 border-green-500" v-for="product in topupproduct">
-			    <div class="text-center shadow-lg">
-			        <nuxt-link :to="/playzone/+product.id">
-			            <div class="text-center pt-5">
-			            	<img class="w-32 h-32 mx-auto object-contain" :src="'https://admin.selften.com/uploads/product/'+product.logo" :alt=" product.name"/>
-			            </div>
-			            <div>
-			                <p class="text-green-100 font-bold py-3">{{ product.name }}</p>
-			                <p class="text-green-100 font-normal">{{ product.matches.length }} Match Found</p>
-			            </div>
-			        </nuxt-link>
+			<div v-for="product in topupproduct" class="mt-5 w-1/2 md:w-1/3 xl:w-1/6">
+				<div class="mx-1 hover:shadow-xl shadow-lg border-2 border-green-500">
+				    <div class="text-center">
+				        <nuxt-link :to="/playzone/+product.id">
+				            <div class="text-center pt-5">
+				            	<img class="w-32 h-32 mx-auto object-contain" :src="'https://admin.selften.com/uploads/product/'+product.logo" :alt=" product.name"/>
+				            </div>
+				            <div>
+				                <p class="text-green-100 font-bold py-3">{{ product.name }}</p>
+				                <p class="text-green-100 font-normal">{{ product.matches.length }} Match Found</p>
+				            </div>
+				        </nuxt-link>
+				    </div>
 			    </div>
 			</div>
 		</div>
