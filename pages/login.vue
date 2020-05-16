@@ -1,7 +1,7 @@
 <template>
     <div class="p-2 h-screen overflow-hidden flex items-center justify-center">
-        <div class="bg-gray-300 shadow-lg rounded-lg px-10">
-            <div class="w-full px-0 md:px-6 py-16">
+        <div class="bg-gray-300 shadow-lg rounded-lg px-1 md:px-10">
+            <div class="w-full px-0 md:px-3 py-16">
             	<div class="rounded-t mb-0 px-6 py-6">
                     <div class="text-center mb-3">
                     <h6 class="text-gray-600 text-sm font-bold">Sign in with</h6></div>
@@ -29,7 +29,6 @@
                     </label>
                     <div class="block md:flex items-center justify-between">
                         <button type="submit" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg" :disabled="submitStatus === 'PENDING'">LOGIN</button>
-
                         <nuxt-link class="text-gray-600 hover:text-gray-700 no-underline block mt-3" to="forgetpassword">
                         	Forgot Your Password?
                         </nuxt-link>

@@ -9,7 +9,7 @@ export default {
 	name: 'LoginWithFacebook',
 
 	computed: {
-		url: () => `/api/oauth/facebook`
+		url: () => `https://admin.selften.com/api/login/google`
 	},
 
 	mounted () {
@@ -24,11 +24,11 @@ export default {
 		async login () {
 			const newWindow = openWindow('', "login")
 
-			const url = await this.$store.dispatch('auth/fetchOauthUrl', {
-				provider: 'facebook'
-			})
+			// const url = await this.$store.dispatch('auth/fetchOauthUrl', {
+			// 	provider: 'facebook'
+			// })
 
-			newWindow.location.href = url
+			newWindow.location.href = this.url
 		},
 
 		/**
