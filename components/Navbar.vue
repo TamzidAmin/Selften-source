@@ -44,9 +44,12 @@
 
 				<div class="relative">
 					<div class="flex">
-						<template v-if="token"> 
+						<template v-if="token">
 							<button id="userButton" class="flex items-center focus:outline-none mr-3 ml-3" @click="dropdown()">
-								<avatar :username="user.username" v-if="user" backgroundColor="#D81C4B" color="#fff" :size="30"></avatar>
+								<div v-if="user">
+									<avatar v-if="user.avatar" :src="user.avatar" backgroundColor="#D81C4B" color="#fff" :size="30"></avatar>
+									<avatar v-else :username="user.username" backgroundColor="#D81C4B" color="#fff" :size="30"></avatar>
+								</div>
 								<div v-if="user" class="flex"><span class="px-3">Hi, {{ user.username }}</span> <svg  aria-hidden="true" focusable="false" data-prefix="fad" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="w-5 h-5"><g class="fa-group"><path fill="currentColor" d="M160 256.14l-56.51 56.47-96.44-96.15a23.77 23.77 0 0 1-.18-33.61l.18-.18 22.59-22.51a23.94 23.94 0 0 1 33.85 0z" class="fa-secondary"></path><path fill="currentColor" d="M313 182.57L290.21 160a23.94 23.94 0 0 0-33.85 0L103.47 312.61 143 352l.06.06a24 24 0 0 0 33.93-.16L313 216.36l.18-.17a23.78 23.78 0 0 0-.18-33.62z" class="fa-primary"></path></g></svg></div> 
 							</button>
 						</template>
