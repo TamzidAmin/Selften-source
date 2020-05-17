@@ -22,13 +22,13 @@ export default {
 
 	methods: {
 		async login () {
-			const newWindow = openWindow('', "login")
+			// const newWindow = openWindow('', "login")
 
 			// const url = await this.$store.dispatch('auth/fetchOauthUrl', {
 			// 	provider: 'facebook'
 			// })
 
-			newWindow.location.href = this.url
+			window.location.href = this.url
 		},
 
 		/**
