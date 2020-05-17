@@ -1,5 +1,5 @@
 <template>
-	<p>Lgoinas {{ users }}</p>
+	<p> {{ users }}</p>
 </template>
 <script>
 import { required } from 'vuelidate/lib/validators'
@@ -26,13 +26,19 @@ export default{
 				// Cookie.set('token', auth,{ expires: 365 }) // saving token in cookie for server rendering
 				// Cookie.set('user', response.data,{ expires: 365 }) // saving token in cookie for server rendering
 				self.$router.push('/')
-				window.close();
+				// window.close();
 			  }, 1000)
 			})
 			.catch(function (error) {
-					console.log(error);
-				});
+				console.log(error);
+			});
 		}
+	},
+	destroyed () {
+	    if (process.client) { 
+			// self.$router.push('/')
+			window.close();
+	    }
 	},
 	async asyncData ({ params }) {
 		return {

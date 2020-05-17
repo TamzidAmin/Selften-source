@@ -36,6 +36,7 @@ export const mutations = {
 	setUsero (state, user) {
 		state.user = user
 		Cookie.set('user', user,{ expires: 365 }) // saving token in cookie for server rendering
+		
 	}
 }
 
