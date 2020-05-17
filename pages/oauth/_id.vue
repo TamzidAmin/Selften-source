@@ -1,3 +1,6 @@
+<template>
+	<p>Lgoin</p>
+</template>
 <script>
 import { required } from 'vuelidate/lib/validators'
 import axios from '~/plugins/axios'
