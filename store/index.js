@@ -1,5 +1,5 @@
 const cookieparser = process.server ? require('cookieparser') : undefined
-
+const Cookie = require('js-cookie')
 export const state = () => {
 	return {
 		token: null,
@@ -27,6 +27,15 @@ export const mutations = {
 	},
 	setUser (state, user) {
 		state.user = user
+	},
+
+	setTokeno (state, token) {
+		state.token = token
+		Cookie.set('token', token,{ expires: 365 }) // saving token in cookie for server rendering
+	},
+	setUsero (state, user) {
+		state.user = user
+		Cookie.set('user', user,{ expires: 365 }) // saving token in cookie for server rendering
 	}
 }
 

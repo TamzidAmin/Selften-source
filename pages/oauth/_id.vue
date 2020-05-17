@@ -1,5 +1,5 @@
 <template>
-	<p>Lgoinas {{ users() }}</p>
+	<p>Lgoinas {{ users }}</p>
 </template>
 <script>
 import { required } from 'vuelidate/lib/validators'
@@ -9,25 +9,26 @@ export default{
 	data: () => ({
 		id: 0,
 	}),
-	methods: {
+	computed: {
 		users(){
-			 	var self = this;
-				axios.post('/api/loginbyid/'+this.id)
-				.then(function (response) {
-					console.log(response.data);
-					setTimeout(() => { // we simulate the async request with timeout.
-					const auth = {
-					  accessToken: response.data.token
-					}
-					console.log(auth);
-					self.$store.commit('setToken', auth) // mutating to store for client rendering
-					self.$store.commit('setUser', response.data) // mutating to store for client rendering
-					Cookie.set('token', auth,{ expires: 365 }) // saving token in cookie for server rendering
-					Cookie.set('user', response.data,{ expires: 365 }) // saving token in cookie for server rendering
-					window.close();
-				  }, 1000)
-				})
-				.catch(function (error) {
+			console.log(Cookie);
+		 	var self = this;
+			axios.post('/api/loginbyid/'+this.id)
+			.then(function (response) {
+				console.log(response.data);
+				setTimeout(() => { // we simulate the async request with timeout.
+				const auth = {
+				  accessToken: response.data.token
+				}
+				console.log(auth);
+				self.$store.commit('setTokeno', auth) // mutating to store for client rendering
+				self.$store.commit('setUser', response.data) // mutating to store for client rendering
+				// Cookie.set('token', auth,{ expires: 365 }) // saving token in cookie for server rendering
+				// Cookie.set('user', response.data,{ expires: 365 }) // saving token in cookie for server rendering
+				// window.close();
+			  }, 1000)
+			})
+			.catch(function (error) {
 					console.log(error);
 				});
 		}
