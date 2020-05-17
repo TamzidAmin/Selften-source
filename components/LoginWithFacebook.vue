@@ -9,7 +9,7 @@ export default {
 	name: 'LoginWithFacebook',
 
 	computed: {
-		url: () => `https://admin.selften.com/api/login/facebook`
+		url: () => `https://admin.selften.com/au/facebook`
 	},
 
 	mounted () {

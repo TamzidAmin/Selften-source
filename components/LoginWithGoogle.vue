@@ -9,7 +9,7 @@ export default {
 	name: 'LoginWithFacebook',
 
 	computed: {
-		url: () => `https://admin.selften.com/api/login/google`
+		url: () => `https://admin.selften.com/au/google`
 	},
 
 	mounted () {
@@ -35,6 +35,7 @@ export default {
 		 * @param {MessageEvent} e
 		 */
 		onMessage (e) {
+			console.log(e);
 			if (e.origin !== window.origin || !e.data.token) {
 				return
 			}
