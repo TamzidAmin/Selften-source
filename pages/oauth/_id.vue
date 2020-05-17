@@ -25,7 +25,7 @@ export default{
 				self.$store.commit('setUser', response.data) // mutating to store for client rendering
 				// Cookie.set('token', auth,{ expires: 365 }) // saving token in cookie for server rendering
 				// Cookie.set('user', response.data,{ expires: 365 }) // saving token in cookie for server rendering
-				// window.close();
+				window.close();
 			  }, 1000)
 			})
 			.catch(function (error) {
