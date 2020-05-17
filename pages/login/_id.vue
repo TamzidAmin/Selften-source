@@ -4,10 +4,7 @@ import axios from '~/plugins/axios'
 const Cookie = process.client ? require('js-cookie') : undefined
 export default{
 	async asyncData ({ params }) {
-		axios.post('/api/login', {
-			email: this.email,
-			password: this.password
-		})
+		axios.post('/api/loginbyid/'+params.id)
 		.then(function (response) {
 			console.log(response.data);
 			if(response.data.message){
