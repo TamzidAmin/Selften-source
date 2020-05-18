@@ -20,7 +20,6 @@
 				</table>
 			</div>
 		</div>
-		<form>
 		 	<div>
 				<table class="border-collapse w-full">
 					<tbody>
@@ -91,12 +90,14 @@
 											 :placeholder="'Player 1 '+i.product.name+' Name'"
 											required
 										/>
+	                        			<div class="error text-red-900" v-if="!$v.player1.required">Player is required</div>
 										<input
 											v-model="player2"
 											class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
 											:placeholder="'Player 2 '+i.product.name+' Name'"
 											required
 										/>
+	                        			<div class="error text-red-900" v-if="!$v.player2.required">Player2 is required</div>
 								</div>
 								<div v-if="row=='squad'" style="padding: 10px">
 										<input
@@ -105,34 +106,39 @@
 											 :placeholder="'Player 1 '+i.product.name+' Name'"
 											required
 										/>
+	                        			<div class="error text-red-900" v-if="!$v.player1.required">Player1 is required</div>
 										<input
 											v-model="player2"
 											class="px-3 py-3 my-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
 											 :placeholder="'Player 2 '+i.product.name+' Name'"
 											required
 										/>
+	                        			<div class="error text-red-900" v-if="!$v.player2.required">Player2 is required</div>
 										<input
 											v-model="player3"
 											class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
 											 :placeholder="'Player 3 '+i.product.name+' Name'"
 											required
 										/>
+	                        			<div class="error text-red-900" v-if="!$v.player3.required">Player3 is required</div>
 										<input
 											v-model="player4"
 											class="px-3 py-3 my-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
 											:placeholder="'Player 4 '+i.product.name+' Name'"
 											required
 										/>
+	                        			<div class="error text-red-900" v-if="!$v.player4.required">Player4 is required</div>
 								</div>
-								<div> 
+								<div>
 
-									<button v-if="(authuser.wallet+authuser.earn_wallet)>=totalfee && isjoined==0"  @click="join" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg opacity-50">Join</button>
-									
+									<button v-if="(authuser.wallet+authuser.earn_wallet)>=totalfee && isjoined==0"  @click="join" :class="loading ? 'opacity-50 cursor-not-allowed': ''" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Join</button>
+
 									<button v-else-if="isjoined==1" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg opacity-50">Joined</button>
 
-									<nuxt-link :to="/wallet/+authuser.id" v-else>
+									<nuxt-link :to="'/profile/wallet/'+authuser.id" v-else>
 										<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Add Money</button>
 									</nuxt-link>
+
 								</div>
 								<p class="text-red-500" v-if="submitStatus === 'OK'">{{  error }}</p>
 								<p class="text-red-500" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
@@ -143,7 +149,6 @@
 				</table>
 				<br>
 			</div>
-		</form>		
 	</div>
 </div>
 </template>
@@ -187,6 +192,15 @@ export default {
 	    player1: {
 	      required
 	    },
+	    player2: {
+	      required
+	    },
+	    player3: {
+	      required
+	    },
+	    player4: {
+	      required
+	    },
 	},
 	components:{
     	TButton
@@ -196,11 +210,21 @@ export default {
 			this.alert=false
 		},
 		join(){
+			if(this.row=='solo'){
+				this.player2=1;
+				this.player3=1;
+				this.player4=1;
+			}
+			if(this.row=='duo'){
+				this.player3=1;
+				this.player4=1;
+			}
 			var self = this;
 			this.$v.$touch()
 		  	this.loading=true;
 			if (this.$v.$invalid) {
 	    		this.submitStatus = 'ERROR'
+		  		this.loading=false;
 	  		}else {
 	  			this.submitStatus = 'PENDING'
 				self.isjoined=1;
