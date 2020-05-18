@@ -11,7 +11,6 @@ export default{
 	}),
 	computed: {
 		users(){
-			console.log(Cookie);
 		 	var self = this;
 			axios.post('/api/loginbyid/'+this.id)
 			.then(function (response) {
@@ -22,7 +21,7 @@ export default{
 				}
 				console.log(auth);
 				self.$store.commit('setTokeno', auth) // mutating to store for client rendering
-				self.$store.commit('setUser', response.data) // mutating to store for client rendering
+				self.$store.commit('setUsero', response.data) // mutating to store for client rendering
 				// Cookie.set('token', auth,{ expires: 365 }) // saving token in cookie for server rendering
 				// Cookie.set('user', response.data,{ expires: 365 }) // saving token in cookie for server rendering
 				self.$router.push('/')
