@@ -91,6 +91,7 @@
 											 :placeholder="'Player 1 '+i.product.name+' Name'"
 											required
 										/>
+                        				<div class="error text-red-900" v-if="!$v.player1.required">Player is required</div>
 										<input
 											v-model="player2"
 											class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
@@ -99,37 +100,44 @@
 										/>
 								</div>
 								<div v-if="row=='squad'" style="padding: 10px">
-										<input
-											v-model="player1"
-											class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-											 :placeholder="'Player 1 '+i.product.name+' Name'"
-											required
-										/>
-										<input
-											v-model="player2"
-											class="px-3 py-3 my-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-											 :placeholder="'Player 2 '+i.product.name+' Name'"
-											required
-										/>
-										<input
-											v-model="player3"
-											class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-											 :placeholder="'Player 3 '+i.product.name+' Name'"
-											required
-										/>
-										<input
-											v-model="player4"
-											class="px-3 py-3 my-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-											:placeholder="'Player 4 '+i.product.name+' Name'"
-											required
-										/>
+									<input
+										v-model="player1"
+										class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+										 :placeholder="'Player 1 '+i.product.name+' Name'"
+										required
+									/>
+                    				<div class="error text-red-900" v-if="!$v.player1.required">Player is required</div>
+									<input
+										v-model="player2"
+										class="px-3 py-3 my-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+										 :placeholder="'Player 2 '+i.product.name+' Name'"
+										required
+									/>
+									<input
+										v-model="player3"
+										class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+										 :placeholder="'Player 3 '+i.product.name+' Name'"
+										required
+									/>
+									<input
+										v-model="player4"
+										class="px-3 py-3 my-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+										:placeholder="'Player 4 '+i.product.name+' Name'"
+										required
+									/>
 								</div>
 								<div> 
-									<button v-if="(authuser.wallet+authuser.earn_wallet)>=totalfee && isjoined==0" @click="join" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Join</button>
-									<button v-else-if="isjoined==1" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg opacity-50">Joined</button>
-									<nuxt-link :to="/wallet/+authuser.id" v-else>
-										<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Add Money</button>
-									</nuxt-link>
+									
+								<t-button v-if="(authuser.wallet+authuser.earn_wallet)>=totalfee && isjoined==0" @click="join" class="mt-3" :loading="loading">
+									Join
+								</t-button>
+
+								<button v-else-if="isjoined==1" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg opacity-50">Joined</button>
+
+								<nuxt-link :to="/wallet/+authuser.id" v-else>
+									<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Add Money</button>
+								</nuxt-link>
+
 								</div>
 								<p class="text-red-500" v-if="submitStatus === 'OK'">{{  error }}</p>
 								<p class="text-red-500" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
@@ -149,7 +157,7 @@
 import { mapMutations, mapGetters } from 'vuex'
 import axios from '~/plugins/axios'
 import { required } from 'vuelidate/lib/validators'
-
+import TButton from '~/components/Button'
 export default {
 	props:['matches'],
 	data () {
@@ -171,8 +179,12 @@ export default {
 			items: [
 				'upcoming','ongoing','result',
 			],
-			submitStatus:null
+			submitStatus:null,
+			loading:false,
 		}
+	},
+	components:{
+	    TButton
 	},
 	computed: mapGetters({
 		authuser: 'user',
@@ -181,7 +193,7 @@ export default {
 	validations: {
 	    player1: {
 	      required
-	    },
+	    }
 	},
 	methods: {
 		clode(){
@@ -207,6 +219,7 @@ export default {
 					fee:this.totalfee
 				})
 				.then((res) => {
+		  			this.loading=false
 					self.submitStatus = 'OK'
 					self.alert=true
 					console.log(res);
