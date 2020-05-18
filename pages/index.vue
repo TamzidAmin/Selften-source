@@ -6,7 +6,6 @@
 			<a :href="banner[0].link" target="_blank"><img :src="'https://admin.selften.com/uploads/banner/'+banner[0].banner" alt="" class="mx-auto"/></a>
 		</div>
 	</section>
-
 	<section class="bg-green-100 mt-24">
 		<div class="container mx-auto py-20">
 			<div class="flex flex-wrap justify-center">
@@ -39,6 +38,7 @@
 
 <script>
 import axios from '~/plugins/axios'
+import { mapMutations, mapGetters } from 'vuex'
 export default {
 	data () {
 		return {
@@ -47,9 +47,10 @@ export default {
 			notice:[]
 		}
 	},
-	computed:{
-			
-	},
+	computed: mapGetters({
+		authuser: 'user',
+		token:'token'
+	}),
 	methods:{
 		
 	},

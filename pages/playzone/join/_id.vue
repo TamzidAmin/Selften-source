@@ -125,7 +125,10 @@
 										/>
 								</div>
 								<div> 
-									<button v-if="(authuser.wallet+authuser.earn_wallet)>=totalfee && isjoined==0" @click="join" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Join</button>
+									<t-button :nativeType="'button'" v-if="(authuser.wallet+authuser.earn_wallet)>=totalfee && isjoined==0"  @click="join" :loading="loading">
+										Join
+									</t-button>
+
 									<button v-else-if="isjoined==1" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg opacity-50">Joined</button>
 									<nuxt-link :to="/wallet/+authuser.id" v-else>
 										<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Add Money</button>
@@ -148,6 +151,7 @@
 <script>
 import { mapMutations, mapGetters } from 'vuex'
 import axios from '~/plugins/axios'
+import TButton from '~/components/Button'
 import { required } from 'vuelidate/lib/validators'
 
 export default {
@@ -157,6 +161,7 @@ export default {
 			error:null,
 			alert: false,
   			valid: true,
+  			loading:false,
 			dialog: false,
 			totalfee:0,
 			i:[],
@@ -183,6 +188,9 @@ export default {
 	      required
 	    },
 	},
+	components:{
+    	TButton
+    },
 	methods: {
 		clode(){
 			this.alert=false
