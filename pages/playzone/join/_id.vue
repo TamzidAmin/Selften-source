@@ -125,11 +125,11 @@
 										/>
 								</div>
 								<div> 
-									<t-button :nativeType="'button'" v-if="(authuser.wallet+authuser.earn_wallet)>=totalfee && isjoined==0"  @click="join" :loading="loading">
-										Join
-									</t-button>
 
+									<button v-if="(authuser.wallet+authuser.earn_wallet)>=totalfee && isjoined==0"  @click="join" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg opacity-50">Join</button>
+									
 									<button v-else-if="isjoined==1" class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg opacity-50">Joined</button>
+
 									<nuxt-link :to="/wallet/+authuser.id" v-else>
 										<button class="align-middle bg-green-100 hover:bg-green-300 text-center px-4 py-2 text-white text-sm font-semibold rounded-lg inline-block shadow-lg">Add Money</button>
 									</nuxt-link>
