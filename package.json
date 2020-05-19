@@ -1,8 +1,8 @@
 {
 	"name": "Selften",
 	"version": "1.0.0",
-	"description": "My super-duper Nuxt.js project",
-	"author": "mahal",
+	"description": "An E-Sports and top-up Platform in Bangladesh. This group is offically control by Self-Ten Team.",
+	"author": "teammahal",
 	"private": true,
 	"scripts": {
 		"dev": "nuxt",

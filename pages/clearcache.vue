@@ -8,7 +8,6 @@
 		methods: {
 			async logout () {
 				Cookie.remove('token')
-		      	Cookie.remove('setUser')
 		      	this.$store.commit('setToken', null)
 		      	this.$store.commit('setUser', null)
 				this.$router.push('/')
