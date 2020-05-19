@@ -5,12 +5,13 @@
 </template>
 
 <script>
+import { mapMutations, mapGetters } from 'vuex'
 export default {
 	name: 'LoginWithFacebook',
 
-	computed: {
-		url: () => `https://admin.selften.com/au/google`
-	},
+	computed: mapGetters({
+		url: 'base_url',
+	}),
 
 	mounted () {
 		window.addEventListener('message', this.onMessage, false)
@@ -20,6 +21,8 @@ export default {
 		window.removeEventListener('message', this.onMessage)
 	},
 
+
+
 	methods: {
 		async login () {
 			// const newWindow = openWindow('', "login")
@@ -28,10 +31,9 @@ export default {
 			// 	provider: 'facebook'
 			// })
 
-			window.location.href = this.url
+			console.log(this.url);	
 
-			console.log('aaaaa');
-			window.close();
+			window.location.href = this.url+'au/google'
 
 		},
 

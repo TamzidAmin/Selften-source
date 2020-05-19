@@ -55,6 +55,8 @@ export default {
 		
 	},
 	async asyncData ({ params }) {
+		console.log(process.env.NODE_ENV);
+		console.log(process.env.baseUrl);	
 		let banner = await axios.get(`/api/banner/`)
 		let notice = await axios.get(`/api/notice/`)
 		let countsamary = await axios.get(`/api/countsamary`)

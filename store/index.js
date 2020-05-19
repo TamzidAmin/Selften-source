@@ -1,3 +1,4 @@
+
 const cookieparser = process.server ? require('cookieparser') : undefined
 const Cookie = require('js-cookie')
 export const state = () => {
