@@ -91,10 +91,10 @@
 				    <div class="flex flex-wrap justify-center">
 					  	<div class="text-center w-40" v-for="game in packages.topuppackage" :key="game.id">
 					  		<div class="m-1">
-					  			<label :for="game.id" class="mb-0 w-40 list-group-item p-2 d-block"  style="font-size: 11px;position: relative;    overflow: hidden;">
-					  				<span :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
-						  			<input required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
-									{{ game.name }}
+					  			<label :for="game.id" class="mb-0 w-40 list-group-item px-1 py-3 d-block"  style="font-size: 11px;position: relative;    overflow: hidden;">
+					  				<span class="absolute left-0" :class="selectedpackage.id==game.id ? 'element-check-label' : ''" style="color: #fff;"> L </span>
+						  			<input class="absolute" required style="visibility: hidden;" :id="game.id" @change="changepackage(game)" name="send" :value="game.id" type="radio">
+									<span class="text-xs">{{ game.name }}</span> <sup class="text-green-100">BDT{{ game.price }}</sup>
 						  		</label>
 						  	</div>
 					  	</div> 

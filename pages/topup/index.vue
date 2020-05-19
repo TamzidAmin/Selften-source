@@ -1,6 +1,6 @@
 <template>
 <div class="pt-5 text-center min-h-screen">
-	<siema ref="siema" auto-play>
+	<siema ref="siema" auto-play class="hidden">
 		<div class="slide">
 		  	<img src="~/assets/img/banner.jpg" alt="" class="mx-auto"/>
 		</div>
@@ -14,7 +14,7 @@
 		</div>
 	</siema>
 	<section class="container mx-auto">
-		<h3 class="font-bold text-green-100 mt-4 text-xl">VOUCHER PURCHASE</h3>
+		<h3 class="font-bold text-green-100 mt-4 text-xl uppercase">top up games credi</h3>
 		<div class="flex flex-wrap justify-center">
 			<div class="w-1/2 sm:w-1/3 md:w-1/4 xl:w-1/6" v-for="product in topupproduct">
 				<div class="hover:shadow-xl shadow-lg m-2 border-2 border-green-500">
