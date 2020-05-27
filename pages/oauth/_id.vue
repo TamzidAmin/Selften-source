@@ -19,7 +19,6 @@ export default{
 				const auth = {
 				  accessToken: response.data.token
 				}
-				console.log(auth);
 				self.$store.commit('setTokeno', auth) // mutating to store for client rendering
 				self.$store.commit('setUsero', response.data) // mutating to store for client rendering
 				// Cookie.set('token', auth,{ expires: 365 }) // saving token in cookie for server rendering
@@ -37,6 +36,12 @@ export default{
 	    if (process.client) { 
 			// self.$router.push('/')
 			window.close();
+	    }
+	},
+	beforeDestroy () {
+	    if (process.client) { 
+			// self.$router.push('/')
+			window.reload()
 	    }
 	},
 	async asyncData ({ params }) {
