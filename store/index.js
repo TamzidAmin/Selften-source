@@ -5,7 +5,7 @@ export const state = () => {
 	return {
 		token: null,
 		user:[],
-		base_url:"https://admin.selften.com/"
+		base_url: process.env.baseUrl
 	}
 }
 
