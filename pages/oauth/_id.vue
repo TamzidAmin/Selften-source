@@ -15,7 +15,6 @@ export default{
 			axios.post('/api/loginbyid/'+this.id)
 			.then(function (response) {
 				console.log(response.data);
-				setTimeout(() => { // we simulate the async request with timeout.
 				const auth = {
 				  accessToken: response.data.token
 				}
@@ -25,7 +24,6 @@ export default{
 				// Cookie.set('user', response.data,{ expires: 365 }) // saving token in cookie for server rendering
 				self.$router.push('/')
 				// window.close();
-			  }, 1000)
 			})
 			.catch(function (error) {
 				console.log(error);

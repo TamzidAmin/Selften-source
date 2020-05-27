@@ -50,6 +50,7 @@ import LoginWithFacebook from '~/components/LoginWithFacebook'
 import LoginWithGoogle from '~/components/LoginWithGoogle'
 const Cookie = process.client ? require('js-cookie') : undefined
   export default {
+	middleware: 'guest',
 	data: () => ({
 		loading: false,
 		show1: false,
