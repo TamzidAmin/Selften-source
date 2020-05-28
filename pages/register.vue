@@ -1,11 +1,18 @@
 <template>
 <div class="p-2 h-screen overflow-hidden flex items-center justify-center"><span class="loading-screen loading-circle loading-text"></span>
     <div class="bg-white shadow-lg rounded-lg bg-gray-300">
-		<div v-if="mustVerifyEmail" class="alert alert-success" role="alert">
-			verify_email_address 
-		</div>
-		<div v-else title="register">
-			<div class="w-full py-16">
+		<div class="rounded-t mb-0 px-6 py-6">
+            <div class="text-center mb-3">
+            <h6 class="text-gray-600 text-sm font-bold">Sign in with</h6></div>
+            <div class="btn-wrapper text-center">
+               <LoginWithFacebook/>
+               <LoginWithGoogle/>
+            </div>
+            <hr class="mt-6 border-b-1 border-gray-400">
+        </div>
+        <div class="text-gray-500 text-center mb-3 font-bold"><small>Or sign in with credentials</small></div>
+		<div title="register">
+			<div class="w-full">
                 <div class="mb-4 font-light tracking-widest text-2xl text-center font-bold uppercase">register</div>
 				<form @submit.prevent="register" class="rounded px-8 pt-6 pb-8 mb-4 capitalize">
 					<!-- Name -->
@@ -70,6 +77,8 @@
 <script>
 import { required } from 'vuelidate/lib/validators'
 import axios from '~/plugins/axios'
+import LoginWithFacebook from '~/components/LoginWithFacebook'
+import LoginWithGoogle from '~/components/LoginWithGoogle'
 const Cookie = process.client ? require('js-cookie') : undefined
 export default {
 	middleware: 'guest',
@@ -86,7 +95,10 @@ export default {
 		error:'',
 		submitStatus:null
 	}),
-
+	components:{
+    	LoginWithFacebook,
+    	LoginWithGoogle,
+    },
 	validations: {
 		username: {
 	      required

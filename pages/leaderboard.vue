@@ -4,12 +4,12 @@
     <br>
     <div class="v-data-table v-data-table--fixed-height theme--light box-shodow" style="min-width: 350px;">
         <div>
-        	<div class="box">
-	            <div class="text-center w-33 pointer radious" :class="active=='players' ? 'active' : '' " @click="change('players')">Players</div>
-	            <div class="text-center w-33 pointer radious" :class="active=='prizes' ? 'active' : '' " @click="change('prizes')">Prizes</div>
-	            <div class="text-center w-33 pointer radious" :class="active=='rules' ? 'active' : '' " @click="change('rules')">Rules</div>
+        	<div class="flex justify-center">
+	            <div class="p-3 text-2xl" :class="active=='players' ? 'text-red-500 border-2 border-green-100' : '' " @click="change('players')">Players</div>
+	            <div class="p-3 text-2xl" :class="active=='prizes' ? 'text-red-500 border-2 border-green-100' : '' " @click="change('prizes')">Prizes</div>
+	            <div class="p-3 text-2xl" :class="active=='rules' ? 'text-red-500 border-2 border-green-100' : '' " @click="change('rules')">Rules</div>
 	        </div>
-            <table v-if="active=='players'">
+            <table v-if="active=='players'" class="flex justify-center mt-5">
                 <tbody>
                     <tr v-for="(item,index) in leaderboard">
                         <th class="text-left">
