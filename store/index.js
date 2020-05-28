@@ -41,7 +41,7 @@ export const mutations = {
 		setTimeout(function(){
 			if (process.client) { 
 				// self.$router.push('/')
-				window.close();
+				window.reload();
 	    	}
 		}, 3000);
 	}
