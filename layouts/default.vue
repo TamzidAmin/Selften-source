@@ -3,6 +3,7 @@
 	<div class="min-h">
 		<Navbar/>
 		<div class="mx-auto">
+			<div><adsbygoogle ad-slot="2896692395" ad-format	="auto"/></div>
 			<nuxt />
 		</div>
 	</div>
