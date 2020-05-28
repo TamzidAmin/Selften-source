@@ -71,6 +71,7 @@
 			</div>
 		</div>
 	</div>
+	<adsbygoogle ad-slot="6929831472" ad-format	="auto"/>
 </div>
 </template>
 
