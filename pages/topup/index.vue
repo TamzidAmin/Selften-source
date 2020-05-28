@@ -41,6 +41,7 @@
 			<h3 class="font-bold text-green-100 mt-4 text-xl py-3">Top-up or Buy game's item, cheap and fast only at selften.com</h3>
 		</div>
 	</section>
+	<adsbygoogle ad-slot="6929831472" ad-format	="auto"/>
 </div>
 </template>
 
