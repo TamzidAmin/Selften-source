@@ -4,7 +4,9 @@
 		<Navbar/>
 		<div class="mx-auto">
 			<nuxt />
-			<div class="container mx-auto"><adsbygoogle ad-slot="2896692395" ad-format="auto"/></div>
+			<div class="container mx-auto">
+				<adsbygoogle ad-slot="2896692395" ad-format="auto"/>
+			</div>
 		</div>
 	</div>
 	<Footer/>
