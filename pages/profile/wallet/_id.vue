@@ -126,7 +126,9 @@ export default {
 		totalItem: function(){
 		    let sum = 0;
 		    for(let i = 0; i < this.data.length; i++){
-		        sum += parseFloat(this.data[i].amount);
+		    	if(this.data[i].status!='cancel'){
+		        	sum += parseFloat(this.data[i].amount);
+		    	}
 		    }
 		    return sum;
 		}

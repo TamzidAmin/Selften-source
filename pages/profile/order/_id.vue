@@ -63,9 +63,10 @@
 		  totalItem: function(){
 		      let sum = 0;
 		      for(let i = 0; i < this.myorder.length; i++){
-		        sum += parseFloat(this.myorder[i].amount);
+		    	if(this.myorder[i].status!='cancel'){
+		        	sum += parseFloat(this.myorder[i].amount);
+		    	}
 		      }
-
 		     return sum;
 		   }
 		},
