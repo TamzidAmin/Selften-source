@@ -80,6 +80,9 @@
 				          	</td>
 				          <td class="p-3 text-gray-800 text-center border border-b" v-if="item.created_at">{{ item.created_at.substring(0,10) }}</td>
 				        </tr>
+				        <tr>
+				        	<td class="p-3 text-gray-800 text-center border border-b font-black text-right text-center">Total:{{ totalItem }}</td>
+				        </tr>
 				    </tbody>
 				</table>
 	    	</div>
@@ -116,9 +119,18 @@ export default {
 	components: {
 		Avatar
 	},
-	computed: mapGetters({
-	   authuser: 'user'
-	}),
+	computed: {
+		...mapGetters({
+		   authuser: 'user'
+		}),
+		totalItem: function(){
+		    let sum = 0;
+		    for(let i = 0; i < this.data.length; i++){
+		        sum += parseFloat(this.data[i].amount);
+		    }
+		    return sum;
+		}
+	},
 	methods: {
 		addmoney(name){
 			var self = this;

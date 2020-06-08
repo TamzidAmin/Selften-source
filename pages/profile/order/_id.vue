@@ -19,6 +19,11 @@
 	          	<td class="p-3 text-gray-800 text-center border border-b">{{ item.amount }}</td>
 	          	<td class="p-3 text-gray-800 text-center border border-b">{{ item.status }}</td>
 	        </tr>
+	        <tr>
+	        	<td colspan="3" align="right" class="p-3 text-gray-800 font-black text-right text-center border border-b">Total:</td>
+	        	<td class="p-3 text-gray-800 text-center border border-b">{{ totalItem }}</td>
+	        	<td class="p-3 text-gray-800 text-center border border-b"></td>
+	        </tr>
       	</tbody>
     </table>
 
@@ -50,12 +55,24 @@
 		data(){
 			return{
 				myorder:[],
-				offerorder:[]
+				offerorder:[],
+				sum:0
 			}
+		},
+		computed: {
+		  totalItem: function(){
+		      let sum = 0;
+		      for(let i = 0; i < this.myorder.length; i++){
+		        sum += parseFloat(this.myorder[i].amount);
+		      }
+
+		     return sum;
+		   }
 		},
 		async asyncData ({ params }) {
 		    let myorder =  await axios.get(`/api/myorder/`+params.id)
 		    let offerorder =  await axios.get(`/api/offerorder/`+params.id)
+
 		    return { 
 		    	myorder: myorder.data,
 		    	offerorder: offerorder.data,
