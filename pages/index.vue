@@ -3,8 +3,8 @@
 	<section class="container mx-auto">
 		<div id="example">
 		  <carousel-3d :controls-visible="true" :controls-prev-html="'&#10092;'" :controls-next-html="'&#10093;'" 
-               :controls-width="30" :controls-height="60" :perspective="0" :space="600" :display="3" :autoplay="false" :autoplay-timeout="5000" :width="713" :height="255">
-		    <slide v-for="(slide, i) in banner" :index="i">
+               :controls-width="30" :controls-height="60" :perspective="0" :space="600" :display="3" :autoplay="true" :autoplay-timeout="2000" :width="713" :height="255">
+		    <slide v-for="(slide, i) in banner" :index="i" :key="i">
 		    	<a :href="slide.link" target="_blank">
 		    		<img :src="base_url+'/uploads/banner/'+slide.banner" alt="" class="mx-auto" style="width: 100%;height: 100%;object-fit: scale-down;" />
 		    	</a>
@@ -120,15 +120,11 @@ export default {
 </script>
 
 <style type="text/css">
-	.carousel-3d-slide{
-		border-radius: 20px!important;
-	}
+	
 
 	.carousel-3d-container {
 	  .carousel-3d-slide {
-	  	border-radius: 20px;
 	    padding: 20px;
-	    
 	    .title { font-size: 22px; }
 	  }
 	}
