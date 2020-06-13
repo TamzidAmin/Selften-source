@@ -1,6 +1,5 @@
 <template>
 <div>
-
 	<section class="container mx-auto">
 		<div id="example">
 		  <carousel-3d :controls-visible="true" :controls-prev-html="'&#10092;'" :controls-next-html="'&#10093;'" 
