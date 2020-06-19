@@ -276,7 +276,7 @@
 						    amount:this.selectedpackage.price,
 						    bprice:this.selectedpackage.bprice,
 						},{
-				        headers: { 'Authorization': 'Bearer '+this.token }
+				        headers: { 'Authorization': 'Bearer '+this.token.accessToken }
 				      	})
 						.then(function (response) {
 							self.submitStatus = 'OK'

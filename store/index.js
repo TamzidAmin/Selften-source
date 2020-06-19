@@ -14,7 +14,7 @@ export const getters = {
 	return state.user
   },
   token (state) {
-	return state.token.accessToken
+	return state.token
   },
   base_url (state) {
 	return state.base_url
