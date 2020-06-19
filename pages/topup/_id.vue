@@ -225,7 +225,8 @@
 		},
 		computed: mapGetters({
 			authuser: 'user',
-			base_url:'base_url'
+			base_url:'base_url',
+			token:'token',
 		}),
 		methods:{
 			async users(){
@@ -246,6 +247,7 @@
 				this.selectedmgetway=p;
 			},
 			buynow(){
+				console.log(this.token)
 					if(this.packages.topuptype==1){
 						this.ingamepassword="IDCODE"
 						this.accounttype="1"
@@ -273,7 +275,9 @@
 						    status: 'pending',
 						    amount:this.selectedpackage.price,
 						    bprice:this.selectedpackage.bprice,
-						})
+						},{
+				        headers: { 'Authorization': 'Bearer '+this.token }
+				      	})
 						.then(function (response) {
 							self.submitStatus = 'OK'
 						    self.loading=false
