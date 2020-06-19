@@ -237,7 +237,9 @@ export default {
 					player4: this.player4,
 					type: this.row,
 					fee:this.totalfee
-				})
+				},{
+		        	headers: { 'Authorization': 'Bearer '+this.token.accessToken }
+		      	})
 				.then((res) => {
 					self.submitStatus = 'OK'
 					self.alert=true
