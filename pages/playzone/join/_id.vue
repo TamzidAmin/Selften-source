@@ -186,7 +186,8 @@ export default {
 	},
 	computed: mapGetters({
 		authuser: 'user',
-		base_url:'base_url'
+		base_url:'base_url',
+		token:'token',
 	}),
 	validations: {
 	    player1: {
