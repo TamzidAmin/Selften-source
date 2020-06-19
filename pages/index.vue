@@ -104,17 +104,17 @@ export default {
 		
 	},
 	async asyncData ({ params }) {
-		let banner = await axios.get(`/api/banner/`)
-		let notice = await axios.get(`/api/notice/`)
-		let countsamary = await axios.get(`/api/countsamary`)
-		let topupproduct = await axios.get(`api/topupproduct/`)
+		// let banner = await axios.get(`/api/banner/`)
+		// let notice = await axios.get(`/api/notice/`)
+		// let countsamary = await axios.get(`/api/countsamary`)
+		// let topupproduct = await axios.get(`api/topupproduct/`)
 
-		return {
-			banner: banner.data,
-			countsamary: countsamary.data,
-			notice: notice.data,
-			topupproduct: topupproduct.data,
-		}
+		// return {
+		// 	banner: banner.data,
+		// 	countsamary: countsamary.data,
+		// 	notice: notice.data,
+		// 	topupproduct: topupproduct.data,
+		// }
 	}
 }
 </script>
