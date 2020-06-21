@@ -83,7 +83,8 @@ export default {
 	},
 
     computed:mapGetters({
-		authuser: 'user'
+		authuser: 'user',
+		token:'token',
     }),
     methods:{
     	addwallet ({ params }) {
@@ -100,7 +101,9 @@ export default {
 					purpose : 'withdraw',
 					paymentmethod : this.paymentmethod.id,
 					user_id: this.authuser.id
-				})
+				},{
+		        	headers: { 'Authorization': 'Bearer '+this.token.accessToken }
+		      	})
 				.then(function (response) {
 					this.loading=false;
 					self.submitStatus = 'ERROR'
