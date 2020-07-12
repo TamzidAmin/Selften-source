@@ -2,22 +2,18 @@
 <div class="container mx-auto shadow-md">
 	
     <div class="my-3 md:flex p-3 bg-white">
-    	<div v-if="packages.topuptype==1" class="md:w-1/3">
-			<div v-if="packageinfo[0]">
-	    		<div class="product-top-banner__container">
-			    	<img :src="'https://admin.selften.com/uploads/topupinfo/'+packageinfo[0].banner" alt="" class="w-100">
-			    </div>
-			    <div :class="active ? 'product__description' : ''" v-html="packageinfo[0].content">
+    	
+		<div class="md:w-1/3">
+
+			<div v-if="packages.rules">
+				<div :class="active ? 'product__description' : ''" v-html="packages.rules">
 			    	
-			    </div>
-			    <a href="#" v-if="packageinfo[0].content" @click="seemore">See more</a>
-		    </div>
-		</div>
-		<div v-else class="md:w-1/3">
-			<div v-html="packages.rules">
-			    
+				</div>
+				<a href="#" v-if="packages.rules" @click="seemore">See more</a>
 			</div>
+
 		</div>
+
 		<div class="md:w-2/3">
 	     	<form @submit.prevent="buynow()" method="post">
 	    		<div class="section select-server" v-if="packages.topuptype==1">
