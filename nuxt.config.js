@@ -36,6 +36,7 @@ export default {
 	plugins: [
 		{ src: '~/plugins/common', ssr: false },
 		{ src: '~/plugins/validator'},
+		{ src: '~/plugins/vue-fb-customer-chat.js', ssr: false }
 	],
 	/*
 	** Nuxt.js dev-modules

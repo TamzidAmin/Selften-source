@@ -29,6 +29,7 @@
 					    />
 				    </div>
                     <div class="error text-red-900 ml-3 mb-3" v-if="!$v.playerid.required">Playerid is required</div>
+                    
 				</div>
 				<div v-else class="section select-server flex flex-wrap justify-center">
 					<div class="w-full md:w-1/3">

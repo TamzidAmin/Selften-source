@@ -1,7 +1,8 @@
 <template>
 <div class="bg-gray-100">
-	<div class="min-h">
-		<div> <span class="hidden">{{ getnotice }}</span>
+	<div>
+		<div>
+			<span class="hidden">{{ getnotice }}</span>
 			<center v-if="notice[0]">
 				<div><marquee behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" id="MARQUEE1" class="scrolling">
 					<b class="text-info">NOTICE : <span class="text-green-100" v-if="notice[0]"> {{ notice[0].notice }}</span></b></marquee>
@@ -10,7 +11,9 @@
 		</div>
 		<Navbar/>
 		<div class="mx-auto">
-			<nuxt />
+			<div style="min-height: 50vh!important;">
+				<nuxt />
+			</div>
 			<div class="container mx-auto">
 				<adsbygoogle ad-slot="2896692395" ad-format="auto"/>
 			</div>
@@ -45,11 +48,12 @@
 </script>
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
 	.nuxt-link-exact-active{
 		color: #D81C4B;
 		background: #fff;
 	}
-	.min-h{
-		min-height: 93vh!important;
+	body,a{
+		font-family: 'Roboto', sans-serif;	
 	}
 </style>
