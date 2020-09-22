@@ -39,13 +39,12 @@
 	        <h6>Total Kills</h6>
 	      </div>
 
-	      <div class="p-2 font-semibold">
-	        <h4>{{ user.earn_wallet }}</h4>
-	        <h6>Winnings</h6>
-	      </div>
+	      	<div class="p-2 font-semibold">
+	        	<h4>{{ user.earn_wallet }}</h4>
+	        	<h6>Winnings</h6>
+	      	</div>
 		</div>
 	</div>
-	<adsbygoogle ad-slot="6929831472" ad-format	="auto"/>
 </div>
 </template>
 <script>

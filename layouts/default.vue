@@ -1,6 +1,6 @@
 <template>
 <div class="bg-gray-100">
-	<div>
+	<div  style="min-height: 90vh!important;">
 		<div>
 			<span class="hidden">{{ getnotice }}</span>
 			<center v-if="notice[0]">
@@ -11,11 +11,8 @@
 		</div>
 		<Navbar/>
 		<div class="mx-auto">
-			<div style="min-height: 50vh!important;">
+			<div>
 				<nuxt />
-			</div>
-			<div class="container mx-auto">
-				<adsbygoogle ad-slot="2896692395" ad-format="auto"/>
 			</div>
 		</div>
 	</div>

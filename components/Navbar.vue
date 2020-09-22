@@ -63,6 +63,12 @@
 								</nuxt-link>
 							</div>
 						</template>
+
+						<div>
+							<nuxt-link class="mt-2" to="/card">
+								<svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="cart-plus" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="h-6 w-6 svg-inline--fa text-red-500 fa-cart-plus fa-w-18 fa-2x"><path fill="currentColor" d="M551.991 64H144.28l-8.726-44.608C133.35 8.128 123.478 0 112 0H12C5.373 0 0 5.373 0 12v24c0 6.627 5.373 12 12 12h80.24l69.594 355.701C150.796 415.201 144 430.802 144 448c0 35.346 28.654 64 64 64s64-28.654 64-64a63.681 63.681 0 0 0-8.583-32h145.167a63.681 63.681 0 0 0-8.583 32c0 35.346 28.654 64 64 64s64-28.654 64-64c0-18.136-7.556-34.496-19.676-46.142l1.035-4.757c3.254-14.96-8.142-29.101-23.452-29.101H203.76l-9.39-48h312.405c11.29 0 21.054-7.869 23.452-18.902l45.216-208C578.695 78.139 567.299 64 551.991 64zM464 424c13.234 0 24 10.766 24 24s-10.766 24-24 24-24-10.766-24-24 10.766-24 24-24zm-256 0c13.234 0 24 10.766 24 24s-10.766 24-24 24-24-10.766-24-24 10.766-24 24-24zm279.438-152H184.98l-31.31-160h368.548l-34.78 160zM272 200v-16c0-6.627 5.373-12 12-12h32v-32c0-6.627 5.373-12 12-12h16c6.627 0 12 5.373 12 12v32h32c6.627 0 12 5.373 12 12v16c0 6.627-5.373 12-12 12h-32v32c0 6.627-5.373 12-12 12h-16c-6.627 0-12-5.373-12-12v-32h-32c-6.627 0-12-5.373-12-12z" class=""></path></svg>
+							</nuxt-link>
+						</div>
 					</div>
 					<div id="userMenu" v-if="token" v-bind:class="activeClass ? '' : 'hidden'"  class="bg-white rounded shadow-md mt-2 absolute mt-12 top-0 right-0 min-w-full overflow-auto z-30">
 						<ul class="list-reset">
@@ -119,7 +125,7 @@
 					class="block lg:inline-block text-md font-bold hover:text-red-900 mx-2 p-1 rounded-lg uppercase">
 					leaderboard
 				</nuxt-link>
-				<a href="https://t.me/joinchat/Q77WBk4Jli5iqWsgJqatKw" target="_blank" @click="remove()"
+				<a href="https://www.facebook.com/selften/?notif_id=1589113107445395&notif_t=page_fan&ref=notif" target="_blank" @click="remove()"
 					class="block lg:inline-block text-md font-bold hover:text-red-900 mx-2 p-1 rounded-lg">
 					CONTACT US
 				</a>
@@ -150,7 +156,26 @@
 			ismobile: 'sidebar/ismobile'
 		}),
 
+		mounted () {
+		    	document.addEventListener('click', this.close)
+		    	document.addEventListener('click', this.close1)
+		},
+	  	beforeDestroy () {
+	    	document.removeEventListener('click',this.close)
+	    	document.removeEventListener('click',this.close1)
+		},
 		methods: {
+			close (e) {
+	      		if (!this.$el.contains(e.target)) {
+	      		  	this.activeClass = false
+	      		}
+    		},
+    		close1 (e) {
+      			if (!this.$el.contains(e.target)) {
+      		  		var $target = document.getElementById('main-nav');
+					$target.classList.add('hidden');
+      		  	}
+      		},
 			toggle(){
 				var $target = document.getElementById('main-nav');
 				$target.classList.toggle('hidden');
