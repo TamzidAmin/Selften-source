@@ -6,7 +6,7 @@
 		<div class="md:w-1/3">
 
 			<div v-if="packages.rules">
-				<div :class="active ? 'product__description' : ''" v-html="packages.rules">
+				<div v-html="packages.rules">
 			    	
 				</div>
 				<a href="#" v-if="packages.rules" @click="seemore">See more</a>
@@ -79,7 +79,22 @@
 	                    	<div class="error text-red-900 mb-3" v-if="!$v.ingamepassword.required">Password is required</div>
 					    </div>
                     </div>
+
+                    <div v-if="accounttype=='gmail'" class="w-full">
+					    <label class="font-semibold">Account Security Code</label>
+					    <input
+				        	class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+					       	placeholder="Enter Security Code"
+					        v-model="securitycode"
+						/>
+	                    <div class="error text-red-900 ml-3 mb-3" v-if="!$v.securitycode.required">Security Code is required</div>
+					</div>
+					<a href="https://www.youtube.com/watch?v=dHRVPg84UhU" target="_blanck" class="text-left" style="color: #0000EE;"  v-if="accounttype=='gmail'">How To Get Security Code</a>
 				</div>
+
+
+
+
 				<div class="section select-server">
 				    <h2 class="circle">
 				        <span>2</span>
@@ -195,6 +210,7 @@
 				playerid:null,
 				emailaddress:'',
 				loading:false,
+				securitycode:'',
 	  			valid: true,
 				alert: false,
 				resmessage:"Order successfully",
@@ -217,6 +233,9 @@
 		      required
 		    },
 		    accounttype: {
+		      required
+		    },
+		    securitycode: {
 		      required
 		    }
 		},
@@ -248,7 +267,13 @@
 					if(this.packages.topuptype==1){
 						this.ingamepassword="IDCODE"
 						this.accounttype="1"
+						this.securitycode="IDCODE"
 					}
+
+					if(this.accounttype=='facebook'){
+						this.securitycode="facebook"
+					}
+
 					let con= confirm("The Money Will Take From your Wallet. Are You Sure Want to Confirm?? ");
 					if(con){
 					this.loading=true;
@@ -266,6 +291,7 @@
 						    product_id: this.selectedpackage.product_id,
 						    ingameid: this.ingameid,
 						    ingamepassword: this.ingamepassword,
+						    securitycode: this.securitycode,
 						    user_id:this.authuser.id,
 						    playerid:this.playerid,
 						    emailaddress:'111',

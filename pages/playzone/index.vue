@@ -1,5 +1,5 @@
 <template>
-<div class="pt-5 text-center min-h-screen">
+<div class="pt-5 text-center">
 	<section class="container mx-auto">
 		<h3 class="font-bold text-green-100 mt-4 text-xl">PLAYZONE</h3>
 		<div class="flex flex-wrap justify-center">
@@ -23,9 +23,6 @@
 			<button class="ml-3 bg-green-100 border border-green-100 hover:bg-green-200 text-white font-semibold py-2 px-4 rounded uppercase">See All</button>
 		</div>
 	</section>
-
-	<adsbygoogle ad-slot="6929831472" ad-format	="auto"/>
-	
 </div>
 </template>
 
