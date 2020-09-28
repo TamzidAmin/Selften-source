@@ -19,10 +19,7 @@
 				
 				<div class="w-full flex-grow lg:flex items-center lg:w-auto hidden">
 					<div class="text-sm lg:flex-grow mt-2 animated jackinthebox xl:mx-8">
-						<nuxt-link to="/playzone"
-							class="block lg:inline-block text-md font-bold hover:text-red-900 mx-2 p-1 rounded-lg">
-							PLAYZONE
-						</nuxt-link>
+			
 						<nuxt-link to="/topup"
 							class="block lg:inline-block text-md font-bold hover:text-red-900 mx-2 p-1 rounded-lg">
 							TOP-UP
@@ -109,10 +106,6 @@
 		
 		<div id="main-nav" class="w-full lg:w-auto hidden absolute left-0 bg-white z-20">
 			<div class="text-sm lg:flex-grow mt-2 animated jackinthebox xl:mx-8">
-				<nuxt-link to="/playzone" @click.native="remove()"
-					class="block lg:inline-block text-md font-bold hover:text-red-900 mx-2 p-1 rounded-lg">
-					PLAYZONE
-				</nuxt-link>
 				<nuxt-link to="/topup" @click.native="remove()"
 					class="block lg:inline-block text-md font-bold hover:text-red-900 mx-2 p-1 rounded-lg">
 					TOP-UP
