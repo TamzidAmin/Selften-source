@@ -26,9 +26,8 @@
 					<div class="form-group row">
 						<div class="mb-4">
 	                        <label for="email" class="mb-2 font-bold">Phone</label>
-	                        <vuephone v-model="phone" default-country-code="BD" @update="onUpdate"/>
-	                      	<div v-if="results!=null && !results.isValid" class="text-red-900"> Phone Number Must Be A Valid Number. </div>
-	                       <div v-if="results==null" class="text-red-900">Phone is required</div>
+	                        <input type="text" v-model="$v.phone.$model" class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full" placeholder="Phone" style="transition: all 0.15s ease 0s;">
+                        	<div class="error text-red-900" v-if="!$v.phone.required">Phone is required</div>
                     	</div>
 					</div>
 
@@ -68,9 +67,10 @@
 						<p class="text-red-500" v-if="submitStatus === 'PENDING'">Sending...</p>
 					</div>
 				</form>
-			</div> 
-		</div> 
+			</div>
+		</div>
 	</div>
+	<adsbygoogle ad-slot="6929831472" ad-format	="auto"/>
 </div>
 </template>
 
@@ -93,8 +93,7 @@ export default {
 		password_confirmation: '',
 		mustVerifyEmail: false,
 		error:'',
-		submitStatus:null,
-		results:null
+		submitStatus:null
 	}),
 	components:{
     	LoginWithFacebook,
@@ -119,52 +118,47 @@ export default {
 	},
 
 	methods: {
-		onUpdate (payload) {
-        	this.results = payload
-      	},
 		async register () {
-			if(this.results && this.results.isValid){
-				this.$v.$touch()
-			  	this.loading=true;
-				if (this.$v.$invalid) {
-		    		this.submitStatus = 'ERROR'
-		  		}else {
-	  			this.submitStatus = 'PENDING'
-		        	this.loading=true
-		          	this.snackbar = true
-		          	var self = this;
-		         	axios.post('/api/register', {
-					    username: this.username,
-					    phone: this.phone,
-					    email: this.email,
-					    password: this.password,
-					    password_confirmation:this.password
-					})
-					.then(function (response) {
-						self.submitStatus = 'OK'
-						console.log(response);
-						if(response.data[0]){
-							self.loading=false
-							self.error=response.data[0].message
-						}else{
-							self.loading=false
-						    setTimeout(() => { // we simulate the async request with timeout.
-					        const auth = {
-					          accessToken: response.data.token
-					        }
-					        self.$store.commit('setToken', auth) //mutating to store for client rendering
-					        self.$store.commit('setUser', response.data) //mutating to store for client rendering
-					        Cookie.set('token', auth,{ expires: 365 }) //saving token in cookie for server rendering
-					        Cookie.set('user', response.data,{ expires: 365 }) //saving token in cookie for server rendering
-					        self.$router.push('/profile/'+response.data.id)
-					      }, 1000)
-						}
-					})
-					.catch(function (error) {
-					    console.log(error);
-					});
-		        }
-		    }
+			this.$v.$touch()
+		  	this.loading=true;
+			if (this.$v.$invalid) {
+	    		this.submitStatus = 'ERROR'
+	  		}else {
+  			this.submitStatus = 'PENDING'
+	        	this.loading=true
+	          	this.snackbar = true
+	          	var self = this;
+	         	axios.post('/api/register', {
+				    username: this.username,
+				    phone: this.phone,
+				    email: this.email,
+				    password: this.password,
+				    password_confirmation:this.password
+				})
+				.then(function (response) {
+					self.submitStatus = 'OK'
+					console.log(response);
+					if(response.data[0]){
+						self.loading=false
+						self.error=response.data[0].message
+					}else{
+						self.loading=false
+					    setTimeout(() => { // we simulate the async request with timeout.
+				        const auth = {
+				          accessToken: response.data.token
+				        }
+				        self.$store.commit('setToken', auth) //mutating to store for client rendering
+				        self.$store.commit('setUser', response.data) //mutating to store for client rendering
+				        Cookie.set('token', auth,{ expires: 365 }) //saving token in cookie for server rendering
+				        Cookie.set('user', response.data,{ expires: 365 }) //saving token in cookie for server rendering
+				        self.$router.push('/profile/'+response.data.id)
+				      }, 1000)
+					}
+				})
+				.catch(function (error) {
+				    console.log(error);
+				});
+	        }
 		}
 	}
 };
