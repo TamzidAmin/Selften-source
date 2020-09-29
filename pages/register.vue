@@ -68,7 +68,7 @@
 						<p class="text-red-500" v-if="submitStatus === 'PENDING'">Sending...</p>
 					</div>
 				</form>
-			</div>
+			</div> 
 		</div>
 	</div>
 </div>
