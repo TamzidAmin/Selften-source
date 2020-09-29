@@ -85,7 +85,6 @@
 
 <script>
 import axios from '~/plugins/axios'
-import 'vue-phone-number-input/dist/vue-phone-number-input.css'
 import { mapMutations, mapGetters } from 'vuex'
 export default {
 	data () {

@@ -79,6 +79,7 @@ import { required } from 'vuelidate/lib/validators'
 import axios from '~/plugins/axios'
 import LoginWithFacebook from '~/components/LoginWithFacebook'
 import LoginWithGoogle from '~/components/LoginWithGoogle'
+import 'vue-phone-number-input/dist/vue-phone-number-input.css'
 const Cookie = process.client ? require('js-cookie') : undefined
 export default {
 	middleware: 'guest',
