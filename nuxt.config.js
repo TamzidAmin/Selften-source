@@ -17,7 +17,8 @@ export default {
 			{ hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
 		],
 		link: [
-			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+		  	{ rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/vue-phone-number-input@1.1.10/dist/vue-phone-number-input.css' }
 		]
 	},
 	/*
@@ -34,6 +35,7 @@ export default {
 	** Plugins to load before mounting the App
 	*/
 	plugins: [
+		'./plugins/maz-ui',
 		{ src: '~/plugins/common', ssr: false },
 		{ src: '~/plugins/validator'},
 		{ src: '~/plugins/vue-fb-customer-chat.js', ssr: false }
@@ -73,10 +75,15 @@ export default {
 	** Build configuration
 	*/
 	build: {
-		/*
-		** You can extend webpack config here
-		*/
-		extend (config, ctx) {
-		}
+		babel: {
+	      plugins: [
+	        [
+	          'component', {
+	            libraryName: 'maz-ui',
+	            styleLibraryName: 'css'
+	          }
+	        ]
+	      ]
+    	}
 	}
 }
