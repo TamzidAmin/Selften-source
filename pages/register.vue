@@ -126,6 +126,7 @@ export default {
       	},
 		async register () {
 			if(this.results && this.results.isValid){
+				this.phone=this.results.formattedNumber;
 				this.$v.$touch()
 			  	this.loading=true;
 				if (this.$v.$invalid) {
