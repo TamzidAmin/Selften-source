@@ -3,7 +3,7 @@ export default {
 	mode: 'universal',
 
 	env: {
-    	baseUrl:process.env.NODE_ENV === 'development' ? 'http://localhost:3333' : 'https://admin.selften.com'
+    	baseUrl:process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:8000' : 'https://admin.selften.com'
   	},
 
 	/*

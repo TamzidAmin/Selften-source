@@ -37,7 +37,7 @@
 		</div>
 	</section>
 
-	<section class="bg-green-100 mt-10">
+	<section class="bg-green-600 mt-10">
 		<div class="container mx-auto py-20">
 			<div class="flex flex-wrap justify-center">
 				<div class="w-64 text-center bg-green-500 p-5 rounded m-2">
@@ -67,7 +67,7 @@
 
 	<section class="mt-10 container mx-auto text-center">
         <div>
-            <h2 class="text-5xl">Download <span class="text-green-100">Selften</span></h2>
+            <h2 class="text-5xl">Download <span class="text-green-100">Tinams</span></h2>
             <p class="p-large">An E-Sports and top-up Platform in Bangladesh. This group is offically control by Self-Ten Team.</p>
             <div class="flex justify-center mt-2 flex-wrap">
                 <a class="btn-solid-lg" href="#your-link"><i class="fab fa-apple"></i>
@@ -79,7 +79,6 @@
             </div>
         </div> <!-- end of text-container -->
 	</section>
-
 </div>
 </template>
 

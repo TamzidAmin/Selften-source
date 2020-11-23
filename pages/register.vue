@@ -137,7 +137,7 @@ export default {
 		          	this.snackbar = true
 		          	var self = this;
 		         	axios.post('/api/register', {
-					    username: this.username,
+					    name: this.username,
 					    phone: this.phone,
 					    email: this.email,
 					    password: this.password,
@@ -145,7 +145,7 @@ export default {
 					})
 					.then(function (response) {
 						self.submitStatus = 'OK'
-						console.log(response);
+						console.log(response.data);
 						if(response.data[0]){
 							self.loading=false
 							self.error=response.data[0].message
@@ -156,10 +156,10 @@ export default {
 					          accessToken: response.data.token
 					        }
 					        self.$store.commit('setToken', auth) //mutating to store for client rendering
-					        self.$store.commit('setUser', response.data) //mutating to store for client rendering
+					        self.$store.commit('setUser', response.data.data) //mutating to store for client rendering
 					        Cookie.set('token', auth,{ expires: 365 }) //saving token in cookie for server rendering
 					        Cookie.set('user', response.data,{ expires: 365 }) //saving token in cookie for server rendering
-					        self.$router.push('/profile/'+response.data.id)
+					        self.$router.push('/profile/'+response.data.user.id)
 					      }, 1000)
 						}
 					})

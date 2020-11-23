@@ -14,7 +14,7 @@
 					</button>
 				</div>
 				<nuxt-link to="/">
-					<img src="~/assets/selften.png" alt="" class="w-24 md:w-40">
+					<img src="~/assets/logo.png" alt="" class="w-24 md:w-40">
 				</nuxt-link>
 				
 				<div class="w-full flex-grow lg:flex items-center lg:w-auto hidden">
@@ -77,6 +77,11 @@
 							<li @click="dropdown()">
 								<router-link :to="'/profile/order/'+user.id" class="px-4 py-2 block text-gray-900 hover:bg-green-400 hover:text-white no-underline hover:no-underline">
 									My Order
+								</router-link>
+							</li>
+							<li @click="dropdown()">
+								<router-link :to="'/profile/addwallet/'+user.id" class="px-4 py-2 block text-gray-900 hover:bg-green-400 hover:text-white no-underline hover:no-underline">
+									Add wallet
 								</router-link>
 							</li>
 							<li @click="dropdown()">
